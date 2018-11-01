@@ -9,3 +9,6 @@
 @import url('./top-menu.css');
 @import url('./footer.css');
 @import url('./quote.css');
+
+/* Pages css */
+@import url('./page-index.css');

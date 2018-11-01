@@ -12,9 +12,18 @@
   <header id="top-menu">
     <div class="meu-header">
       <div class="container">
-        <div class="col-6">info@sendit.com</div>
         <div class="col-6">
-
+          <ul class="plain-list">
+            <li><a href="#"><i class="fa fa-phone"></i> (+250)-000-000-000</a></li>
+            <li><a href="#"><i class="fa fa-envelope"></i> info@sendit.com</a></li>
+          </ul>
+        </div>
+        <div class="col-6 align-right">
+          <ul class="plain-list">
+            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+          </ul>
         </div>
       </div>
     </div>
@@ -36,8 +45,47 @@
   </header>
   <div id="main-content">
     <div class="container">
-      <div class="box">
-        my box
+      <div class="box quote-container">
+        <form action="#">
+          <div class="row">
+            <div class="col-3">
+              <label for="from">From</label>
+              <input type="text" name="from" id="from">
+              <div class="form-error"></div>
+            </div>
+            <div class="col-3">
+              <label for="from">To</label>
+              <input type="text" name="to" id="to">
+              <div class="form-error"></div>
+            </div>
+            <div class="col-3">
+              <label for="from">Weight</label>
+              <input type="number" name="weight" id="weight">
+              <div class="form-error"></div>
+            </div>
+            <div class="col-3 align-center">
+              <button class="btn">Quote</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="testimonies-area">
+      <div class="container items-center">
+        <div class="testimonies">
+          <div class="testimony-block">
+            <i class="fa fa-quote-left is-white"></i>
+            <div class="testimony-content">
+              <h3 class="testimony-content__title">Name</h3>
+              <p class="testimony-content__text">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam aliquam 
+                libero exercitationem, temporibus eligendi optio expedita eius suscipit, 
+                minus, cupiditate animi officia odit ipsam ut nemo cum ducimus error neque?
+              </p>
+            </div>
+            <i class="fa fa-quote-right is-white"></i>
+          </div>
+        </div>
       </div>
     </div>
   </div>
