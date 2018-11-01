@@ -11,7 +11,7 @@
   align-items: center;
 }
 .brand {
-  height: 70px;
+  height: 60px;
   padding: 15px 0;
   width: auto;
 }
@@ -103,7 +103,7 @@
 
 .nav-item a {
   color: #fff;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 
 .nav-item a:hover {
