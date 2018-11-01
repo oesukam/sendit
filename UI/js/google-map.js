@@ -21,5 +21,15 @@ function initMap() {
 
   // Add marker to the map
   marker.setMap(map);
+}
 
+// geoCoding to use Google Geocoding API and need substriction
+function geoCoding (text = '') {
+  if (text) {
+    fetch(`${geoLocUrl}${text}&region=rw&key=${apiKey}`)
+    .then(res => res.json())
+    .then(res => console.log('res', res))
+    .catch(err => console.log(err))
+  }
+  return
 }
