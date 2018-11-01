@@ -28,6 +28,7 @@ a {
   min-height: 20px;
   font-size: 1rem;
   color: transparent;
+  margin: 5px;
 }
 .form-error .has-error {
   color: red;
@@ -38,12 +39,12 @@ label {
   margin: 10px 0 5px 0;
   font-size: 1.2rem;
 }
-input, select {
+input, select, textarea {
   line-height: 1.5rem;
   font-size: 1.1rem;
   outline: none;
 }
-input {
+input, textarea {
   background-color: #fff;
   border: 1px solid rgba(0,0,0,0.2);
   border-radius: 3px;
@@ -142,4 +143,10 @@ select option {
   background-color: #ffa400;
 }
 
-/* Form Error */
+.map-location {
+  background-color: rgba(0,0,0,.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+}

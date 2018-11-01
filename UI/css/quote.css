@@ -20,3 +20,13 @@
 #quote-map {
   height: 300px;
 }
+
+.quote-result {
+  min-height: 50px;
+  background-color: #fff;
+  padding: 5px 15px;
+  margin-top: 30px;
+}
+.quote-result p {
+  font-size: 2rem;
+}
