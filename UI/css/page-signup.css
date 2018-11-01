@@ -4,7 +4,6 @@
 
 .signup-container {
   margin-top: 20px;
-  margin-bottom: 200px;
 }
 .signup-container::after {
   clear: both;

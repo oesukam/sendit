@@ -78,6 +78,7 @@
 
 #main-content {
   padding-top: 100px;
+  padding-bottom: 200px;
   min-height: 100%;
   margin-bottom: -175px;
   z-index: 1;
@@ -90,6 +91,12 @@
   box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
   display: block;
   padding: 1.25rem;
+}
+.table {
+  width: 100%;
+}
+.table tr {
+  line-height: 1.5rem;
 }
 @media only screen and (max-width: 768px) {
   .col-1, .col-2, .col-3,
