@@ -3,7 +3,7 @@
 */
 
 .quote-container {
-  margin-top: 10vh;
+  margin-top: 15px;
   background-color: #3359DF;
   color: #fff;
 }
@@ -13,4 +13,10 @@
 }
 .quote-container button {
   background-color: #ffa400;
+  margin-top: 15px;
+  font-size: 1.3rem;
+}
+
+#quote-map {
+  height: 300px;
 }
