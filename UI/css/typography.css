@@ -29,10 +29,26 @@ h1, h2, h3, h4, h5 {
   font-size: 1.5rem;
   margin: 10px 0 15px 0;
 }
+.title-1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
 .title.primary {
   color: #3359DF;
 }
 .title.secondary {
   color: #ffa400;
+}
+.mr-5 {
+  margin-right: 5px;
+}
+.ml-5 {
+  margin-left: 5px;
+}
+.mt-5 {
+  margin-top: 5px;
+}
+.mb-5 {
+  margin-bottom: 5px;
 }
 

@@ -1,3 +1,6 @@
+.profile-container {
+
+}
 .profile-sidebar {
   margin-top: 15px;
   background-color: #3359DF;
@@ -43,4 +46,18 @@
 .profile-sidebar__nav li a:hover,
 .profile-sidebar__nav .active {
   color: #ffa400;
+}
+.profile-counter {
+  font-size: 1.5rem;
+}
+.btn-edit {
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  padding: 5px 10px;
+  margin: 5px;
+  display: inline-block;
 }

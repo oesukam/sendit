@@ -15,12 +15,17 @@
   password.addEventListener('input', inputHandler);
   submitLogin.addEventListener('click', (e) => {
     e.preventDefault();
+    
+    // Reset form errors to empty string
+    document.querySelector('.form-error.email').textContent = '';
+    document.querySelector('.form-error.password').textContent = '';
+    
     // Validate email
     if (!form.email) {
       document.querySelector('.form-error.email').style.color = 'red';
       document.querySelector('.form-error.email').textContent = 'Email Required.';
       return;
-    }
+    } 
     if (!testEmail.test(form.email)) {
       document.querySelector('.form-error.email').style.color = 'red';
       document.querySelector('.form-error.email').textContent = 'Enter a correct email.';

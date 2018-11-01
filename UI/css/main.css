@@ -150,3 +150,12 @@ select option {
   align-items: center;
   margin-top: 15px;
 }
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+.pagination a {
+  cursor: pointer;
+  font-size: 1.3rem;
+}

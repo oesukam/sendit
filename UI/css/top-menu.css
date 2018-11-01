@@ -108,8 +108,8 @@
   color: #fff;
   font-size: 1.2rem;
 }
-.nav-item a:hover {
-  color: #adadad;
+.nav-item:hover a {
+  color: #ffa400 !important;
 }
 .nav-item.active a {
   color: #ffa400;
