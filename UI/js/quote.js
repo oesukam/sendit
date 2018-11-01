@@ -59,14 +59,13 @@
   }
   // Initialise select inputs and errors
   const fromProvince = document.querySelector('#fromProvince');
+  const toProvince = document.querySelector('#toProvince');
   const quoteError = document.querySelector('.quote-error');
 
-  // const fromDistrict = document.querySelector('#fromDistrict');
-
-  const toProvince = document.querySelector('#toProvince');
   // const toDistrict = document.querySelector('#toDistrict');
 
   fromProvince.addEventListener('change', provinceCallBack);
+  toProvince.addEventListener('change', provinceCallBack);
 
   // district.addEventListener('change', (e) => {
   //   form.district = e.target.value

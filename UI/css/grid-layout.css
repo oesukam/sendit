@@ -40,6 +40,9 @@
 .col-11 {
   width: 91.66%;
 }
+.col-12 {
+  width: 100%;
+}
 
 .col-1, .col-2, .col-3,
 .col-4, .col-5, .col-6,
