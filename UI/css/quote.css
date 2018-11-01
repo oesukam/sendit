@@ -1,0 +1,16 @@
+/* 
+  Get A Quote form CSS
+*/
+
+.quote-container {
+  margin-top: 10vh;
+  background-color: #3359DF;
+  color: #fff;
+}
+
+.quote-container label {
+  color: #fff;
+}
+.quote-container button {
+  background-color: #ffa400;
+}

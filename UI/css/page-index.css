@@ -1,0 +1,33 @@
+.testimonies-area {
+  margin: 10vh 0px;
+  background-color: #3359DF;
+}
+
+.testimonies {
+  height: 20vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.testimony-block {
+  display: flex;
+  align-items: center;
+}
+.testimony-block .fa {
+  font-size: 3rem;
+}
+.testimony-content {
+  flex: 1;
+  padding: 10px 30px;
+  overflow: hidden;
+  color: #fff;
+}
+
+.testimony-content__title {
+  font-size: 2rem;
+  color: #fff;
+}
+.testimony-content__text {
+  font-size: 1rem;
+  color: rgb(224, 224, 224);
+}
