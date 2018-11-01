@@ -1,0 +1,134 @@
+#top-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #3359DF;
+}
+#top-menu .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.brand {
+  height: 70px;
+  padding: 15px 0;
+  width: auto;
+}
+.brand__img {
+  height: 100%;
+  object-fit: fill;
+}
+.toggle-menu {
+  position: relative;
+  height: 70px;
+}
+.hamburger {
+  height: 6px;
+  width: 50px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transform: translateY(30px);
+  -webkit-transform: translateY(30px);
+  -moz-transform: translateY(30px);
+  -ms-transform: translateY(30px);
+  -o-transform: translateY(30px);
+  transition: .5s;
+  -webkit-transition: .5s;
+  -moz-transition: .5s;
+  -ms-transition: .5s;
+  -o-transition: .5s;
+}
+.hamburger::before, .hamburger::after {
+  content: '';
+  position: absolute;
+  height: 6px;
+  width: 50px;
+  right: 0px;
+  background-color: #fff;
+  transition: .5s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  -webkit-transition: .5s;
+  -moz-transition: .5s;
+  -ms-transition: .5s;
+  -o-transition: .5s;
+}
+.hamburger::before {
+  top: -16px;
+}
+.hamburger::after {
+  top: 16px;
+}
+
+.hamburger.active {
+  background-color: rgba(0,0,0,0);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+.hamburger.active::before {
+  top: 0;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+}
+.hamburger.active:after {
+  top: 0;
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+  -moz-transform: rotate(135deg);
+  -ms-transform: rotate(135deg);
+  -o-transform: rotate(135deg);
+}
+.nav {
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+  overflow: hidden;
+}
+
+.nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-item {
+  display: inline-block;
+  padding: 5px 15px;
+  cursor: pointer;
+}
+
+.nav-item a {
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.nav-item a:hover {
+  color: #adadad;
+}
+
+@media only screen and (max-width: 768px) {
+  .nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background-color: #3359DF;
+    display: none;
+  }
+  .nav.active {
+    display: block;
+  }
+  .nav-item {
+    color: #fff;
+    display: block;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid #adadad;
+    padding: 10px;
+  }
+}
