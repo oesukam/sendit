@@ -17,10 +17,27 @@ body {
 a {
   text-decoration: none;
 }
+
+/* Form elements */
+
+.input-block {
+  width: 100%;
+  position: relative;
+}
+.form-error {
+  min-height: 20px;
+  font-size: 1rem;
+  color: transparent;
+}
+.form-error .has-error {
+  color: red;
+}
 label {
   display: inline-block;
   margin-right: 10px;
   min-width: 50px;
+  margin-bottom: 5px;
+  font-size: 1.2rem;
 }
 input {
   outline: none;
@@ -35,8 +52,9 @@ input {
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
-  line-height: 1.2rem;
-  padding: 2px 5px;
+  line-height: 1.5rem;
+  font-size: 1.1rem;
+  padding: 3px 5px;
 }
 
 .btn {
@@ -48,6 +66,17 @@ input {
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
   cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+
+.btn.primary {
+  background-color: #3359DF;
+  color: #fff;
+}
+
+.btn.secondary {
+  background-color: #ffa400;
 }
 
 /* Form Error */
