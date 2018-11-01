@@ -17,10 +17,10 @@
   width: 25%;
 }
 .col-4 {
-  width: 33.33;
+  width: 33.33%;
 }
 .col-5 {
-  width: 44.66;
+  width: 44.66%;
 }
 .col-6 {
   width: 50%;
@@ -76,7 +76,9 @@
 #main-content {
   padding-top: 100px;
   min-height: 100%;
-  margin-bottom: -100px;
+  margin-bottom: -175px;
+  z-index: 1;
+  background-color: #fff;
 }
 
 .box {
