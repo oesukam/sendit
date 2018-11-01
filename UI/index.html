@@ -38,6 +38,7 @@
         <ul>
           <li class="nav-item"><a href="index.html">Home</a></li>
           <li class="nav-item"><a href="quote.html">Get A Quote</a></li>
+          <li class="nav-item"><a href="signup.html">Register</a></li>
           <li class="nav-item"><a href="login.html">Login</a></li>
         </ul>
       </nav>
@@ -45,22 +46,23 @@
   </header>
   <div id="main-content">
     <div class="container">
+      <div id="quote-map"></div>
       <div class="box quote-container">
         <form action="#">
           <div class="row">
             <div class="col-3">
               <label for="from">From</label>
-              <input type="text" name="from" id="from">
+              <input type="text" name="from" id="from-input">
               <div class="form-error"></div>
             </div>
             <div class="col-3">
               <label for="from">To</label>
-              <input type="text" name="to" id="to">
+              <input type="text" name="to" id="to-input">
               <div class="form-error"></div>
             </div>
             <div class="col-3">
               <label for="from">Weight</label>
-              <input type="number" name="weight" id="weight">
+              <input type="number" name="weight" id="weight-input">
               <div class="form-error"></div>
             </div>
             <div class="col-3 align-center">
@@ -82,6 +84,13 @@
                 libero exercitationem, temporibus eligendi optio expedita eius suscipit, 
                 minus, cupiditate animi officia odit ipsam ut nemo cum ducimus error neque?
               </p>
+              <div class="testimony-stars">
+                <i class="fa fa-star active"></i>
+                <i class="fa fa-star active"></i>
+                <i class="fa fa-star active"></i>
+                <i class="fa fa-star active"></i>
+                <i class="fa fa-star"></i>
+              </div>
             </div>
             <i class="fa fa-quote-right is-white"></i>
           </div>
@@ -118,6 +127,12 @@
       </div>
     </div>
   </footer>
+  <script>
+    
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu_9x-afqT01pFFB3vc4cDRObiSVIen1I&callback=initMap"
+  async defer></script>
   <script src="./js/main.js"></script>
+  <script src="./js/google-map.js"></script>
 </body>
 </html>

@@ -1,10 +1,11 @@
 .testimonies-area {
-  margin: 10vh 0px;
+  margin: 10vh 0 100px 0;
   background-color: #3359DF;
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.4);
 }
 
 .testimonies {
-  height: 20vh;
+  min-height: 20vh;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -30,4 +31,15 @@
 .testimony-content__text {
   font-size: 1rem;
   color: rgb(224, 224, 224);
+}
+.testimony-stars {
+  text-align: center;
+}
+.testimony-stars .fa {
+  color: #fff;
+  font-size: 1.5rem;
+  
+}
+.testimony-stars .active {
+  color: #ffa400;
 }

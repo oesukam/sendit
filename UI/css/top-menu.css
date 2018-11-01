@@ -4,6 +4,7 @@
   left: 0;
   right: 0;
   background-color: #3359DF;
+  z-index: 9999;
 }
 .meu-header {
   background-color: #ffa400;
@@ -106,7 +107,7 @@
 
 .nav-item a {
   color: #fff;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
 
 .nav-item a:hover {
