@@ -1,3 +1,28 @@
+.country-map {
+  background-image: url('../images/rwanda-map.png');
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  min-height: 300px;
+}
+.intro-area {
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  padding: 30px 15px;
+  border-bottom: 1px solid #3359DF;
+  box-shadow: 0 1px 3px #3350df;
+}
+.intro-area__title {
+  font-size: 3rem;
+  color: #3359DF;
+}
+.intro-area__text {
+  font-size: 1.5rem;
+  color: #3359DF;
+  line-height: 2.3rem;
+  letter-spacing: 0.2rem;
+}
 label .title {
   margin-bottom: 20px;
 }
