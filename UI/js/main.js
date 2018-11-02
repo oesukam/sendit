@@ -1,11 +1,6 @@
 'use strict';
 
 (() => {
-  let quote = {
-    from: '',
-    to: '',
-    weight: ''
-  }
   const toggleMenu = document.querySelector('.toggle-menu');
   toggleMenu.addEventListener('click', (e) => {
     e.preventDefault()
