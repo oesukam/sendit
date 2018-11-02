@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/font-awesome.min.css">
+  <title>SendIT - Admin Orders</title>
+</head>
+<body>
+  <header id="top-menu">
+    <div class="meu-header">
+      <div class="container">
+        <div class="col-6">
+          <ul class="plain-list">
+            <li><a href="#"><i class="fa fa-phone"></i> (+250)-000-000-000</a></li>
+            <li><a href="#"><i class="fa fa-envelope"></i> info@sendit.com</a></li>
+          </ul>
+        </div>
+        <div class="col-6 align-right">
+          <ul class="plain-list">
+            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="brand">
+        <img class="brand__img" src="./images/logo.png" alt="logo">
+      </div>
+      <div class="toggle-menu is-tablet">
+        <div class="hamburger"></div>
+      </div>
+      <nav id="menu-nav" class="nav pull-right">
+        <ul>
+          <li class="nav-item"><a href="index.html">Home</a></li>
+          <li class="nav-item"><a href="quote.html">Get A Quote</a></li>
+          <li class="nav-item">
+            <a href="profile.html">
+              <i class="fa fa-user mr-5 is-white"></i> My Profile
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div id="main-content">
+    <div class="container">
+      <div class="row profile-container">
+        <div class="col-3">
+          <div class="box profile-sidebar">
+            <div class="profile-sidebar__header">
+              <div class="profile-avatar"></div>
+              <div class="profile-name">Admin</div>
+            </div>
+            <div class="profile-sidebar__content">
+              <ul class="profile-sidebar__nav">
+                <li><a href="profile.html">My Profile</a></li>
+                <li><a href="profile.html">My Orders</a></li>
+                <li><a href="make-order.html">Make an Order</a></li>
+                <li><a class="active" href="admin-orders.html">Orders</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-9">
+          <div class="row">
+            <div class="col-12">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th width="20" >No.</th>
+                    <th>Users</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Address</th>
+                    <th width="100">Date</th>
+                    <th width="100">Status</th>
+                    <th width="100">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Olivier</td>
+                    <td>Kigali</td>
+                    <td>Gisenyi</td>
+                    <td>.....</td>
+                    <td>2018-09-2</td>
+                    <td>Await pick up</td>
+                    <td class="align-right">
+                      <a href="order.html" class="btn-edit">
+                        <i class="fa fa-edit"></i> Edit
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Andrew</td>
+                    <td>Kigali</td>
+                    <td>Gisenyi</td>
+                    <td>.....</td>
+                    <td>2018-09-3</td>
+                    <td>Delivered</td>
+                    <td class="align-right">
+                      <a href="order.html" class="btn-edit">
+                        <i class="fa fa-edit"></i> Edit
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Angel</td>
+                    <td>Kigali</td>
+                    <td>Gisenyi</td>
+                    <td>.....</td>
+                    <td>2018-09-3</td>
+                    <td>In Process</td>
+                    <td class="align-right">
+                      <a href="order.html" class="btn-edit">
+                        <i class="fa fa-edit"></i> Edit
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <nav class="pagination">
+                <a href="#"><i class="fa fa-angle-left"></i> Previous</a>
+                <a href="#">Next <i class="fa fa-angle-right"></i></a>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer id="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-3">
+          <img class="footer-logo" src="./images/logo.png" alt="logo">
+        </div>
+        <div class="col-3">
+          <h3 class="footer-title">Site Map</h3>
+          <ul class="footer-list">
+            <li><a href="index.html">Home</a></li>
+          </ul>
+        </div>
+        <div class="col-3">
+          <h3 class="footer-title">Partners</h3>
+          <ul class="footer-list">
+            <li><a href="#">DHL</a></li>
+            <li><a href="#">Postal</a></li>
+          </ul>
+        </div>
+        <div class="col-3">
+          <h3 class="footer-title">Social</h3>
+          <ul class="footer-list">
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Twitter</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu_9x-afqT01pFFB3vc4cDRObiSVIen1I&callback=initMap"
+  async defer></script>
+  <script src="./js/main.js"></script>
+  <script src="./js/quote.js"></script>
+  <script src="./js/google-map.js"></script>
+</body>
+</html>

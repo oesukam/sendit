@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/font-awesome.min.css">
+  <title>SendIT - Quote</title>
+</head>
+<body>
+  <header id="top-menu">
+    <div class="meu-header">
+      <div class="container">
+        <div class="col-6">
+          <ul class="plain-list">
+            <li><a href="#"><i class="fa fa-phone"></i> (+250)-000-000-000</a></li>
+            <li><a href="#"><i class="fa fa-envelope"></i> info@sendit.com</a></li>
+          </ul>
+        </div>
+        <div class="col-6 align-right">
+          <ul class="plain-list">
+            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="brand">
+        <img class="brand__img" src="./images/logo.png" alt="logo">
+      </div>
+      <div class="toggle-menu is-tablet">
+        <div class="hamburger"></div>
+      </div>
+      <nav id="menu-nav" class="nav pull-right">
+        <ul>
+          <li class="nav-item"><a href="index.html">Home</a></li>
+          <li class="nav-item active"><a href="quote.html">Get A Quote</a></li>
+          <li class="nav-item"><a href="signup.html">Register</a></li>
+          <li class="nav-item"><a href="login.html">Login</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div id="main-content">
+    <div class="container">
+      <div id="quote-map" class="map-location"> Map location</div>
+      <div class="box quote-container">
+        <p class="quote-error">
+          Please select the corresponding province and district.
+        </p>
+        <form action="#">
+          <div class="row">
+            <div class="col-4">
+              <h3 class="title is-white">From</h3>
+
+              <label for="fromProvince">Province</label>
+              <span class="custom-dropdown">
+                <select id="fromProvince" name="fromProvince">
+                  <option value="">Select</option> 
+                  <option value="eastern">Eastern Province</option>
+                  <option value="kigali">Kigali</option>  
+                  <option value="northern">Northen Province</option>
+                  <option value="southern">Southern Province</option>
+                </select>
+              </span>
+              
+              <label for="fromDistrict">District</label>
+              <span class="custom-dropdown">
+                <select id="fromDistrict" name="fromDistrict">    
+                  <option value="eastern">Select</option>
+                </select>
+              </span>
+            </div>
+            <div class="col-4">
+              <h3 class="title is-white">To</h3>
+              
+              <label for="toProvince">Province</label>
+              <span class="custom-dropdown">
+                <select id="toProvince" name="toProvince">
+                  <option value="">Select</option> 
+                  <option value="eastern">Eastern Province</option>
+                  <option value="kigali">Kigali</option>  
+                  <option value="northern">Northen Province</option>
+                  <option value="southern">Southern Province</option>
+                </select>
+              </span>
+              
+              <label for="toDistrict">District</label>
+              <span class="custom-dropdown">
+                <select id="toDistrict" name="toDistrict">    
+                  <option value="eastern">Select</option>
+                </select>
+              </span>
+            </div>
+            <div class="col-4">
+              <label for="from" class="title is-white">Weight</label>
+              <input type="number" name="weight" id="weight-input">
+              <div class="form-error"></div>
+              <button id="submit-quote" class="btn">Quote</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="quote-result">
+                <p>From <strong>Kigali</strong> to <strong>Gisenyi</strong>, a parcel of 
+                  <strong>5Kg</strong> costs <strong>2$</strong>
+                </p>
+              </div>
+            </div>
+          </div>
+        </form>
+        
+      </div>
+    </div>
+  </div>
+  <footer id="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-3">
+          <img class="footer-logo" src="./images/logo.png" alt="logo">
+        </div>
+        <div class="col-3">
+          <h3 class="footer-title">Site Map</h3>
+          <ul class="footer-list">
+            <li><a href="index.html">Home</a></li>
+          </ul>
+        </div>
+        <div class="col-3">
+          <h3 class="footer-title">Partners</h3>
+          <ul class="footer-list">
+            <li><a href="#">DHL</a></li>
+            <li><a href="#">Postal</a></li>
+          </ul>
+        </div>
+        <div class="col-3">
+          <h3 class="footer-title">Social</h3>
+          <ul class="footer-list">
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Twitter</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu_9x-afqT01pFFB3vc4cDRObiSVIen1I&callback=initMap"
+  async defer></script>
+  <script src="./js/main.js"></script>
+  <script src="./js/quote.js"></script>
+  <script src="./js/google-map.js"></script>
+</body>
+</html>
