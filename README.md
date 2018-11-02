@@ -1,6 +1,8 @@
 # Andela - SendIT (v1.0)
 SendIT is a courier service that helps users deliver parcels to different destinations. SendIT provides courier quotes based on weight categories.
 
+[Home Page](https://oesukam.github.io/andela-sendit/UI/index.html)
+
 ![Home Page Screenshot](/images/index-page.png)
 
 ## Technologies used
