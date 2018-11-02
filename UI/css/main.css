@@ -148,7 +148,7 @@ select option {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 15px;
+  margin-top: 2px;
 }
 .pagination {
   display: flex;
@@ -158,4 +158,12 @@ select option {
 .pagination a {
   cursor: pointer;
   font-size: 1.3rem;
+}
+.pagination a:hover {
+  color: #3359DF;
+}
+
+/* Reset fontawesome icon to inherit font color */
+.fa {
+  color: inherit;
 }

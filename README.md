@@ -1,6 +1,17 @@
 # Andela - SendIT (v1.0)
 SendIT is a courier service that helps users deliver parcels to different destinations. SendIT provides courier quotes based on weight categories.
 
+## Web Pages
+[Home Page](https://oesukam.github.io/andela-sendit/UI/index.html)
+[Get A Quote Page](https://oesukam.github.io/andela-sendit/UI/quote.html)
+[Signup Page](https://oesukam.github.io/andela-sendit/UI/signup.html)
+[Login Page](https://oesukam.github.io/andela-sendit/UI/login.html)
+[Profile Page](https://oesukam.github.io/andela-sendit/UI/profile.html)
+[Make An Order Page](https://oesukam.github.io/andela-sendit/UI/make-order.html)
+[Order View Page](https://oesukam.github.io/andela-sendit/UI/order.html)
+[Admin Orders Page](https://oesukam.github.io/andela-sendit/UI/admin-orders.html)
+[Admin Single Order Page](https://oesukam.github.io/andela-sendit/UI/admin-order.html)
+
 ![Home Page Screenshot](/images/index-page.png)
 
 ## Technologies used
