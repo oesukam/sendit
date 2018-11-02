@@ -19,6 +19,7 @@
 }
 .footer-list {
   list-style-type: none;
+  padding-left: 10px; 
 }
 .footer-list li {
   margin-top: 10px;
@@ -26,8 +27,15 @@
 .footer-list li a {
   color: #fff;
 }
+.footer-list li a:hover,
+.footer-list li a.active {
+  color: #ffa400;
+}
 @media only screen and (max-width: 768px) {
   #footer .container .col-3 {
     text-align: center;
+  }
+  .footer-list {
+    padding-left: 0;
   }
 }
