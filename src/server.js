@@ -1,9 +1,11 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
+import dotenv from 'dotenv';
 
+dotenv.config();
 const app = express();
-const { port = 3000 } = process.env;
+const { PORT = 3000 } = process.env;
 
 /* Apply the body-parser middleware to grab data
   from the request body and create application/json parser
@@ -17,6 +19,6 @@ app.get('/', (req, res) => {
   res.json({ msg: 'hello world' });
 });
 
-app.listen(port, () => {
-  console.log(`Server listenning on port: ${port}...`);
+app.listen(PORT, () => {
+  console.log(`Server listenning on port: ${PORT}...`);
 });
