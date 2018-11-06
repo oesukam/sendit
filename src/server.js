@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import helmet from 'helmet';
 
 const app = express();
 const { port = 3000 } = process.env;
@@ -9,6 +10,8 @@ const { port = 3000 } = process.env;
 */
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.use(helmet); // Sets various http headers
 
 app.get('/', (req, res) => {
   res.json({ msg: 'hello world' });
