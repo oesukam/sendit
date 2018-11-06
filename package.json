@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon --exec babel-node src/server.js",
     "build": "babel src --out-dir dist",
-    "serve": "node dist/server.js"
+    "serve": "node dist/server.js",
+    "test": "node ./node_modules/jasmine/bin/jasmine.js"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,7 @@
     "@babel/node": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "i": "^0.3.6",
+    "jasmine": "^3.3.0",
     "nodemon": "^1.18.6"
   }
 }
