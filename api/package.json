@@ -26,5 +26,8 @@
     "eslint-plugin-import": "^2.14.0",
     "jasmine": "^3.3.0",
     "nodemon": "^1.18.6"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
   }
 }
