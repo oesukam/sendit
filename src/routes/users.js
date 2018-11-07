@@ -1,7 +1,9 @@
 import express from 'express';
 import { celebrate } from 'celebrate';
+import bcrypt from 'bcrypt';
 
-import { users } from '../validators/index'
+import { users } from '../validators/index';
+import User from '../models/User';
 const router = express.Router();
 
 // Signup route
@@ -9,8 +11,28 @@ router.post('/', celebrate({
     body: users.signup
   }),
   (req, res) => {
-    res.json({ success: true, user: {} });
-})
+    let success = false;
+    const { body } = req
+    let user = new User();
+
+    // Assigns all body fields to User model
+    for (let i in body) {
+      // Check if the field is password in order to hash the string
+      if (i === 'password') {
+        user.password = bcrypt.hashSync(body.password, 10);
+        continue;
+      }
+      user[i] = body[i];
+    }
+    const userData = user.save();
+
+    if (userData) success = true;
+
+    // Delete password from the returned object
+    delete userData.password;
+    
+    res.json({ success, user: userData });
+});
 
 // Users route accessible to admins only
 router.get('/', (req, res) => {

@@ -1,5 +1,5 @@
 import Request from 'request';
-import server from '../src/server';
+import server from '../../src/server';
 const urlPrefixV1 = 'http://localhost:3000/api/v1';
 
 describe('users routes', () => {

@@ -1,15 +1,11 @@
 
-class User {
-  constructor () {
-    this.fistName = '';
-    this.lastName = '';
-    this.email = '';
-    this.gender = '';
-    this.password = '';
-    this.province = '';
-    this.district = '';
+import BaseModel from './BaseModel';
+
+class User extends BaseModel {
+  constructor (args) {
+    super(args);
+    this.arrayName = 'users';
   }
-  set password (value)
 }
 
 export default User;
