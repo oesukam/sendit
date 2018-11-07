@@ -2,6 +2,7 @@ import express from 'express';
 import { celebrate } from 'celebrate';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import faker from 'faker';
 import { users } from '../validators/index';
 import User from '../models/User';
 
@@ -15,8 +16,12 @@ router.post('/', celebrate({
     let success = false;
     const { JWT_SECRET } = process.env;
     let token;
-    const { body } = req
+    const { body } = req;
     let user = new User();
+
+    // Confirmation code to be sent to the user by email
+    user.confirmed = false;
+    user.confirmationCode = faker.random.uuid();
 
     // Assigns all body fields to User model
     for (let i in body) {
@@ -27,7 +32,7 @@ router.post('/', celebrate({
       }
       user[i] = body[i];
     }
-    const userData = user.save();
+    let userData = user.save();
 
     if (userData) {
       success = true;
@@ -37,7 +42,7 @@ router.post('/', celebrate({
     // Delete password from the returned object
     delete userData.password;
 
-    res.json({ success, data: userData, token });
+    res.status(201).json({ success, data: userData, token });
 });
 
 // Users route accessible to admins only

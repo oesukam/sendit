@@ -36,7 +36,12 @@ class BaseModel {
     if (!global[this.arrayName]) {
       global[this.arrayName] = []; //Initialises the array
     }
-    const items = global[this.arrayName]
+    const items = global[this.arrayName];
+    // If a user with the same email already exist
+    if (items.some(v => v.email === this.email && v.id !== this.id)){
+      throw new Error(`${this.email} account already exist`);
+      return;
+    }
     global[this.arrayName] = [
       ...items,
       this.toObject()

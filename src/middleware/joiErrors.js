@@ -12,6 +12,7 @@ const joiErrors = () => {
         errMsg: 'Bad Request',
         errFields
       };
+      console.log(req.body, 'body')
       return res.status(400).json(data);
     }
 

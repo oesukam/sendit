@@ -10,34 +10,38 @@ describe('users routes', () => {
     server.close();
   });
   describe('POST /users', () => {
-    let data = {};
-    let user, userData;
+    let data = {}, user;
 
     beforeAll((done) => {
       user = {
         firstName: 'Olivier',
         lastName: 'Esuka',
-        email: 'oesukam@gmail.com',
+        email: 'oesuklam@gmail.com',
         gender: 'Male',
         province: 'Kigali',
         district: 'Nyarungege',
         password: '123456'
       }
-      userData = { avatar: null, ...user };
-      delete userData.password;
 
-      Request.post(`${urlPrefixV1}/users`, user, (err, res, body) => {
+      Request.post(`${urlPrefixV1}/users`,
+        {form: user }, (err, res, body) => {
         data.status = res.statusCode
+        const bodyJSON = JSON.parse(body);
+        if (!err) {
+          data.token = bodyJSON.token;
+          data.success = bodyJSON.success
+          data.data = bodyJSON.data;
+        }
         done();
       });
     });
-    it('Status 200', () => {
-      expect(data.status).toBe(200);
+    it('Status 201', () => {
+      expect(data.status).toBe(201);
     });
     it('Body', () => {
-      expect(data.body.success).toBe(true);
-      expect(data.body.data).toEqual(userData);
-      expect(data.body.token).toBeDefined();
+      expect(data.success).toBe(true);
+      expect(data.data).toBeDefined();
+      expect(data.token).toBeDefined();
     });
   });
 });
