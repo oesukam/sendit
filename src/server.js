@@ -2,9 +2,10 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
-import morgan from 'morgan';
+import logger from 'morgan';
 import { errors } from 'celebrate';
 import routes from './routes';
+import joiErrors from './middleware/joiErrors'
 
 dotenv.config();
 const urlPrefixV1 = '/api/v1'; // Url prefix to map all urls
@@ -13,7 +14,7 @@ const { PORT = 3000, NODE_ENV } = process.env;
 
 // Check for working environment to start logging http request
 if (NODE_ENV === 'development') {
-  app.use(morgan('tiny'));
+  app.use(logger('tiny'));
   console.info('Morgan enabled');
 }
 
@@ -33,7 +34,7 @@ app.get('/', (req, res) => {
 app.use(`${urlPrefixV1}/users`, routes.users);
 
 // Apply Celebrate middleware to handle joi errors
-app.use(errors);
+app.use(joiErrors());
 
 
 const server = app.listen(PORT, () => {
