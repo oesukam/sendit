@@ -1,3 +1,5 @@
+import faker from 'faker';
+
 class BaseModel {
   constructor (arrayName = '') {
     this.arrayName = arrayName; // stores the name of the global variable
@@ -25,7 +27,10 @@ class BaseModel {
     // Check if the array name was set
     if (!this.arrayName) {
       throw new Error('arrayName not set');
-      return 
+      return;
+    }
+    if (!this.id) {
+      this.id = faker.random.uuid();
     }
     // Check the existance of the array
     if (!global[this.arrayName]) {

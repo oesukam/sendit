@@ -36,7 +36,7 @@ describe('users routes', () => {
     });
     it('Body', () => {
       expect(data.body.success).toBe(true);
-      expect(data.body.user).toEqual(userData);
+      expect(data.body.data).toEqual(userData);
       expect(data.body.token).toBeDefined();
     });
   });
