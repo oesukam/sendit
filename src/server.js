@@ -3,9 +3,8 @@ import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
 import logger from 'morgan';
-import { errors } from 'celebrate';
 import routes from './routes';
-import joiErrors from './middleware/joiErrors'
+import joiErrors from './middleware/joiErrors';
 
 dotenv.config();
 const urlPrefixV1 = '/api/v1'; // Url prefix to map all urls
@@ -43,5 +42,5 @@ const server = app.listen(PORT, () => {
 
 export default {
   start: () => server,
-  close: () => server.close
-}
+  close: () => server.close,
+};

@@ -13,7 +13,5 @@ const signup = {
 };
 
 export default {
-  signup
-}
-
-
+  signup,
+};
