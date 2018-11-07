@@ -4,8 +4,10 @@ import helmet from 'helmet';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
 import { errors } from 'celebrate';
+import routes from './routes';
 
 dotenv.config();
+const urlPrefixV1 = '/api/v1'; // Url prefix to map all urls
 const app = express();
 const { PORT = 3000, NODE_ENV } = process.env;
 
@@ -28,9 +30,17 @@ app.get('/', (req, res) => {
   res.send('<h1>SendIT - API</h1>');
 });
 
+app.use(`${urlPrefixV1}/users`, routes.users);
+
 // Apply Celebrate middleware to handle joi errors
 app.use(errors);
 
-app.listen(PORT, () => {
+
+const server = app.listen(PORT, () => {
   console.info(`Server listenning on port: ${PORT}...`);
 });
+
+export default {
+  start: () => server,
+  close: () => server.close
+}
