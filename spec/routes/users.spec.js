@@ -12,7 +12,7 @@ describe('users routes', () => {
     server.close();
   });
   describe('POST /users', () => {
-    let data = {};
+    const data = {};
     let user;
 
     beforeAll((done) => {
