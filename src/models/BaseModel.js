@@ -5,7 +5,7 @@ class BaseModel {
     this.arrayName = arrayName; // stores the name of the global variable
   }
 
-  toObject(withHidden = false) {
+  toObject({ withHidden = false } = {}) {
     const fields = { ...this };
     const hidden = [...fields.hidden];
     delete fields.arrayName;
@@ -21,17 +21,32 @@ class BaseModel {
     return { ...fields };
   }
 
+  // Filter items by id
   getById(id = '') {
-    const items = global[this.dataType] || [];
+    if (!id) return null;
+    const items = global[this.arrayName] || [];
     if (!id || items.length === 0) return null;
-
-    return items.filter(val => val.id === id);
+    const item = items.filter(val => val.id === id)[0] || null;
+    this.updateFields(item);
+    return this;
   }
 
+  // Update given proterties
+  updateFields(fields = {}) {
+    const keys = Object.keys(fields);
+    keys.forEach((key) => {
+      if (fields[key] !== undefined) {
+        this[key] = fields[key];
+      }
+    });
+  }
+
+  // Returns all items or an empty array
   getAll() {
     return global[this.arrayName] || [];
   }
 
+  // Updates createdAt and updatedAt date
   updateDate() {
     // Set created at date
     if (!this.createdAt) {
@@ -42,7 +57,8 @@ class BaseModel {
     }
   }
 
-  save(withHidden = false) {
+  // Save properies to the array
+  save({ withHidden = false } = {}) {
     // Check if the array name was set
     if (!this.arrayName) {
       throw new Error('arrayName not set');
@@ -54,7 +70,7 @@ class BaseModel {
     if (!global[this.arrayName]) {
       global[this.arrayName] = []; // Initialises the array
     }
-    const items = global[this.arrayName];
+    let items = global[this.arrayName];
     // If a user with the same email already exist
     if (items.some(v => v.email === this.email && v.id !== this.id)) {
       throw new Error(`${this.email} account already exist`);
@@ -62,11 +78,24 @@ class BaseModel {
 
     this.updateDate();
 
-    global[this.arrayName] = [
-      ...items,
-      this.toObject(withHidden),
-    ];
-    return this.toObject();
+    if (items.some(v => v.email === this.email)) {
+      // Update the corresponded
+      items = items.map((item) => {
+        if (item.email === this.email) {
+          item = this.toObject({ withHidden: true });
+        }
+        return item;
+      });
+      global[this.arrayName] = [...items];
+    } else {
+      // Add new item to the array without mutating
+      global[this.arrayName] = [
+        ...items,
+        this.toObject({ withHidden: true }),
+      ];
+    }
+
+    return this.toObject({ withHidden });
   }
 }
 

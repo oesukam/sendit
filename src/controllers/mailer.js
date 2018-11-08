@@ -23,8 +23,8 @@ const sendMail = ({
     to: to || 'oesukam@gmail.com', // list of receivers
     bcc: bcc || undefined, // list of receivers
     subject: subject || 'Hello ✔', // Subject line
-    text: text || 'Hello world? Plain', // plain text body
-    html: html || '<b>Hello world? Html</b>', // html body
+    text: text || 'Hello There!', // plain text body
+    html: html || '<b>Hello There!</b>', // html body
   };
 
   // send mail with defined transport object
