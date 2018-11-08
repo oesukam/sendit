@@ -1,5 +1,7 @@
 import Request from 'request';
+
 import server from '../../src/server';
+
 const urlPrefixV1 = 'http://localhost:3000/api/v1';
 
 describe('users routes', () => {
@@ -10,7 +12,8 @@ describe('users routes', () => {
     server.close();
   });
   describe('POST /users', () => {
-    let data = {}, user;
+    let data = {};
+    let user;
 
     beforeAll((done) => {
       user = {
@@ -20,20 +23,20 @@ describe('users routes', () => {
         gender: 'Male',
         province: 'Kigali',
         district: 'Nyarungege',
-        password: '123456'
-      }
+        password: '123456',
+      };
 
       Request.post(`${urlPrefixV1}/users`,
-        {form: user }, (err, res, body) => {
-        data.status = res.statusCode
-        const bodyJSON = JSON.parse(body);
-        if (!err) {
-          data.token = bodyJSON.token;
-          data.success = bodyJSON.success
-          data.data = bodyJSON.data;
-        }
-        done();
-      });
+        { form: user }, (err, res, body) => {
+          data.status = res.statusCode;
+          const bodyJSON = JSON.parse(body);
+          if (!err) {
+            data.token = bodyJSON.token;
+            data.success = bodyJSON.success;
+            data.data = bodyJSON.data;
+          }
+          done();
+        });
     });
     it('Status 201', () => {
       expect(data.status).toBe(201);

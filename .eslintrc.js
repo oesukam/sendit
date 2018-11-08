@@ -1,4 +1,7 @@
-export default  {
+module.exports =  {
   "extends": "airbnb-base",
-  "plugins": ["jasmine"]
+  "plugins": ["import", "jasmine"],
+  "rules": {
+    
+  }
 };
