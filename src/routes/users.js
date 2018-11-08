@@ -5,8 +5,10 @@ import jwt from 'jsonwebtoken';
 import faker from 'faker';
 import { users } from '../validators/index';
 import User from '../models/User';
+import mailer from '../controllers/mailer';
 
 const router = express.Router();
+const { URL } = process.env;
 
 // Signup route
 router.post('/', celebrate({
@@ -39,6 +41,28 @@ router.post('/', celebrate({
   if (userData) {
     success = true;
     token = jwt.sign({ id: userData.id, userType: userData.userType }, JWT_SECRET);
+
+    const mailBody = `
+      <div style="background-color: #3359DF; padding: 20px;">
+        <h1 style="color: #fff; text-align: center;">SendIT - Email Confirmation</h1>
+      </div>
+      <p style="font-size: 1.2rem; line-height: 2rem;">
+        Hello ${user.firstName}, <br>
+        Thank you for creating an account with us, please proceed to
+        to confirm your email.
+      <p/>
+      <div style="text-align: center; padding: 20px;">
+        <a 
+          href="${URL}/api/v1/users/confirmEmail/${user.confirmationCode}"
+          style="color: #fff; background-color: #3359DF; padding: 10px 20px; font-size: 1.2rem; text-align: center; text-decoration: none;"
+        >
+          Confirm email
+        </a>
+      </div>
+      Thank you, <br>
+      Andela - SendIT Team
+    `;
+    mailer({ subject: 'Email confirmation', to: userData.email, html: mailBody });
   }
 
   // Delete password from the returned object
@@ -49,7 +73,10 @@ router.post('/', celebrate({
 
 // Users route accessible to admins only
 router.get('/', (req, res) => {
-  res.json({ user: { } });
+  const user = new User();
+  const { page = 1 } = req.params;
+
+  res.json({ data: user.getAll({ page }) });
 });
 
 export default router;
