@@ -1,16 +1,26 @@
 import faker from 'faker';
 
 class BaseModel {
-  constructor(arrayName = '') {
-    this.arrayName = arrayName; // stores the name of the global variable
+  constructor(args = '') {
+    this.arrayName = ''; // stores the name of the global variable
+    if (args) {
+      this.updateFields(args);
+    }
   }
 
   toObject({ withHidden = false } = {}) {
     const fields = { ...this };
-    const hidden = [...fields.hidden];
-    delete fields.arrayName;
-    delete fields.hidden;
-    if (!withHidden) {
+    let hidden;
+    if (this.hidden !== undefined) {
+      hidden = [...fields.hidden];
+    }
+    if (this.arrayName !== undefined) {
+      delete fields.arrayName;
+    }
+    if (this.hidden !== undefined) {
+      delete fields.hidden;
+    }
+    if (!withHidden && hidden) {
       // Delete all hidden properties before returning the object
       hidden.forEach((value) => {
         if (fields[value] !== undefined) {
@@ -24,7 +34,10 @@ class BaseModel {
   // Filter items by id
   findById(id = '') {
     if (!id) return null;
-    const items = global[this.arrayName] || [];
+    let items = [];
+    if (global[this.arrayName] !== undefined) {
+      items = [...global[this.arrayName]];
+    }
     if (!id || items.length === 0) return null;
     const item = items.filter(val => val.id === id)[0] || null;
     this.updateFields(item);
@@ -32,13 +45,15 @@ class BaseModel {
   }
 
   // Update given proterties
-  updateFields(fields = {}) {
-    const keys = Object.keys(fields);
-    keys.forEach((key) => {
-      if (fields[key] !== undefined) {
-        this[key] = fields[key];
-      }
-    });
+  updateFields(fields = '') {
+    if (fields) {
+      const keys = Object.keys(fields);
+      keys.forEach((key) => {
+        if (fields[key] !== undefined) {
+          this[key] = fields[key];
+        }
+      });
+    }
   }
 
   // Returns all items or an empty array

@@ -2,7 +2,7 @@ import faker from 'faker';
 import bcrypt from 'bcrypt';
 
 // Default admin
-const user = {
+const admin = {
   id: faker.random.uuid(),
   firstName: 'Admin',
   lastName: 'Admin',
@@ -15,8 +15,23 @@ const user = {
   confirmed: true,
   confirmationCode: null,
 };
+// default user
+const user = {
+  id: faker.random.uuid(),
+  firstName: 'User',
+  lastName: 'User',
+  userType: 'user',
+  email: 'user@email.com',
+  password: bcrypt.hashSync('user@user', 10),
+  gender: 'Female',
+  province: 'Kigali',
+  district: 'Nyarungege',
+  confirmed: true,
+  confirmationCode: null,
+};
+
 const initUsers = () => {
-  global.users = [user];
+  global.users = [admin, user];
 };
 
 export default initUsers;

@@ -51,7 +51,6 @@ async (req, res) => {
 router.get('/:userId/confirmEmail/:confirmationCode',
   (req, res) => {
     let success = false;
-    let token;
     const { userId, confirmationCode } = req.params;
     const user = new User();
     const userData = user.findById(userId);
