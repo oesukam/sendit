@@ -1,5 +1,6 @@
-import users from './users';
+import initUsers from './users';
 
-export default {
-  users,
+const initData = () => {
+  initUsers(); // Initialises global users array
 };
+export default initData;

@@ -22,7 +22,7 @@ class BaseModel {
   }
 
   // Filter items by id
-  getById(id = '') {
+  findById(id = '') {
     if (!id) return null;
     const items = global[this.arrayName] || [];
     if (!id || items.length === 0) return null;

@@ -1,25 +1,25 @@
 import Request from 'request';
 
-import server from '../../src/server';
+import run from '../../src/server';
 
-const urlPrefixV1 = 'http://localhost:3000/api/v1';
+const urlPrefixV1 = 'http://localhost:5000/api/v1';
 
-describe('users routes', () => {
+describe('user', () => {
+  let server;
   beforeAll(() => {
-    server.start();
+    server = run(5000);
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
   });
   afterAll(() => {
     server.close();
   });
-  describe('POST /users', () => {
-    let data = {};
-    let user;
-
+  describe('create an account POST /api/v1/users', () => {
+    const data = {};
     beforeAll((done) => {
-      user = {
+      const user = {
         firstName: 'Olivier',
         lastName: 'Esuka',
-        email: 'oesuklam@gmail.com',
+        email: 'username@gmail.com',
         gender: 'Male',
         province: 'Kigali',
         district: 'Nyarungege',
@@ -27,19 +27,49 @@ describe('users routes', () => {
       };
 
       Request.post(`${urlPrefixV1}/users`,
-        { form: user }, (err, res, body) => {
+        { json: true, form: user }, (err, res, body) => {
           data.status = res.statusCode;
-          const bodyJSON = JSON.parse(body);
           if (!err) {
-            data.token = bodyJSON.token;
-            data.success = bodyJSON.success;
-            data.data = bodyJSON.data;
+            data.token = body.token;
+            data.success = body.success;
+            data.data = body.data;
+            console.log(global.users[0].password, global.users[1].password, 'ppppp');
           }
           done();
         });
     });
     it('Status 201', () => {
       expect(data.status).toBe(201);
+    });
+    it('Body', () => {
+      expect(data.success).toBe(true);
+      expect(data.data).toBeDefined();
+      expect(data.token).toBeDefined();
+    });
+  });
+
+  // Login endpoint
+  describe('log into an account POST /api/v1/users/login', () => {
+    const data = {};
+    beforeAll((done) => {
+      const userLogin = {
+        email: 'username@gmail.com',
+        password: '123456',
+      };
+      // Login the new user
+      Request.post(`${urlPrefixV1}/users/login`,
+        { json: true, form: userLogin }, (err, res, body) => {
+          data.status = res.statusCode;
+          if (!err) {
+            data.success = body.success;
+            data.data = body.data;
+            data.token = body.token;
+          }
+          done();
+        });
+    });
+    it('Status 200', () => {
+      expect(data.status).toBe(200);
     });
     it('Body', () => {
       expect(data.success).toBe(true);

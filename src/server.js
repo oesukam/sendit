@@ -3,10 +3,13 @@ import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
 import logger from 'morgan';
+import initData from './data';
 import routes from './routes';
 import joiErrors from './middleware/joiErrors';
 
-dotenv.config();
+initData(); // Initialise global data arrays
+dotenv.config(); // Sets environment's varibles
+
 const urlPrefixV1 = '/api/v1'; // Url prefix to map all urls
 const app = express();
 const { PORT = 3000, NODE_ENV } = process.env;
@@ -35,12 +38,22 @@ app.use(`${urlPrefixV1}/users`, routes.users);
 // Apply Celebrate middleware to handle joi errors
 app.use(joiErrors());
 
-
-const server = app.listen(PORT, () => {
-  console.info(`Server listenning on port: ${PORT}...`);
+// catch 404 and forward to error handler
+app.use((req, res, next) => {
+  const err = new Error('Not Found');
+  err.status = 404;
+  next(err);
 });
 
-export default {
-  start: () => server,
-  close: () => server.close,
+const run = (port = '') => {
+  const server = app.listen(port || PORT, () => {
+    console.info(`Server listenning on port: ${port || PORT}...`);
+  });
+  return server;
 };
+
+if (require.main === module) {
+  run();
+}
+
+export default run;
