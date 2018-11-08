@@ -1,8 +1,9 @@
 import faker from 'faker';
 
 class BaseModel {
-  constructor(arrayName = '') {
-    this.arrayName = arrayName; // stores the name of the global variable
+  constructor(args = {}) {
+    this.arrayName = ''; // stores the name of the global variable
+    this.updateFields(args);
   }
 
   toObject({ withHidden = false } = {}) {
