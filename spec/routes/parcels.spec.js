@@ -25,8 +25,8 @@ describe('parcel', () => {
         userId: user.id,
         fromProvince: 'Kigali',
         fromDistrict: 'Nyarungege',
-        toProvince: 'Kigali',
-        toDistrict: 'Nyarungege',
+        toProvince: 'Northen Province',
+        toDistrict: 'Burera',
         receiverNames: `${faker.name.firstName()} ${faker.name.lastName()}`,
         receiverPhone: '250-783200000',
         receiverAddress: faker.lorem.sentence(),
@@ -50,7 +50,6 @@ describe('parcel', () => {
     it('Body', () => {
       expect(data.success).toBe(true);
       expect(data.data).toBeDefined();
-      expect(data.token).toBeDefined();
     });
   });
 

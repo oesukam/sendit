@@ -34,6 +34,7 @@ app.get('/', (req, res) => {
 });
 
 app.use(`${urlPrefixV1}/users`, routes.users);
+app.use(`${urlPrefixV1}/parcels`, routes.parcels);
 
 // Apply Celebrate middleware to handle joi errors
 app.use(joiErrors());
