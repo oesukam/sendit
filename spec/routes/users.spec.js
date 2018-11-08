@@ -1,22 +1,22 @@
 import Request from 'request';
 
-import server from '../../src/server';
+import run from '../../src/server';
 
-const urlPrefixV1 = 'http://localhost:3000/api/v1';
+const urlPrefixV1 = 'http://localhost:5000/api/v1';
 
-describe('users routes', () => {
+describe('user', () => {
+  let server;
   beforeAll(() => {
-    server.start();
+    server = run(5000);
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
   });
   afterAll(() => {
     server.close();
   });
-  describe('POST /api/v1/users', () => {
+  describe('create an account POST /api/v1/users', () => {
     const data = {};
-    let user;
-
     beforeAll((done) => {
-      user = {
+      const user = {
         firstName: 'Olivier',
         lastName: 'Esuka',
         email: 'username@gmail.com',
@@ -27,13 +27,13 @@ describe('users routes', () => {
       };
 
       Request.post(`${urlPrefixV1}/users`,
-        { form: user }, (err, res, body) => {
+        { json: true, form: user }, (err, res, body) => {
           data.status = res.statusCode;
-          const bodyJSON = JSON.parse(body);
           if (!err) {
-            data.token = bodyJSON.token;
-            data.success = bodyJSON.success;
-            data.data = bodyJSON.data;
+            data.token = body.token;
+            data.success = body.success;
+            data.data = body.data;
+            console.log(global.users[0].password, global.users[1].password, 'ppppp');
           }
           done();
         });
@@ -48,33 +48,32 @@ describe('users routes', () => {
     });
   });
 
-  // Login endpoit
-  describe('POST /api/v1/users/login', () => {
+  // Login endpoint
+  describe('log into an account POST /api/v1/users/login', () => {
     const data = {};
-    let user;
-
     beforeAll((done) => {
-      user = {
+      const userLogin = {
         email: 'username@gmail.com',
         password: '123456',
       };
-
-      Request.post(`${urlPrefixV1}/users`,
-        { form: user }, (err, res, body) => {
+      // Login the new user
+      Request.post(`${urlPrefixV1}/users/login`,
+        { json: true, form: userLogin }, (err, res, body) => {
           data.status = res.statusCode;
-          const bodyJSON = JSON.parse(body);
           if (!err) {
-            data.token = bodyJSON.token;
-            data.success = bodyJSON.success;
+            data.success = body.success;
+            data.data = body.data;
+            data.token = body.token;
           }
           done();
         });
     });
-    it('Status 201', () => {
+    it('Status 200', () => {
       expect(data.status).toBe(200);
     });
     it('Body', () => {
       expect(data.success).toBe(true);
+      expect(data.data).toBeDefined();
       expect(data.token).toBeDefined();
     });
   });
