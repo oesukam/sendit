@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/server.js",
   "scripts": {
-    "start": "nodemon --exec babel-node src/server.js",
+    "start": "node --exec babel-node src/server.js",
     "build": "babel src --out-dir dist",
     "serve": "node dist/server.js",
     "test": "NODE_ENV=test JASMINE_CONFIG_PATH=spec/support/jasmine.json nyc --reporter=text --reporter=lcov babel-node spec/run.js --exit",
