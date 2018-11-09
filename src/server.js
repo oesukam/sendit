@@ -29,15 +29,21 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-app.get('/', (req, res) => {
-  res.send('<h1>SendIT - API</h1>');
-});
-
 app.use(`${urlPrefixV1}/users`, routes.users);
 app.use(`${urlPrefixV1}/parcels`, routes.parcels);
 
 // Apply Celebrate middleware to handle joi errors
 app.use(joiErrors());
+
+
+app.get('/', (req, res) => {
+  res.send('<h1>SendIT - API</h1>');
+});
+
+app.get('/api/v1/*', (req, res) => {
+  res.send('<h1>SendIT - API</h1>');
+});
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
