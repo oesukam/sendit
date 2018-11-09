@@ -50,15 +50,8 @@ app.use((req, res, next) => {
   next(err);
 });
 
-const run = (port = '') => {
-  const server = app.listen(port || PORT, () => {
-    console.info(`Server listenning on port: ${port || PORT}...`);
-  });
-  return server;
-};
+app.listen(PORT, () => {
+  console.info(`Server listenning on port: ${PORT}...`);
+});
 
-if (require.main === module) {
-  run();
-}
-
-export default run;
+export default app;
