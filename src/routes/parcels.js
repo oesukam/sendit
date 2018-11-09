@@ -43,6 +43,7 @@ router.put('/:id/cancel',
   (req, res) => {
     const { id } = req.params;
     const { userId } = req.body;
+    console.log('userid', userId, id)
     let parcel = new Parcel();
     parcel = parcel.findById(id);
     if (!parcel) {
