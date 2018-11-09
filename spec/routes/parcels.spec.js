@@ -10,6 +10,7 @@ const urlPrefixV1 = 'http://localhost:5000/api/v1';
 describe('parcel', () => {
   let server;
   let parcelId;
+  let parcelUserId;
   beforeAll(() => {
     server = run(5000);
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
@@ -42,6 +43,7 @@ describe('parcel', () => {
             data.success = body.success;
             data.data = body.data;
             parcelId = body.data.id;
+            parcelUserId = body.data.userId;
           }
           done();
         });
@@ -59,13 +61,8 @@ describe('parcel', () => {
   describe('fetch single parcel GET /api/v1/parcels/<parcelId>', () => {
     const data = {};
     beforeAll((done) => {
-      const userLogin = {
-        email: 'username@gmail.com',
-        password: '123456',
-      };
-      // Login the new user
-      Request.post(`${urlPrefixV1}/parcels/${parcelId}`,
-        { json: true, form: userLogin }, (err, res, body) => {
+      Request.get(`${urlPrefixV1}/parcels/${parcelId}`,
+        { json: true }, (err, res, body) => {
           data.status = res.statusCode;
           if (!err) {
             data.success = body.success;
@@ -74,10 +71,34 @@ describe('parcel', () => {
           done();
         });
     });
-    xit('Status 200', () => {
+    it('Status 200', () => {
       expect(data.status).toBe(200);
     });
-    xit('Body', () => {
+    it('Body', () => {
+      expect(data.success).toBe(true);
+      expect(data.data).toBeDefined();
+    });
+  });
+
+  // Cancel a parcel
+  describe('cancel a parcel PUT /api/v1/parcels/<parcelId>/cancel', () => {
+    const data = {};
+    beforeAll((done) => {
+      // Login the new user
+      Request.put(`${urlPrefixV1}/parcels/${parcelId}`,
+        { json: true, form: { userId: parcelUserId } }, (err, res, body) => {
+          data.status = res.statusCode;
+          if (!err) {
+            data.success = body.success;
+            data.data = body.data;
+          }
+          done();
+        });
+    });
+    it('Status 200', () => {
+      expect(data.status).toBe(200);
+    });
+    it('Body', () => {
       expect(data.success).toBe(true);
       expect(data.data).toBeDefined();
     });

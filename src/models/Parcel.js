@@ -6,6 +6,7 @@ class Parcel extends BaseModel {
     super(args);
     this.arrayName = 'parcels';
     this.orderStatus = 'in-transit';
+    this.cancel = false;
   }
 }
 
