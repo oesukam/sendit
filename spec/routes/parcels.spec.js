@@ -31,7 +31,7 @@ describe('parcel', () => {
         toDistrict: 'Burera',
         receiverNames: `${faker.name.firstName()} ${faker.name.lastName()}`,
         receiverPhone: '250-783200000',
-        receiverAddress: faker.lorem.sentence(),
+        receiverAddress: faker.address.streetAddress(),
         weight: faker.random.number(),
       };
 
@@ -39,6 +39,7 @@ describe('parcel', () => {
         { json: true, form: parcel }, (err, res, body) => {
           data.status = res.statusCode;
           if (!err) {
+            console.log(parcel);
             data.token = body.token;
             data.success = body.success;
             data.data = body.data;
@@ -85,12 +86,12 @@ describe('parcel', () => {
     const data = {};
     beforeAll((done) => {
       // Login the new user
-      Request.put(`${urlPrefixV1}/parcels/${parcelId}`,
+      Request.put(`${urlPrefixV1}/parcels/${parcelId}/cancel`,
         { json: true, form: { userId: parcelUserId } }, (err, res, body) => {
           data.status = res.statusCode;
           if (!err) {
             data.success = body.success;
-            data.data = body.data;
+            data.message = body.msg;
           }
           done();
         });
@@ -100,7 +101,7 @@ describe('parcel', () => {
     });
     it('Body', () => {
       expect(data.success).toBe(true);
-      expect(data.data).toBeDefined();
+      expect(data.message).toBe('Parcel cancelled successfully');
     });
   });
 });

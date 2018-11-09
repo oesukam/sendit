@@ -5,8 +5,8 @@ class Parcel extends BaseModel {
   constructor(args) {
     super(args);
     this.arrayName = 'parcels';
-    this.orderStatus = 'in-transit';
-    this.cancel = false;
+    this.parcelStatus = 'in-transit';
+    this.cancelled = false;
   }
 }
 

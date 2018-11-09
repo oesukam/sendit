@@ -18,7 +18,7 @@ router.post('/',
     if (!user) {
       return res.status(401).json({ success: false, msg: 'Unathorized Access' });
     }
-    const parcel = new Parcel(body);
+    const parcel = new Parcel({ ...body, location: body.city || body.district });
 
     parcel.save();
 
@@ -43,7 +43,6 @@ router.put('/:id/cancel',
   (req, res) => {
     const { id } = req.params;
     const { userId } = req.body;
-    console.log('userid', userId, id)
     let parcel = new Parcel();
     parcel = parcel.findById(id);
     if (!parcel) {
@@ -56,10 +55,13 @@ router.put('/:id/cancel',
       return res.status(401).json({ success: false, msg: 'Unauthorized Access' });
     }
 
-    parcel.cancel = true;
+    if (parcel.cancelled) {
+      return res.status(204).json({ success: false, msg: 'Parcel had already been cancelled' });
+    }
+    parcel.cancelled = true;
     parcel.save();
 
-    return res.status(200).json({ success: true });
+    return res.status(200).json({ success: true, msg: 'Parcel cancelled successfully' });
   });
 
 export default router;
