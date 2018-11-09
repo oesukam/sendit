@@ -97,7 +97,7 @@ class BaseModel {
       // Update the corresponded
       items = items.map((item) => {
         if (item.email === this.email) {
-          item = this.toObject({ withHidden: true });
+          return this.toObject({ withHidden: true });
         }
         return item;
       });

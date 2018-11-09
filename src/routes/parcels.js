@@ -24,4 +24,15 @@ router.post('/',
     return res.status(201).json({ succes: true, data: parcel.toObject() });
   });
 
+router.get('/:id', (req, res) => {
+  const { id } = req.params;
+  let parcel = new Parcel();
+  parcel = parcel.findById(id);
+  if (!parcel) {
+    return res.status(404).json({ succes: false, msg: 'Not found' });
+  }
+
+  return res.status(201).json({ succes: true, data: parcel.toObject() });
+});
+
 export default router;
