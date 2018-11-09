@@ -9,6 +9,7 @@ const urlPrefixV1 = 'http://localhost:5000/api/v1';
 // Creating a new parce;
 describe('parcel', () => {
   let server;
+  let parcelId;
   beforeAll(() => {
     server = run(5000);
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
@@ -40,6 +41,7 @@ describe('parcel', () => {
             data.token = body.token;
             data.success = body.success;
             data.data = body.data;
+            parcelId = body.data.id;
           }
           done();
         });
@@ -53,8 +55,8 @@ describe('parcel', () => {
     });
   });
 
-  // Login endpoint
-  describe('log into an account POST /api/v1/parcels/<parcelId>', () => {
+  // Fetch a single parcel
+  describe('fetch single parcel GET /api/v1/parcels/<parcelId>', () => {
     const data = {};
     beforeAll((done) => {
       const userLogin = {
@@ -62,13 +64,12 @@ describe('parcel', () => {
         password: '123456',
       };
       // Login the new user
-      Request.post(`${urlPrefixV1}/users/login`,
+      Request.post(`${urlPrefixV1}/parcels/${parcelId}`,
         { json: true, form: userLogin }, (err, res, body) => {
           data.status = res.statusCode;
           if (!err) {
             data.success = body.success;
             data.data = body.data;
-            data.token = body.token;
           }
           done();
         });
@@ -79,7 +80,6 @@ describe('parcel', () => {
     xit('Body', () => {
       expect(data.success).toBe(true);
       expect(data.data).toBeDefined();
-      expect(data.token).toBeDefined();
     });
   });
 });
