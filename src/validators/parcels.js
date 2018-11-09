@@ -13,7 +13,12 @@ const create = {
   weight: Joi.number().positive().required(),
 };
 
+const cancel = {
+  userId: Joi.string(),
+};
+
 
 export default {
   create,
+  cancel,
 };

@@ -8,6 +8,7 @@ import User from '../models/User';
 dotenv.config();
 const router = express.Router();
 
+// Create a new parcel
 router.post('/',
   celebrate({ body: parcels.create }),
   (req, res) => {
@@ -15,24 +16,52 @@ router.post('/',
     let user = new User();
     user = user.findById(body.userId);
     if (!user) {
-      return res.status(401).json({ succes: false, msg: 'Unathorized access' });
+      return res.status(401).json({ success: false, msg: 'Unathorized Access' });
     }
-    const parcel = new Parcel(body);
+    const parcel = new Parcel({ ...body, location: body.city || body.district });
 
     parcel.save();
 
-    return res.status(201).json({ succes: true, data: parcel.toObject() });
+    return res.status(201).json({ success: true, data: parcel.toObject() });
   });
 
+// Fetch a single parcel
 router.get('/:id', (req, res) => {
   const { id } = req.params;
   let parcel = new Parcel();
   parcel = parcel.findById(id);
   if (!parcel) {
-    return res.status(404).json({ succes: false, msg: 'Not found' });
+    return res.status(404).json({ success: false, msg: 'Not found' });
   }
 
-  return res.status(201).json({ succes: true, data: parcel.toObject() });
+  return res.status(200).json({ success: true, data: parcel.toObject() });
 });
+
+// Cancel a parcel
+router.put('/:id/cancel',
+  celebrate({ body: parcels.cancel }),
+  (req, res) => {
+    const { id } = req.params;
+    const { userId } = req.body;
+    let parcel = new Parcel();
+    parcel = parcel.findById(id);
+    if (!parcel) {
+      return res.status(404).json({ success: false, msg: 'Not found' });
+    }
+    let user = new User();
+    user = user.findById(userId);
+
+    if (!user) {
+      return res.status(401).json({ success: false, msg: 'Unauthorized Access' });
+    }
+
+    if (parcel.cancelled) {
+      return res.status(204).json({ success: false, msg: 'Parcel had already been cancelled' });
+    }
+    parcel.cancelled = true;
+    parcel.save();
+
+    return res.status(200).json({ success: true, msg: 'Parcel cancelled successfully' });
+  });
 
 export default router;

@@ -86,9 +86,11 @@ class BaseModel {
       global[this.arrayName] = []; // Initialises the array
     }
     let items = global[this.arrayName];
-    // If a user with the same email already exist
-    if (items.some(v => v.email === this.email && v.id !== this.id)) {
-      throw new Error(`${this.email} account already exist`);
+    if (this.arrayName === 'users') {
+      // If a user with the same email already exist
+      if (items.some(v => v.email === this.email && v.id !== this.id)) {
+        throw new Error(`${this.email} account already exist`);
+      }
     }
 
     this.updateDate();

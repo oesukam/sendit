@@ -1,9 +1,8 @@
-import faker from 'faker';
 import bcrypt from 'bcrypt';
 
 // Default admin
 const admin = {
-  id: faker.random.uuid(),
+  id: '648da554-e42f-40dc-92d3-649e3865fd72',
   firstName: 'Admin',
   lastName: 'Admin',
   userType: 'admin',
@@ -17,7 +16,7 @@ const admin = {
 };
 // default user
 const user = {
-  id: faker.random.uuid(),
+  id: '97cf377c-5735-4f5d-8645-c8fb4b5c5af3',
   firstName: 'User',
   lastName: 'User',
   userType: 'user',
