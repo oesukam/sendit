@@ -11,6 +11,9 @@
     "test-cover": "cat ./coverage/lcov.info | coveralls",
     "report-coverage": "codecov"
   },
+  "engines": {
+    "node": "10.4.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oesukam/andela-sendit-api.git"
