@@ -1,4 +1,4 @@
-# SendIT - API
+# SendIT - API (V1.0.0)
 
 ## API endpoints
 
