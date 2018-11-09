@@ -26,6 +26,17 @@ router.post('/',
   });
 
 // Fetch a single parcel
+router.get('/', (req, res) => {
+  const parcel = new Parcel();
+  const items = parcel.getAll();
+  if (!parcel) {
+    return res.status(404).json({ success: false, msg: 'Not found' });
+  }
+
+  return res.status(200).json({ success: true, data: items });
+});
+
+// Fetch a single parcel
 router.get('/:id', (req, res) => {
   const { id } = req.params;
   let parcel = new Parcel();

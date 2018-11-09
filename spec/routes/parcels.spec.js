@@ -58,6 +58,29 @@ describe('parcel', () => {
     });
   });
 
+  // Fetch parcels
+  describe('fetch parcels GET /api/v1/parcels', () => {
+    const data = {};
+    beforeAll((done) => {
+      Request.get(`${urlPrefixV1}/parcels`,
+        { json: true }, (err, res, body) => {
+          data.status = res.statusCode;
+          if (!err) {
+            data.success = body.success;
+            data.data = body.data;
+          }
+          done();
+        });
+    });
+    it('Status 200', () => {
+      expect(data.status).toBe(200);
+    });
+    it('Body', () => {
+      expect(data.success).toBe(true);
+      expect(typeof data.data).toBe('object');
+    });
+  });
+
   // Fetch a single parcel
   describe('fetch single parcel GET /api/v1/parcels/<parcelId>', () => {
     const data = {};
