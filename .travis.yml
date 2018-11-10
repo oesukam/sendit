@@ -1,4 +1,12 @@
 sudo: false
+env:
+  global:
+    - URL=http://localhost:3000
+    - PORT=3000
+    - NODE_ENV=development
+    - JWT_SECRET=oesukam@secret
+    - MAILGUN_USER=
+    - MAILGUN_PASSWORD=
 language: node_js
 node_js:
   - node
