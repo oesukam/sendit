@@ -7,9 +7,9 @@
     "start": "nodemon --exec babel-node src/server.js",
     "build": "babel src --out-dir dist",
     "serve": "node dist/server.js",
-    "test": "NODE_ENV=test JASMINE_CONFIG_PATH=spec/support/jasmine.json nyc --reporter=text-lcov babel-node spec/run.js --exit",
+    "test": "NODE_ENV=test JASMINE_CONFIG_PATH=spec/support/jasmine.json nyc --reporter=text --reporter=lcov babel-node spec/run.js --exit",
     "report-coverage": "codecov",
-    "coveralls": "NODE_ENV=test JASMINE_CONFIG_PATH=spec/support/jasmine.json nyc report --reporter=text-lcov babel-node spec/run.js | coveralls"
+    "coveralls": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
   "engines": {
     "node": "10.4.0"
