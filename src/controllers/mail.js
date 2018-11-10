@@ -1,5 +1,6 @@
 import mailer from '../helpers/mailer';
 
+// Send an email function
 const sendConfirmEmail = (user = '') => {
   if (user) {
     const mailBody = `
@@ -37,6 +38,7 @@ const sendConfirmEmail = (user = '') => {
   }
 };
 
+// Send a confirmation email function
 const sendEmailConfirmed = (user = '') => {
   if (user) {
     const mailBody = `
