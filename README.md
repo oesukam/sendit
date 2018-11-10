@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/oesukam/andela-sendit-api.svg?branch=master)](https://travis-ci.org/oesukam/andela-sendit-api)
 
+[![codecov](https://codecov.io/gh/oesukam/andela-sendit-api/branch/develop/graph/badge.svg)](https://codecov.io/gh/oesukam/andela-sendit-api)
+
 ## API endpoints
 
 ### Users
