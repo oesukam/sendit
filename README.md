@@ -1,8 +1,8 @@
 # SendIT - API (V1.0.3)
 
 [![Build Status](https://travis-ci.org/oesukam/andela-sendit-api.svg?branch=master)](https://travis-ci.org/oesukam/andela-sendit-api)
-
 [![codecov](https://codecov.io/gh/oesukam/andela-sendit-api/branch/develop/graph/badge.svg)](https://codecov.io/gh/oesukam/andela-sendit-api)
+[![Maintainability](https://api.codeclimate.com/v1/badges/c011afab4339ebb57ff7/maintainability)](https://codeclimate.com/github/oesukam/andela-sendit-api/maintainability)
 
 ## API endpoints
 
