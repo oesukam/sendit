@@ -1,6 +1,7 @@
 import { isCelebrate } from 'celebrate';
 
 const joiErrors = () => (err, req, res, next) => {
+  // Checks if it is a Joi error, otherwise, send it to the next error handler
   if (isCelebrate(err)) {
     let errFields = null;
     if (err.details) {
@@ -14,7 +15,6 @@ const joiErrors = () => (err, req, res, next) => {
     return res.status(400).json(data);
   }
 
-  // If this isn't a Joi error, send it to the next error handler
   return next(err);
 };
 
