@@ -9,7 +9,6 @@ env:
     - MAILGUN_PASSWORD=
 language: node_js
 node_js:
-  - node
   - "10.4.0"
 branches:
   only:
