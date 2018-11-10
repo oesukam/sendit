@@ -3,9 +3,7 @@ import faker from 'faker';
 class BaseModel {
   constructor(args = '') {
     this.arrayName = ''; // stores the name of the global variable
-    if (args) {
-      this.updateFields(args);
-    }
+    if (args) this.updateFields(args);
   }
 
   toObject({ withHidden = false } = {}) {
@@ -58,20 +56,8 @@ class BaseModel {
 
   // Returns all items or an empty array
   getAll() {
-    if (!this.arrayName) {
-      return [];
-    }
-    const items = global[this.arrayName] || [];
-    // const { hidden } = this;
-    // if (hidden) {
-    //   items = items.map((val) => {
-    //     if () {
-
-    //     }
-    //     return item;
-    //   });
-    // }
-    return items;
+    if (!this.arrayName) return [];
+    return global[this.arrayName] || [];
   }
 
   // Updates createdAt and updatedAt date
@@ -88,9 +74,7 @@ class BaseModel {
   // Save properies to the array
   save({ withHidden = false } = {}) {
     // Check if the array name was set
-    if (!this.arrayName) {
-      throw new Error('arrayName not set');
-    }
+    if (!this.arrayName) throw new Error('arrayName not set');
     if (!this.id) {
       this.id = faker.random.uuid();
     }
@@ -124,7 +108,6 @@ class BaseModel {
         this.toObject({ withHidden: true }),
       ];
     }
-
     return this.toObject({ withHidden });
   }
 }
