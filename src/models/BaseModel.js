@@ -58,7 +58,20 @@ class BaseModel {
 
   // Returns all items or an empty array
   getAll() {
-    return global[this.arrayName] || [];
+    if (!this.arrayName) {
+      return [];
+    }
+    const items = global[this.arrayName] || [];
+    // const { hidden } = this;
+    // if (hidden) {
+    //   items = items.map((val) => {
+    //     if () {
+
+    //     }
+    //     return item;
+    //   });
+    // }
+    return items;
   }
 
   // Updates createdAt and updatedAt date
