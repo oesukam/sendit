@@ -17,8 +17,13 @@ const cancel = {
   userId: Joi.string(),
 };
 
+const changeLocation = {
+  location: Joi.string().required(),
+};
+
 
 export default {
   create,
   cancel,
+  changeLocation,
 };

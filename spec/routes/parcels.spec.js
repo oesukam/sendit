@@ -11,9 +11,22 @@ describe('parcel', () => {
   let server;
   let parcelId;
   let parcelUserId;
-  beforeAll(() => {
+  let userToken;
+
+  beforeAll((done) => {
     server = run(5000);
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+    const user = {
+      email: 'admin@email.com',
+      password: 'admin@admin',
+    };
+    Request.post(`${urlPrefixV1}/users/login`,
+      { json: true, form: user }, (err, res, body) => {
+        if (!err) {
+          userToken = body.token;
+        }
+        done();
+      });
   });
   afterAll(() => {
     server.close();
@@ -39,7 +52,6 @@ describe('parcel', () => {
         { json: true, form: parcel }, (err, res, body) => {
           data.status = res.statusCode;
           if (!err) {
-            console.log(parcel);
             data.token = body.token;
             data.success = body.success;
             data.data = body.data;
@@ -108,7 +120,6 @@ describe('parcel', () => {
   describe('cancel a parcel PUT /api/v1/parcels/<parcelId>/cancel', () => {
     const data = {};
     beforeAll((done) => {
-      // Login the new user
       Request.put(`${urlPrefixV1}/parcels/${parcelId}/cancel`,
         { json: true, form: { userId: parcelUserId } }, (err, res, body) => {
           data.status = res.statusCode;
@@ -125,6 +136,35 @@ describe('parcel', () => {
     it('Body', () => {
       expect(data.success).toBe(true);
       expect(data.message).toBe('Parcel cancelled successfully');
+    });
+  });
+
+  // Change parcel location
+  describe('change a parcel location PUT /api/v1/parcels/<parcelId>/location', () => {
+    const data = {};
+    beforeAll((done) => {
+      Request.put(`${urlPrefixV1}/parcels/${parcelId}/location`,
+        {
+          json: true,
+          form: { location: 'Gisenyi' },
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }, (err, res, body) => {
+          data.status = res.statusCode;
+          if (!err) {
+            data.success = body.success;
+            data.message = body.msg;
+          }
+          done();
+        });
+    });
+    it('Status 200', () => {
+      expect(data.status).toBe(200);
+    });
+    it('Body', () => {
+      expect(data.success).toBe(true);
+      expect(data.message).toBe('Parcel location changed successfully');
     });
   });
 });

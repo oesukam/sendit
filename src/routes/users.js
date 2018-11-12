@@ -95,7 +95,7 @@ router.post('/login', async (req, res) => {
   return res.status(200).json({ success, token, data: user.toObject() });
 });
 
-// Users route accessible to admins only
+// Fetch users route accessible to admins only
 router.get('/', jwtVerifyToken(['admin']), (req, res) => {
   const user = new User();
   const { page = 1 } = req.params;

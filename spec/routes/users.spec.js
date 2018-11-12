@@ -37,13 +37,15 @@ describe('user', () => {
           done();
         });
     });
-    it('Status 201', () => {
+    it('Status 201', (done) => {
       expect(data.status).toBe(201);
+      done();
     });
-    it('Body', () => {
+    it('Body', (done) => {
       expect(data.success).toBe(true);
       expect(data.data).toBeDefined();
       expect(data.token).toBeDefined();
+      done();
     });
   });
 
@@ -52,8 +54,8 @@ describe('user', () => {
     const data = {};
     beforeAll((done) => {
       const userLogin = {
-        email: 'username@gmail.com',
-        password: '123456',
+        email: 'user@email.com',
+        password: 'user@user',
       };
       // Login the new user
       Request.post(`${urlPrefixV1}/users/login`,
@@ -67,13 +69,15 @@ describe('user', () => {
           done();
         });
     });
-    it('Status 200', () => {
+    it('Status 200', (done) => {
       expect(data.status).toBe(200);
+      done();
     });
-    it('Body', () => {
+    it('Body', (done) => {
       expect(data.success).toBe(true);
       expect(data.data).toBeDefined();
       expect(data.token).toBeDefined();
+      done();
     });
   });
 });
