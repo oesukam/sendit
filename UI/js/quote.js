@@ -10,10 +10,10 @@
     fromDistrict: '',
     toProvince: '',
     toDistrict: '',
-    weight: ''
-  }
+    weight: '',
+  };
   // List of provinces and districts of Rwanda
-  const provinces  = {
+  const provinces = {
     eastern: {
       name: "eastern province",
       districts: {
@@ -99,5 +99,5 @@
     } else {
       quoteError.classList.add('active');
     }
-  })
+  });
 })();
