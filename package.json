@@ -1,0 +1,67 @@
+{
+  "name": "andela-sendit-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node --exec babel-node src/server.js",
+    "dev": "nodemon --exec babel-node src/server.js",
+    "build": "babel src --out-dir dist",
+    "serve": "node dist/server.js",
+    "test": "NODE_ENV=test JASMINE_CONFIG_PATH=spec/support/jasmine.json nyc --reporter=text --reporter=lcov babel-node spec/run.js --exit",
+    "report-coverage": "codecov",
+    "coveralls": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
+  },
+  "engines": {
+    "node": "10.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oesukam/andela-sendit-api.git"
+  },
+  "keywords": [
+    "SendIT-API",
+    "SendIT",
+    "API",
+    "Andela"
+  ],
+  "author": "Olivier Esuka <oesukam@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oesukam/andela-sendit-api/issues"
+  },
+  "homepage": "https://github.com/oesukam/andela-sendit-api#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.5",
+    "@babel/node": "^7.0.0",
+    "@babel/preset-env": "^7.1.5",
+    "codecov": "^3.1.0",
+    "coveralls": "^3.0.2",
+    "eslint": "^5.8.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jasmine": "^2.10.1",
+    "i": "^0.3.6",
+    "isparta": "^4.1.0",
+    "istanbul": "^0.4.5",
+    "jasmine": "^3.3.0",
+    "jasmine-console-reporter": "^3.1.0",
+    "jasmine-node": "^2.0.1",
+    "nodemon": "^1.18.6",
+    "nyc": "^13.1.0"
+  },
+  "dependencies": {
+    "bcrypt": "^3.0.2",
+    "body-parser": "^1.18.3",
+    "celebrate": "^9.0.0",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "faker": "^4.1.0",
+    "helmet": "^3.14.0",
+    "jsonwebtoken": "^8.3.0",
+    "morgan": "^1.9.1",
+    "nodemailer": "^4.6.8",
+    "request": "^2.88.0"
+  }
+}
