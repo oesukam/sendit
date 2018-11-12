@@ -1,8 +1,13 @@
 {
   "name": "andela-sendit-api",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "",
   "main": "src/server.js",
+  "nyc": {
+    "exclude": [
+      "UI/"
+    ]
+  },
   "scripts": {
     "start": "node --exec babel-node src/server.js",
     "dev": "nodemon --exec babel-node src/server.js",
