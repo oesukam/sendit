@@ -54,7 +54,7 @@ their parcel.
 - Google Map Javascript API
 
 
-## SendIT - API (V1.0.3)
+## SendIT - API (V1.0.4)
 ### API endpoints
 
 ### Users

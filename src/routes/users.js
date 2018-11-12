@@ -44,7 +44,7 @@ async (req, res) => {
     mail.sendConfirmEmail(user);
   }
 
-  return res.status(201).json({ token, success, data: user.toObject() });
+  return res.status(201).json({ success, token, data: user.toObject() });
 });
 
 // Confirm email route

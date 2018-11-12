@@ -74,7 +74,6 @@ class BaseModel {
   // Save properies to the array
   save({ withHidden = false } = {}) {
     // Check if the array name was set
-    if (!this.arrayName) throw new Error('arrayName not set');
     if (!this.id) {
       this.id = faker.random.uuid();
     }
@@ -88,12 +87,7 @@ class BaseModel {
       if (items.some(v => v.email === this.email && v.id !== this.id)) {
         throw new Error(`${this.email} account already exist`);
       }
-    }
-
-    this.updateDate();
-
-    if (items.some(v => v.email === this.email)) {
-      // Update the corresponded
+      this.updateDate();
       items = items.map((item) => {
         if (item.email === this.email) {
           return this.toObject({ withHidden: true });
@@ -102,6 +96,7 @@ class BaseModel {
       });
       global[this.arrayName] = [...items];
     } else {
+      this.updateDate();
       // Add new item to the array without mutating
       global[this.arrayName] = [
         ...items,

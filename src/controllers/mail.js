@@ -18,13 +18,9 @@ const sendConfirmEmail = (user = '') => {
           > Confirm email </a>
           <p style="font-size: 1.5rem; margin-top: 30px; color: #5a5a5a !important">
             Or copy the link below
-          <p><br>
-          ${URL}/api/v1/users/${user.id}/confirmEmail/${user.confirmationCode} 
+          <p><br>${URL}/api/v1/users/${user.id}/confirmEmail/${user.confirmationCode} 
         </div>
-        <p style="color: #5a5a5a !important;>
-          Thank you, <br>
-          Andela - SendIT Team
-        </p>
+        <p style="color: #5a5a5a !important;>Thank you, <br> Andela - SendIT Team</p>
       </div>
     `;
     mailer({ subject: 'Email confirmation', to: user.email, html: mailBody });
@@ -44,8 +40,7 @@ const sendEmailConfirmed = (user = '') => {
           able to make a parcel delivery order
         <p/>
         <p style="color: #5a5a5a !important;"
-          Thank you, <br>
-          Andela - SendIT Team
+          Thank you, <br> Andela - SendIT Team
         </p>
       </div>
     `;
