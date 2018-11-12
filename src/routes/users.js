@@ -7,6 +7,7 @@ import dotenv from 'dotenv';
 import { users } from '../validators/index';
 import User from '../models/User';
 import mail from '../controllers/mail';
+import { jwtVerifyToken } from '../middlewares';
 
 const router = express.Router();
 dotenv.config();
@@ -95,7 +96,7 @@ router.post('/login', async (req, res) => {
 });
 
 // Users route accessible to admins only
-router.get('/', (req, res) => {
+router.get('/', jwtVerifyToken(['admin']), (req, res) => {
   const user = new User();
   const { page = 1 } = req.params;
 
