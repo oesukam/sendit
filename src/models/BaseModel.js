@@ -55,9 +55,25 @@ class BaseModel {
   }
 
   // Returns all items or an empty array
-  getAll() {
+  getAll({ keywords = '', page = 1 } = {}) {
     if (!this.arrayName) return [];
-    return global[this.arrayName] || [];
+    let items = global[this.arrayName] || [];
+    if (keywords) {
+      items = items.filter((item) => {
+        const keys = Object.keys(item);
+        for (let i = 0; i < keys.length; i += 1) {
+          const val = (item[keys[i]] || '').toString().toLowerCase();
+          if (keywords.toString().toLowerCase().includes(val) && val) {
+            return true;
+          }
+        }
+        return false;
+      });
+    }
+    const limit = 25;
+    const startAt = (page - 1) * limit;
+    const endAt = (page * limit) - 1;
+    return items.slice(startAt, endAt);
   }
 
   // Updates createdAt and updatedAt date

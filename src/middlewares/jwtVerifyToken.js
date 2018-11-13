@@ -6,7 +6,6 @@ dotenv.config();
 const { JWT_SECRET } = process.env;
 
 export const jwtVerifyToken = (userType = ['user']) => (req, res, next) => {
-  console.log(req.body, req.headers);
   if (!req.headers) {
     return res.status(401).json({ succes: false, errMsg: 'Unauthorized access' });
   }
