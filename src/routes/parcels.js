@@ -26,10 +26,11 @@ router.post('/',
     return res.status(201).json({ success: true, data: parcel.toObject() });
   });
 
-// Fetch a single parcel
+// Fetch parcels
 router.get('/', (req, res) => {
+  const { keywords = '' } = req.query;
   const parcel = new Parcel();
-  const items = parcel.getAll();
+  const items = parcel.getAll({ keywords });
   if (!parcel) {
     return res.status(404).json({ success: false, msg: 'Not found' });
   }
