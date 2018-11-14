@@ -1,0 +1,25 @@
+sudo: false
+env:
+  global:
+    - URL=http://localhost:3000
+    - PORT=3000
+    - NODE_ENV=development
+    - JWT_SECRET=oesukam@secret
+    - MAILGUN_USER=
+    - MAILGUN_PASSWORD=
+language: node_js
+node_js:
+  - "10.4.0"
+branches:
+  only:
+    - master
+install:
+  - npm install
+  - npm install -g codecov
+cache:
+  directories:
+    - node_modules
+script:
+  - npm run test
+after_success:
+  - codecov

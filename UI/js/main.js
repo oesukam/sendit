@@ -8,5 +8,5 @@
     const menuNav = document.querySelector('#menu-nav');
     hamburger.classList.toggle('active');
     menuNav.classList.toggle('active');
-  })
-})()
+  });
+})();
