@@ -123,7 +123,6 @@ class BaseModel {
           this.toObject({ withHidden: true }),
         ];
       }
-      console.log(global.users.length, items, 'legnth');
       resolve(this.toObject({ withHidden }));
     });
   }
