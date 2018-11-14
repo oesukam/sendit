@@ -1,7 +1,7 @@
 import faker from 'faker';
 import Parcel from '../../src/models/Parcel';
 
-fdescribe('user model', () => {
+describe('user model', () => {
   it('should return user a string as users', () => {
     const parcel = new Parcel();
     expect(parcel.arrayName).toBe('parcels');
