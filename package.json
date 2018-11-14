@@ -13,6 +13,7 @@
     "dev": "nodemon --exec babel-node src/server.js",
     "build": "babel src --out-dir dist",
     "serve": "node dist/server.js",
+    "test-only": "babel-node spec/run.js",
     "test": "NODE_ENV=test JASMINE_CONFIG_PATH=spec/support/jasmine.json nyc --reporter=text --reporter=lcov babel-node spec/run.js --exit",
     "report-coverage": "codecov",
     "coveralls": "nyc report --reporter=text-lcov > coverage.lcov && codecov"

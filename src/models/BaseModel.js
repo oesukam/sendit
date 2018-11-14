@@ -89,37 +89,40 @@ class BaseModel {
 
   // Save properies to the array
   save({ withHidden = false } = {}) {
-    // Check if the array name was set
-    if (!this.id) {
-      this.id = faker.random.uuid();
-    }
-    // Check the existance of the array
-    if (!global[this.arrayName]) {
-      global[this.arrayName] = []; // Initialises the array
-    }
-    let items = global[this.arrayName];
-    if (this.arrayName === 'users') {
-      // If a user with the same email already exist
-      if (items.some(v => v.email === this.email && v.id !== this.id)) {
-        throw new Error(`${this.email} account already exist`);
+    return new Promise(async (resolve, reject) => {
+      // Check if the array name was set
+      if (!this.id) {
+        this.id = faker.random.uuid();
       }
-      this.updateDate();
-      items = items.map((item) => {
-        if (item.email === this.email) {
-          return this.toObject({ withHidden: true });
+      // Check the existance of the array
+      if (!global[this.arrayName]) {
+        global[this.arrayName] = []; // Initialises the array
+      }
+      let items = global[this.arrayName];
+      if (this.arrayName === 'users') {
+        // If a user with the same email already exist
+        if (items.some(v => v.email === this.email && v.id !== this.id)) {
+          reject(new Error(`${this.email} account already exist`));
         }
-        return item;
-      });
-      global[this.arrayName] = [...items];
-    } else {
-      this.updateDate();
-      // Add new item to the array without mutating
-      global[this.arrayName] = [
-        ...items,
-        this.toObject({ withHidden: true }),
-      ];
-    }
-    return this.toObject({ withHidden });
+        this.updateDate();
+        items = items.map((item) => {
+          if (item.email === this.email) {
+            return this.toObject({ withHidden: true });
+          }
+          return item;
+        });
+        global[this.arrayName] = [...items, this.toObject({ withHidden: true })];
+      } else {
+        this.updateDate();
+        // Add new item to the array without mutating
+        global[this.arrayName] = [
+          ...items,
+          this.toObject({ withHidden: true }),
+        ];
+      }
+      console.log(global.users.length, items, 'legnth');
+      resolve(this.toObject({ withHidden }));
+    });
   }
 }
 
