@@ -1,4 +1,4 @@
-# Andela - SendIT (v1.0.5)
+# Andela - SendIT (v1.0.6)
 
 [![Build Status](https://travis-ci.org/oesukam/andela-sendit.svg?branch=master)](https://travis-ci.org/oesukam/andela-sendit-api)
 [![codecov](https://codecov.io/gh/oesukam/andela-sendit/branch/develop/graph/badge.svg)](https://codecov.io/gh/oesukam/andela-sendit)
@@ -53,7 +53,7 @@ their parcel.
 - Google Map Javascript API
 
 
-## SendIT - API (V1.0.4)
+## SendIT - API
 ### API endpoints
 
 ### Users
