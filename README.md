@@ -9,7 +9,6 @@ SendIT is a courier service that helps users deliver parcels to different destin
 ## Features
 
 ### Required Features:
-
 1. Users can create an account and log in.
 2. Users can create a parcel delivery order.
 3. Users can change the destination of a parcel delivery order.
