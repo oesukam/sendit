@@ -1,8 +1,8 @@
-# Andela - SendIT (v1.0.6)
+# Andela - SendIT (v1.0.7)
 
 [![Build Status](https://travis-ci.org/oesukam/andela-sendit.svg?branch=master)](https://travis-ci.org/oesukam/andela-sendit-api)
 [![codecov](https://codecov.io/gh/oesukam/andela-sendit/branch/develop/graph/badge.svg)](https://codecov.io/gh/oesukam/andela-sendit)
-[![Maintainability](https://api.codeclimate.com/v1/badges/c011afab4339ebb57ff7/maintainability)](https://codeclimate.com/github/oesukam/andela-sendit/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/30bd033f62cd2b12a455/maintainability)](https://codeclimate.com/github/oesukam/andela-sendit/maintainability)
 
 SendIT is a courier service that helps users deliver parcels to different destinations. SendIT provides courier quotes based on weight categories.
 
