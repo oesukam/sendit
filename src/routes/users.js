@@ -6,6 +6,7 @@ import faker from 'faker';
 import dotenv from 'dotenv';
 import { users } from '../validators/index';
 import User from '../models/User';
+import Parcel from '../models/Parcel';
 import mail from '../controllers/mail';
 import { jwtVerifyToken } from '../middlewares';
 
@@ -101,6 +102,18 @@ router.get('/', jwtVerifyToken(['admin']), (req, res) => {
   const { page = 1 } = req.params;
 
   res.json({ data: user.getAll({ page }) });
+});
+
+// Fetch user parcels
+router.get('/:userId/parcels', jwtVerifyToken(['user']), (req, res) => {
+  const { keywords = '', userId } = req.query;
+  const parcel = new Parcel();
+  const items = parcel.getAll({ keywords, userId });
+  if (!parcel) {
+    return res.status(404).json({ success: false, msg: 'Not found' });
+  }
+
+  return res.status(200).json({ success: true, data: items });
 });
 
 export default router;

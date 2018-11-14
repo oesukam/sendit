@@ -55,7 +55,7 @@ class BaseModel {
   }
 
   // Returns all items or an empty array
-  getAll({ keywords = '', page = 1 } = {}) {
+  getAll({ keywords = '', page = 1, userId = '' } = {}) {
     if (!this.arrayName) return [];
     let items = global[this.arrayName] || [];
     if (keywords) {
@@ -64,6 +64,9 @@ class BaseModel {
         for (let i = 0; i < keys.length; i += 1) {
           const val = (item[keys[i]] || '').toString().toLowerCase();
           if (keywords.toString().toLowerCase().includes(val) && val) {
+            if (userId) {
+              return userId === item.userId;
+            }
             return true;
           }
         }
