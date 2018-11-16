@@ -104,9 +104,21 @@ router.get('/', jwtVerifyToken(['admin']), (req, res) => {
   res.json({ data: user.getAll({ page }) });
 });
 
+// Fetch user info
+router.get('/:userId', jwtVerifyToken(['user', 'admin']), (req, res) => {
+  const { userId } = req.params;
+  const user = new User().findById(userId);
+  if (!user) {
+    return res.status(404).json({ success: false, msg: 'Not found' });
+  }
+
+  return res.status(200).json({ success: true, data: user.toObject() });
+});
+
 // Fetch user parcels
 router.get('/:userId/parcels', jwtVerifyToken(['user']), (req, res) => {
-  const { keywords = '', userId } = req.query;
+  const { keywords = '' } = req.query;
+  const { userId } = req.params;
   const parcel = new Parcel();
   const items = parcel.getAll({ keywords, userId });
   if (!parcel) {
