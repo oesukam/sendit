@@ -1,4 +1,4 @@
-# Andela - SendIT (v1.0.7)
+# Andela - SendIT (v1.0.8)
 
 [![Build Status](https://travis-ci.org/oesukam/andela-sendit.svg?branch=master)](https://travis-ci.org/oesukam/andela-sendit-api)
 [![codecov](https://codecov.io/gh/oesukam/andela-sendit/branch/master/graph/badge.svg)](https://codecov.io/gh/oesukam/andela-sendit)
@@ -78,6 +78,10 @@ their parcel.
   }
 ```
 - GET /api/v1/users/**userId**/confirmEmail/**confirmationCode** -> _Confirms emails after creating an account for new users_
+
+- GET /api/v1/users/**userId** -> _Fetch user's info_
+
+- GET /api/v1/users/**userId**/parcels -> _Fetch user's parcels_
 
 - GET /api/v1/users -> _Fetch Users_
 
