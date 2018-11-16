@@ -9,6 +9,7 @@ var _mailer = _interopRequireDefault(require("../helpers/mailer"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// Send an email function
 const sendConfirmEmail = (user = '') => {
   if (user) {
     const mailBody = `
@@ -18,27 +19,17 @@ const sendConfirmEmail = (user = '') => {
         </div>
         <p style="font-size: 1.2rem; line-height: 2rem; color: #5a5a5a;">
           Hello ${user.firstName}, <br>
-          Thank you for creating an account with us, please proceed to
-          to confirm your email.
+          Thank you for creating an account with us, please proceed to confirm your email.
         <p/>
         <div style="text-align: center; padding: 20px;">
-          <a 
-            href="${URL}/api/v1/users/${user.id}/confirmEmail/${user.confirmationCode}"
+          <a href="${URL}/api/v1/users/${user.id}/confirmEmail/${user.confirmationCode}"
             style="color: #fff; background-color: #3359DF; padding: 10px 20px; font-size: 1.2rem; text-align: center; text-decoration: none;"
-          >
-            Confirm email
-          </a>
+          > Confirm email </a>
           <p style="font-size: 1.5rem; margin-top: 30px; color: #5a5a5a !important">
             Or copy the link below
-          <p>
-          <br>
-          ${URL}/api/v1/users/${user.id}/confirmEmail/${user.confirmationCode} 
+          <p><br>${URL}/api/v1/users/${user.id}/confirmEmail/${user.confirmationCode} 
         </div>
-
-        <p style="color: #5a5a5a !important;"
-          Thank you, <br>
-          Andela - SendIT Team
-        </p>
+        <p style="color: #5a5a5a !important;>Thank you, <br> Andela - SendIT Team</p>
       </div>
     `;
     (0, _mailer.default)({
@@ -47,7 +38,8 @@ const sendConfirmEmail = (user = '') => {
       html: mailBody
     });
   }
-};
+}; // Send a confirmation email function
+
 
 const sendEmailConfirmed = (user = '') => {
   if (user) {
@@ -61,8 +53,7 @@ const sendEmailConfirmed = (user = '') => {
           able to make a parcel delivery order
         <p/>
         <p style="color: #5a5a5a !important;"
-          Thank you, <br>
-          Andela - SendIT Team
+          Thank you, <br> Andela - SendIT Team
         </p>
       </div>
     `;

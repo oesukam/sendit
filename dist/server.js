@@ -19,7 +19,7 @@ var _data = _interopRequireDefault(require("./data"));
 
 var _routes = _interopRequireDefault(require("./routes"));
 
-var _joiErrors = _interopRequireDefault(require("./middleware/joiErrors"));
+var _joiErrors = _interopRequireDefault(require("./middlewares/joiErrors"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

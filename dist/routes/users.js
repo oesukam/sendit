@@ -21,7 +21,11 @@ var _index = require("../validators/index");
 
 var _User = _interopRequireDefault(require("../models/User"));
 
+var _Parcel = _interopRequireDefault(require("../models/Parcel"));
+
 var _mail = _interopRequireDefault(require("../controllers/mail"));
+
+var _middlewares = require("../middlewares");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -67,8 +71,8 @@ router.post('/', (0, _celebrate.celebrate)({
   }
 
   return res.status(201).json({
-    token,
     success,
+    token,
     data: user.toObject()
   });
 }); // Confirm email route
@@ -154,9 +158,9 @@ router.post('/login', async (req, res) => {
     token,
     data: user.toObject()
   });
-}); // Users route accessible to admins only
+}); // Fetch users route accessible to admins only
 
-router.get('/', (req, res) => {
+router.get('/', (0, _middlewares.jwtVerifyToken)(['admin']), (req, res) => {
   const user = new _User.default();
   const {
     page = 1
@@ -165,6 +169,51 @@ router.get('/', (req, res) => {
     data: user.getAll({
       page
     })
+  });
+}); // Fetch user info
+
+router.get('/:userId', (0, _middlewares.jwtVerifyToken)(['user', 'admin']), (req, res) => {
+  const {
+    userId
+  } = req.params;
+  const user = new _User.default().findById(userId);
+
+  if (!user) {
+    return res.status(404).json({
+      success: false,
+      msg: 'Not found'
+    });
+  }
+
+  return res.status(200).json({
+    success: true,
+    data: user.toObject()
+  });
+}); // Fetch user parcels
+
+router.get('/:userId/parcels', (0, _middlewares.jwtVerifyToken)(['user']), (req, res) => {
+  const {
+    keywords = ''
+  } = req.query;
+  const {
+    userId
+  } = req.params;
+  const parcel = new _Parcel.default();
+  const items = parcel.getAll({
+    keywords,
+    userId
+  });
+
+  if (!parcel) {
+    return res.status(404).json({
+      success: false,
+      msg: 'Not found'
+    });
+  }
+
+  return res.status(200).json({
+    success: true,
+    data: items
   });
 });
 var _default = router;

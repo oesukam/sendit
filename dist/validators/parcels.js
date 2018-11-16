@@ -22,8 +22,12 @@ const create = {
 const cancel = {
   userId: _celebrate.Joi.string()
 };
+const changeLocation = {
+  location: _celebrate.Joi.string().required()
+};
 var _default = {
   create,
-  cancel
+  cancel,
+  changeLocation
 };
 exports.default = _default;

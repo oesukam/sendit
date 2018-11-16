@@ -17,6 +17,8 @@ var _Parcel = _interopRequireDefault(require("../models/Parcel"));
 
 var _User = _interopRequireDefault(require("../models/User"));
 
+var _middlewares = require("../middlewares");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _dotenv.default.config();
@@ -48,11 +50,16 @@ router.post('/', (0, _celebrate.celebrate)({
     success: true,
     data: parcel.toObject()
   });
-}); // Fetch a single parcel
+}); // Fetch parcels
 
 router.get('/', (req, res) => {
+  const {
+    keywords = ''
+  } = req.query;
   const parcel = new _Parcel.default();
-  const items = parcel.getAll();
+  const items = parcel.getAll({
+    keywords
+  });
 
   if (!parcel) {
     return res.status(404).json({
@@ -128,6 +135,33 @@ router.put('/:id/cancel', (0, _celebrate.celebrate)({
   return res.status(200).json({
     success: true,
     msg: 'Parcel cancelled successfully'
+  });
+}); // Change parcel location
+
+router.put('/:id/location', (0, _celebrate.celebrate)({
+  body: _index.parcels.changeLocation
+}), (0, _middlewares.jwtVerifyToken)(['admin']), (req, res) => {
+  const {
+    id
+  } = req.params;
+  const {
+    location
+  } = req.body;
+  let parcel = new _Parcel.default();
+  parcel = parcel.findById(id);
+
+  if (!parcel) {
+    return res.status(404).json({
+      success: false,
+      msg: 'Not found'
+    });
+  }
+
+  parcel.location = location;
+  parcel.save();
+  return res.status(200).json({
+    success: true,
+    msg: 'Parcel location changed successfully'
   });
 });
 var _default = router;
