@@ -6,6 +6,8 @@ const urlPrefixV1 = 'http://localhost:5000/api/v1';
 
 describe('user', () => {
   let server;
+  let userToken;
+  let userId;
   beforeAll(() => {
     server = run(5000);
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
@@ -33,17 +35,21 @@ describe('user', () => {
             data.token = body.token;
             data.success = body.success;
             data.data = body.data;
+            userId = body.id;
+            userToken = body.token;
           }
           done();
         });
     });
-    it('Status 201', () => {
+    it('Status 201', (done) => {
       expect(data.status).toBe(201);
+      done();
     });
-    it('Body', () => {
+    it('Body', (done) => {
       expect(data.success).toBe(true);
       expect(data.data).toBeDefined();
       expect(data.token).toBeDefined();
+      done();
     });
   });
 
@@ -52,8 +58,8 @@ describe('user', () => {
     const data = {};
     beforeAll((done) => {
       const userLogin = {
-        email: 'username@gmail.com',
-        password: '123456',
+        email: 'user@email.com',
+        password: 'user@user',
       };
       // Login the new user
       Request.post(`${urlPrefixV1}/users/login`,
@@ -67,13 +73,76 @@ describe('user', () => {
           done();
         });
     });
-    it('Status 200', () => {
+    it('Status 200', (done) => {
       expect(data.status).toBe(200);
+      done();
     });
-    it('Body', () => {
+    it('Body', (done) => {
       expect(data.success).toBe(true);
       expect(data.data).toBeDefined();
       expect(data.token).toBeDefined();
+      done();
+    });
+  });
+
+  // Fetch user info
+  describe('fetch user info GET /api/v1/users/<userId>', () => {
+    const data = {};
+    beforeAll((done) => {
+      Request.get(`${urlPrefixV1}/users/${userId}`,
+        {
+          json: true,
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }, (err, res, body) => {
+          data.status = res.statusCode;
+          if (!err) {
+            data.success = body.success;
+            data.data = body.data;
+            data.token = body.token;
+          }
+          done();
+        });
+    });
+    it('Status 200', (done) => {
+      expect(data.status).toBe(200);
+      done();
+    });
+    it('Body', (done) => {
+      expect(data.success).toBe(true);
+      expect(data.data).toBeDefined();
+      done();
+    });
+  });
+
+  // Fetch user parcels
+  describe('fetch user info GET /api/v1/users/<userId>/parcels', () => {
+    const data = {};
+    beforeAll((done) => {
+      Request.get(`${urlPrefixV1}/users/${userId}`,
+        {
+          json: true,
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }, (err, res, body) => {
+          data.status = res.statusCode;
+          if (!err) {
+            data.success = body.success;
+            data.data = body.data;
+          }
+          done();
+        });
+    });
+    it('Status 200', (done) => {
+      expect(data.status).toBe(200);
+      done();
+    });
+    it('Body', (done) => {
+      expect(data.success).toBe(true);
+      expect(data.data).toBeDefined();
+      done();
     });
   });
 });

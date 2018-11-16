@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import logger from 'morgan';
 import initData from './data';
 import routes from './routes';
-import joiErrors from './middleware/joiErrors';
+import joiErrors from './middlewares/joiErrors';
 
 initData(); // Initialise global data arrays
 dotenv.config(); // Sets environment's varibles

@@ -5,5 +5,9 @@ module.exports =  {
   ],
   "env": {
     "jasmine": "true"
-  }
+  },
+  "rules": {
+    "consistent-return": 0,
+		"import/prefer-default-export": "off"
+	}
 };

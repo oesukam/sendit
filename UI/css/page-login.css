@@ -1,0 +1,19 @@
+/*
+  CSS Style for login.html 
+*/
+
+.login-container {
+  margin-top: 20px;
+}
+.forgot-password {
+  font-size: 1.3rem;
+  color: rgba(0,0,0,0.5);
+  border: none;
+  background-color: transparent;
+  display: block;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+.forgot-password:hover {
+  color: rgba(0,0,0,0.8)
+}

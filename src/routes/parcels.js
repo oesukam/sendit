@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import { parcels } from '../validators/index';
 import Parcel from '../models/Parcel';
 import User from '../models/User';
+import { jwtVerifyToken } from '../middlewares';
 
 dotenv.config();
 const router = express.Router();
@@ -25,10 +26,11 @@ router.post('/',
     return res.status(201).json({ success: true, data: parcel.toObject() });
   });
 
-// Fetch a single parcel
+// Fetch parcels
 router.get('/', (req, res) => {
+  const { keywords = '' } = req.query;
   const parcel = new Parcel();
-  const items = parcel.getAll();
+  const items = parcel.getAll({ keywords });
   if (!parcel) {
     return res.status(404).json({ success: false, msg: 'Not found' });
   }
@@ -73,6 +75,25 @@ router.put('/:id/cancel',
     parcel.save();
 
     return res.status(200).json({ success: true, msg: 'Parcel cancelled successfully' });
+  });
+
+// Change parcel location
+router.put('/:id/location',
+  celebrate({ body: parcels.changeLocation }),
+  jwtVerifyToken(['admin']),
+  (req, res) => {
+    const { id } = req.params;
+    const { location } = req.body;
+    let parcel = new Parcel();
+    parcel = parcel.findById(id);
+    if (!parcel) {
+      return res.status(404).json({ success: false, msg: 'Not found' });
+    }
+
+    parcel.location = location;
+    parcel.save();
+
+    return res.status(200).json({ success: true, msg: 'Parcel location changed successfully' });
   });
 
 export default router;

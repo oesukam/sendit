@@ -6,7 +6,9 @@ import faker from 'faker';
 import dotenv from 'dotenv';
 import { users } from '../validators/index';
 import User from '../models/User';
+import Parcel from '../models/Parcel';
 import mail from '../controllers/mail';
+import { jwtVerifyToken } from '../middlewares';
 
 const router = express.Router();
 dotenv.config();
@@ -44,7 +46,7 @@ async (req, res) => {
     mail.sendConfirmEmail(user);
   }
 
-  return res.status(201).json({ token, success, data: user.toObject() });
+  return res.status(201).json({ success, token, data: user.toObject() });
 });
 
 // Confirm email route
@@ -94,12 +96,36 @@ router.post('/login', async (req, res) => {
   return res.status(200).json({ success, token, data: user.toObject() });
 });
 
-// Users route accessible to admins only
-router.get('/', (req, res) => {
+// Fetch users route accessible to admins only
+router.get('/', jwtVerifyToken(['admin']), (req, res) => {
   const user = new User();
   const { page = 1 } = req.params;
 
   res.json({ data: user.getAll({ page }) });
+});
+
+// Fetch user info
+router.get('/:userId', jwtVerifyToken(['user', 'admin']), (req, res) => {
+  const { userId } = req.params;
+  const user = new User().findById(userId);
+  if (!user) {
+    return res.status(404).json({ success: false, msg: 'Not found' });
+  }
+
+  return res.status(200).json({ success: true, data: user.toObject() });
+});
+
+// Fetch user parcels
+router.get('/:userId/parcels', jwtVerifyToken(['user']), (req, res) => {
+  const { keywords = '' } = req.query;
+  const { userId } = req.params;
+  const parcel = new Parcel();
+  const items = parcel.getAll({ keywords, userId });
+  if (!parcel) {
+    return res.status(404).json({ success: false, msg: 'Not found' });
+  }
+
+  return res.status(200).json({ success: true, data: items });
 });
 
 export default router;

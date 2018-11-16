@@ -1,0 +1,24 @@
+.is-primary {
+  color: #3359DF;
+}
+.is-blue {
+  color: blue;
+}
+.is-red {
+  color: red;
+}
+.is-yellow {
+  color: #ffa400;
+}
+.is-white {
+  color: white;
+}
+.bg-primary {
+  background-color: #3359DF;
+}
+.bg-blue {
+  background-color: blue;
+}
+.bg-yellow {
+  background-color: #ffa400;
+}
