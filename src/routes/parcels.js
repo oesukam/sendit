@@ -5,6 +5,7 @@ import { parcels } from '../validators/index';
 import Parcel from '../models/Parcel';
 import User from '../models/User';
 import { jwtVerifyToken } from '../middlewares';
+import mail from '../controllers/mail';
 
 dotenv.config();
 const router = express.Router();
@@ -97,7 +98,7 @@ router.put('/:id/location',
   });
 
 // Change parcel location
-router.put('/:id/location',
+router.put('/:id/status',
   celebrate({ body: parcels.changeStatus }),
   jwtVerifyToken(['admin']),
   (req, res) => {
@@ -109,8 +110,14 @@ router.put('/:id/location',
       return res.status(404).json({ success: false, msg: 'Not found' });
     }
 
+    if (parcel.parcelStatus === parcelStatus) {
+      return res.status(304).json({ success: false, msg: 'Parcel not changed' });
+    }
     parcel.parcelStatus = parcelStatus;
     parcel.save();
+    const user = new User().findById(parcel.userId);
+
+    mail.sendParcelStatusChanged(user.toObject(), parcel.toObject());
 
     return res.status(200).json({ success: true, msg: 'Parcel status changed successfully' });
   });
