@@ -96,4 +96,23 @@ router.put('/:id/location',
     return res.status(200).json({ success: true, msg: 'Parcel location changed successfully' });
   });
 
+// Change parcel location
+router.put('/:id/location',
+  celebrate({ body: parcels.changeStatus }),
+  jwtVerifyToken(['admin']),
+  (req, res) => {
+    const { id } = req.params;
+    const { parcelStatus } = req.body;
+    let parcel = new Parcel();
+    parcel = parcel.findById(id);
+    if (!parcel) {
+      return res.status(404).json({ success: false, msg: 'Not found' });
+    }
+
+    parcel.parcelStatus = parcelStatus;
+    parcel.save();
+
+    return res.status(200).json({ success: true, msg: 'Parcel status changed successfully' });
+  });
+
 export default router;

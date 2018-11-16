@@ -167,4 +167,33 @@ describe('parcel', () => {
       expect(data.message).toBe('Parcel location changed successfully');
     });
   });
+
+  // Change parcel location
+  describe('change a parcel status PUT /api/v1/parcels/<parcelId>/status', () => {
+    const data = {};
+    beforeAll((done) => {
+      Request.put(`${urlPrefixV1}/parcels/${parcelId}/status`,
+        {
+          json: true,
+          form: { parcelStatus: 'Gisenyi' },
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }, (err, res, body) => {
+          data.status = res.statusCode;
+          if (!err) {
+            data.success = body.success;
+            data.message = body.msg;
+          }
+          done();
+        });
+    });
+    it('Status 200', () => {
+      expect(data.status).toBe(200);
+    });
+    it('Body', () => {
+      expect(data.success).toBe(true);
+      expect(data.message).toBe('Parcel status changed successfully');
+    });
+  });
 });
