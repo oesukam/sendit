@@ -66,9 +66,11 @@
   align-items: center;
 }
 .is-column {
+  display: flex;
   flex-direction: column;
 }
 .is-row {
+  display: flex;
   flex-direction: row;
 }
 .pull-right {
@@ -124,9 +126,26 @@
 }
 .table {
   width: 100%;
+  border-spacing: 0px;
+  overflow-x: scroll;
+  margin-top: 20px;
 }
 .table tr {
   line-height: 1.5rem;
+  animation: all 0.5s;
+  -webkit-animation: all 0.5s;
+  cursor: pointer;
+}
+.table tbody tr:nth-child(even) {
+  background-color: #ccc;
+}
+.table tbody tr:hover {
+  background-color: rgb(51, 89, 223, 0.5);
+  color: #fff;
+  height: 150%;
+}
+.table tr td {
+  padding: 2px 5px;
 }
 @media only screen and (max-width: 768px) {
   .col-1, .col-2, .col-3,
