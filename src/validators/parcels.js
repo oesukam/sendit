@@ -21,9 +21,20 @@ const changeLocation = {
   location: Joi.string().required(),
 };
 
+const changeStatus = {
+  parcelStatus: Joi.string().valid(
+    'Waiting Pickup',
+    'Pick Up',
+    'In Transit',
+    'Pending',
+    'Delivered',
+  ).required(),
+};
+
 
 export default {
   create,
   cancel,
   changeLocation,
+  changeStatus,
 };
