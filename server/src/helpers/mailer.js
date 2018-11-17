@@ -16,8 +16,9 @@ const transporter = nodemailer.createTransport({
 
 const sendMail = ({
   from = '', to = '', subject = '', bcc = '', text = '', html = '',
-}) => {
+}) => new Promise((resolve, reject) => {
   // setup email data with unicode symbols
+  if (!to) return reject(new Error('Please provide to email address'));
   const mailOptions = {
     from: from || '"Andela - SendIT" <admin@sendit.service>', // sender address
     to: to || 'oesukam@gmail.com', // list of receivers
@@ -28,13 +29,17 @@ const sendMail = ({
   };
 
   // send mail with defined transport object
-  transporter.sendMail(mailOptions, (error, info) => {
+  transporter.sendMail(mailOptions, async (error, info) => {
     if (error) {
-      return console.log(error);
+      console.log(error);
+      reject(error);
     }
-    console.log('Message sent: %s', info.messageId);
-    return true;
+    if (info) {
+      console.log('Message sent: %s', info.messageId);
+    }
+    resolve(true);
   });
-};
+});
+
 
 export default sendMail;

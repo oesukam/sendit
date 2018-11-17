@@ -1,6 +1,6 @@
 import Request from 'request';
 
-import run from '../../src/server';
+import run from '../../src/index';
 
 const urlPrefixV1 = 'http://localhost:5000/api/v1';
 

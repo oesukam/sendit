@@ -2,7 +2,7 @@ import Request from 'request';
 import faker from 'faker';
 
 import User from '../../src/models/User';
-import run from '../../src/server';
+import run from '../../src/index';
 
 const urlPrefixV1 = 'http://localhost:5000/api/v1';
 
@@ -151,7 +151,6 @@ describe('parcel', () => {
             Authorization: `Bearer ${userToken}`,
           },
         }, (err, res, body) => {
-          console.log(err, body)
           data.status = res.statusCode;
           if (!err) {
             data.success = body.success;
