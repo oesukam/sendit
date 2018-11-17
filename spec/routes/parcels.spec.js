@@ -151,6 +151,7 @@ describe('parcel', () => {
             Authorization: `Bearer ${userToken}`,
           },
         }, (err, res, body) => {
+          console.log(err, body)
           data.status = res.statusCode;
           if (!err) {
             data.success = body.success;
@@ -168,7 +169,7 @@ describe('parcel', () => {
     });
   });
 
-  // Change parcel location
+  // Change parcel status
   describe('change a parcel status PUT /api/v1/parcels/<parcelId>/status', () => {
     const data = {};
     beforeAll((done) => {
@@ -180,7 +181,6 @@ describe('parcel', () => {
             Authorization: `Bearer ${userToken}`,
           },
         }, (err, res, body) => {
-          console.log(err, res);
           data.status = res.statusCode;
           if (!err) {
             data.success = body.success;

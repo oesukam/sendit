@@ -9,7 +9,7 @@
     ]
   },
   "scripts": {
-    "start": "node --exec babel-node src/server.js",
+    "start": "babel-node src/server.js",
     "dev": "nodemon --exec babel-node src/server.js",
     "build": "babel src --out-dir dist",
     "serve": "node dist/server.js",
@@ -38,10 +38,6 @@
   },
   "homepage": "https://github.com/oesukam/andela-sendit-api#readme",
   "devDependencies": {
-    "@babel/cli": "^7.1.5",
-    "@babel/core": "^7.1.5",
-    "@babel/node": "^7.0.0",
-    "@babel/preset-env": "^7.1.5",
     "codecov": "^3.1.0",
     "coveralls": "^3.0.2",
     "eslint": "^5.8.0",
@@ -58,6 +54,10 @@
     "nyc": "^13.1.0"
   },
   "dependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.5",
+    "@babel/node": "^7.0.0",
+    "@babel/preset-env": "^7.1.5",
     "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",
     "celebrate": "^9.0.0",

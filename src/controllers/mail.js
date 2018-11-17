@@ -60,7 +60,26 @@ const sendParcelStatusChanged = (user = '', parcel = '') => {
         Dear ${user.firstName}, <br>
         Your parcel status with the following tracking number: ${parcel.trackingNumber || parcel.id} 
         was changed to ${parcel.parcelStatus}
-        able to make a parcel delivery order
+      <p/>
+      <p style="color: #5a5a5a !important;"
+        Thank you, <br> Andela - SendIT Team
+      </p>
+    </div>
+  `;
+  mailer({ subject: 'Parcel Status Changed', to: user.email, html: mailBody });
+};
+
+const sendParcelLocationChanged = (user = '', parcel = '') => {
+  if (!user || !parcel) return false;
+  const mailBody = `
+    <div style="color: #5a5a5a;">
+      <div style="border-bottom: 1px solid #3359DF; padding: 15px;">
+        <h2 style="color: #3359DF; text-align: center;">SendIT - Parcel Status Changed</h2>
+      </div>
+      <p style="font-size: 1.2rem; line-height: 2rem; color: #5a5a5a;">
+        Dear ${user.firstName}, <br>
+        The current location of your parcel (${parcel.trackingNumber || parcel.id}) 
+        is at ${parcel.location}
       <p/>
       <p style="color: #5a5a5a !important;"
         Thank you, <br> Andela - SendIT Team
@@ -74,4 +93,5 @@ export default {
   sendConfirmEmail,
   sendEmailConfirmed,
   sendParcelStatusChanged,
+  sendParcelLocationChanged,
 };
