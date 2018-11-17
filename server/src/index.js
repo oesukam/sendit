@@ -1,5 +1,4 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
 import logger from 'morgan';
@@ -25,8 +24,8 @@ app.use(helmet()); // Sets various http headers
 /* Apply the body-parser middleware to grab data
   from the request body and create application/json parser
 */
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 
 app.use(`${urlPrefixV1}/users`, routes.users);
@@ -52,7 +51,7 @@ app.use((req, res, next) => {
 
 const run = (port = '') => {
   const server = app.listen(port || PORT, () => {
-    console.info(`Server listenning on port: ${port || PORT}...`);
+    console.info(`\nServer listenning on port: ${port || PORT}...`);
   });
   return server;
 };

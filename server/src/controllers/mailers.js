@@ -23,7 +23,7 @@ const sendConfirmEmail = (user = '') => {
         <p style="color: #5a5a5a !important;>Thank you, <br> Andela - SendIT Team</p>
       </div>
     `;
-    mailer({ subject: 'Email confirmation', to: user.email, html: mailBody });
+    return mailer({ subject: 'Email confirmation', to: user.email, html: mailBody });
   }
 };
 
@@ -44,7 +44,7 @@ const sendEmailConfirmed = (user = '') => {
         </p>
       </div>
     `;
-    mailer({ subject: 'Email confirmed', to: user.email, html: mailBody });
+    return mailer({ subject: 'Email confirmed', to: user.email, html: mailBody });
   }
 };
 
@@ -66,7 +66,7 @@ const sendParcelStatusChanged = (user = '', parcel = '') => {
       </p>
     </div>
   `;
-  mailer({ subject: 'Parcel Status Changed', to: user.email, html: mailBody });
+  return mailer({ subject: 'Parcel Status Changed', to: user.email, html: mailBody });
 };
 
 const sendParcelLocationChanged = (user = '', parcel = '') => {
@@ -86,7 +86,7 @@ const sendParcelLocationChanged = (user = '', parcel = '') => {
       </p>
     </div>
   `;
-  mailer({ subject: 'Parcel Status Changed', to: user.email, html: mailBody });
+  return mailer({ subject: 'Parcel Status Changed', to: user.email, html: mailBody });
 };
 
 export default {

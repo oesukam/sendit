@@ -5,16 +5,23 @@
   "main": "src/server.js",
   "nyc": {
     "exclude": [
-      "UI/"
+      "UI/",
+      "spec/",
+      "server/dist/",
+      "server/tests/",
+      "server/src/index.js"
+    ],
+    "include": [
+      "**/server"
     ]
   },
   "scripts": {
-    "start": "babel-node src/server.js",
-    "dev": "nodemon --exec babel-node src/server.js",
-    "build": "babel src --out-dir dist",
-    "serve": "node dist/server.js",
-    "test-only": "babel-node spec/run.js",
-    "test": "NODE_ENV=test JASMINE_CONFIG_PATH=spec/support/jasmine.json nyc --reporter=text --reporter=lcov babel-node spec/run.js --exit",
+    "start": "babel-node server/src/index.js",
+    "dev": "nodemon --exec babel-node server/src/index.js",
+    "build": "babel server/src --out-dir server/dist",
+    "serve": "node server/dist/index.js",
+    "test-only": "babel-node tests/run.js",
+    "test": "NODE_ENV=test JASMINE_CONFIG_PATH=server/tests/support/jasmine.json nyc --include-sources server/src --reporter=text --reporter=lcov babel-node server/tests/run.js --exit",
     "report-coverage": "codecov",
     "coveralls": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
@@ -54,12 +61,10 @@
     "nyc": "^13.1.0"
   },
   "dependencies": {
-    "@babel/cli": "^7.1.5",
-    "@babel/core": "^7.1.5",
-    "@babel/node": "^7.0.0",
-    "@babel/preset-env": "^7.1.5",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "bcrypt": "^3.0.2",
-    "body-parser": "^1.18.3",
     "celebrate": "^9.0.0",
     "dotenv": "^6.1.0",
     "express": "^4.16.4",

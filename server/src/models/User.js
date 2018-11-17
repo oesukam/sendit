@@ -6,7 +6,7 @@ class User extends BaseModel {
     super(args);
     this.arrayName = 'users';
     this.userType = 'user'; // Normal user type by default
-    this.hidden = ['password', 'confirmed', 'confirmationCode'];
+    this.hidden = ['password', 'confirmationCode'];
   }
 
   // Find user by email

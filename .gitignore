@@ -1,5 +1,6 @@
 node_modules/
-dist/
+dist/*
+server/dist
 .env
 .nyc_output/
 coverage/

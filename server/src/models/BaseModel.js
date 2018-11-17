@@ -54,6 +54,11 @@ class BaseModel {
     }
   }
 
+  getFirst() {
+    const items = global[this.arrayName] || [];
+    return items[0] || undefined;
+  }
+
   // Returns all items or an empty array
   getAll({ keywords = '', page = 1, userId = '' } = {}) {
     if (!this.arrayName) return [];

@@ -1,24 +1,16 @@
-import express from 'express';
-import { celebrate } from 'celebrate';
 import bcrypt from 'bcrypt';
+import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import faker from 'faker';
-import dotenv from 'dotenv';
-import { users } from '../validators/index';
-import User from '../models/User';
-import Parcel from '../models/Parcel';
-import mail from '../controllers/mail';
-import { jwtVerifyToken } from '../middlewares';
 
-const router = express.Router();
+import Parcel from '../models/Parcel';
+import User from '../models/User';
+import mail from './mailers';
+
 dotenv.config();
 const { JWT_SECRET } = process.env;
 
-// Signup route
-router.post('/', celebrate({
-  body: users.signup,
-}),
-async (req, res) => {
+const signup = async (req, res) => {
   let success = false;
   let token;
   const { body } = req;
@@ -47,39 +39,36 @@ async (req, res) => {
   }
 
   return res.status(201).json({ success, token, data: user.toObject() });
-});
+};
 
-// Confirm email route
-router.get('/:userId/confirmEmail/:confirmationCode',
-  (req, res) => {
-    let success = false;
-    const { userId, confirmationCode } = req.params;
-    const user = new User();
-    const userData = user.findById(userId);
-    if (!userData) {
-      return res.status(404).json({ success });
-    }
-    if (userData.confirmed) {
-      return res.status(404).json({ success, msg: `${userData.email} has already been confimed` });
-    }
-    if (confirmationCode !== userData.confirmationCode) {
-      return res.status(404).json({ success, msg: 'Confirmation code is incorrect' });
-    }
-    userData.confirmed = true;
-    userData.confirmationCode = null;
-    // Assigns all body fields to User model
-    const savedData = userData.save();
+const confirmEmail = (req, res) => {
+  let success = false;
+  const { userId, confirmationCode } = req.params;
+  const user = new User();
+  const userData = user.findById(userId);
+  if (!userData) {
+    return res.status(404).json({ success });
+  }
+  if (userData.confirmed) {
+    return res.status(404).json({ success, msg: `${userData.email} has already been confimed` });
+  }
+  if (confirmationCode !== userData.confirmationCode) {
+    return res.status(404).json({ success, msg: 'Confirmation code is incorrect' });
+  }
+  userData.confirmed = true;
+  userData.confirmationCode = null;
+  // Assigns all body fields to User model
+  const savedData = userData.save();
 
-    if (savedData) {
-      success = true;
-      mail.sendEmailConfirmed(userData);
-    }
+  if (savedData) {
+    success = true;
+    mail.sendEmailConfirmed(userData);
+  }
 
-    return res.status(201).json({ success, msg: 'Emaile confirmed' });
-  });
+  return res.status(201).json({ success, msg: 'Emaile confirmed' });
+};
 
-// Login route
-router.post('/login', async (req, res) => {
+const login = async (req, res) => {
   const { email, password } = req.body;
   let success = false;
   const user = new User();
@@ -94,18 +83,18 @@ router.post('/login', async (req, res) => {
   success = true;
   const token = await jwt.sign({ id: user.id, userType: user.userType }, JWT_SECRET);
   return res.status(200).json({ success, token, data: user.toObject() });
-});
+};
 
-// Fetch users route accessible to admins only
-router.get('/', jwtVerifyToken(['admin']), (req, res) => {
+// Fetch list of users
+const getAll = (req, res) => {
   const user = new User();
   const { page = 1 } = req.params;
 
   res.json({ data: user.getAll({ page }) });
-});
+};
 
-// Fetch user info
-router.get('/:userId', jwtVerifyToken(['user', 'admin']), (req, res) => {
+// Fetch a single user
+const getSingle = (req, res) => {
   const { userId } = req.params;
   const user = new User().findById(userId);
   if (!user) {
@@ -113,10 +102,9 @@ router.get('/:userId', jwtVerifyToken(['user', 'admin']), (req, res) => {
   }
 
   return res.status(200).json({ success: true, data: user.toObject() });
-});
+};
 
-// Fetch user parcels
-router.get('/:userId/parcels', jwtVerifyToken(['user']), (req, res) => {
+const getUserParcels = (req, res) => {
   const { keywords = '' } = req.query;
   const { userId } = req.params;
   const parcel = new Parcel();
@@ -126,6 +114,13 @@ router.get('/:userId/parcels', jwtVerifyToken(['user']), (req, res) => {
   }
 
   return res.status(200).json({ success: true, data: items });
-});
+};
 
-export default router;
+export default {
+  signup,
+  login,
+  confirmEmail,
+  getAll,
+  getSingle,
+  getUserParcels,
+};
