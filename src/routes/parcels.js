@@ -91,13 +91,20 @@ router.put('/:id/location',
       return res.status(404).json({ success: false, msg: 'Not found' });
     }
 
+    if (parcel.location === location) {
+      return res.status(304).json({ success: false, msg: 'Parcel location not changed' });
+    }
     parcel.location = location;
     parcel.save();
+
+    const user = new User().findById(parcel.userId);
+
+    mail.sendParcelLocationChanged(user.toObject(), parcel.toObject());
 
     return res.status(200).json({ success: true, msg: 'Parcel location changed successfully' });
   });
 
-// Change parcel location
+// Change parcel status
 router.put('/:id/status',
   celebrate({ body: parcels.changeStatus }),
   jwtVerifyToken(['admin']),

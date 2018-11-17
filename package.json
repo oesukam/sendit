@@ -9,7 +9,7 @@
     ]
   },
   "scripts": {
-    "start": "node --exec babel-node src/server.js",
+    "start": "babel-node src/server.js",
     "dev": "nodemon --exec babel-node src/server.js",
     "build": "babel src --out-dir dist",
     "serve": "node dist/server.js",
