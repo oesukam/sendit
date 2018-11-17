@@ -175,11 +175,12 @@ describe('parcel', () => {
       Request.put(`${urlPrefixV1}/parcels/${parcelId}/status`,
         {
           json: true,
-          form: { parcelStatus: 'Gisenyi' },
+          form: { parcelStatus: 'In Transit' },
           headers: {
             Authorization: `Bearer ${userToken}`,
           },
         }, (err, res, body) => {
+          console.log(err, res);
           data.status = res.statusCode;
           if (!err) {
             data.success = body.success;
