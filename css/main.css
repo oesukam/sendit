@@ -163,6 +163,12 @@ select option {
   color: #3359DF;
 }
 
+.icon-btn {
+  padding: 10px;
+}
+.icon-btn:hover {
+  cursor: pointer;
+}
 /* Reset fontawesome icon to inherit font color */
 .fa {
   color: inherit;
