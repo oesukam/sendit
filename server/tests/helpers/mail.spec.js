@@ -40,7 +40,7 @@ describe('mailer', () => {
     });
   });
 
-  fdescribe('send email with wrong from address', () => {
+  describe('send email with wrong from address', () => {
     let success = false;
     beforeAll((done) => {
       const mailInfo = {
