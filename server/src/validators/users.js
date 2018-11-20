@@ -1,8 +1,8 @@
 import { Joi } from 'celebrate';
 
 const signup = {
-  firstName: Joi.string(),
-  lastName: Joi.string(),
+  firstName: Joi.string().required(),
+  lastName: Joi.string().required(),
   password: Joi.string().min(6),
   email: Joi.string().email().required(),
   gender: Joi.string().required().valid('Male', 'Female'),
@@ -14,7 +14,7 @@ const signup = {
 
 const login = {
   email: Joi.string().email().required(),
-  password: Joi.string().min(6),
+  password: Joi.string().min(6).required(),
 };
 
 export default {

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/font-awesome.min.css">
-  <title>SendIT - Quote</title>
+  <title>SendIT - My Profile</title>
 </head>
 <body>
   <header id="top-menu">
@@ -37,7 +37,7 @@
       <nav id="menu-nav" class="nav pull-right">
         <ul>
           <li class="nav-item"><a href="index.html">Home</a></li>
-          <li class="nav-item active"><a href="quote.html">Get A Quote</a></li>
+          <li class="nav-item"><a href="quote.html">Get A Quote</a></li>
           <li class="nav-item dropdown">
             <a href="#">Admin</a>
             <ul class="dropdown-block">
@@ -55,8 +55,7 @@
                   <i class="fa fa-user mr-5"></i> My Profile
                 </a>
               </li>
-              <li class="nav-item"><a href="order.html">Single Order View</a></li>
-              <li class="nav-item"><a href="make-order.html">Make an Order</a></li>
+              <li class="nav-item active"><a href="make-order.html">Make an Order</a></li>
               <li class="nav-item"><a href="orders.html">My Orders</a></li>
             </ul>
           </li>
@@ -66,73 +65,90 @@
   </header>
   <div id="main-content">
     <div class="container">
-      <div id="quote-map" class="map-location"> Map location</div>
-      <div class="box quote-container">
-        <p class="quote-error">
-          Please select the corresponding province and district.
-        </p>
-        <form action="#">
-          <div class="row">
-            <div class="col-4">
-              <h3 class="title is-white">From</h3>
-
-              <label for="fromProvince">Province</label>
-              <span class="custom-dropdown">
-                <select id="fromProvince" name="fromProvince">
-                  <option value="">Select</option> 
-                  <option value="eastern">Eastern Province</option>
-                  <option value="kigali">Kigali</option>  
-                  <option value="northern">Northen Province</option>
-                  <option value="southern">Southern Province</option>
-                </select>
-              </span>
-              
-              <label for="fromDistrict">District</label>
-              <span class="custom-dropdown">
-                <select id="fromDistrict" name="fromDistrict">    
-                  <option value="eastern">Select</option>
-                </select>
-              </span>
+      <div class="row profile-container">
+        <div class="col-3">
+          <div class="box profile-sidebar">
+            <div class="profile-sidebar__header">
+              <div class="profile-avatar"></div>
+              <div class="profile-name">Olivier Esuka</div>
             </div>
-            <div class="col-4">
-              <h3 class="title is-white">To</h3>
-              
-              <label for="toProvince">Province</label>
-              <span class="custom-dropdown">
-                <select id="toProvince" name="toProvince">
-                  <option value="">Select</option> 
-                  <option value="eastern">Eastern Province</option>
-                  <option value="kigali">Kigali</option>  
-                  <option value="northern">Northen Province</option>
-                  <option value="southern">Southern Province</option>
-                </select>
-              </span>
-              
-              <label for="toDistrict">District</label>
-              <span class="custom-dropdown">
-                <select id="toDistrict" name="toDistrict">    
-                  <option value="eastern">Select</option>
-                </select>
-              </span>
-            </div>
-            <div class="col-4">
-              <label for="from" class="title is-white">Weight</label>
-              <input type="number" name="weight" id="weight-input">
-              <div class="form-error"></div>
-              <button id="submit-quote" class="btn">Quote</button>
+            <div class="profile-sidebar__content">
+              <ul class="profile-sidebar__nav">
+                <li><a href="profile.html">My Profile</a></li>
+                <li><a class="active" href="orders.html">My Orders</a></li>
+                <li><a href="make-order.html">Make an Order</a></li>
+              </ul>
             </div>
           </div>
+        </div>
+        <div class="col-9">
           <div class="row">
             <div class="col-12">
-              <div class="quote-result">
-                <p>From <strong>Kigali</strong> to <strong>Gisenyi</strong>, a parcel of 
-                  <strong>5Kg</strong> costs <strong>2$</strong>
-                </p>
-              </div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th width="20" >No.</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Receiver</th>
+                    <th>Address</th>
+                    <th width="100">Date</th>
+                    <th width="100">Status</th>
+                    <th width="100">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Kigali</td>
+                    <td>Gisenyi</td>
+                    <td>Franck</td>
+                    <td>.....</td>
+                    <td>2018-09-2</td>
+                    <td>Await pick up</td>
+                    <td class="align-right">
+                      <a href="order.html" class="btn-edit">
+                        <i class="fa fa-edit"></i> Edit
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Kigali</td>
+                    <td>Gisenyi</td>
+                    <td>Anais</td>
+                    <td>.....</td>
+                    <td>2018-09-3</td>
+                    <td>Delivered</td>
+                    <td class="align-right">
+                      <a href="order.html" class="btn-edit">
+                        <i class="fa fa-edit"></i> Edit
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Kigali</td>
+                    <td>Gisenyi</td>
+                    <td>Angel</td>
+                    <td>.....</td>
+                    <td>2018-09-3</td>
+                    <td>In Process</td>
+                    <td class="align-right">
+                      <a href="order.html" class="btn-edit">
+                        <i class="fa fa-edit"></i> Edit
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <nav class="pagination">
+                <a href="#"><i class="fa fa-angle-left"></i> Previous</a>
+                <a href="#">Next <i class="fa fa-angle-right"></i></a>
+              </nav>
             </div>
           </div>
-        </form>
-        
+        </div>
       </div>
     </div>
   </div>
@@ -146,7 +162,7 @@
           <h3 class="footer-title">Site Map</h3>
           <ul class="footer-list">
             <li><a href="index.html">Home</a></li>
-            <li><a class="active" href="quote.html">Get A Quote</a></li>
+            <li><a href="quote.html">Get A Quote</a></li>
           </ul>
         </div>
         <div class="col-3">
@@ -170,10 +186,6 @@
       </div>
     </div>
   </footer>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu_9x-afqT01pFFB3vc4cDRObiSVIen1I&callback=initMap"
-  async defer></script>
   <script src="./js/main.js"></script>
-  <script src="./js/quote.js"></script>
-  <script src="./js/google-map.js"></script>
 </body>
 </html>
