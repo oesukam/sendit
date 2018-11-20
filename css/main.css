@@ -99,7 +99,14 @@ select option {
   color: #fff;
   
 }
-
+.checkbox:after {
+	content: '\2714';
+	font-size: 16px;
+	position: absolute;
+	top: 2px;
+	left: 8px;
+	color: rgb(238, 238, 238);
+}
 .checkbox:checked:after {
 	content: '\2714';
 	font-size: 16px;
