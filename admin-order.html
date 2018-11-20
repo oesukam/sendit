@@ -92,15 +92,21 @@
             </p>
             <form action="#">
               <div class="row content-center">
-                <div class="col-6">
+                <div class="col-6 align-center">
                   <label for="orderStatus">Order Status</label>
                   <span class="custom-dropdown">
-                    <select disabled id="orderStatus" name="orderStatus">
-                      <option value="process" selected>In Process</option>
-                      <option value="await-pick" selected>Await Pickup</option>  
-                      <option value="delivered">Delivered</option>
+                    <select id="orderStatus" name="orderStatus">
+                      <option value="Waiting Pickup">Waiting Pickup</option>
+                      <option value="Pick Up" selected>Pick Up</option>  
+                      <option value="In Transit">In Transit</option>
+                      <option value="Delivered">Delivered</option>
                     </select>
                   </span>
+
+                  <div class="checkbox-block content-center">
+                    <label for="cancelled">Cancelled</label>
+                    <input class="checkbox" type="checkbox" name="cancelled" /> 
+                  </div>
                 </div>
               </div>
               <div class="row">
@@ -165,6 +171,14 @@
                     value="000-0000-000-000"
                   >
                   <div class="form-error phone"></div>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-6">
+                  <label for="receiverNames" class="title">Receiver's Names</label>
+                  <input type="text" name="receiverNames" id="receiverNames">
+                  <div class="form-error receiverNames"></div>
                 </div>
               </div>
 
