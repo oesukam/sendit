@@ -4,7 +4,7 @@ const joiErrors = () => (err, req, res, next) => {
   if (!isCelebrate(err)) return next(err);
   return res.status(400).json({
     success: false,
-    errMsg: 'Bad Request',
+    errmessage: 'Bad Request',
     errFields: err.details || null,
   });
 };

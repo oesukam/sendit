@@ -125,7 +125,7 @@ describe('parcel', () => {
           data.status = res.statusCode;
           if (!err) {
             data.success = body.success;
-            data.message = body.msg;
+            data.message = body.message;
           }
           done();
         });
@@ -154,7 +154,7 @@ describe('parcel', () => {
           data.status = res.statusCode;
           if (!err) {
             data.success = body.success;
-            data.message = body.msg;
+            data.message = body.message;
           }
           done();
         });
@@ -183,7 +183,7 @@ describe('parcel', () => {
           data.status = res.statusCode;
           if (!err) {
             data.success = body.success;
-            data.message = body.msg;
+            data.message = body.message;
           }
           done();
         });
