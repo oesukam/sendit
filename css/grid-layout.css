@@ -134,6 +134,9 @@
   overflow-x: scroll;
   margin-top: 20px;
 }
+.table th {
+  text-align: left;
+}
 .table tr {
   line-height: 1.5rem;
   animation: all 0.5s;
