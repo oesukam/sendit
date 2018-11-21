@@ -3,7 +3,6 @@ import User from '../../src/models/User';
 import Parcel from '../../src/models/Parcel';
 import run from '../../src/index';
 
-
 describe('mailer', () => {
   let server;
   let parcel;

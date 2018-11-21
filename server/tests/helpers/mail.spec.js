@@ -1,7 +1,6 @@
 import mailer from '../../src/helpers/mailer';
 import run from '../../src/index';
 
-
 describe('mailer', () => {
   let server;
   beforeAll((done) => {

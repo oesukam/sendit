@@ -55,6 +55,7 @@ class BaseModel {
   }
 
   getFirst() {
+    if (!this.arrayName) return null;
     const items = global[this.arrayName] || [];
     return items[0] || undefined;
   }
@@ -98,6 +99,7 @@ class BaseModel {
   // Save properies to the array
   save({ withHidden = false } = {}) {
     return new Promise(async (resolve, reject) => {
+      if (!this.arrayName) reject(new Error('Please set arrayName'));
       // Check if the array name was set
       if (!this.id) {
         this.id = faker.random.uuid();

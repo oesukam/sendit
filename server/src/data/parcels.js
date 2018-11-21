@@ -13,7 +13,7 @@ const parcel = {
   receiverAddress: faker.address.streetAddress(),
   weight: faker.random.number(),
   cancelled: false,
-  location: 'Nyarungege',
+  presentLocation: 'Nyarungege',
   parcelStatus: 'in-transit',
 };
 const initParcels = () => {

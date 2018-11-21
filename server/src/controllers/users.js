@@ -50,10 +50,16 @@ const confirmEmail = (req, res) => {
     return res.status(404).json({ success });
   }
   if (userData.confirmed) {
-    return res.status(404).json({ success, message: `${userData.email} has already been confimed` });
+    return res.status(404).json({
+      success,
+      message: `${userData.email} has already been confimed`,
+    });
   }
   if (confirmationCode !== userData.confirmationCode) {
-    return res.status(404).json({ success, message: 'Confirmation code is incorrect' });
+    return res.status(404).json({
+      success,
+      message: 'Confirmation code is incorrect',
+    });
   }
   userData.confirmed = true;
   userData.confirmationCode = null;
@@ -78,19 +84,26 @@ const login = async (req, res) => {
   }
   const validPassword = await bcrypt.compare(password, userData.password);
   if (!validPassword) {
-    return res.status(401).json({ success, message: 'Email and password don\'t match' });
+    return res.status(401).json({
+      success,
+      message: 'Email and password don\'t match',
+    });
   }
   success = true;
-  const token = await jwt.sign({ id: user.id, userType: user.userType }, JWT_SECRET);
+  const token = await jwt.sign({
+    id: user.id,
+    userType:
+    user.userType,
+  }, JWT_SECRET);
   return res.status(200).json({ success, token, data: user.toObject() });
 };
 
 // Fetch list of users
 const getAll = (req, res) => {
   const user = new User();
-  const { page = 1 } = req.params;
+  const { page = 1, keywords = '' } = req.params;
 
-  res.json({ data: user.getAll({ page }) });
+  res.json({ data: user.getAll({ page, keywords }) });
 };
 
 // Fetch a single user
