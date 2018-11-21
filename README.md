@@ -26,23 +26,23 @@ their parcel.
 
 ## UI
 ### Web Pages
-- [Home Page](https://oesukam.github.io/andela-sendit/UI/index.html)
+- [Home Page](https://oesukam.github.io/andela-sendit/index.html)
 
-- [Get A Quote Page](https://oesukam.github.io/andela-sendit/UI/quote.html)
+- [Get A Quote Page](https://oesukam.github.io/andela-sendit/quote.html)
 
-- [Signup Page](https://oesukam.github.io/andela-sendit/UI/signup.html)
+- [Signup Page](https://oesukam.github.io/andela-sendit/signup.html)
 
-- [Login Page](https://oesukam.github.io/andela-sendit/UI/login.html)
+- [Login Page](https://oesukam.github.io/andela-sendit/login.html)
 
-- [Profile Page](https://oesukam.github.io/andela-sendit/UI/profile.html)
+- [Profile Page](https://oesukam.github.io/andela-sendit/profile.html)
 
-- [Make An Order Page](https://oesukam.github.io/andela-sendit/UI/make-order.html)
+- [Make An Order Page](https://oesukam.github.io/andela-sendit/make-order.html)
 
-- [Order View Page](https://oesukam.github.io/andela-sendit/UI/order.html)
+- [Order View Page](https://oesukam.github.io/andela-sendit/order.html)
 
-- [Admin Orders Page](https://oesukam.github.io/andela-sendit/UI/admin-orders.html)
+- [Admin Orders Page](https://oesukam.github.io/andela-sendit/admin-orders.html)
 
-- [Admin Single Order Page](https://oesukam.github.io/andela-sendit/UI/admin-order.html)
+- [Admin Single Order Page](https://oesukam.github.io/andela-sendit/admin-order.html)
 
 ![Home Page Screenshot](/images/index-page.png)
 
