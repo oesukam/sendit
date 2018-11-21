@@ -3,30 +3,24 @@ import faker from 'faker';
 
 import User from '../../src/models/User';
 import run from '../../src/index';
-
-const urlPrefixV1 = 'http://localhost:5000/api/v1';
+import {
+  urlPrefixV1,
+  parcelData,
+  userToken,
+  adminToken,
+} from '../data';
+import Parcel from '../../src/models/Parcel';
 
 // Creating a new parce;
 describe('parcel', () => {
   let server;
   let parcelId;
   let parcelUserId;
-  let userToken;
 
   beforeAll((done) => {
     server = run(5000);
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
-    const user = {
-      email: 'admin@email.com',
-      password: 'admin@admin',
-    };
-    Request.post(`${urlPrefixV1}/users/login`,
-      { json: true, form: user }, (err, res, body) => {
-        if (!err) {
-          userToken = body.token;
-        }
-        done();
-      });
+    done();
   });
   afterAll(() => {
     server.close();
@@ -38,18 +32,20 @@ describe('parcel', () => {
       user = user.findByEmail('user@email.com');
       const parcel = {
         userId: user.id,
-        fromProvince: 'Kigali',
-        fromDistrict: 'Nyarungege',
-        toProvince: 'Northen Province',
-        toDistrict: 'Burera',
-        receiverNames: `${faker.name.firstName()} ${faker.name.lastName()}`,
-        receiverPhone: '250-783200000',
-        receiverAddress: faker.address.streetAddress(),
-        weight: faker.random.number(),
+        ...parcelData,
       };
+      delete parcel.cancelled;
+      delete parcel.presentLocation;
+      delete parcel.id;
 
       Request.post(`${urlPrefixV1}/parcels`,
-        { json: true, form: parcel }, (err, res, body) => {
+        {
+          json: true,
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+          form: parcel,
+        }, (err, res, body) => {
           data.status = res.statusCode;
           if (!err) {
             data.token = body.token;
@@ -75,7 +71,12 @@ describe('parcel', () => {
     const data = {};
     beforeAll((done) => {
       Request.get(`${urlPrefixV1}/parcels`,
-        { json: true }, (err, res, body) => {
+        {
+          json: true,
+          headers: {
+            Authorization: `Bearer ${adminToken}`,
+          },
+        }, (err, res, body) => {
           data.status = res.statusCode;
           if (!err) {
             data.success = body.success;
@@ -98,7 +99,12 @@ describe('parcel', () => {
     const data = {};
     beforeAll((done) => {
       Request.get(`${urlPrefixV1}/parcels/${parcelId}`,
-        { json: true }, (err, res, body) => {
+        {
+          json: true,
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }, (err, res, body) => {
           data.status = res.statusCode;
           if (!err) {
             data.success = body.success;
@@ -120,12 +126,19 @@ describe('parcel', () => {
   describe('cancel a parcel PUT /api/v1/parcels/<parcelId>/cancel', () => {
     const data = {};
     beforeAll((done) => {
-      Request.put(`${urlPrefixV1}/parcels/${parcelId}/cancel`,
-        { json: true, form: { userId: parcelUserId } }, (err, res, body) => {
+      const parcel = new Parcel().getFirst();
+      Request.put(`${urlPrefixV1}/parcels/${parcel.id}/cancel`,
+        {
+          json: true,
+          form: { userId: parcel.userId },
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }, (err, res, body) => {
           data.status = res.statusCode;
           if (!err) {
             data.success = body.success;
-            data.message = body.msg;
+            data.message = body.message;
           }
           done();
         });
@@ -140,21 +153,22 @@ describe('parcel', () => {
   });
 
   // Change parcel location
-  describe('change a parcel location PUT /api/v1/parcels/<parcelId>/location', () => {
+  describe('change a parcel location PUT /api/v1/parcels/<parcelId>/presentLocation', () => {
     const data = {};
     beforeAll((done) => {
-      Request.put(`${urlPrefixV1}/parcels/${parcelId}/location`,
+      const parcel = new Parcel().getFirst();
+      Request.put(`${urlPrefixV1}/parcels/${parcel.id}/presentLocation`,
         {
           json: true,
-          form: { location: 'Gisenyi' },
+          form: { presentLocation: 'Gisenyi' },
           headers: {
-            Authorization: `Bearer ${userToken}`,
+            Authorization: `Bearer ${adminToken}`,
           },
         }, (err, res, body) => {
           data.status = res.statusCode;
           if (!err) {
             data.success = body.success;
-            data.message = body.msg;
+            data.message = body.message;
           }
           done();
         });
@@ -169,21 +183,21 @@ describe('parcel', () => {
   });
 
   // Change parcel status
-  describe('change a parcel status PUT /api/v1/parcels/<parcelId>/status', () => {
+  describe('change parcel status PUT /api/v1/parcels/<parcelId>/status', () => {
     const data = {};
     beforeAll((done) => {
       Request.put(`${urlPrefixV1}/parcels/${parcelId}/status`,
         {
           json: true,
-          form: { parcelStatus: 'In Transit' },
+          form: { parcelStatus: 'Pick Up' },
           headers: {
-            Authorization: `Bearer ${userToken}`,
+            Authorization: `Bearer ${adminToken}`,
           },
         }, (err, res, body) => {
           data.status = res.statusCode;
           if (!err) {
             data.success = body.success;
-            data.message = body.msg;
+            data.message = body.message;
           }
           done();
         });

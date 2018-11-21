@@ -10,9 +10,12 @@ const createParcel = (req, res) => {
   let user = new User();
   user = user.findById(body.userId);
   if (!user) {
-    return res.status(401).json({ success: false, msg: 'Unathorized Access' });
+    return res.status(401).json({
+      success: false,
+      message: 'Unathorized Access',
+    });
   }
-  const parcel = new Parcel({ ...body, location: body.city || body.district });
+  const parcel = new Parcel({ ...body, presentLocation: body.city || body.district });
 
   parcel.save();
 
@@ -25,7 +28,7 @@ const getAll = (req, res) => {
   const parcel = new Parcel();
   const items = parcel.getAll({ keywords });
   if (!parcel) {
-    return res.status(404).json({ success: false, msg: 'Not found' });
+    return res.status(404).json({ success: false, message: 'Not found' });
   }
   return res.status(200).json({ success: true, data: items });
 };
@@ -36,7 +39,7 @@ const getSingle = (req, res) => {
   let parcel = new Parcel();
   parcel = parcel.findById(id);
   if (!parcel) {
-    return res.status(404).json({ success: false, msg: 'Not found' });
+    return res.status(404).json({ success: false, message: 'Not found' });
   }
 
   return res.status(200).json({ success: true, data: parcel.toObject() });
@@ -48,44 +51,60 @@ const cancelParcel = (req, res) => {
   let parcel = new Parcel();
   parcel = parcel.findById(id);
   if (!parcel) {
-    return res.status(404).json({ success: false, msg: 'Not found' });
+    return res.status(404).json({ success: false, message: 'Not found' });
   }
   let user = new User();
   user = user.findById(userId);
 
   if (!user) {
-    return res.status(401).json({ success: false, msg: 'Unauthorized Access' });
+    return res.status(401).json({
+      success: false,
+      message: 'Unauthorized Access',
+    });
   }
 
   if (parcel.cancelled) {
-    return res.status(204).json({ success: false, msg: 'Parcel had already been cancelled' });
+    return res.status(204).json({
+      success: false,
+      message: 'Parcel had already been cancelled',
+    });
   }
   parcel.cancelled = true;
   parcel.save();
 
-  return res.status(200).json({ success: true, msg: 'Parcel cancelled successfully' });
+  return res.status(200).json({
+    success: true,
+    message: 'Parcel cancelled successfully',
+  });
 };
 
 const changeLocation = (req, res) => {
   const { id } = req.params;
-  const { location } = req.body;
+  const { presentLocation, jwtUser } = req.body;
   let parcel = new Parcel();
   parcel = parcel.findById(id);
   if (!parcel) {
-    return res.status(404).json({ success: false, msg: 'Not found' });
+    return res.status(404).json({ success: false, message: 'Not found' });
   }
 
-  if (parcel.location === location) {
-    return res.status(304).json({ success: false, msg: 'Parcel location not changed' });
+  if (parcel.presentLocation === presentLocation) {
+    return res.status(304).json({
+      success: false,
+      message: 'Parcel location not changed',
+    });
   }
-  parcel.location = location;
+  parcel.presentLocation = presentLocation;
   parcel.save();
 
   const user = new User().findById(parcel.userId);
 
-  mail.sendParcelLocationChanged(user.toObject(), parcel.toObject());
+  // Notifying the user via email
+  if (user) mail.sendParcelLocationChanged(user, parcel.toObject());
 
-  return res.status(200).json({ success: true, msg: 'Parcel location changed successfully' });
+  return res.status(200).json({
+    success: true,
+    message: 'Parcel location changed successfully',
+  });
 };
 
 const changeStatus = (req, res) => {
@@ -94,19 +113,22 @@ const changeStatus = (req, res) => {
   let parcel = new Parcel();
   parcel = parcel.findById(id);
   if (!parcel) {
-    return res.status(404).json({ success: false, msg: 'Not found' });
+    return res.status(404).json({ success: false, message: 'Not found' });
   }
 
   if (parcel.parcelStatus === parcelStatus) {
-    return res.status(304).json({ success: false, msg: 'Parcel not changed' });
+    return res.status(304).json({ success: false, message: 'Parcel not changed' });
   }
   parcel.parcelStatus = parcelStatus;
   parcel.save();
   const user = new User().findById(parcel.userId);
 
-  mail.sendParcelStatusChanged(user.toObject(), parcel.toObject());
+  if (user) mail.sendParcelStatusChanged(user.toObject(), parcel.toObject());
 
-  return res.status(200).json({ success: true, msg: 'Parcel status changed successfully' });
+  return res.status(200).json({
+    success: true,
+    message: 'Parcel status changed successfully',
+  });
 };
 
 export default {

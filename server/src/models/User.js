@@ -11,10 +11,10 @@ class User extends BaseModel {
 
   // Find user by email
   findByEmail(email = '') {
-    if (!email) return null;
-    const users = global[this.arrayName] || [];
+    const users = global[this.arrayName];
 
-    if (!email || users.length === 0) return null;
+    if (!email || users.length === 0) return undefined;
+
     const user = users.filter(val => val.email === email)[0] || null;
 
     if (!user) return null;

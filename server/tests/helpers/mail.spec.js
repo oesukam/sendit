@@ -1,7 +1,6 @@
 import mailer from '../../src/helpers/mailer';
 import run from '../../src/index';
 
-
 describe('mailer', () => {
   let server;
   beforeAll((done) => {
@@ -40,7 +39,7 @@ describe('mailer', () => {
     });
   });
 
-  fdescribe('send email with wrong from address', () => {
+  describe('send email with wrong from address', () => {
     let success = false;
     beforeAll((done) => {
       const mailInfo = {

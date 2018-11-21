@@ -5,6 +5,8 @@ import logger from 'morgan';
 import initData from './data';
 import routes from './routes';
 import joiErrors from './middlewares/joiErrors';
+import { error404 } from './middlewares/responseErrors';
+import { welcomeMessage } from './htmlMessage/index';
 
 initData(); // Initialise global data arrays
 dotenv.config(); // Sets environment's varibles
@@ -27,27 +29,23 @@ app.use(helmet()); // Sets various http headers
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.get('/', (req, res) => {
+  res.send(welcomeMessage);
+});
 
+app.use(`${urlPrefixV1}/auth`, routes.auth);
 app.use(`${urlPrefixV1}/users`, routes.users);
 app.use(`${urlPrefixV1}/parcels`, routes.parcels);
+
+app.get('/api/v1/', (req, res) => {
+  res.send(welcomeMessage);
+});
 
 // Apply Celebrate middleware to handle joi errors
 app.use(joiErrors());
 
-app.get('/api/v1/*', (req, res) => {
-  res.send('<h1>SendIT - API</h1>');
-});
-
-app.get('/*', (req, res) => {
-  res.send('<h1>SendIT - API</h1>');
-});
-
 // catch 404 and forward to error handler
-app.use((req, res, next) => {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
+app.use(error404);
 
 const run = (port = '') => {
   const server = app.listen(port || PORT, () => {

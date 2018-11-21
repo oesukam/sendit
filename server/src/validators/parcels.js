@@ -18,7 +18,7 @@ const cancel = {
 };
 
 const changeLocation = {
-  location: Joi.string().required(),
+  presentLocation: Joi.string().required(),
 };
 
 const changeStatus = {
