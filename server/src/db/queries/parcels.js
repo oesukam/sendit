@@ -5,12 +5,12 @@ const columns = `
   to_province AS toProvince,
   to_district AS toDistrict,
   presentLocation AS presentLocation,
-  description,
   receiver_phone AS receiverPhone,
   receiver_names AS receiverNames,
   weight,
   price,
   status,
+  description,
   updated_at AS updatedAt,
   created_at AS createdAt
  `;
@@ -24,11 +24,12 @@ CREATE TABLE IF NOT EXISTS
     to_province VARCHAR(255) NOT NULL,
     to_district VARCHAR(255) NOT NULL,
     present_location VARCHAR(255) NOT NULL,
-    description TEXT,
     receiver_phone VARCHAR(20) NOT NULL,
     receiver_names VARCHAR(255) NOT NULL,
-    weight SMALLINT,
+    receiver_address VARCHAR(255) NOT NULL,
+    weight INT,
     price INT,
+    description TEXT,
     status VARCHAR(20) NOT NULL DEFAULT 'In Transit',
     cancelled BOOLEAN DEFAULT false,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -38,21 +39,25 @@ CREATE TABLE IF NOT EXISTS
 const dropTable = 'DROP TABLE IF EXISTS parcels';
 
 const insert = `INSERT INTO parcels (
+  id,
   user_id,
   from_province,
   from_district,
   to_province,
   to_district,
-  presentLocation,
-  description,
-  receiver_phone,
+  present_location,
   receiver_names,
+  receiver_phone,
+  receiver_address,
   weight,
   price,
+  description,
+  cancelled,
   status,
   updated_at,
   created_at
-) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`;
+) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) 
+ON CONFLICT DO NOTHING returning * `;
 
 const queryAll = `SELECT
   ${columns} FROM parcels LIMIT 25 OFFSET $1

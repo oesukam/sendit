@@ -6,6 +6,7 @@ const columns = `
   first_name AS firstName,
   last_name AS lastName,
   birth_date AS birthDate,
+  gender,
   province,
   district,
   status,
@@ -25,6 +26,7 @@ CREATE TABLE IF NOT EXISTS
     province VARCHAR(128) NOT NULL,
     district VARCHAR(128) NOT NULL,
     birth_date DATE,
+    gender VARCHAR(10),
     status VARCHAR(50) DEFAULT 'active',
     user_type VARCHAR(20) NOT NULL,
     confirmed BOOLEAN DEFAULT false,
@@ -39,11 +41,16 @@ const insert = `INSERT INTO users(
   first_name,
   last_name,
   birth_date,
+  gender,
   province,
   district,
   user_type,
-  confirmation_code
- ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) returning *`;
+  confirmed,
+  confirmation_code,
+  created_at,
+  updated_at
+ ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+ ON CONFLICT DO NOTHING returning *`;
 const dropTable = 'DROP TABLE IF EXISTS users';
 
 const queryAll = `SELECT id, ${columns} FROM users LIMIT 25 OFFSET $1`;

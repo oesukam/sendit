@@ -11,10 +11,13 @@ import db from './db';
 import { logger } from './helpers';
 
 
-db.createTables();
-initData(); // Initialise global data arrays
 dotenv.config(); // Sets environment's varibles
+db.createTables();
 
+if (process.argv[2] === 'migrate') {
+  initData(); // Initialise default records
+  logger.info('Migrated');
+}
 const urlPrefixV1 = '/api/v1'; // Url prefix to map all urls
 const app = express();
 const { PORT = 3000, NODE_ENV } = process.env;

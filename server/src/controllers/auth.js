@@ -5,6 +5,7 @@ import faker from 'faker';
 
 import User from '../models/User';
 import mail from './mailers';
+import { logger } from '../helpers';
 
 dotenv.config();
 const { JWT_SECRET } = process.env;
@@ -17,7 +18,7 @@ const signup = async (req, res) => {
 
   try {
     const foundUser = await user.findByEmail(body.email);
-    if (foundUser.user) {
+    if (foundUser.data) {
       return res.status(200).json({
         success: false,
         message: `${body.email} user already exist`,
@@ -57,19 +58,26 @@ const signup = async (req, res) => {
 
 const login = async (req, res) => {
   const { email, password } = req.body;
+  let userData;
   let success = false;
   const user = new User();
-  const userData = await user.findByEmail(email);
-  if (!userData) {
-    return res.status(404).json({ success, message: 'User does not exist' });
+  try {
+    userData = await user.findByEmail(email);
+    if (!userData.data) {
+      return res.status(404).json({ success, message: 'User does not exist' });
+    }
+    const validPassword = await bcrypt.compare(password, userData.password);
+    if (!validPassword) {
+      return res.status(401).json({
+        success,
+        message: 'Email and password don\'t match',
+      });
+    }
+  } catch (err) {
+    logger.error(err);
+    return res.status(404).json({ success, message: 'User does not exist' }); 
   }
-  const validPassword = await bcrypt.compare(password, userData.password);
-  if (!validPassword) {
-    return res.status(401).json({
-      success,
-      message: 'Email and password don\'t match',
-    });
-  }
+
   success = true;
   const token = await jwt.sign({
     id: user.id,

@@ -32,3 +32,9 @@
 {"name":"error","length":209,"severity":"ERROR","code":"23505","detail":"Key (email)=(oesukam@gmail.com) already exists.","schema":"public","table":"users","constraint":"users_email_key","file":"nbtinsert.c","line":"535","routine":"_bt_check_unique","level":"error"}
 {"level":"error","message":"Message sent: %s"}
 {"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"message":"Postgress could not connect","level":"error"}
+{"message":"Postgress could not connect","level":"error"}
+{"message":"Postgress could not connect","level":"error"}
+{"message":"Postgress could not connect","level":"error"}
+{"message":"Postgress could not connect","level":"error"}

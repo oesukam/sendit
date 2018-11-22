@@ -1,4 +1,5 @@
 
+import moment from 'moment';
 import BaseModel from './BaseModel';
 import db from '../db';
 import { usersQuery } from '../db/queries';
@@ -20,10 +21,9 @@ class User extends BaseModel {
           .then((res) => {
             const user = res.rows[0];
             this.updateFields(user);
-            resolve({ user });
+            resolve({ data: user });
           })
           .catch((err) => {
-            console.log('ress', 'ooo', err);
             logger.error(err);
             reject(new Error('Failed, could query the user'));
           });
@@ -37,6 +37,7 @@ class User extends BaseModel {
     return new Promise((resolve, reject) => {
       const data = this.toObject();
       if (!data) reject(new Error('Field empty'));
+      const now = moment().format();
       const record = [
         this.getUID(),
         this.email,
@@ -44,10 +45,14 @@ class User extends BaseModel {
         this.firstName,
         this.lastName,
         this.birthDate,
+        this.gender,
         this.province,
         this.district,
         this.userType,
+        this.confirmed || false,
         this.confirmationCode,
+        this.createdAt || now,
+        now,
       ];
       try {
         db.query(usersQuery.insert, record)
