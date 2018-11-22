@@ -80,7 +80,7 @@ const cancelParcel = (req, res) => {
 
 const changeLocation = (req, res) => {
   const { id } = req.params;
-  const { presentLocation, jwtUser } = req.body;
+  const { presentLocation } = req.body;
   let parcel = new Parcel();
   parcel = parcel.findById(id);
   if (!parcel) {

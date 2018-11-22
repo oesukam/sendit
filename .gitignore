@@ -4,3 +4,5 @@ server/dist
 .env
 .nyc_output/
 coverage/
+error.log
+combined.log

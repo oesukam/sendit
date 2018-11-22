@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
+import logger from './logger';
 
 dotenv.config();
 const { MAILGUN_USER, MAILGUN_PASSWORD } = process.env;
@@ -31,11 +32,11 @@ const sendMail = ({
   // send mail with defined transport object
   transporter.sendMail(mailOptions, async (error, info) => {
     if (error) {
-      console.log(error);
+      logger.error(error);
       reject(error);
     }
     if (info) {
-      console.log('Message sent: %s', info.messageId);
+      logger.error('Message sent: %s', info.messageId);
     }
     resolve(true);
   });
