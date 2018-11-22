@@ -7,3 +7,28 @@
 {"message":"Postgress could not connect","level":"error"}
 {"message":"Postgress could not connect","level":"error"}
 {"message":"Postgress could not connect","level":"error"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"message":"Postgress could not connect","level":"error"}
+{"name":"error","length":100,"severity":"ERROR","code":"42601","position":"233","file":"scan.l","line":"1134","routine":"scanner_yyerror","level":"error"}
+{"name":"error","length":100,"severity":"ERROR","code":"42601","position":"233","file":"scan.l","line":"1134","routine":"scanner_yyerror","level":"error"}
+{"name":"error","length":100,"severity":"ERROR","code":"42601","position":"233","file":"scan.l","line":"1134","routine":"scanner_yyerror","level":"error"}
+{"name":"error","length":110,"severity":"ERROR","code":"42703","position":"180","file":"parse_relation.c","line":"3294","routine":"errorMissingColumn","level":"error"}
+{"message":"Postgress could not connect","level":"error"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"name":"error","length":209,"severity":"ERROR","code":"23505","detail":"Key (email)=(oesukam@gmail.com) already exists.","schema":"public","table":"users","constraint":"users_email_key","file":"nbtinsert.c","line":"535","routine":"_bt_check_unique","level":"error"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}

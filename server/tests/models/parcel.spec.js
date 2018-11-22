@@ -4,7 +4,7 @@ import { parcelData } from '../data';
 describe('user model', () => {
   it('should create an instance of Parcel', () => {
     const parcel = new Parcel();
-    expect(parcel.arrayName).toBe('parcels');
+    expect(parcel.storage).toBe('parcels');
     expect(parcel.parcelStatus).toBe('In Transit');
     expect(parcel.cancelled).toBeFalsy();
   });

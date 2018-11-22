@@ -4,7 +4,7 @@ import { userData } from '../data';
 describe('user model', () => {
   it('should create an instance of User', () => {
     const user = new User();
-    expect(user.arrayName).toBe('users');
+    expect(user.storage).toBe('users');
     expect(user.userType).toBe('user');
     expect(user.hidden[0]).toBe('password');
   });

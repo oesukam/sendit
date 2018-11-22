@@ -1,9 +1,9 @@
-import parcelQuery from './parcels';
-import userQuery from './users';
-import tokenQuery from './tokens';
+import parcelsQuery from './parcels';
+import usersQuery from './users';
+import tokensQuery from './tokens';
 
 export {
-  parcelQuery,
-  userQuery,
-  tokenQuery,
+  parcelsQuery,
+  usersQuery,
+  tokensQuery,
 };

@@ -1,6 +1,9 @@
 import { Pool } from 'pg';
+import dotenv from 'dotenv';
 import { logger } from '../helpers';
-import { userQuery, parcelQuery } from './queries';
+import { usersQuery, parcelsQuery, tokensQuery } from './queries';
+
+dotenv.config();
 
 const {
   NODE_ENV,
@@ -16,7 +19,7 @@ const pool = new Pool({
   host: PG_HOST,
   database: PG_DATABASE,
   password: PG_PASSWORD,
-  port: PG_PORT,
+  port: PG_PORT
 });
 
 logger.info(`Environment: ${NODE_ENV}`);
@@ -25,13 +28,15 @@ pool.connect()
   .catch(() => logger.error('Postgress could not connect'));
 
 const createTables = () => {
-  pool.query(userQuery.create);
-  pool.query(parcelQuery.create);
+  pool.query(usersQuery.createTable);
+  pool.query(parcelsQuery.createTable);
+  pool.query(tokensQuery.createTable);
 };
 
 const dropTables = () => {
-  pool.query(userQuery.drop);
-  pool.query(parcelQuery.drop);
+  pool.query(usersQuery.dropTable);
+  pool.query(parcelsQuery.dropTable);
+  pool.query(tokensQuery.dropTable);
 };
 
 const db = {

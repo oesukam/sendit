@@ -5,9 +5,9 @@ describe('base model', () => {
   beforeAll(() => {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
   });
-  it('arrayName should return empty string', () => {
+  it('storage should return empty string', () => {
     const model = new BaseModel();
-    expect(model.arrayName).toEqual('');
+    expect(model.storage).toEqual('');
   });
 
   it('save() should return undefined', (done) => {
@@ -21,7 +21,7 @@ describe('base model', () => {
 
   it('save() should return an object', (done) => {
     const model = new BaseModel({ ...parcelData });
-    model.arrayName = 'parcels';
+    model.storage = 'parcels';
     model.save()
       .then((res) => {
         expect(res).toBeDefined();
