@@ -18,10 +18,10 @@ export const jwtVerifyToken = (userType = ['user']) => (req, res, next) => {
     if (err || !decoded) {
       return res.status(401).json({ succes: false, message: 'Unauthorized access' });
     }
-    let user = new User();
-    user = await user.findById(decoded.id);
+    const user = new User();
+    await user.findById(decoded.id);
     if (userType.length === 0) next();
-    if (userType.indexOf(user.userType) === -1) {
+    if (userType.indexOf(user.user_type) === -1) {
       return res.status(403).json({ succes: false, message: 'Not allowed' });
     }
 

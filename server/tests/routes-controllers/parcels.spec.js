@@ -1,41 +1,93 @@
 import Request from 'request';
-import faker from 'faker';
-
-import User from '../../src/models/User';
+import bcrypt from 'bcrypt';
 import run from '../../src/index';
+import db from '../../src/db';
+import { deleteTestUser, deleteTestParcels } from '../queries';
+import User from '../../src/models/User';
 import {
   urlPrefixV1,
   parcelData,
-  userToken,
   adminToken,
+  user,
 } from '../data';
-import Parcel from '../../src/models/Parcel';
 
 // Creating a new parce;
 describe('parcel', () => {
   let server;
   let parcelId;
   let parcelUserId;
+  let userToken;
 
-  beforeAll((done) => {
+  beforeAll(async (done) => {
     server = run(5000);
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
-    done();
+    const userModel = new User({ ...user });
+    userModel.userType = 'admin';
+    userModel.password = await bcrypt.hash(user.password, 10);
+    await userModel.save();
+    parcelUserId = userModel.id;
+    Request.post(`${urlPrefixV1}/auth/login`,
+      {
+        json: true,
+        form: {
+          email: user.email,
+          password: user.password,
+        },
+      }, (err, res, body) => {
+        if (!err) {
+          userToken = body.token;
+          parcelUserId = body.data.id;
+        }
+        const parcel = {
+          user_id: parcelUserId,
+          ...parcelData,
+          to_district: 'Test',
+        };
+        delete parcel.cancelled;
+        delete parcel.present_location;
+        delete parcel.id;
+
+        Request.post(`${urlPrefixV1}/parcels`,
+          {
+            json: true,
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+            },
+            form: parcel,
+          }, (e, r, b) => {
+            if (!e) {
+              parcelId = b.data.id;
+            }
+            done();
+          });
+        // done();
+      });
   });
-  afterAll(() => {
+
+  afterAll((done) => {
     server.close();
+    db.query(deleteTestUser, [])
+      .then(() => {
+        done();
+        db.query(deleteTestParcels, [])
+          .then(() => done())
+          .catch(() => done());
+      })
+      .catch(() => {
+        db.query(deleteTestParcels, [])
+          .then(() => done())
+          .catch(() => done());
+      });
   });
   describe('create an order POST /api/v1/parcels', () => {
     const data = {};
-    beforeAll((done) => {
-      let user = new User();
-      user = user.findByEmail('user@email.com');
+    beforeAll(async (done) => {
       const parcel = {
-        userId: user.id,
+        user_id: parcelUserId,
         ...parcelData,
       };
       delete parcel.cancelled;
-      delete parcel.presentLocation;
+      delete parcel.present_location;
       delete parcel.id;
 
       Request.post(`${urlPrefixV1}/parcels`,
@@ -48,11 +100,10 @@ describe('parcel', () => {
         }, (err, res, body) => {
           data.status = res.statusCode;
           if (!err) {
-            data.token = body.token;
             data.success = body.success;
             data.data = body.data;
             parcelId = body.data.id;
-            parcelUserId = body.data.userId;
+            parcelUserId = body.data.user_id;
           }
           done();
         });
@@ -126,13 +177,12 @@ describe('parcel', () => {
   describe('cancel a parcel PUT /api/v1/parcels/<parcelId>/cancel', () => {
     const data = {};
     beforeAll((done) => {
-      const parcel = new Parcel().getFirst();
-      Request.put(`${urlPrefixV1}/parcels/${parcel.id}/cancel`,
+      Request.put(`${urlPrefixV1}/parcels/${parcelId}/cancel`,
         {
           json: true,
-          form: { userId: parcel.userId },
+          form: { user_id: parcelUserId },
           headers: {
-            Authorization: `Bearer ${userToken}`,
+            Authorization: `Bearer ${adminToken}`,
           },
         }, (err, res, body) => {
           data.status = res.statusCode;
@@ -156,11 +206,10 @@ describe('parcel', () => {
   describe('change a parcel location PUT /api/v1/parcels/<parcelId>/presentLocation', () => {
     const data = {};
     beforeAll((done) => {
-      const parcel = new Parcel().getFirst();
-      Request.put(`${urlPrefixV1}/parcels/${parcel.id}/presentLocation`,
+      Request.put(`${urlPrefixV1}/parcels/${parcelId}/presentLocation`,
         {
           json: true,
-          form: { presentLocation: 'Gisenyi' },
+          form: { present_location: 'Gisenyi' },
           headers: {
             Authorization: `Bearer ${adminToken}`,
           },
@@ -189,7 +238,7 @@ describe('parcel', () => {
       Request.put(`${urlPrefixV1}/parcels/${parcelId}/status`,
         {
           json: true,
-          form: { parcelStatus: 'Pick Up' },
+          form: { status: 'Pick Up' },
           headers: {
             Authorization: `Bearer ${adminToken}`,
           },

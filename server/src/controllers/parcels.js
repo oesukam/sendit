@@ -5,28 +5,29 @@ import mail from './mailers';
 
 dotenv.config();
 
-const createParcel = (req, res) => {
+const createParcel = async (req, res) => {
   const { body } = req;
-  let user = new User();
-  user = user.findById(body.userId);
-  if (!user) {
+  const user = new User();
+  await user.findById(body.jwtUser.id);
+  if (!user.id) {
     return res.status(401).json({
       success: false,
       message: 'Unathorized Access',
     });
   }
-  const parcel = new Parcel({ ...body, presentLocation: body.city || body.district });
+  delete body.jwtUser;
+  const parcel = new Parcel({ ...body, present_location: body.city || body.district });
 
-  parcel.save();
+  await parcel.save();
 
   return res.status(201).json({ success: true, data: parcel.toObject() });
 };
 
 // Fetch all parcels
-const getAll = (req, res) => {
-  const { keywords = '' } = req.query;
+const getAll = async (req, res) => {
+  const { search = '', page = 1 } = req.query;
   const parcel = new Parcel();
-  const items = parcel.getAll({ keywords });
+  const items = await parcel.getAll({ search, page });
   if (!parcel) {
     return res.status(404).json({ success: false, message: 'Not found' });
   }
@@ -34,33 +35,24 @@ const getAll = (req, res) => {
 };
 
 // Fetch a single parcel
-const getSingle = (req, res) => {
+const getSingle = async (req, res) => {
   const { id } = req.params;
-  let parcel = new Parcel();
-  parcel = parcel.findById(id);
-  if (!parcel) {
+  const parcel = new Parcel();
+  await parcel.findById(id);
+  if (!parcel.id) {
     return res.status(404).json({ success: false, message: 'Not found' });
   }
 
   return res.status(200).json({ success: true, data: parcel.toObject() });
 };
 
-const cancelParcel = (req, res) => {
+const cancelParcel = async (req, res) => {
   const { id } = req.params;
-  const { userId } = req.body;
-  let parcel = new Parcel();
-  parcel = parcel.findById(id);
-  if (!parcel) {
+  const { body } = req;
+  const parcel = new Parcel();
+  await parcel.findById(id);
+  if (!parcel.id) {
     return res.status(404).json({ success: false, message: 'Not found' });
-  }
-  let user = new User();
-  user = user.findById(userId);
-
-  if (!user) {
-    return res.status(401).json({
-      success: false,
-      message: 'Unauthorized Access',
-    });
   }
 
   if (parcel.cancelled) {
@@ -70,7 +62,7 @@ const cancelParcel = (req, res) => {
     });
   }
   parcel.cancelled = true;
-  parcel.save();
+  await parcel.save();
 
   return res.status(200).json({
     success: true,
@@ -78,28 +70,29 @@ const cancelParcel = (req, res) => {
   });
 };
 
-const changeLocation = (req, res) => {
+const changeLocation = async (req, res) => {
   const { id } = req.params;
-  const { presentLocation } = req.body;
-  let parcel = new Parcel();
-  parcel = parcel.findById(id);
-  if (!parcel) {
+  const { body } = req;
+  const parcel = new Parcel();
+  await parcel.findById(id);
+  if (!parcel.id) {
     return res.status(404).json({ success: false, message: 'Not found' });
   }
 
-  if (parcel.presentLocation === presentLocation) {
+  if (parcel.present_location === body.present_location) {
     return res.status(304).json({
       success: false,
       message: 'Parcel location not changed',
     });
   }
-  parcel.presentLocation = presentLocation;
-  parcel.save();
+  parcel.present_location = body.present_location;
+  await parcel.save();
 
-  const user = new User().findById(parcel.userId);
+  const user = new User();
+  await user.findById(parcel.user_id);
 
   // Notifying the user via email
-  if (user) mail.sendParcelLocationChanged(user, parcel.toObject());
+  if (user.id) mail.sendParcelLocationChanged(user, parcel.toObject());
 
   return res.status(200).json({
     success: true,
@@ -107,23 +100,24 @@ const changeLocation = (req, res) => {
   });
 };
 
-const changeStatus = (req, res) => {
+const changeStatus = async (req, res) => {
   const { id } = req.params;
-  const { parcelStatus } = req.body;
-  let parcel = new Parcel();
-  parcel = parcel.findById(id);
+  const { status } = req.body;
+  const parcel = new Parcel();
+  await parcel.findById(id);
   if (!parcel) {
     return res.status(404).json({ success: false, message: 'Not found' });
   }
 
-  if (parcel.parcelStatus === parcelStatus) {
+  if (parcel.status === status) {
     return res.status(304).json({ success: false, message: 'Parcel not changed' });
   }
-  parcel.parcelStatus = parcelStatus;
-  parcel.save();
-  const user = new User().findById(parcel.userId);
+  parcel.status = status;
+  await parcel.save();
+  const user = new User();
+  await user.findById(parcel.user_id);
 
-  if (user) mail.sendParcelStatusChanged(user.toObject(), parcel.toObject());
+  if (user.id) mail.sendParcelStatusChanged(user.toObject(), parcel.toObject());
 
   return res.status(200).json({
     success: true,

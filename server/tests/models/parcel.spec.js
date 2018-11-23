@@ -1,22 +1,32 @@
 import Parcel from '../../src/models/Parcel';
 import { parcelData } from '../data';
+import db from '../../src/db';
+import { deleteTestUser, deleteTestParcels } from '../queries';
 
-describe('user model', () => {
+describe('parcel model', () => {
+  beforeAll((done) => {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+    db.query(deleteTestUser, [])
+      .then(() => done())
+      .catch(() => done());
+  });
+  afterAll(async (done) => {
+    db.query(deleteTestParcels, [])
+      .then(() => done())
+      .catch(() => done());
+  });
   it('should create an instance of Parcel', () => {
     const parcel = new Parcel();
     expect(parcel.storage).toBe('parcels');
-    expect(parcel.parcelStatus).toBe('In Transit');
+    expect(parcel.status).toBe('In Transit');
     expect(parcel.cancelled).toBeFalsy();
   });
 
-  it('should add another user to global users\' array', (done) => {
+  it('should add a new parcel', (done) => {
     const parcel = new Parcel({ ...parcelData });
     parcel.save()
       .then((res) => {
-        const { parcels = [] } = global;
-        expect(parcels[parcels.length - 1].userId).toBe(res.userId);
-        expect(res.receiverNames).toBe(parcel.receiverNames);
-        expect(res.toObject()).toBeDefined();
+        expect(res.id).toBeDefined();
         done();
       })
       .catch(() => done());

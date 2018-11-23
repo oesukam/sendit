@@ -20,14 +20,14 @@ const confirmEmail = (req, res) => {
       message: `${userData.email} has already been confimed`,
     });
   }
-  if (confirmationCode !== userData.confirmationCode) {
+  if (confirmationCode !== userData.confirmation_code) {
     return res.status(404).json({
       success,
       message: 'Confirmation code is incorrect',
     });
   }
   userData.confirmed = true;
-  userData.confirmationCode = null;
+  userData.confirmation_code = null;
   // Assigns all body fields to User model
   const savedData = userData.save();
 
@@ -40,18 +40,19 @@ const confirmEmail = (req, res) => {
 };
 
 // Fetch list of users
-const getAll = (req, res) => {
+const getAll = async (req, res) => {
   const user = new User();
-  const { page = 1, keywords = '' } = req.params;
-
-  res.json({ data: user.getAll({ page, keywords }) });
+  const { page = 1, search = '' } = req.params;
+  const items = await user.getAll({ page, search });
+  res.json({ data: items });
 };
 
 // Fetch a single user
-const getSingle = (req, res) => {
+const getSingle = async (req, res) => {
   const { userId } = req.params;
-  const user = new User().findById(userId);
-  if (!user) {
+  const user = new User();
+  await user.findById(userId);
+  if (!user.id) {
     return res.status(404).json({ success: false, message: 'Not found' });
   }
 
@@ -59,10 +60,10 @@ const getSingle = (req, res) => {
 };
 
 const getUserParcels = (req, res) => {
-  const { keywords = '' } = req.query;
+  const { keywords = '', page = 1 } = req.query;
   const { userId } = req.params;
   const parcel = new Parcel();
-  const items = parcel.getAll({ keywords, userId });
+  const items = parcel.getAllByUser({ keywords, userId, page });
   if (!parcel) {
     return res.status(404).json({ success: false, message: 'Not found' });
   }

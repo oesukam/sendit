@@ -1,4 +1,6 @@
 sudo: false
+services:
+  - postgresql
 env:
   global:
     - URL=http://localhost:3000
@@ -7,6 +9,12 @@ env:
     - JWT_SECRET=oesukam@secret
     - MAILGUN_USER=
     - MAILGUN_PASSWORD=
+    - PH_URL=postgresql://oem:secret@localhost/sendit
+    - PG_HOST=localhost
+    - PG_USER=oem
+    - PG_DATABASE=sendit
+    - PG_PASSWORD=secret
+    - PG_PORT=5432
 language: node_js
 node_js:
   - "10.4.0"
@@ -19,6 +27,9 @@ install:
 cache:
   directories:
     - node_modules
+before_script:
+  - psql -c 'create database sendit;' -U postgres
+  - psql -c "CREATE USER oem WITH PASSWORD 'secretpassword';" -U postgres
 script:
   - npm run test
 after_success:

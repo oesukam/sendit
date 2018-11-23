@@ -1,12 +1,12 @@
 import { Joi } from 'celebrate';
 
 const signup = {
-  firstName: Joi.string().required(),
-  lastName: Joi.string().required(),
+  first_name: Joi.string().required(),
+  last_name: Joi.string().required(),
   password: Joi.string().min(6),
   email: Joi.string().email().required(),
   gender: Joi.string().required().valid('Male', 'Female'),
-  birthDate: Joi.date(),
+  birth_date: Joi.date(),
   province: Joi.string().required(),
   district: Joi.string().required(),
   city: Joi.string(),

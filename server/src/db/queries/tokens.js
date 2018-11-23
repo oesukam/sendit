@@ -1,11 +1,3 @@
-const columns = `
-  user_id AS userId,
-  token,
-  device,
-  active,
-  updated_at AS updatedAt,
-  created_at AS createdAt
-`;
 const createTable = `
 CREATE TABLE IF NOT EXISTS
   tokens (
@@ -26,7 +18,7 @@ const insert = `INSERT INTO tokens (
 
 const updateDevice = 'UPDATE tokens SET device = $2 WHERE token = $1';
 const updateActive = 'UPDATE tokens SET active = $2 WHERE token = $1';
-const queryByToken = `SELECT ${columns} FROM tokens WHERE token = $1`;
+const queryByToken = 'SELECT * FROM tokens WHERE token = $1';
 
 export default {
   createTable,

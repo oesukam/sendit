@@ -9,16 +9,16 @@ const sendConfirmEmail = (user = '') => {
           <h2 style="color: #3359DF; text-align: center;">SendIT - Email Confirmation</h2>
         </div>
         <p style="font-size: 1.2rem; line-height: 2rem; color: #5a5a5a;">
-          Hello ${user.firstName}, <br>
+          Hello ${user.first_name}, <br>
           Thank you for creating an account with us, please proceed to confirm your email.
         <p/>
         <div style="text-align: center; padding: 20px;">
-          <a href="${URL}/api/v1/users/${user.id}/confirmEmail/${user.confirmationCode}"
+          <a href="${URL}/api/v1/users/${user.id}/confirmEmail/${user.confirmation_code}"
             style="color: #fff; background-color: #3359DF; padding: 10px 20px; font-size: 1.2rem; text-align: center; text-decoration: none;"
           > Confirm email </a>
           <p style="font-size: 1.5rem; margin-top: 30px; color: #5a5a5a !important">
             Or copy the link below
-          <p><br>${URL}/api/v1/users/${user.id}/confirmEmail/${user.confirmationCode} 
+          <p><br>${URL}/api/v1/users/${user.id}/confirmEmail/${user.confirmation_code} 
         </div>
         <p style="color: #5a5a5a !important;>Thank you, <br> Andela - SendIT Team</p>
       </div>
@@ -57,9 +57,9 @@ const sendParcelStatusChanged = (user = '', parcel = '') => {
         <h2 style="color: #3359DF; text-align: center;">SendIT - Parcel Status Changed</h2>
       </div>
       <p style="font-size: 1.2rem; line-height: 2rem; color: #5a5a5a;">
-        Dear ${user.firstName}, <br>
+        Dear ${user.first_name}, <br>
         Your parcel status with the following tracking number: ${parcel.trackingNumber || parcel.id} 
-        was changed to ${parcel.parcelStatus}
+        was changed to ${parcel.status}
       <p/>
       <p style="color: #5a5a5a !important;"
         Thank you, <br> Andela - SendIT Team
@@ -77,9 +77,9 @@ const sendParcelLocationChanged = (user = '', parcel = '') => {
         <h2 style="color: #3359DF; text-align: center;">SendIT - Parcel Status Changed</h2>
       </div>
       <p style="font-size: 1.2rem; line-height: 2rem; color: #5a5a5a;">
-        Dear ${user.firstName}, <br>
-        The current location of your parcel (${parcel.trackingNumber || parcel.id}) 
-        is at ${parcel.location}
+        Dear ${user.first_name}, <br>
+        The current location of your parcel (${parcel.tracking_number || parcel.id}) 
+        is at ${parcel.present_location}
       <p/>
       <p style="color: #5a5a5a !important;"
         Thank you, <br> Andela - SendIT Team

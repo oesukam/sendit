@@ -38,3 +38,166 @@
 {"message":"Postgress could not connect","level":"error"}
 {"message":"Postgress could not connect","level":"error"}
 {"message":"Postgress could not connect","level":"error"}
+{"level":"error","message":"Message sent: %s"}
+{"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}
+{"name":"error","length":116,"severity":"ERROR","code":"42601","position":"171","file":"analyze.c","line":"944","routine":"transformInsertRow","level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error","message":"Message sent: %s"}
+{"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}
+{"name":"error","length":116,"severity":"ERROR","code":"42601","position":"171","file":"analyze.c","line":"944","routine":"transformInsertRow","level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}
+{"name":"error","length":116,"severity":"ERROR","code":"42601","position":"171","file":"analyze.c","line":"944","routine":"transformInsertRow","level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"message":"Postgress could not connect","level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"name":"error","length":116,"severity":"ERROR","code":"42601","position":"171","file":"analyze.c","line":"944","routine":"transformInsertRow","level":"error"}
+{"level":"error"}
+{"name":"error","length":116,"severity":"ERROR","code":"42601","position":"171","file":"analyze.c","line":"944","routine":"transformInsertRow","level":"error"}
+{"level":"error"}
+{"name":"error","length":116,"severity":"ERROR","code":"42601","position":"171","file":"analyze.c","line":"944","routine":"transformInsertRow","level":"error"}
+{"message":"Postgress could not connect","level":"error"}
+{"name":"error","length":116,"severity":"ERROR","code":"42601","position":"171","file":"analyze.c","line":"944","routine":"transformInsertRow","level":"error"}
+{"message":"Postgress could not connect","level":"error"}
+{"name":"error","length":116,"severity":"ERROR","code":"42601","position":"171","file":"analyze.c","line":"944","routine":"transformInsertRow","level":"error"}
+{"name":"error","length":116,"severity":"ERROR","code":"42601","position":"171","file":"analyze.c","line":"944","routine":"transformInsertRow","level":"error"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error"}
+{"level":"error"}
+{"message":"Postgress could not connect","level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"message":"Postgress could not connect","level":"error"}
+{"message":"Postgress could not connect","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":187,"severity":"ERROR","code":"42703","hint":"Perhaps you meant to reference the column \"parcels.present_location\".","position":"160","file":"parse_relation.c","line":"3294","routine":"errorMissingColumn","level":"error"}
+{"name":"error","length":187,"severity":"ERROR","code":"42703","hint":"Perhaps you meant to reference the column \"parcels.present_location\".","position":"160","file":"parse_relation.c","line":"3294","routine":"errorMissingColumn","level":"error"}
+{"name":"error","length":405,"severity":"ERROR","code":"23502","detail":"Failing row contains (da877a8e-8e33-4add-8b7c-bcf7f6446fbe, username@gmail.com, $2b$10$.4JA.VQSCk3VyqH/nW9LWu//UuKqAPOoCXrxRsXeXA0mmD6ciXeae, null, null, Kigali, Nyarungege, null, active, user, f, null, 2018-11-22 22:08:39, 2018-11-22 22:08:39, Male).","schema":"public","table":"users","column":"first_name","file":"execMain.c","line":"2042","routine":"ExecConstraints","level":"error"}
+{"name":"error","length":430,"severity":"ERROR","code":"23502","detail":"Failing row contains (71d24f2c-dbde-4633-833a-16181f417d28, 3416c9cf-4975-4251-b944-6d2407421fd6, Kigali, Nyarugenge, Northen Province, Burera, null, 250783200000, null, Address, KI, 2, null, null, In Transit, f, 2018-11-23 00:14:31, 2018-11-23 00:14:31, RW-KI).","schema":"public","table":"parcels","column":"present_location","file":"execMain.c","line":"2042","routine":"ExecConstraints","level":"error"}
+{"name":"error","length":430,"severity":"ERROR","code":"23502","detail":"Failing row contains (f4af4420-cb49-4c13-880f-f4bef5da91cb, 3416c9cf-4975-4251-b944-6d2407421fd6, Kigali, Nyarugenge, Northen Province, Burera, null, 250783200000, null, Address, KI, 2, null, null, In Transit, f, 2018-11-23 00:18:34, 2018-11-23 00:18:34, RW-KI).","schema":"public","table":"parcels","column":"present_location","file":"execMain.c","line":"2042","routine":"ExecConstraints","level":"error"}
+{"name":"error","length":430,"severity":"ERROR","code":"23502","detail":"Failing row contains (af8312d8-a7cf-4b6f-9793-a377f1d80aa2, 3416c9cf-4975-4251-b944-6d2407421fd6, Kigali, Nyarugenge, Northen Province, Burera, null, 250783200000, null, Address, KI, 2, null, null, In Transit, f, 2018-11-23 00:20:43, 2018-11-23 00:20:43, RW-KI).","schema":"public","table":"parcels","column":"present_location","file":"execMain.c","line":"2042","routine":"ExecConstraints","level":"error"}
+{"name":"error","length":430,"severity":"ERROR","code":"23502","detail":"Failing row contains (2047d4ce-11ab-4852-9d1c-bc298c3a91d4, 3416c9cf-4975-4251-b944-6d2407421fd6, Kigali, Nyarugenge, Northen Province, Burera, null, 250783200000, null, Address, KI, 2, null, null, In Transit, f, 2018-11-23 00:22:01, 2018-11-23 00:22:01, RW-KI).","schema":"public","table":"parcels","column":"present_location","file":"execMain.c","line":"2042","routine":"ExecConstraints","level":"error"}
+{"name":"error","length":430,"severity":"ERROR","code":"23502","detail":"Failing row contains (20e3a2b1-d4af-4e02-b20e-b75a9e43f208, 3416c9cf-4975-4251-b944-6d2407421fd6, Kigali, Nyarugenge, Northen Province, Burera, null, 250783200000, null, Address, KI, 2, null, null, In Transit, f, 2018-11-23 00:23:26, 2018-11-23 00:23:26, RW-KI).","schema":"public","table":"parcels","column":"present_location","file":"execMain.c","line":"2042","routine":"ExecConstraints","level":"error"}
+{"name":"error","length":430,"severity":"ERROR","code":"23502","detail":"Failing row contains (d89d8548-53bd-422c-8b67-d1edaf97fd99, 3416c9cf-4975-4251-b944-6d2407421fd6, Kigali, Nyarugenge, Northen Province, Burera, null, 250783200000, null, Address, KI, 2, null, null, In Transit, f, 2018-11-23 00:23:37, 2018-11-23 00:23:37, RW-KI).","schema":"public","table":"parcels","column":"present_location","file":"execMain.c","line":"2042","routine":"ExecConstraints","level":"error"}
+{"name":"error","length":430,"severity":"ERROR","code":"23502","detail":"Failing row contains (8d9b41a7-e876-4820-ae55-0d05f6f45fbe, 3416c9cf-4975-4251-b944-6d2407421fd6, Kigali, Nyarugenge, Northen Province, Burera, null, 250783200000, null, Address, KI, 2, null, null, In Transit, f, 2018-11-23 00:24:38, 2018-11-23 00:24:38, RW-KI).","schema":"public","table":"parcels","column":"present_location","file":"execMain.c","line":"2042","routine":"ExecConstraints","level":"error"}
+{"name":"error","length":430,"severity":"ERROR","code":"23502","detail":"Failing row contains (198a383e-ad65-4c37-b988-5eff60ad03e9, 3416c9cf-4975-4251-b944-6d2407421fd6, Kigali, Nyarugenge, Northen Province, Burera, null, 250783200000, null, Address, KI, 2, null, null, In Transit, f, 2018-11-23 00:26:22, 2018-11-23 00:26:22, RW-KI).","schema":"public","table":"parcels","column":"present_location","file":"execMain.c","line":"2042","routine":"ExecConstraints","level":"error"}
+{"message":"Postgress could not connect","level":"error"}
+{"errno":"ECONNREFUSED","code":"ECONNREFUSED","syscall":"connect","address":"127.0.0.1","port":5432,"level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":132,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"level":"error","message":"Message sent: %s"}
+{"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"message":"Postgress could not connect","level":"error"}
+{"level":"error","message":"Message sent: %s"}
+{"message":"Postgress could not connect","level":"error"}
+{"errno":"ENOTFOUND","code":"ECONNECTION","syscall":"getaddrinfo","hostname":"smtp.mailgun.org","host":"smtp.mailgun.org","port":587,"command":"CONN","level":"error"}
+{"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}
+{"message":"Postgress could not connect","level":"error"}
+{"errno":"ENOTFOUND","code":"ECONNECTION","syscall":"getaddrinfo","hostname":"smtp.mailgun.org","host":"smtp.mailgun.org","port":587,"command":"CONN","level":"error"}
+{"errno":"ENOTFOUND","code":"ECONNECTION","syscall":"getaddrinfo","hostname":"smtp.mailgun.org","host":"smtp.mailgun.org","port":587,"command":"CONN","level":"error"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"errno":"ENOTFOUND","code":"ECONNECTION","syscall":"getaddrinfo","hostname":"smtp.mailgun.org","host":"smtp.mailgun.org","port":587,"command":"CONN","level":"error"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"message":"Postgress could not connect","level":"error"}
+{"message":"Postgress could not connect","level":"error"}
+{"errno":"ENOTFOUND","code":"ECONNECTION","syscall":"getaddrinfo","hostname":"smtp.mailgun.org","host":"smtp.mailgun.org","port":587,"command":"CONN","level":"error"}
+{"errno":"ENOTFOUND","code":"ECONNECTION","syscall":"getaddrinfo","hostname":"smtp.mailgun.org","host":"smtp.mailgun.org","port":587,"command":"CONN","level":"error"}
+{"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"level":"error","message":"Message sent: %s"}
+{"message":"Postgress could not connect","level":"error"}
+{"errno":"ENOTFOUND","code":"ECONNECTION","syscall":"getaddrinfo","hostname":"smtp.mailgun.org","host":"smtp.mailgun.org","port":587,"command":"CONN","level":"error"}
+{"errno":"ENOTFOUND","code":"ECONNECTION","syscall":"getaddrinfo","hostname":"smtp.mailgun.org","host":"smtp.mailgun.org","port":587,"command":"CONN","level":"error"}
+{"level":"error","message":"Message sent: %s"}
+{"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}

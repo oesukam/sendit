@@ -49,13 +49,13 @@ const insert = `INSERT INTO users(
   confirmation_code,
   created_at,
   updated_at
- ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+ ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
  ON CONFLICT DO NOTHING returning *`;
 const dropTable = 'DROP TABLE IF EXISTS users';
+const queryById = 'SELECT * FROM users WHERE id = $1';
+const queryAll = 'SELECT * FROM users LIMIT 25 OFFSET $1';
 
-const queryAll = `SELECT id, ${columns} FROM users LIMIT 25 OFFSET $1`;
-
-const queryByEmail = `SELECT id, ${columns} FROM users WHERE email = $1`;
+const queryByEmail = 'SELECT * FROM users WHERE email = $1';
 
 export default {
   createTable,
@@ -63,4 +63,5 @@ export default {
   dropTable,
   queryAll,
   queryByEmail,
+  queryById,
 };

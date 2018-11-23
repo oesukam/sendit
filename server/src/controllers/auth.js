@@ -66,7 +66,7 @@ const login = async (req, res) => {
     if (!userData.data) {
       return res.status(404).json({ success, message: 'User does not exist' });
     }
-    const validPassword = await bcrypt.compare(password, userData.password);
+    const validPassword = await bcrypt.compare(password, userData.data.password);
     if (!validPassword) {
       return res.status(401).json({
         success,
@@ -75,7 +75,7 @@ const login = async (req, res) => {
     }
   } catch (err) {
     logger.error(err);
-    return res.status(404).json({ success, message: 'User does not exist' }); 
+    return res.status(404).json({ success, message: 'User does not exist' });
   }
 
   success = true;

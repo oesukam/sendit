@@ -1,20 +1,37 @@
 import User from '../../src/models/User';
 import { userData } from '../data';
+import db from '../../src/db';
+import { deleteTestUser, deleteTestParcels } from '../queries';
 
 describe('user model', () => {
+  beforeAll((done) => {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+    db.query(deleteTestUser, [])
+      .then(() => done())
+      .catch(() => done());
+  });
+  afterAll(async (done) => {
+    db.query(deleteTestParcels, [])
+      .then(() => done())
+      .catch(() => done());
+  });
+  afterEach(async (done) => {
+    db.query(deleteTestUser, [])
+      .then(() => done())
+      .catch(() => done());
+  });
+
   it('should create an instance of User', () => {
     const user = new User();
     expect(user.storage).toBe('users');
-    expect(user.userType).toBe('user');
+    expect(user.user_type).toBe('user');
     expect(user.hidden[0]).toBe('password');
   });
 
-  it('should add another user to global users\' array', (done) => {
+  it('should add a new user', (done) => {
     const user = new User({ ...userData });
     user.save()
       .then((res) => {
-        const { users = [] } = global;
-        expect(users[users.length - 1].email).toBe(res.email);
         expect(res.email).toBe(userData.email);
         done();
       })
@@ -23,20 +40,33 @@ describe('user model', () => {
 
   it('should return undefined', (done) => {
     const user = new User();
-    expect(user.findByEmail()).toEqual(undefined);
-    expect(user.email).toEqual(undefined);
-    done();
+    user.findByEmail()
+      .then((res) => {
+        expect(res.data).toEqual(undefined);
+        expect(res.email).toEqual(undefined);
+        done();
+      })
+      .catch(() => done());
   });
 
   it('should return null', (done) => {
     const user = new User();
-    expect(user.findByEmail('email@email.com')).toEqual(null);
-    done();
+    user.findByEmail('email@email.com')
+      .then((res) => {
+        expect(res.data).toEqual(undefined);
+        done();
+      })
+      .catch(() => done());
   });
 
-  it('should return an object', (done) => {
-    const user = new User();
-    expect(user.findByEmail('user@email.com')).toBeDefined();
-    done();
+  it('should return an object', async (done) => {
+    const user = new User({ ...userData });
+    await user.save();
+    user.findByEmail(userData.email)
+      .then((res) => {
+        expect(res.data).toBeDefined();
+        done();
+      })
+      .catch(() => done());
   });
 });

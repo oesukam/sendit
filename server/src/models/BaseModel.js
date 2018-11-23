@@ -1,11 +1,11 @@
 import faker from 'faker';
 import uuid from 'uuid';
-import queries from '../db/queries';
+import { logger } from '../helpers';
+import * as queries from '../db/queries';
 import db from '../db';
 
 class BaseModel {
   constructor(args = '') {
-    this.storage = ''; // stores the name of the global variable
     if (args) this.updateFields(args);
     this.uuid = uuid.v4();
   }
@@ -40,15 +40,28 @@ class BaseModel {
 
   // Filter items by id
   findById(id = '') {
-    if (!id) return null;
-    let items = [];
-    if (global[this.storage] !== undefined) {
-      items = [...global[this.storage]];
-    }
-    if (!id || items.length === 0) return null;
-    const item = items.filter(val => val.id === id)[0] || null;
-    this.updateFields(item);
-    return this;
+    return new Promise((resolve, reject) => {
+      if (!id) return reject(new Error('Failed, please provide the id'));
+      const { queryById = undefined } = queries[`${this.storage}Query`];
+      if (queryById === undefined) {
+        return reject(new Error('Failed, model storage not set'));
+      }
+      try {
+        db.query(queryById, [id])
+          .then((res) => {
+            const row = res.rows[0];
+            this.updateFields(row);
+            resolve({ data: row });
+          })
+          .catch((err) => {
+            console.log(err)
+            logger.error(err);
+            reject(new Error('Failed, could query the user'));
+          });
+      } catch (err) {
+        reject(new Error('Failed, could query the user'));
+      }
+    });
   }
 
   // Update given proterties
@@ -65,37 +78,25 @@ class BaseModel {
 
   getFirst() {
     return new Promise((resolve, reject) => {
-      if (!this.storage) return reject(new Error('Storage not defined'));
-      const query = queries[this.storage].getFirst;
+      if (this.storage === undefined) reject(new Error('Storage not defined'));
+      const query = queries[`${this.storage}Query`].getFirst;
       db.query(query)
-        .then(res => resolve(res))
+        .then(res => resolve(res.rows[0]))
         .catch(err => reject(err));
     });
   }
 
   // Returns all items or an empty array
-  getAll({ keywords = '', page = 1, userId = '' } = {}) {
-    if (!this.storage) return [];
-    let items = global[this.storage] || [];
-    if (keywords) {
-      items = items.filter((item) => {
-        const keys = Object.keys(item);
-        for (let i = 0; i < keys.length; i += 1) {
-          const val = (item[keys[i]] || '').toString().toLowerCase();
-          if (keywords.toString().toLowerCase().includes(val) && val) {
-            if (userId) {
-              return userId === item.userId;
-            }
-            return true;
-          }
-        }
-        return false;
-      });
-    }
+  getAll({ search = '', page = 1} = {}) {
     const limit = 25;
     const startAt = (page - 1) * limit;
-    const endAt = (page * limit) - 1;
-    return items.slice(startAt, endAt);
+    return new Promise((resolve, reject) => {
+      if (!this.storage) reject(new Error('Failed, storage not set'));
+      const query = queries[`${this.storage}Query`].queryAll;
+      db.query(query, [startAt])
+        .then(res => resolve(res.rows))
+        .catch(err => reject(err));
+    });
   }
 
   // Updates createdAt and updatedAt date

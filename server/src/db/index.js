@@ -12,15 +12,24 @@ const {
   PG_PASSWORD,
   PG_DATABASE,
   PG_PORT,
+  PG_URL,
 } = process.env;
 
-const pool = new Pool({
-  user: PG_USER,
-  host: PG_HOST,
-  database: PG_DATABASE,
-  password: PG_PASSWORD,
-  port: PG_PORT
-});
+let pool;
+
+if (PG_URL) {
+  pool = new Pool({
+    connectionString: PG_URL,
+  });
+} else {
+  pool = new Pool({
+    user: PG_USER,
+    host: PG_HOST,
+    database: PG_DATABASE,
+    password: PG_PASSWORD,
+    port: PG_PORT,
+  });
+}
 
 logger.info(`Environment: ${NODE_ENV}`);
 pool.connect()

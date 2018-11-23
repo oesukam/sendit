@@ -1,21 +1,31 @@
 import Request from 'request';
-
 import run from '../../src/index';
-
+import db from '../../src/db';
+import { deleteTestUser } from '../queries';
 import { urlPrefixV1, user, userLogin } from '../data';
+import User from '../../src/models/User';
+
+const TIMEOUT_INTERVAL = 30000;
 
 describe('auth', () => {
   let server;
-  beforeAll(() => {
+  beforeAll((done) => {
     server = run(5000);
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = TIMEOUT_INTERVAL;
+    db.query(deleteTestUser, [])
+      .then(() => done())
+      .catch(() => done());
   });
-  afterAll(() => {
+  afterAll((done) => {
     server.close();
+    db.query(deleteTestUser, [])
+      .then(() => done())
+      .catch(() => done());
   });
   describe('create an account POST /api/v1/auth/signup', () => {
     const data = {};
     beforeAll((done) => {
+      jasmine.DEFAULT_TIMEOUT_INTERVAL = TIMEOUT_INTERVAL;
       Request.post(`${urlPrefixV1}/auth/signup`,
         { json: true, form: user }, (err, res, body) => {
           data.status = res.statusCode;
@@ -42,7 +52,8 @@ describe('auth', () => {
   // Login endpoint
   describe('log into an account POST /api/v1/auth/login', () => {
     const data = {};
-    beforeAll((done) => {
+    beforeAll(async (done) => {
+      await new User({ ...user }).save();
       // Login the new user
       Request.post(`${urlPrefixV1}/auth/login`,
         { json: true, form: userLogin }, (err, res, body) => {

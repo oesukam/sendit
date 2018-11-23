@@ -5,8 +5,8 @@ const urlPrefixV1 = 'http://localhost:5000/api/v1';
 const userToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk3Y2YzNzdjLTU3MzUtNGY1ZC04NjQ1LWM4ZmI0YjVjNWFmMyIsInVzZXJUeXBlIjoidXNlciIsImlhdCI6MTU0MjcxNDU4Mn0.RHfGtWgETscndD2i7DULuy8onw2r2SgHi8IvmWUOP-g';
 const adminToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OGRhNTU0LWU0MmYtNDBkYy05MmQzLTY0OWUzODY1ZmQ3MiIsInVzZXJUeXBlIjoiYWRtaW4iLCJpYXQiOjE1NDI3ODE0OTF9.Pn2fPex5lDkjymZYH2inB13fGoTqoGyJw83_V_fCrE8';
 const user = {
-  firstName: 'Olivier',
-  lastName: 'Esuka',
+  first_name: 'Olivier',
+  last_name: 'Esuka',
   email: 'username@gmail.com',
   gender: 'Male',
   province: 'Kigali',
@@ -23,23 +23,33 @@ const userLoginAdmin = {
   password: 'admin@admin',
 };
 
+const userMail = {
+  id: '97cf377c-5735-4f5d-8645-c8fb4b5c5af3',
+  email: 'oesukam@gmail.com',
+  first_name: 'Olivier',
+  last_name: 'Esuka',
+  gender: 'Male',
+  province: 'Kigali',
+  district: 'Burera',
+};
+
 const parcelData = {
-  userId: '97cf377c-5735-4f5d-8645-c8fb4b5c5af3',
-  fromProvince: 'Kigali',
-  fromDistrict: 'Nyarungege',
-  toProvince: 'Northen Province',
-  toDistrict: 'Burera',
-  receiverNames: `${faker.name.firstName()} ${faker.name.lastName()}`,
-  receiverPhone: '250-783200000',
-  receiverAddress: faker.address.streetAddress(),
+  user_id: '97cf377c-5735-4f5d-8645-c8fb4b5c5af3',
+  from_province: 'Kigali',
+  from_district: 'Nyarungege',
+  to_province: 'Northen Province',
+  to_district: 'Test',
+  receiver_names: `${faker.name.firstName()} ${faker.name.lastName()}`,
+  receiver_phone: '250-783200000',
+  receiver_address: faker.address.streetAddress(),
   weight: faker.random.number(),
   cancelled: false,
-  presentLocation: 'Nyarungege',
+  present_location: 'Nyarungege',
 };
 const userData = {
-  firstName: 'Test',
-  lastName: 'Test',
-  userType: 'Test',
+  first_name: 'Test',
+  last_name: 'Test',
+  user_type: 'Test',
   email: 'test@email.com',
   password: bcrypt.hashSync('test@test', 10),
   gender: 'Male',
@@ -56,4 +66,5 @@ export {
   userData,
   userToken,
   adminToken,
+  userMail,
 };

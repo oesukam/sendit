@@ -9,8 +9,8 @@ class User extends BaseModel {
   constructor(args) {
     super(args);
     this.storage = 'users';
-    this.userType = 'user'; // Normal user type by default
-    this.hidden = ['password', 'confirmationCode'];
+    this.user_type = 'user'; // Normal user type by default
+    this.hidden = ['password', 'confirmation_code'];
   }
 
   // Find user by email
@@ -19,16 +19,16 @@ class User extends BaseModel {
       try {
         db.query(usersQuery.queryByEmail, [email])
           .then((res) => {
-            const user = res.rows[0];
-            this.updateFields(user);
-            resolve({ data: user });
+            const row = res.rows[0];
+            this.updateFields(row);
+            resolve({ data: row });
           })
           .catch((err) => {
             logger.error(err);
             reject(new Error('Failed, could query the user'));
           });
       } catch (err) {
-        reject(new Error('Failed, could query the user'));
+        reject(new Error('Failed'));
       }
     });
   }
@@ -42,15 +42,15 @@ class User extends BaseModel {
         this.getUID(),
         this.email,
         this.password,
-        this.firstName,
-        this.lastName,
-        this.birthDate,
+        this.first_name,
+        this.last_name,
+        this.birth_date,
         this.gender,
         this.province,
         this.district,
-        this.userType,
+        this.user_type,
         this.confirmed || false,
-        this.confirmationCode,
+        this.confirmation_code,
         this.createdAt || now,
         now,
       ];
