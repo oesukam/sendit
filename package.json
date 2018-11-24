@@ -22,9 +22,9 @@
     "serve": "node server/dist/index.js",
     "test-only": "babel-node tests/run.js",
     "test": "NODE_ENV=test JASMINE_CONFIG_PATH=server/tests/support/jasmine.json nyc --include-sources server/src --reporter=text --reporter=lcov babel-node server/tests/run.js --exit",
-    "report-coverage": "codecov",
     "seed": "babel-node server/src/db/seed.js",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "coveralls": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "cover": "nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint --ignore-path .gitignore ."
   },
   "engines": {
