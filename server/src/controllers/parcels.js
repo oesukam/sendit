@@ -10,7 +10,6 @@ const createParcel = async (req, res) => {
   const { jwtUser } = body;
   const user = new User();
   await user.findById(body.user_id);
-  console.log(user.id, body.user_id, 'body', jwtUser.id);
   if (!user.id || user.id !== jwtUser.id) {
     return res.status(401).json({
       success: false,
