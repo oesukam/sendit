@@ -1,22 +1,34 @@
 import faker from 'faker';
+import uuid from 'uuid';
+import { logger } from '../helpers';
+import * as queries from '../db/queries';
+import db from '../db';
 
 class BaseModel {
   constructor(args = '') {
-    this.arrayName = ''; // stores the name of the global variable
     if (args) this.updateFields(args);
+    this.uuid = uuid.v4();
+  }
+
+  getUID() {
+    return this.uuid;
   }
 
   toObject({ withHidden = false } = {}) {
     const fields = { ...this };
     let hidden;
+    delete fields.uuid;
     if (this.hidden !== undefined) {
       hidden = [...fields.hidden];
     }
-    if (this.arrayName !== undefined) {
-      delete fields.arrayName;
+    if (this.storage !== undefined) {
+      delete fields.storage;
     }
     if (this.hidden !== undefined) {
       delete fields.hidden;
+    }
+    if (this.jwtUser !== undefined) {
+      delete fields.jwtUser;
     }
     if (!withHidden && hidden) {
       // Delete all hidden properties before returning the object
@@ -31,15 +43,27 @@ class BaseModel {
 
   // Filter items by id
   findById(id = '') {
-    if (!id) return null;
-    let items = [];
-    if (global[this.arrayName] !== undefined) {
-      items = [...global[this.arrayName]];
-    }
-    if (!id || items.length === 0) return null;
-    const item = items.filter(val => val.id === id)[0] || null;
-    this.updateFields(item);
-    return this;
+    return new Promise((resolve, reject) => {
+      if (!id) return reject(new Error('Failed, please provide the id'));
+      const { queryById = undefined } = queries[`${this.storage}Query`];
+      if (queryById === undefined) {
+        return reject(new Error('Failed, model storage not set'));
+      }
+      try {
+        db.query(queryById, [id])
+          .then((res) => {
+            const row = res.rows[0];
+            this.updateFields(row);
+            resolve({ data: row });
+          })
+          .catch((err) => {
+            logger.error(err);
+            reject(new Error('Failed, could query the user'));
+          });
+      } catch (err) {
+        reject(new Error('Failed, could query the user'));
+      }
+    });
   }
 
   // Update given proterties
@@ -55,34 +79,26 @@ class BaseModel {
   }
 
   getFirst() {
-    if (!this.arrayName) return null;
-    const items = global[this.arrayName] || [];
-    return items[0] || undefined;
+    return new Promise((resolve, reject) => {
+      if (this.storage === undefined) reject(new Error('Storage not defined'));
+      const query = queries[`${this.storage}Query`].getFirst;
+      db.query(query)
+        .then(res => resolve(res.rows[0]))
+        .catch(err => reject(err));
+    });
   }
 
   // Returns all items or an empty array
-  getAll({ keywords = '', page = 1, userId = '' } = {}) {
-    if (!this.arrayName) return [];
-    let items = global[this.arrayName] || [];
-    if (keywords) {
-      items = items.filter((item) => {
-        const keys = Object.keys(item);
-        for (let i = 0; i < keys.length; i += 1) {
-          const val = (item[keys[i]] || '').toString().toLowerCase();
-          if (keywords.toString().toLowerCase().includes(val) && val) {
-            if (userId) {
-              return userId === item.userId;
-            }
-            return true;
-          }
-        }
-        return false;
-      });
-    }
+  getAll({ search = '', page = 1} = {}) {
     const limit = 25;
     const startAt = (page - 1) * limit;
-    const endAt = (page * limit) - 1;
-    return items.slice(startAt, endAt);
+    return new Promise((resolve, reject) => {
+      if (!this.storage) reject(new Error('Failed, storage not set'));
+      const query = queries[`${this.storage}Query`].queryAll;
+      db.query(query, [startAt])
+        .then(res => resolve(res.rows))
+        .catch(err => reject(err));
+    });
   }
 
   // Updates createdAt and updatedAt date
@@ -94,44 +110,6 @@ class BaseModel {
     } else {
       this.createdAt = Date.now();
     }
-  }
-
-  // Save properies to the array
-  save({ withHidden = false } = {}) {
-    return new Promise(async (resolve, reject) => {
-      if (!this.arrayName) reject(new Error('Please set arrayName'));
-      // Check if the array name was set
-      if (!this.id) {
-        this.id = faker.random.uuid();
-      }
-      // Check the existance of the array
-      if (!global[this.arrayName]) {
-        global[this.arrayName] = []; // Initialises the array
-      }
-      let items = global[this.arrayName];
-      if (this.arrayName === 'users') {
-        // If a user with the same email already exist
-        if (items.some(v => v.email === this.email && v.id !== this.id)) {
-          reject(new Error(`${this.email} account already exist`));
-        }
-        this.updateDate();
-        items = items.map((item) => {
-          if (item.email === this.email) {
-            return this.toObject({ withHidden: true });
-          }
-          return item;
-        });
-        global[this.arrayName] = [...items, this.toObject({ withHidden: true })];
-      } else {
-        this.updateDate();
-        // Add new item to the array without mutating
-        global[this.arrayName] = [
-          ...items,
-          this.toObject({ withHidden: true }),
-        ];
-      }
-      resolve(this.toObject({ withHidden }));
-    });
   }
 }
 

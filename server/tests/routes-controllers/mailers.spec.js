@@ -1,100 +1,96 @@
 import mailers from '../../src/controllers/mailers';
-import User from '../../src/models/User';
-import Parcel from '../../src/models/Parcel';
 import run from '../../src/index';
+import { userMail, parcelData } from '../data';
 
 describe('mailer', () => {
   let server;
-  let parcel;
-  let user;
   beforeAll((done) => {
-    parcel = new Parcel().getFirst();
-    user = new User().findById(parcel.userId);
     server = run(5000);
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
     done();
   });
-  afterAll(() => {
+  afterAll((done) => {
     server.close();
+    done();
   });
 
-  // testing email confirmation
+  // testing user registration email confirmation
   describe('sendConfirmEmail', () => {
-    let sucess = false;
+    let success = false;
     beforeAll((done) => {
-      mailers.sendConfirmEmail(user)
+      mailers.sendConfirmEmail(userMail)
         .then(() => {
-          sucess = true;
+          success = true;
           done();
         })
         .catch(() => {
-          sucess = false;
+          success = false;
           done();
         });
     });
 
     it('should return true', () => {
-      expect(sucess).toBeTruthy();
+      expect(success).toBeTruthy();
     });
   });
 
   // testing email verified notification
-  describe('sendConfirmEmail', () => {
-    let sucess = false;
+  describe('sendEmailConfirmed', () => {
+    let success = false;
     beforeAll((done) => {
-      mailers.sendEmailConfirmed(user)
+      mailers.sendEmailConfirmed(userMail)
         .then(() => {
-          sucess = true;
+          success = true;
           done();
         })
         .catch(() => {
-          sucess = false;
+          success = false;
           done();
         });
     });
 
     it('should return true', () => {
-      expect(sucess).toBeTruthy();
+      expect(success).toBeTruthy();
     });
   });
 
   // testing parcel status changes notification
   describe('sendParcelStatusChanged', () => {
-    let sucess = false;
+    let success = false;
     beforeAll((done) => {
-      mailers.sendParcelStatusChanged(user, parcel)
+      mailers.sendParcelStatusChanged(userMail, parcelData)
         .then(() => {
-          sucess = true;
+          success = true;
           done();
         })
         .catch(() => {
-          sucess = false;
+          success = false;
           done();
         });
     });
 
     it('should return true', () => {
-      expect(sucess).toBeTruthy();
+      expect(success).toBeTruthy();
     });
   });
 
   // testing parcel location changed notification
   describe('sendParcelLocationChanged', () => {
-    let sucess = false;
+    let success = false;
     beforeAll((done) => {
-      mailers.sendParcelLocationChanged(user, parcel)
+      mailers.sendParcelLocationChanged(userMail, parcelData)
         .then(() => {
-          sucess = true;
+          success = true;
           done();
         })
         .catch(() => {
-          sucess = false;
+          success = false;
           done();
         });
     });
 
     it('should return true', () => {
-      expect(sucess).toBeTruthy();
+      expect(success).toBeTruthy();
     });
   });
 });

@@ -2,7 +2,7 @@ import express from 'express';
 import { celebrate } from 'celebrate';
 import dotenv from 'dotenv';
 import { users } from '../validators/index';
-import controllers from '../controllers/users';
+import controllers from '../controllers/auth';
 
 const router = express.Router();
 dotenv.config();

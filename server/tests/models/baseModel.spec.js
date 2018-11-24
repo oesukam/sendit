@@ -1,40 +1,24 @@
 import BaseModel from '../../src/models/BaseModel';
 import { parcelData } from '../data';
+import db from '../../src/db';
+import { deleteTestParcels } from '../queries';
 
 describe('base model', () => {
-  beforeAll(() => {
+  beforeAll((done) => {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+    db.query(deleteTestParcels, [])
+      .then(() => done())
+      .catch(() => done());
   });
-  it('arrayName should return empty string', () => {
+  afterAll(async (done) => {
+    db.query(deleteTestParcels, [])
+      .then(() => done())
+      .catch(() => done());
+  });
+
+  it('storage should return empty string', (done) => {
     const model = new BaseModel();
-    expect(model.arrayName).toEqual('');
-  });
-
-  it('save() should return undefined', (done) => {
-    const model = new BaseModel({ ...parcelData });
-    model.save()
-      .catch((err) => {
-        expect(err).toBeDefined();
-        done();
-      });
-  });
-
-  it('save() should return an object', (done) => {
-    const model = new BaseModel({ ...parcelData });
-    model.arrayName = 'parcels';
-    model.save()
-      .then((res) => {
-        expect(res).toBeDefined();
-        expect(res.id).toBeDefined();
-        expect(res.fromDistrict).toBeDefined();
-        expect(res.fromProvince).toBeDefined();
-        done();
-      });
-  });
-
-  it('should return null', (done) => {
-    const model = new BaseModel({ ...parcelData });
-    expect(model.getFirst()).toEqual(null);
+    expect(model.storage).toEqual(undefined);
     done();
   });
 

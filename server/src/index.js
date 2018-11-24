@@ -1,15 +1,18 @@
 import express from 'express';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
-import logger from 'morgan';
-import initData from './data';
+import morgan from 'morgan';
 import routes from './routes';
 import joiErrors from './middlewares/joiErrors';
 import { error404 } from './middlewares/responseErrors';
 import { welcomeMessage } from './htmlMessage/index';
+import db from './db';
+import { logger } from './helpers';
 
-initData(); // Initialise global data arrays
+
 dotenv.config(); // Sets environment's varibles
+
+db.connect();
 
 const urlPrefixV1 = '/api/v1'; // Url prefix to map all urls
 const app = express();
@@ -17,8 +20,7 @@ const { PORT = 3000, NODE_ENV } = process.env;
 
 // Check for working environment to start logging http request
 if (NODE_ENV === 'development') {
-  app.use(logger('tiny'));
-  console.info('Morgan enabled');
+  app.use(morgan('tiny'));
 }
 
 app.use(helmet()); // Sets various http headers
@@ -49,7 +51,7 @@ app.use(error404);
 
 const run = (port = '') => {
   const server = app.listen(port || PORT, () => {
-    console.info(`\nServer listenning on port: ${port || PORT}...`);
+    logger.info(`\nServer listenning on port: ${port || PORT}...`);
   });
   return server;
 };
