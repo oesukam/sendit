@@ -22,7 +22,7 @@ const initUsers = () => new Promise(async (resolve, reject) => {
     now,
   ]);
 
-  await db.query(usersQuery.insert, [
+  await db.query(usersQuery.insertUser, [
     '97cf377c-5735-4f5d-8645-c8fb4b5c5af3', // id
     'user@email.com', // user email
     bcrypt.hashSync('user@user', 10), // password

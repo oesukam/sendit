@@ -35,9 +35,9 @@ logger.info(`Environment: ${NODE_ENV}`);
 
 const createTables = () => new Promise(async (resolve) => {
   try {
-    await pool.query(usersQuery.createTable);
-    await pool.query(parcelsQuery.createTable);
-    await pool.query(tokensQuery.createTable);
+    await pool.query(usersQuery.createTableUsers);
+    await pool.query(parcelsQuery.createTableParcels);
+    await pool.query(tokensQuery.createTableTokens);
     resolve(true);
   } catch (err) {
     logger.error(err);
@@ -47,9 +47,9 @@ const createTables = () => new Promise(async (resolve) => {
 
 const dropTables = () => new Promise(async (resolve) => {
   try {
-    await pool.query(usersQuery.dropTable);
-    await pool.query(parcelsQuery.dropTable);
-    await pool.query(tokensQuery.dropTable);
+    await pool.query(usersQuery.dropTableUsers);
+    await pool.query(parcelsQuery.dropTableParcels);
+    await pool.query(tokensQuery.dropTableTokens);
     logger.info('Tables dropped');
     resolve(true);
   } catch (err) {

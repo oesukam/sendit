@@ -1,21 +1,4 @@
-const columns = `
-  id,
-  email,
-  password,
-  user_type AS userType,
-  first_name AS firstName,
-  last_name AS lastName,
-  birth_date AS birthDate,
-  gender,
-  province,
-  district,
-  status,
-  confirmed,
-  confirmation_code AS confirmationCode,
-  created_at AS createdAt,
-  updated_at AS updatedAt
-`;
-const createTable = `
+const createTableUsers = `
 CREATE TABLE IF NOT EXISTS
   users(
     id UUID PRIMARY KEY,
@@ -34,7 +17,7 @@ CREATE TABLE IF NOT EXISTS
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
   )`;
-const insert = `INSERT INTO users(
+const insertUser = `INSERT INTO users(
   id,
   email,
   password,
@@ -51,17 +34,19 @@ const insert = `INSERT INTO users(
   updated_at
  ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
  ON CONFLICT DO NOTHING returning *`;
-const dropTable = 'DROP TABLE IF EXISTS users';
-const queryById = 'SELECT * FROM users WHERE id = $1';
-const queryAll = 'SELECT * FROM users LIMIT 25 OFFSET $1';
+const dropTableUsers = 'DROP TABLE IF EXISTS users';
+const queryUserById = 'SELECT * FROM users WHERE id = $1';
+const queryFirstUser = 'SELECT * FROM users WHERE id = $1 LIMIT 1';
+const queryAllUsers = 'SELECT * FROM users LIMIT 25 OFFSET $1';
 
-const queryByEmail = 'SELECT * FROM users WHERE email = $1';
+const queryUserByEmail = 'SELECT * FROM users WHERE email = $1';
 
 export default {
-  createTable,
-  insert,
-  dropTable,
-  queryAll,
-  queryByEmail,
-  queryById,
+  createTableUsers,
+  insertUser,
+  dropTableUsers,
+  queryAllUsers,
+  queryUserByEmail,
+  queryUserById,
+  queryFirstUser,
 };
