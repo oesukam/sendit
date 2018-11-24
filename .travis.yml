@@ -9,7 +9,7 @@ env:
     - JWT_SECRET=oesukam@secret
     - MAILGUN_USER=
     - MAILGUN_PASSWORD=
-    - PH_URL=postgresql://oem:secret@localhost/sendit
+    - PG_URL=postgresql://oem:secret@localhost/sendit
     - PG_HOST=localhost
     - PG_USER=oem
     - PG_DATABASE=sendit
