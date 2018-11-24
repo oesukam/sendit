@@ -8,20 +8,27 @@ dotenv.config(); // Sets environment's varibles
 const exitNode = () => {
   setTimeout(() => {
     process.exit(0); // Exit with success
-  }, 3000);
+  }, 1000);
 };
 
-db.connect()
-  .then(async () => {
-    if (process.argv[2] === 'drop') {
-      await db.dropTables();
+try {
+  db.connect()
+    .then(async () => {
+      if (process.argv[2] === 'drop') {
+        await db.dropTables();
+        exitNode();
+      } else {
+        await db.createTables();
+        await data.initUsers();
+        await data.parcels();
+        logger.info('Migrated');
+        exitNode();
+      }
+    })
+    .catch((err) => {
+      console.log(err);
       exitNode();
-    } else {
-      await db.createTables();
-      await data.initUsers();
-      await data.parcels();
-      logger.info('Migrated');
-      exitNode();
-    }
-  })
-  .catch(() => exitNode());
+    });
+} catch (err) {
+  console.log(err);
+}
