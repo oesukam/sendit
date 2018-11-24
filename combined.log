@@ -1852,3 +1852,6 @@
 {"message":"Message sent: <a50f84cb-19ee-0d5f-ec79-c73339a534b2@sendit.service>","level":"info"}
 {"message":"\nServer listenning on port: 5000...","level":"info"}
 {"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Environment: test","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Postgress connected","level":"info"}

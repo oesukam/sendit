@@ -12,7 +12,7 @@ import {
 } from '../data';
 
 // Creating a new parce;
-describe('parcel', () => {
+fdescribe('parcel', () => {
   let server;
   let parcelId;
   let parcelUserId;
@@ -259,8 +259,8 @@ describe('parcel', () => {
     });
   });
 
-  // Change parcel status
-  describe('change parcel status PUT /api/v1/parcels/<parcelId>/destination', () => {
+  // Change parcel destination
+  fdescribe('change parcel status PUT /api/v1/parcels/<parcelId>/destination', () => {
     const data = {};
     beforeAll((done) => {
       Request.put(`${urlPrefixV1}/parcels/${parcelId}/destination`,
