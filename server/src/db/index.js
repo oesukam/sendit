@@ -33,18 +33,20 @@ if (PG_URL) {
 
 logger.info(`Environment: ${NODE_ENV}`);
 
-const createTables = () => {
-  pool.query(usersQuery.createTable);
-  pool.query(parcelsQuery.createTable);
-  pool.query(tokensQuery.createTable);
-};
+const createTables = () => new Promise(async (resolve) => {
+  await pool.query(usersQuery.createTable);
+  await pool.query(parcelsQuery.createTable);
+  await pool.query(tokensQuery.createTable);
+  resolve(true);
+});
 
-const dropTables = () => {
-  pool.query(usersQuery.dropTable);
-  pool.query(parcelsQuery.dropTable);
-  pool.query(tokensQuery.dropTable);
+const dropTables = () => new Promise(async (resolve) => {
+  await pool.query(usersQuery.dropTable);
+  await pool.query(parcelsQuery.dropTable);
+  await pool.query(tokensQuery.dropTable);
   logger.info('Tables dropped');
-};
+  resolve(true);
+});
 
 const connect = () => new Promise((resolve, reject) => {
   pool.connect()

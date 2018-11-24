@@ -3,7 +3,7 @@ import moment from 'moment';
 import db from '../db';
 import { usersQuery } from '../db/queries';
 
-const initUsers = async () => {
+const initUsers = () => new Promise(async (resolve, reject) => {
   const now = moment().format();
   await db.query(usersQuery.insert, [
     '648da554-e42f-40dc-92d3-649e3865fd72', // id
@@ -37,7 +37,9 @@ const initUsers = async () => {
     null, // confirmation_code,
     now,
     now,
-  ]);
-};
+  ])
+    .then(() => resolve(true))
+    .catch(() => reject(new Error('Failed, could not save default users')));
+});
 
 export default initUsers;

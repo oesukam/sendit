@@ -223,3 +223,14 @@
 {"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}
 {"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}
 {"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}
+{"message":"Postgress could not connect","level":"error"}
+{"errno":"ETIMEDOUT","code":"ECONNECTION","syscall":"connect","address":"52.10.161.208","port":587,"command":"CONN","level":"error"}
+{"errno":"ETIMEDOUT","code":"ECONNECTION","syscall":"connect","address":"50.112.177.176","port":587,"command":"CONN","level":"error"}
+{"errno":"ETIMEDOUT","code":"ETIMEDOUT","syscall":"connect","address":"52.209.97.228","port":5432,"level":"error"}
+{"errno":"ETIMEDOUT","code":"ETIMEDOUT","syscall":"connect","address":"52.209.97.228","port":5432,"level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"42P01","position":"15","file":"parse_relation.c","line":"1180","routine":"parserOpenTable","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"42P01","position":"13","file":"parse_relation.c","line":"1180","routine":"parserOpenTable","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"42P01","position":"15","file":"parse_relation.c","line":"1180","routine":"parserOpenTable","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"42P01","position":"13","file":"parse_relation.c","line":"1180","routine":"parserOpenTable","level":"error"}
+{"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}
+{"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}

@@ -2,7 +2,7 @@ import express from 'express';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
-import initData from './data';
+import * as data from './data';
 import routes from './routes';
 import joiErrors from './middlewares/joiErrors';
 import { error404 } from './middlewares/responseErrors';
@@ -13,17 +13,7 @@ import { logger } from './helpers';
 
 dotenv.config(); // Sets environment's varibles
 
-
-db.connect()
-  .then(() => {
-    if (process.argv[2] === 'drop') {
-      db.dropTables();
-    } else {
-      db.createTables();
-      initData(); // Initialise default records
-      logger.info('Migrated');
-    }
-  });
+db.connect();
 
 const urlPrefixV1 = '/api/v1'; // Url prefix to map all urls
 const app = express();

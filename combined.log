@@ -1791,3 +1791,47 @@
 {"message":"Message sent: <bbe145dc-024a-015b-62ea-c66670c6a61e@sendit.service>","level":"info"}
 {"message":"\nServer listenning on port: 5000...","level":"info"}
 {"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Environment: test","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Postgress could not connect","level":"error"}
+{"errno":"ETIMEDOUT","code":"ECONNECTION","syscall":"connect","address":"52.10.161.208","port":587,"command":"CONN","level":"error"}
+{"errno":"ETIMEDOUT","code":"ECONNECTION","syscall":"connect","address":"50.112.177.176","port":587,"command":"CONN","level":"error"}
+{"errno":"ETIMEDOUT","code":"ETIMEDOUT","syscall":"connect","address":"52.209.97.228","port":5432,"level":"error"}
+{"errno":"ETIMEDOUT","code":"ETIMEDOUT","syscall":"connect","address":"52.209.97.228","port":5432,"level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"42P01","position":"15","file":"parse_relation.c","line":"1180","routine":"parserOpenTable","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"42P01","position":"13","file":"parse_relation.c","line":"1180","routine":"parserOpenTable","level":"error"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"name":"error","length":104,"severity":"ERROR","code":"42P01","position":"15","file":"parse_relation.c","line":"1180","routine":"parserOpenTable","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"42P01","position":"13","file":"parse_relation.c","line":"1180","routine":"parserOpenTable","level":"error"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Environment: test","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Message sent: <f0fa966b-1bb8-7b1c-2a5c-f725531d134e@sendit.service>","level":"info"}
+{"message":"Environment: test","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Message sent: <065d0a23-586d-e964-9910-ee2951a5ac17@sendit.service>","level":"info"}
+{"message":"Message sent: <22c40bed-2fec-99d0-e247-b184f37bc0cf@sendit.service>","level":"info"}
+{"message":"Message sent: <7f6cfb1c-710d-1bc2-3a5a-86954e8f9dea@sendit.service>","level":"info"}
+{"message":"Message sent: <bd26dcfa-6f8d-e8cf-538e-677d7c92236e@sendit.service>","level":"info"}
+{"message":"Message sent: <8a8430f1-ab11-3851-e7be-c51d80169e39@sendit.service>","level":"info"}
+{"message":"Message sent: <0c2e6dc1-7b83-7024-4f54-a80dd77c90fb@sendit.service>","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"Postgress connected","level":"info"}

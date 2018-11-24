@@ -3,7 +3,7 @@ import moment from 'moment';
 import db from '../db';
 import { parcelsQuery } from '../db/queries';
 
-const initParcels = async () => {
+const initParcels = () => new Promise(async (resolve, reject) => {
   const now = moment().format();
   await db.query(parcelsQuery.insert, [ // default parcel
     'd6d6a11b-6035-4373-ad76-9dd2556cd5cc', // id
@@ -23,7 +23,9 @@ const initParcels = async () => {
     'In Transit', // status
     now,
     now,
-  ]);
-};
+  ])
+    .then(() => resolve(true))
+    .catch(() => reject(new Error('Could not save default parcel')));
+});
 
 export default initParcels;
