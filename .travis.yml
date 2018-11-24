@@ -1,6 +1,8 @@
 sudo: false
 services:
   - postgresql
+addons:
+  postgresql: "9.5"
 env:
   global:
     - URL=http://localhost:3000
