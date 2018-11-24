@@ -105,7 +105,7 @@ const changeStatus = async (req, res) => {
   const { status } = req.body;
   const parcel = new Parcel();
   await parcel.findById(id);
-  if (!parcel) {
+  if (!parcel.id) {
     return res.status(404).json({ success: false, message: 'Not found' });
   }
 
@@ -125,6 +125,53 @@ const changeStatus = async (req, res) => {
   });
 };
 
+const changeDestination = async (req, res) => {
+  const { id } = req.params;
+  const { body } = req;
+  const parcel = new Parcel();
+  await parcel.findById(id);
+  if (!parcel.id) {
+    return res.status(404).json({ success: false, message: 'Not found' });
+  }
+
+  /*
+   * Check if the JWT Token belongs to the owner of the parcel
+   */
+
+  const { jwtUser } = body;
+  const user = new User();
+  await user.findById(parcel.user_id);
+  if (!user.id || user.id !== jwtUser.id) {
+    return res.status(401).json({
+      success: false,
+      message: 'Unauthorized Access',
+    });
+  }
+
+  /*
+    Checks if the user provided new information that
+    are different from the one in the database
+  */
+  if (
+    parcel.to_province === body.to_province
+    || parcel.to_district === body.to_district
+    || parcel.to_province === body.to_province
+  ) {
+    return res.status(304).json({ success: false, message: 'Parcel destination was not changed' });
+  }
+  parcel.to_province = body.to_province;
+  parcel.to_district = body.to_district;
+  parcel.receiver_address = body.receiver_address;
+  await parcel.save();
+
+  mail.sendParcelDestinationChanged(user.toObject(), parcel.toObject());
+
+  return res.status(200).json({
+    success: true,
+    message: 'Parcel destination changed successfully',
+  });
+};
+
 export default {
   getAll,
   getSingle,
@@ -132,4 +179,5 @@ export default {
   changeLocation,
   changeStatus,
   createParcel,
+  changeDestination,
 };

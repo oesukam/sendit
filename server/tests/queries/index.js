@@ -1,6 +1,6 @@
 const deleteTestUser = `
-  DELETE FROM users 
-  WHERE email = 'username@gmail.com' returning *
+  DELETE FROM users WHERE email = 'username@gmail.com' 
+  OR email = 'oesukam@gmail.com' returning *
 `;
 
 const deleteTestParcels = `

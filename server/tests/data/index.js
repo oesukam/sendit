@@ -7,7 +7,7 @@ const adminToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OGRhNTU0LWU
 const user = {
   first_name: 'Olivier',
   last_name: 'Esuka',
-  email: 'username@gmail.com',
+  email: 'oesukam@gmail.com',
   gender: 'Male',
   province: 'Kigali',
   district: 'Nyarungege',

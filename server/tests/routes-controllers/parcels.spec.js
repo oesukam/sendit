@@ -12,7 +12,7 @@ import {
 } from '../data';
 
 // Creating a new parce;
-fdescribe('parcel', () => {
+describe('parcel', () => {
   let server;
   let parcelId;
   let parcelUserId;
@@ -179,7 +179,6 @@ fdescribe('parcel', () => {
       Request.put(`${urlPrefixV1}/parcels/${parcelId}/cancel`,
         {
           json: true,
-          form: { user_id: parcelUserId },
           headers: {
             Authorization: `Bearer ${adminToken}`,
           },
@@ -260,7 +259,7 @@ fdescribe('parcel', () => {
   });
 
   // Change parcel destination
-  fdescribe('change parcel status PUT /api/v1/parcels/<parcelId>/destination', () => {
+  describe('change parcel status PUT /api/v1/parcels/<parcelId>/destination', () => {
     const data = {};
     beforeAll((done) => {
       Request.put(`${urlPrefixV1}/parcels/${parcelId}/destination`,
@@ -272,7 +271,7 @@ fdescribe('parcel', () => {
             receiver_address: 'Address',
           },
           headers: {
-            Authorization: `Bearer ${parcelUserId}`,
+            Authorization: `Bearer ${userToken}`,
           },
         }, (err, res, body) => {
           data.status = res.statusCode;

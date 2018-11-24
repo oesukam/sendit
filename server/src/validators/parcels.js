@@ -15,10 +15,6 @@ const create = {
   description: Joi.string().trim(),
 };
 
-const cancel = {
-  user_id: Joi.string().trim(),
-};
-
 const changeLocation = {
   present_location: Joi.string().required().trim(),
 };
@@ -41,13 +37,12 @@ const changeDestination = {
     'southern',
   ).required(),
   to_district: Joi.string().required().trim(),
-  receiver_address: Joi.string().require().trim(),
+  receiver_address: Joi.string().required().trim(),
 };
 
 
 export default {
   create,
-  cancel,
   changeLocation,
   changeStatus,
   changeDestination,
