@@ -1852,3 +1852,32 @@
 {"message":"Message sent: <a50f84cb-19ee-0d5f-ec79-c73339a534b2@sendit.service>","level":"info"}
 {"message":"\nServer listenning on port: 5000...","level":"info"}
 {"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Environment: test","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: test","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: test","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: test","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: test","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: test","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Message sent: <79ffd8cb-8cf8-f439-b5d7-106d3e8b1210@sendit.service>","level":"info"}
+{"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Message sent: <fcf3de15-efb1-6e5b-06f0-d7b413424981@sendit.service>","level":"info"}
+{"message":"Message sent: <88490bc9-7770-bf07-f352-2a3531a91a4c@sendit.service>","level":"info"}
+{"message":"Message sent: <66183cbe-67ee-8837-b32a-a0c4d9ae5124@sendit.service>","level":"info"}
+{"message":"Message sent: <4834a53e-c4f8-4418-fa67-ade8b14f154b@sendit.service>","level":"info"}
+{"message":"Message sent: <6eb38a73-c299-9419-a123-c758bca82a50@sendit.service>","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}

@@ -179,7 +179,6 @@ describe('parcel', () => {
       Request.put(`${urlPrefixV1}/parcels/${parcelId}/cancel`,
         {
           json: true,
-          form: { user_id: parcelUserId },
           headers: {
             Authorization: `Bearer ${adminToken}`,
           },
@@ -256,6 +255,39 @@ describe('parcel', () => {
     it('Body', () => {
       expect(data.success).toBe(true);
       expect(data.message).toBe('Parcel status changed successfully');
+    });
+  });
+
+  // Change parcel destination
+  describe('change parcel status PUT /api/v1/parcels/<parcelId>/destination', () => {
+    const data = {};
+    beforeAll((done) => {
+      Request.put(`${urlPrefixV1}/parcels/${parcelId}/destination`,
+        {
+          json: true,
+          form: {
+            to_province: 'eastern',
+            to_district: 'bugesera',
+            receiver_address: 'Address',
+          },
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }, (err, res, body) => {
+          data.status = res.statusCode;
+          if (!err) {
+            data.success = body.success;
+            data.message = body.message;
+          }
+          done();
+        });
+    });
+    it('Status 200', () => {
+      expect(data.status).toBe(200);
+    });
+    it('Body', () => {
+      expect(data.success).toBe(true);
+      expect(data.message).toBe('Parcel destination changed successfully');
     });
   });
 });

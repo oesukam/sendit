@@ -25,7 +25,6 @@ router.get('/:id', jwtVerifyToken(['user', 'admin']), controllers.getSingle);
 
 // Cancel a parcel
 router.put('/:id/cancel',
-  celebrate({ body: parcels.cancel }),
   jwtVerifyToken(['user', 'admin']),
   controllers.cancelParcel);
 
@@ -40,5 +39,11 @@ router.put('/:id/status',
   celebrate({ body: parcels.changeStatus }),
   jwtVerifyToken(['admin']),
   controllers.changeStatus);
+
+// Change parcel destination
+router.put('/:id/destination',
+  celebrate({ body: parcels.changeDestination }),
+  jwtVerifyToken(['user']),
+  controllers.changeDestination);
 
 export default router;
