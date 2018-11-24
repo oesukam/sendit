@@ -221,3 +221,5 @@
 {"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}
 {"errno":"ENOTFOUND","code":"ECONNECTION","syscall":"getaddrinfo","hostname":"smtp.mailgun.org","host":"smtp.mailgun.org","port":587,"command":"CONN","level":"error"}
 {"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}
+{"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}
+{"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}

@@ -111,44 +111,6 @@ class BaseModel {
       this.createdAt = Date.now();
     }
   }
-
-  // Save properies to the array
-  save({ withHidden = false } = {}) {
-    return new Promise(async (resolve, reject) => {
-      if (!this.storage) reject(new Error('Please set storage'));
-      // Check if the array name was set
-      if (!this.id) {
-        this.id = faker.random.uuid();
-      }
-      // Check the existance of the array
-      if (!global[this.storage]) {
-        global[this.storage] = []; // Initialises the array
-      }
-      let items = global[this.storage];
-      if (this.storage === 'users') {
-        // If a user with the same email already exist
-        if (items.some(v => v.email === this.email && v.id !== this.id)) {
-          reject(new Error(`${this.email} account already exist`));
-        }
-        this.updateDate();
-        items = items.map((item) => {
-          if (item.email === this.email) {
-            return this.toObject({ withHidden: true });
-          }
-          return item;
-        });
-        global[this.storage] = [...items, this.toObject({ withHidden: true })];
-      } else {
-        this.updateDate();
-        // Add new item to the array without mutating
-        global[this.storage] = [
-          ...items,
-          this.toObject({ withHidden: true }),
-        ];
-      }
-      resolve(this.toObject({ withHidden }));
-    });
-  }
 }
 
 export default BaseModel;
