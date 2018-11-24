@@ -34,31 +34,46 @@ if (PG_URL) {
 logger.info(`Environment: ${NODE_ENV}`);
 
 const createTables = () => new Promise(async (resolve) => {
-  await pool.query(usersQuery.createTable);
-  await pool.query(parcelsQuery.createTable);
-  await pool.query(tokensQuery.createTable);
-  resolve(true);
+  try {
+    await pool.query(usersQuery.createTable);
+    await pool.query(parcelsQuery.createTable);
+    await pool.query(tokensQuery.createTable);
+    resolve(true);
+  } catch (err) {
+    logger.error(err);
+    resolve(false);
+  }
 });
 
 const dropTables = () => new Promise(async (resolve) => {
-  await pool.query(usersQuery.dropTable);
-  await pool.query(parcelsQuery.dropTable);
-  await pool.query(tokensQuery.dropTable);
-  logger.info('Tables dropped');
-  resolve(true);
+  try {
+    await pool.query(usersQuery.dropTable);
+    await pool.query(parcelsQuery.dropTable);
+    await pool.query(tokensQuery.dropTable);
+    logger.info('Tables dropped');
+    resolve(true);
+  } catch (err) {
+    logger.error(err);
+    resolve(false);
+  }
 });
 
 const connect = () => new Promise((resolve) => {
-  pool.connect()
-    .then(() => {
-      logger.info('Postgress connected');
-      resolve(true);
-    })
-    .catch(() => {
-      const error = 'Postgress could not connect';
-      logger.error(error);
-      resolve(false);
-    });
+  try {
+    pool.connect()
+      .then(() => {
+        logger.info('Postgress connected');
+        resolve(true);
+      })
+      .catch(() => {
+        const error = 'Postgress could not connect';
+        logger.error(error);
+        resolve(false);
+      });
+  } catch (err) {
+    logger.error(err);
+    resolve(false);
+  }
 });
 
 const db = {
