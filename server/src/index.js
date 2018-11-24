@@ -12,12 +12,19 @@ import { logger } from './helpers';
 
 
 dotenv.config(); // Sets environment's varibles
-db.createTables();
 
-if (process.argv[2] === 'migrate') {
-  initData(); // Initialise default records
-  logger.info('Migrated');
-}
+
+db.connect()
+  .then(() => {
+    if (process.argv[2] === 'drop') {
+      db.dropTables();
+    } else {
+      db.createTables();
+      initData(); // Initialise default records
+      logger.info('Migrated');
+    }
+  });
+
 const urlPrefixV1 = '/api/v1'; // Url prefix to map all urls
 const app = express();
 const { PORT = 3000, NODE_ENV } = process.env;

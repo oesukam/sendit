@@ -201,3 +201,23 @@
 {"errno":"ENOTFOUND","code":"ECONNECTION","syscall":"getaddrinfo","hostname":"smtp.mailgun.org","host":"smtp.mailgun.org","port":587,"command":"CONN","level":"error"}
 {"level":"error","message":"Message sent: %s"}
 {"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}
+{"message":"Postgress could not connect","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"42P01","position":"15","file":"parse_relation.c","line":"1180","routine":"parserOpenTable","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"42P01","position":"15","file":"parse_relation.c","line":"1180","routine":"parserOpenTable","level":"error"}
+{"level":"error","message":"Message sent: %s"}
+{"name":"error","length":139,"severity":"ERROR","code":"08P01","file":"postgres.c","line":"1578","routine":"exec_bind_message","level":"error"}
+{"name":"error","length":139,"severity":"ERROR","code":"08P01","file":"postgres.c","line":"1578","routine":"exec_bind_message","level":"error"}
+{"name":"error","length":139,"severity":"ERROR","code":"08P01","file":"postgres.c","line":"1578","routine":"exec_bind_message","level":"error"}
+{"name":"error","length":96,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":96,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":139,"severity":"ERROR","code":"08P01","file":"postgres.c","line":"1578","routine":"exec_bind_message","level":"error"}
+{"level":"error","message":"Message sent: %s"}
+{"message":"Postgress could not connect","level":"error"}
+{"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}
+{"errno":"ENOTFOUND","code":"ECONNECTION","syscall":"getaddrinfo","hostname":"smtp.mailgun.org","host":"smtp.mailgun.org","port":587,"command":"CONN","level":"error"}
+{"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}

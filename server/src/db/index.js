@@ -32,9 +32,6 @@ if (PG_URL) {
 }
 
 logger.info(`Environment: ${NODE_ENV}`);
-pool.connect()
-  .then(() => logger.info('Postgress connected'))
-  .catch(() => logger.error('Postgress could not connect'));
 
 const createTables = () => {
   pool.query(usersQuery.createTable);
@@ -46,9 +43,24 @@ const dropTables = () => {
   pool.query(usersQuery.dropTable);
   pool.query(parcelsQuery.dropTable);
   pool.query(tokensQuery.dropTable);
+  logger.info('Tables dropped');
 };
 
+const connect = () => new Promise((resolve, reject) => {
+  pool.connect()
+    .then(() => {
+      logger.info('Postgress connected');
+      resolve(true);
+    })
+    .catch(() => {
+      const error = 'Postgress could not connect';
+      logger.error(error);
+      reject(new Error(error));
+    });
+});
+
 const db = {
+  connect,
   query: (text, params) => pool.query(text, params),
   createTables,
   dropTables,

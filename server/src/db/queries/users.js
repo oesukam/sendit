@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS
     gender VARCHAR(10),
     status VARCHAR(50) DEFAULT 'active',
     user_type VARCHAR(20) NOT NULL,
-    confirmed BOOLEAN DEFAULT false,
+    confirmed VARCHAR(20) DEFAULT 'pending',
     confirmation_code UUID,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP

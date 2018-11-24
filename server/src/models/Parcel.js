@@ -19,7 +19,7 @@ class Parcel extends BaseModel {
       if (!data) reject(new Error('Field empty'));
       const now = moment().format();
       const record = [
-        this.getUID(),
+        this.id || this.getUID(),
         this.user_id,
         'RW-KI',
         this.from_province,
@@ -33,7 +33,6 @@ class Parcel extends BaseModel {
         this.weight,
         this.price,
         this.description,
-        this.cancelled || false,
         this.status || 'In Transit',
         this.created_at || now,
         now,
@@ -46,6 +45,7 @@ class Parcel extends BaseModel {
             resolve(row);
           })
           .catch((err) => {
+            console.log(err)
             logger.error(err);
             reject(new Error('Failed, could not save'));
           });

@@ -16,7 +16,6 @@ CREATE TABLE IF NOT EXISTS
     price INT,
     description TEXT,
     status VARCHAR(20) NOT NULL DEFAULT 'In Transit',
-    cancelled BOOLEAN DEFAULT false,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
   )`;
@@ -38,11 +37,10 @@ const insert = `INSERT INTO parcels (
   weight,
   price,
   description,
-  cancelled,
   status,
   updated_at,
   created_at
-) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18) 
+) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) 
 ON CONFLICT DO NOTHING returning * `;
 
 const queryAll = 'SELECT * FROM parcels LIMIT 25 OFFSET $1';
@@ -54,7 +52,6 @@ const getFirst = 'SELECT * FROM parcels WHERE id = $1 LIMIT 1';
 
 const updatePresentLocation = 'UPDATE parcels SET presentLocation = $2 WHERE id = $1';
 const updateStatus = 'UPDATE parcels SET status = $2 WHERE id = $1';
-const updateCancel = 'UPDATE parcels SET cancelled = $2 WHERE id = $1';
 const updateDestination = `
   UPDATE parcels SET to_province = $2, to_district = $3 WHERE id = $1
 `;
@@ -66,7 +63,6 @@ export default {
   updatePresentLocation,
   updateStatus,
   updateDestination,
-  updateCancel,
   queryAll,
   queryAllByUser,
   queryById,

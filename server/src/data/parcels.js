@@ -8,6 +8,7 @@ const initParcels = async () => {
   await db.query(parcelsQuery.insert, [ // default parcel
     'd6d6a11b-6035-4373-ad76-9dd2556cd5cc', // id
     '97cf377c-5735-4f5d-8645-c8fb4b5c5af3', // user_id
+    'KI-3434-343',
     'Kigali', // from_province
     'Nyarungege', // from_district
     'Northen Province', // to_province
@@ -19,7 +20,6 @@ const initParcels = async () => {
     faker.random.number(), // weight
     faker.random.number(), // price
     'Description',
-    false, // cancelled
     'In Transit', // status
     now,
     now,

@@ -25,7 +25,6 @@ describe('parcel', () => {
     userModel.userType = 'admin';
     userModel.password = await bcrypt.hash(user.password, 10);
     await userModel.save();
-    parcelUserId = userModel.id;
     Request.post(`${urlPrefixV1}/auth/login`,
       {
         json: true,
@@ -39,8 +38,8 @@ describe('parcel', () => {
           parcelUserId = body.data.id;
         }
         const parcel = {
-          user_id: parcelUserId,
           ...parcelData,
+          user_id: parcelUserId,
           to_district: 'Test',
         };
         delete parcel.cancelled;
@@ -51,7 +50,7 @@ describe('parcel', () => {
           {
             json: true,
             headers: {
-              Authorization: `Bearer ${userToken}`,
+              Authorization: `Bearer ${body.token}`,
             },
             form: parcel,
           }, (e, r, b) => {
@@ -83,8 +82,8 @@ describe('parcel', () => {
     const data = {};
     beforeAll(async (done) => {
       const parcel = {
-        user_id: parcelUserId,
         ...parcelData,
+        user_id: parcelUserId,
       };
       delete parcel.cancelled;
       delete parcel.present_location;

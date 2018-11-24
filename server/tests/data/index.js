@@ -43,7 +43,7 @@ const parcelData = {
   receiver_phone: '250-783200000',
   receiver_address: faker.address.streetAddress(),
   weight: faker.random.number(),
-  cancelled: false,
+  price: faker.random.number(),
   present_location: 'Nyarungege',
 };
 const userData = {

@@ -14,10 +14,9 @@ const signup = async (req, res) => {
   let success = false;
   let token;
   const { body } = req;
-  const user = new User();
 
   try {
-    const foundUser = await user.findByEmail(body.email);
+    const foundUser = await new User().findByEmail(body.email);
     if (foundUser.data) {
       return res.status(200).json({
         success: false,
@@ -30,27 +29,22 @@ const signup = async (req, res) => {
       message: 'Failed, please try again',
     });
   }
+  if (body.jwtToken) {
+    delete body.jwtToken;
+  }
+  const user = new User({ ...body });
 
   // Confirmation code to be sent to the user by email
-  user.confirmed = false;
-  user.confirmationCode = faker.random.uuid();
-
-  // Assigns all body fields to User model
-  const fields = Object.keys(body);
-  fields.forEach((field) => {
-    if (body[field] !== undefined) {
-      // Check if the field is password in order to hash the string
-      user[field] = body[field];
-    }
-  });
+  user.confirmed = 'pending';
+  user.confirmation_code = faker.random.uuid();
   user.password = await bcrypt.hash(body.password, 10);
-  const saved = user.save();
+  await user.save();
 
-  if (saved) {
+  if (user.id) {
     success = true;
-    token = jwt.sign({ id: user.id, userType: user.userType }, JWT_SECRET);
+    token = jwt.sign({ id: user.id, user_type: user.user_type }, JWT_SECRET);
 
-    mail.sendConfirmEmail(user);
+    mail.sendConfirmEmail(user.toObject({ withHidden: true }));
   }
 
   return res.status(201).json({ success, token, data: user.toObject() });

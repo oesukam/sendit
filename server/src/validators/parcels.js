@@ -1,25 +1,26 @@
 import { Joi } from 'celebrate';
 
 const create = {
-  user_id: Joi.string(),
-  from_province: Joi.string().required(),
-  from_district: Joi.string().required(),
-  to_province: Joi.string().required(),
-  to_district: Joi.string().required(),
-  to_city: Joi.string(),
-  receiver_phone: Joi.string().required(),
-  receiver_names: Joi.string().required(),
-  receiver_address: Joi.string().required(),
+  user_id: Joi.string().required().trim(),
+  from_province: Joi.string().required().trim(),
+  from_district: Joi.string().required().trim(),
+  to_province: Joi.string().required().trim(),
+  to_district: Joi.string().required().trim(),
+  to_city: Joi.string().trim(),
+  receiver_phone: Joi.string().required().trim(),
+  receiver_names: Joi.string().required().trim(),
+  receiver_address: Joi.string().required().trim(),
   weight: Joi.number().positive().required(),
-  description: Joi.string(),
+  price: Joi.number().positive().required(),
+  description: Joi.string().trim(),
 };
 
 const cancel = {
-  user_id: Joi.string(),
+  user_id: Joi.string().trim(),
 };
 
 const changeLocation = {
-  present_location: Joi.string().required(),
+  present_location: Joi.string().required().trim(),
 };
 
 const changeStatus = {

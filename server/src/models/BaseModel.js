@@ -27,6 +27,9 @@ class BaseModel {
     if (this.hidden !== undefined) {
       delete fields.hidden;
     }
+    if (this.jwtUser !== undefined) {
+      delete fields.jwtUser;
+    }
     if (!withHidden && hidden) {
       // Delete all hidden properties before returning the object
       hidden.forEach((value) => {
@@ -54,7 +57,6 @@ class BaseModel {
             resolve({ data: row });
           })
           .catch((err) => {
-            console.log(err)
             logger.error(err);
             reject(new Error('Failed, could query the user'));
           });

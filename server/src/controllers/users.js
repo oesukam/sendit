@@ -3,40 +3,40 @@ import dotenv from 'dotenv';
 import Parcel from '../models/Parcel';
 import User from '../models/User';
 import mail from './mailers';
+import { logger } from '../helpers';
 
 dotenv.config();
 
-const confirmEmail = (req, res) => {
+const confirmEmail = async (req, res) => {
   let success = false;
   const { userId, confirmationCode } = req.params;
   const user = new User();
-  const userData = user.findById(userId);
-  if (!userData) {
+  await user.findById(userId);
+  if (!user.id) {
     return res.status(404).json({ success });
   }
-  if (userData.confirmed) {
+  if (user.confirmed === 'confirmed') {
     return res.status(404).json({
       success,
-      message: `${userData.email} has already been confimed`,
+      message: `${user.email} has already been confimed`,
     });
   }
-  if (confirmationCode !== userData.confirmation_code) {
+  if (confirmationCode !== user.confirmation_code) {
     return res.status(404).json({
       success,
       message: 'Confirmation code is incorrect',
     });
   }
-  userData.confirmed = true;
-  userData.confirmation_code = null;
-  // Assigns all body fields to User model
-  const savedData = userData.save();
+  user.confirmed = 'confirmed';
+  user.confirmation_code = null;
+  user.save()
+    .then(() => {
+      success = true;
+      mail.sendEmailConfirmed(user.toObject({ withHidden: true }));
+    })
+    .catch(error => logger.error(error));
 
-  if (savedData) {
-    success = true;
-    mail.sendEmailConfirmed(userData);
-  }
-
-  return res.status(201).json({ success, message: 'Emaile confirmed' });
+  return res.status(201).json({ success, message: 'Email confirmed' });
 };
 
 // Fetch list of users

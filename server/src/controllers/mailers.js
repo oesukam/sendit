@@ -1,4 +1,8 @@
+import dotenv from 'dotenv';
 import mailer from '../helpers/mailer';
+
+dotenv.config();
+const { URL } = process.env;
 
 // Send an email function
 const sendConfirmEmail = (user = '') => {

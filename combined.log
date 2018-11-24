@@ -1494,3 +1494,258 @@
 {"message":"Postgress connected","level":"info"}
 {"level":"error","message":"Message sent: %s"}
 {"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}
+{"message":"Environment: development","level":"info"}
+{"message":"Migrated","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress could not connect","level":"error"}
+{"message":"Environment: development","level":"info"}
+{"message":"Migrated","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"name":"error","length":104,"severity":"ERROR","code":"42P01","position":"15","file":"parse_relation.c","line":"1180","routine":"parserOpenTable","level":"error"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"name":"error","length":104,"severity":"ERROR","code":"42P01","position":"15","file":"parse_relation.c","line":"1180","routine":"parserOpenTable","level":"error"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Tables dropped","level":"info"}
+{"message":"Migrated","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Migrated","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Migrated","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Migrated","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Migrated","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Migrated","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Migrated","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Migrated","level":"info"}
+{"level":"error","message":"Message sent: %s"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Migrated","level":"info"}
+{"name":"error","length":139,"severity":"ERROR","code":"08P01","file":"postgres.c","line":"1578","routine":"exec_bind_message","level":"error"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Migrated","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Migrated","level":"info"}
+{"name":"error","length":139,"severity":"ERROR","code":"08P01","file":"postgres.c","line":"1578","routine":"exec_bind_message","level":"error"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Migrated","level":"info"}
+{"name":"error","length":139,"severity":"ERROR","code":"08P01","file":"postgres.c","line":"1578","routine":"exec_bind_message","level":"error"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"name":"error","length":96,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"name":"error","length":96,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"name":"error","length":139,"severity":"ERROR","code":"08P01","file":"postgres.c","line":"1578","routine":"exec_bind_message","level":"error"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"level":"error","message":"Message sent: %s"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Message sent: <16c92505-dece-8d9e-9b04-8976966cb7ef@sendit.service>","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Message sent: <6ad9b352-d171-df3d-f077-2543194ee79c@sendit.service>","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: test","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Postgress could not connect","level":"error"}
+{"message":"Environment: test","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Message sent: <a932195b-44c2-783b-78a8-1e355bbaa791@sendit.service>","level":"info"}
+{"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Message sent: <2d1e2c8d-11f4-b8ec-55ee-993ac5256eb2@sendit.service>","level":"info"}
+{"message":"Message sent: <530b62b3-83d2-2b15-df3c-bdcf14a66348@sendit.service>","level":"info"}
+{"message":"Message sent: <2fbac881-cac8-5c06-d89a-72b2f9d86080@sendit.service>","level":"info"}
+{"message":"Message sent: <ed165fa8-5831-42de-611a-79c0451b9f33@sendit.service>","level":"info"}
+{"message":"Message sent: <9e84edcb-4002-9601-79a0-7b2ce76cc4bc@sendit.service>","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"uuid.c","line":"137","routine":"string_to_uuid","level":"error"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Environment: test","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: test","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: test","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: test","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: test","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: test","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: test","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: test","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: test","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: test","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: test","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: test","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: test","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: test","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: test","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Message sent: <99bf9095-5f8a-1218-b1a0-4c70f955f95b@sendit.service>","level":"info"}
+{"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Message sent: <e854ac9d-6c66-7ab7-d7e8-9af1d4a31a49@sendit.service>","level":"info"}
+{"message":"Message sent: <58fe4b47-6215-1028-4b9f-8a8c00c28f59@sendit.service>","level":"info"}
+{"message":"Environment: test","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"errno":"ENOTFOUND","code":"ECONNECTION","syscall":"getaddrinfo","hostname":"smtp.mailgun.org","host":"smtp.mailgun.org","port":587,"command":"CONN","level":"error"}
+{"message":"Environment: test","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Message sent: <b9edd35f-ed00-08da-ec98-8f24c4a04e2e@sendit.service>","level":"info"}
+{"message":"Message sent: <41d1cdbf-49ff-6235-c7cb-dbb40ba506d4@sendit.service>","level":"info"}
+{"message":"Message sent: <ec671cce-5f7d-42a4-e43e-54a21215f839@sendit.service>","level":"info"}
+{"message":"Message sent: <f6e37e4e-bd85-0951-6a03-404f18f8b1d4@sendit.service>","level":"info"}
+{"message":"Environment: test","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Message sent: <42e5c523-ca63-3faf-2010-ffdf0529fb03@sendit.service>","level":"info"}
+{"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Message sent: <f3f353b7-bd69-ddc1-16b1-c8a9b2db79f3@sendit.service>","level":"info"}
+{"message":"Message sent: <c5ed7084-5a49-7ee7-1a11-171a38d50609@sendit.service>","level":"info"}
+{"message":"Message sent: <e4ecc57f-4146-f055-aeb1-13c88fa0e41c@sendit.service>","level":"info"}

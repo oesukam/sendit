@@ -7,12 +7,14 @@ dotenv.config();
 
 const createParcel = async (req, res) => {
   const { body } = req;
+  const { jwtUser } = body;
   const user = new User();
-  await user.findById(body.jwtUser.id);
-  if (!user.id) {
+  await user.findById(body.user_id);
+  console.log(user.id, body.user_id, 'body', jwtUser.id);
+  if (!user.id || user.id !== jwtUser.id) {
     return res.status(401).json({
       success: false,
-      message: 'Unathorized Access',
+      message: 'Unauthorized Access',
     });
   }
   delete body.jwtUser;
@@ -48,20 +50,19 @@ const getSingle = async (req, res) => {
 
 const cancelParcel = async (req, res) => {
   const { id } = req.params;
-  const { body } = req;
   const parcel = new Parcel();
   await parcel.findById(id);
   if (!parcel.id) {
     return res.status(404).json({ success: false, message: 'Not found' });
   }
 
-  if (parcel.cancelled) {
+  if (parcel.status === 'Cancelled') {
     return res.status(204).json({
       success: false,
       message: 'Parcel had already been cancelled',
     });
   }
-  parcel.cancelled = true;
+  parcel.status = 'Cancelled';
   await parcel.save();
 
   return res.status(200).json({

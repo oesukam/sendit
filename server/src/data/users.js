@@ -16,7 +16,7 @@ const initUsers = async () => {
     'Kigali', // province
     'Nyarungege', // district
     'admin', // user_type
-    true, // confirmed
+    'confirmed', // confirmed
     null, // confirmation_code
     now,
     now,
@@ -33,8 +33,10 @@ const initUsers = async () => {
     'Kigali', // province
     'Nyarungege', // district
     'user', // user_type
-    true, // confirmed
-    null, // confirmation_code
+    'confirmed', // confirmed
+    null, // confirmation_code,
+    now,
+    now,
   ]);
 };
 
