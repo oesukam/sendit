@@ -2,7 +2,6 @@ import express from 'express';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
-import * as data from './data';
 import routes from './routes';
 import joiErrors from './middlewares/joiErrors';
 import { error404 } from './middlewares/responseErrors';

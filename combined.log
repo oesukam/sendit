@@ -1835,3 +1835,20 @@
 {"message":"Postgress connected","level":"info"}
 {"message":"Environment: development","level":"info"}
 {"message":"Postgress connected","level":"info"}
+{"message":"Environment: development","level":"info"}
+{"message":"\nServer listenning on port: 3000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Environment: test","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Postgress connected","level":"info"}
+{"message":"Message sent: <98326c6f-73ff-fb57-b713-1f8d9a256ff1@sendit.service>","level":"info"}
+{"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"Message sent: <ddc5442c-3448-26e0-c628-2b7ee05f0e43@sendit.service>","level":"info"}
+{"message":"Message sent: <78981fa3-2777-74f9-5d9c-222795bb9ea2@sendit.service>","level":"info"}
+{"message":"Message sent: <4e6c7cfa-e55e-b88b-2f96-691f573cfd3d@sendit.service>","level":"info"}
+{"message":"Message sent: <c75245c4-e903-c857-ae72-4c20e6dc222e@sendit.service>","level":"info"}
+{"message":"Message sent: <a50f84cb-19ee-0d5f-ec79-c73339a534b2@sendit.service>","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}
+{"message":"\nServer listenning on port: 5000...","level":"info"}

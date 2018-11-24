@@ -234,3 +234,4 @@
 {"name":"error","length":104,"severity":"ERROR","code":"42P01","position":"13","file":"parse_relation.c","line":"1180","routine":"parserOpenTable","level":"error"}
 {"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}
 {"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}
+{"code":"EENVELOPE","response":"501 Invalid command or cannot parse from address","responseCode":501,"command":"MAIL FROM","level":"error"}

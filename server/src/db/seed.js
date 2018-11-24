@@ -26,9 +26,10 @@ try {
       }
     })
     .catch((err) => {
-      console.log(err);
+      logger.error(err);
       exitNode();
     });
 } catch (err) {
-  console.log(err);
+  logger.error(err);
+  exitNode();
 }
