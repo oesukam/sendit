@@ -7,8 +7,6 @@ env:
     - PORT=3000
     - NODE_ENV=development
     - JWT_SECRET=oesukam@secret
-    - MAILGUN_USER=
-    - MAILGUN_PASSWORD=
     - PG_URL=postgresql://oem:secret@localhost/sendit
     - PG_HOST=localhost
     - PG_USER=oem
