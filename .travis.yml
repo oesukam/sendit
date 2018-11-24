@@ -29,7 +29,7 @@ cache:
     - node_modules
 before_script:
   - psql -c 'create database sendit;' -U postgres
-  - psql -c "CREATE USER oem WITH PASSWORD 'secretpassword';" -U postgres
+  - psql -c "CREATE USER oem WITH PASSWORD 'secret';" -U postgres
 script:
   - npm run test
 after_success:
