@@ -16,6 +16,7 @@
     ]
   },
   "scripts": {
+    "ui": "live-server ui/src --verbose",
     "start": "babel-node server/src/index.js",
     "dev": "nodemon --exec babel-node server/src/index.js",
     "build": "babel server/src --out-dir server/dist",

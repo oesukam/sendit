@@ -1,7 +1,7 @@
-import faker from 'faker';
 import uuid from 'uuid';
+import moment from 'moment';
 import { logger } from '../helpers';
-import * as queries from '../db/queries';
+import { usersQuery, parcelsQuery } from '../db/queries';
 import db from '../db';
 
 class BaseModel {
@@ -45,7 +45,17 @@ class BaseModel {
   findById(id = '') {
     return new Promise((resolve, reject) => {
       if (!id) return reject(new Error('Failed, please provide the id'));
-      const { queryById = undefined } = queries[`${this.storage}Query`];
+      let queryById;
+      switch (this.storage) {
+        case 'users':
+          queryById = usersQuery.queryUserById;
+          break;
+        case 'parcels':
+          queryById = parcelsQuery.queryParcelById;
+          break;
+        default:
+          break;
+      }
       if (queryById === undefined) {
         return reject(new Error('Failed, model storage not set'));
       }
@@ -81,7 +91,17 @@ class BaseModel {
   getFirst() {
     return new Promise((resolve, reject) => {
       if (this.storage === undefined) reject(new Error('Storage not defined'));
-      const query = queries[`${this.storage}Query`].getFirst;
+      let query;
+      switch (this.storage) {
+        case 'users':
+          query = usersQuery.queryFirstUser;
+          break;
+        case 'parcels':
+          query = parcelsQuery.queryFirstParcel;
+          break;
+        default:
+          break;
+      }
       db.query(query)
         .then(res => resolve(res.rows[0]))
         .catch(err => reject(err));
@@ -89,12 +109,22 @@ class BaseModel {
   }
 
   // Returns all items or an empty array
-  getAll({ search = '', page = 1} = {}) {
+  getAll({ search = '', page = 1 } = {}) {
     const limit = 25;
     const startAt = (page - 1) * limit;
     return new Promise((resolve, reject) => {
       if (!this.storage) reject(new Error('Failed, storage not set'));
-      const query = queries[`${this.storage}Query`].queryAll;
+      let query;
+      switch (this.storage) {
+        case 'users':
+          query = usersQuery.queryAllUsers;
+          break;
+        case 'parcels':
+          query = parcelsQuery.queryAllParcels;
+          break;
+        default:
+          break;
+      }
       db.query(query, [startAt])
         .then(res => resolve(res.rows))
         .catch(err => reject(err));
@@ -104,11 +134,11 @@ class BaseModel {
   // Updates createdAt and updatedAt date
   updateDate() {
     // Set created at date
-    if (!this.createdAt) {
-      this.createdAt = Date.now();
-      this.updatedAt = this.createdAt;
+    if (!this.created_at) {
+      this.created_at = moment().format();
+      this.updated_at = this.created_at;
     } else {
-      this.createdAt = Date.now();
+      this.created_at = moment().format();
     }
   }
 }

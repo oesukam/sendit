@@ -1,4 +1,4 @@
-const createTable = `
+const createTableTokens = `
 CREATE TABLE IF NOT EXISTS
   tokens (
     id UUID PRIMARY KEY,
@@ -10,21 +10,21 @@ CREATE TABLE IF NOT EXISTS
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
   )`;
 
-const dropTable = 'DROP TABLE IF EXISTS tokens';
+const dropTableTokens = 'DROP TABLE IF EXISTS tokens';
 
-const insert = `INSERT INTO tokens (
+const insertToken = `INSERT INTO tokens (
   user_id, token, device
 ) VALUES ($1, $2, $2)`;
 
-const updateDevice = 'UPDATE tokens SET device = $2 WHERE token = $1';
-const updateActive = 'UPDATE tokens SET active = $2 WHERE token = $1';
-const queryByToken = 'SELECT * FROM tokens WHERE token = $1';
+const updateTokenDevice = 'UPDATE tokens SET device = $2 WHERE token = $1';
+const updateTokenActive = 'UPDATE tokens SET active = $2 WHERE token = $1';
+const queryTokenByToken = 'SELECT * FROM tokens WHERE token = $1';
 
 export default {
-  createTable,
-  dropTable,
-  insert,
-  queryByToken,
-  updateDevice,
-  updateActive,
+  createTableTokens,
+  dropTableTokens,
+  insertToken,
+  queryTokenByToken,
+  updateTokenDevice,
+  updateTokenActive,
 };

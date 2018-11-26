@@ -5,7 +5,7 @@ import { parcelsQuery } from '../db/queries';
 
 const initParcels = () => new Promise(async (resolve, reject) => {
   const now = moment().format();
-  await db.query(parcelsQuery.insert, [ // default parcel
+  await db.query(parcelsQuery.insertParcel, [ // default parcel
     'd6d6a11b-6035-4373-ad76-9dd2556cd5cc', // id
     '97cf377c-5735-4f5d-8645-c8fb4b5c5af3', // user_id
     'KI-3434-343',

@@ -1,92 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="./css/font-awesome.min.css">
-  <title>SendIT - Admin Order</title>
-</head>
-<body>
-  <header id="top-menu">
-    <div class="meu-header">
-      <div class="container">
-        <div class="col-8">
-          <ul class="plain-list">
-            <li><a href="#"><i class="fa fa-phone"></i> (+250)-000-000-000</a></li>
-            <li><a href="#"><i class="fa fa-envelope"></i> info@sendit.com</a></li>
-          </ul>
-        </div>
-        <div class="col-4 align-right">
-          <ul class="plain-list">
-            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <a class="brand" href="index.html">
-        <img class="brand__img" src="./images/logo.png" alt="logo">
-      </a>
-      <div class="toggle-menu is-tablet">
-        <div class="hamburger"></div>
-      </div>
-      <nav id="menu-nav" class="nav pull-right">
-        <ul>
-          <li class="nav-item"><a href="index.html">Home</a></li>
-          <li class="nav-item"><a href="quote.html">Get A Quote</a></li>
-          <li class="nav-item active dropdown">
-            <a href="#">Admin</a>
-            <ul class="dropdown-block">
-              <li class="nav-item active"><a href="admin-orders.html">Admin Orders</a></li>
-              <li class="nav-item"><a href="admin-order.html">Admin Update an Order</a></li>
-            </ul>
-          </li>
-          <li class="nav-item"><a href="signup.html">Register</a></li>
-          <li class="nav-item"><a href="login.html">Login</a></li>
-          <li class="nav-item dropdown">
-            <a href="#">My Account</a> 
-            <ul class="dropdown-block">
-              <li class="nav-item">
-                <a href="profile.html">
-                  <i class="fa fa-user mr-5"></i> My Profile
-                </a>
-              </li>
-              <li class="nav-item"><a href="order.html">Single Order View</a></li>
-              <li class="nav-item"><a href="make-order.html">Make an Order</a></li>
-              <li class="nav-item"><a href="orders.html">My Orders</a></li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-  <div id="main-content">
+
+import sideBar from '../../components/leftSideBar.js';
+import map from '../../components/googleMap.js';
+
+const Page = {
+  render : async () => `
     <div class="container">
       <div class="row">
         <div class="col-3">
-          <div class="box profile-sidebar">
-            <div class="profile-sidebar__header">
-              <div class="profile-avatar"></div>
-              <div class="profile-name">Admin</div>
-            </div>
-            <div class="profile-sidebar__content">
-              <ul class="profile-sidebar__nav">
-                <li><a href="profile.html">My Profile</a></li>
-                <li><a href="profile.html">My Orders</a></li>
-                <li><a href="make-order.html">Make an Order</a></li>
-                <li><a href="admin-orders.html">Orders</a></li>
-              </ul>
-            </div>
-          </div>
+          ${await sideBar.render()}
         </div>
         <div class="col-9">
-          <div id="quote-map" class="map-location"> Map location</div>
+          ${await map.render()}
           <div class="box order-container">
-            <h2 class="title-1 align-center">Order details</h3>
+            <h2 class="title-1 align-center">Parcel's details</h3>
             <p class="quote-error">
               Please select the corresponding province and district.
             </p>
@@ -194,7 +120,7 @@
                     maxlength="200"
                     >Location Address</textarea>
                   <div class="form-error address"></div>
-  
+
                   <button id="submit-quote" class="btn">Update</button>
 
                   <div class="quote-result">
@@ -209,45 +135,9 @@
         </div>
       </div>
     </div>
-  </div>
-  <footer id="footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-3">
-          <img class="footer-logo" src="./images/logo.png" alt="logo">
-        </div>
-        <div class="col-3">
-          <h3 class="footer-title">Site Map</h3>
-          <ul class="footer-list">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="quote.html">Get A Quote</a></li>
-          </ul>
-        </div>
-        <div class="col-3">
-          <h3 class="footer-title">Partners</h3>
-          <ul class="footer-list">
-            <li><a href="#">DHL</a></li>
-            <li><a href="#">Postal</a></li>
-          </ul>
-        </div>
-        <div class="col-3">
-          <h3 class="footer-title">Social</h3>
-          <ul class="footer-list">
-            <li>
-              <a href="#"><i class="fa fa-facebook is-white"></i> Facebook</a>
-            </li>
-            <li>
-              <a href="#"><i class="fa fa-twitter is-white"></i> Twitter</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu_9x-afqT01pFFB3vc4cDRObiSVIen1I&callback=initMap"
-  async defer></script>
-  <script src="./js/main.js"></script>
-  <script src="./js/quote.js"></script>
-  <script src="./js/google-map.js"></script>
-</body>
-</html>
+  `,
+  after_render: async () => { }
+ }
+ 
+ export default Page;
+ 

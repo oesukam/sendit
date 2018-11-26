@@ -6,3 +6,4 @@ server/dist
 coverage/
 error.log
 combined.log
+.vscode

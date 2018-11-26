@@ -1,6 +1,31 @@
-'use strict';
 
-(() => {
+const Page = {
+ render : async () => `
+  <div class="container">
+    <div class="row content-center">
+      <div class="col-6">
+        <div class="box login-container">
+          <h3 class="title primary align-center">Login</h3>
+          <form action="#">
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email">
+            <div class="form-error email"></div>
+
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password">
+            <div class="form-error password"></div>
+
+            <button class="forgot-password">
+              Forgot Password
+            </button>
+            <button id="submit-login" class="btn primary">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+ `,
+ after_render: async () => {
   let form = {
     email: '',
     password: '',
@@ -41,11 +66,14 @@
       return;
     }
 
-    location.href = 'profile.html';
+    location.href = '/#/profile';
   })
 
   // Callback function to handle email and password imput
   function inputHandler (e) {
     form[e.target.id] = e.target.value;
   }
-})();
+ }
+}
+
+export default Page;

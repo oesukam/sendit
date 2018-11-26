@@ -109,12 +109,17 @@
   color: #fff;
   font-size: 1.2rem;
 }
-.nav-item:hover > a {
+.nav-item:hover > a, .nav-item > a:hover {
   color: #ffa400 !important;
 }
-.nav-item.active > a {
+.nav-item.active > a, .nav-item > a.active {
   color: #ffa400;
 }
+
+.nav-item.drop-downa:has(.nav-item > a.active) {
+  color: red;
+}
+
 .nav-item.dropdown {
   position: relative;
   display: inline-block;
