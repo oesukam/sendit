@@ -40,19 +40,10 @@ class User extends BaseModel {
       const now = moment().format();
       const record = [
         this.id || this.getUID(),
-        this.email,
-        this.password,
-        this.first_name,
-        this.last_name,
-        this.birth_date,
-        this.gender,
-        this.province,
-        this.district,
-        this.user_type,
-        this.confirmed || 'pending',
-        this.confirmation_code,
-        this.createdAt || now,
-        now,
+        this.email, this.password, this.first_name, this.last_name,
+        this.birth_date, this.gender, this.province, this.district,
+        this.user_type, this.confirmed || 'pending',
+        this.confirmation_code, this.createdAt || now, now,
       ];
       try {
         db.query(usersQuery.insert, record)

@@ -1,13 +1,11 @@
-.profile-container {
 
-}
-.profile-sidebar {
+.sidebar {
   margin-top: 15px;
   background-color: #3359DF;
   color: #fff;
   min-height: 400px;
 }
-.profile-sidebar__header {
+.sidebar__header {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -34,17 +32,17 @@
   color: #fff;
   margin: 10px;
 }
-.profile-sidebar__nav {
+.sidebar__nav {
   list-style-type: none;
   padding: 0;
 }
-.profile-sidebar__nav li a {
+.sidebar__nav li a {
   color: #fff;
   display: inline-block;
   padding: 5px;
 }
-.profile-sidebar__nav li a:hover,
-.profile-sidebar__nav .active {
+.sidebar__nav li a:hover,
+.sidebar__nav .active {
   color: #ffa400;
 }
 .profile-counter {
