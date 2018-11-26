@@ -1,116 +1,120 @@
-# Andela - SendIT (v1.0.8)
+# SendIT
+
 
 [![Build Status](https://travis-ci.org/oesukam/andela-sendit.svg?branch=master)](https://travis-ci.org/oesukam/andela-sendit-api)
 [![codecov](https://codecov.io/gh/oesukam/andela-sendit/branch/develop/graph/badge.svg)](https://codecov.io/gh/oesukam/andela-sendit)
 [![Maintainability](https://api.codeclimate.com/v1/badges/30bd033f62cd2b12a455/maintainability)](https://codeclimate.com/github/oesukam/andela-sendit/maintainability)
 
-SendIT is a courier service that helps users deliver parcels to different destinations. SendIT provides courier quotes based on weight categories.
-
-## Features
-
-### Required Features:
-1. Users can create an account and log in.
-2. Users can create a parcel delivery order.
-3. Users can change the destination of a parcel delivery order.
-4. Users can cancel a parcel delivery order.
-5. Users can see the details of a delivery order.
-6. Admin can change the status and present location of a parcel delivery order.
-
-### Optional Features: 
-1. The application should display a Google Map with Markers showing the pickup location and the destination .
-2. The application should display computed travel distance and journey duration between
-the pickup location and the destination. Leverage Google Maps [Distance Matrix Service](https://www.google.com/url?q=https://developers.google.com/maps/documentation/javascript/examples/distance-matrix&ust=1540951920000000&usg=AFQjCNEYH17s27tYweNRYehge7Lw0ReUeA&hl=en-GB&source=gmail).
-3. The user gets real-time email notification when Admin changes the status of their parcel.
-4. The user gets real-time email notification when Admin changes the present location of
-their parcel.
-
-## UI
-### Web Pages
-- [Home Page](https://oesukam.github.io/andela-sendit/index.html)
-
-- [Get A Quote Page](https://oesukam.github.io/andela-sendit/quote.html)
-
-- [Signup Page](https://oesukam.github.io/andela-sendit/signup.html)
-
-- [Login Page](https://oesukam.github.io/andela-sendit/login.html)
-
-- [Profile Page](https://oesukam.github.io/andela-sendit/profile.html)
-
-- [Make An Order Page](https://oesukam.github.io/andela-sendit/make-order.html)
-
-- [Order View Page](https://oesukam.github.io/andela-sendit/order.html)
-
-- [Admin Orders Page](https://oesukam.github.io/andela-sendit/admin-orders.html)
-
-- [Admin Single Order Page](https://oesukam.github.io/andela-sendit/admin-order.html)
-
-![Home Page Screenshot](/images/index-page.png)
-
-### Technologies used for the UI:
-- HTML
-- CSS
-- Javascript (ES6)
-- Google Map Javascript API
+SendIT is a courier service that helps users deliver parcels to different destinations. SendIT provides courier quotes based on weight categories. `Case study`: Rwanda.
 
 
-## SendIT - API
-### API endpoints
+## Getting Started
 
-### Users
-- POST /api/v1/users/login -> _Log into an account_
-[Login](https://andela-sendit-api.herokuapp.com/api/v1/users/login)
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+
+### Prerequisites
+
+What things you need to install the software and how to install them
+
 ```
-  {
-    email: user@email.com,
-    password: user@user
-  }
-```
-- POST /api/v1/users/ -> _Create a new user_
-```
-  {
-    firstName: 'First Name',
-    lastName: 'Last Name',
-    email: 'email@email.com',
-    password: 'password',
-    gender: 'Female',
-    province: 'Kigali',
-    district: 'Nyarungege'
-  }
-```
-- GET /api/v1/users/**userId**/confirmEmail/**confirmationCode** -> _Confirms emails after creating an account for new users_
-
-- GET /api/v1/users/**userId** -> _Fetch user's info_
-
-- GET /api/v1/users/**userId**/parcels -> _Fetch user's parcels_
-
-- GET /api/v1/users -> _Fetch Users_
-
-### Parcels
-
-- GET /api/v1/parcels/**parcelId** -> _Fetch all parcels_
-[Get a Parcel](https://andela-sendit-api.herokuapp.com/api/v1/parcels/d6d6a11b-6035-4373-ad76-9dd2556cd5cc)
-
-- GET /api/v1/parcels -> _Fetch all parcels_
-[Parcels](https://andela-sendit-api.herokuapp.com/api/v1/parcels/)
-
-- POST /api/v1/parcels -> _Creates a new parcel delivery order_
-```
-  {
-    userId: '97cf377c-5735-4f5d-8645-c8fb4b5c5af3',
-    fromProvince: 'Kigali',
-    fromDistrict: 'Nyarungege',
-    toProvince: 'Northen Province',
-    toDistrict: 'Burera',
-    receiverNames: 'Receiver Names',
-    receiverPhone: '250-783200000',
-    receiverAddress: faker.address.streetAddress(),
-    weight: faker.random.number()
-  }
+- NodeJS
+- Postgress
 ```
 
-- PUT /api/v1/parcels/**parcelId**/cancel -> _Cancel a parcel_
+### Installing
+
+A step by step series of examples that tell you how to get a development env running
+
+Say what the step will be
+
 ```
-  {
-    userId: '97cf377c-5735-4f5d-8645-c8fb4b5c5af3'
-  }
+- Clone the repository
+- Copy .env.example to .env then correct change the corresponding variables
+- Run npm install
 ```
+
+End with an example of getting some data out of the system or using it for a little demo
+
+## Running the tests
+
+### Endpoints
+Using Postman to access these endpoints
+
+| Endpoint                   | Methods   | Functionalities        |
+| ---------------------------|-----------|------------------------|
+| /api/v1/auth/login         | POST      | Login registered user  |
+| /api/v1/auth/signup        | POST      | Register a new User    |
+| /api/v1/users    | GET | Fetch all parcels  |
+| /api/v1/users/<userId>     | GET, PUT | Get and update user info  |
+| /api/v1/users/<userId/ confirmEmail/confirmationCode        | GET      | Confirm user email    |
+| /api/v1/users/<userID>parcels         | GET      | Get particular user parcels  |
+| /api/v1/parcels       | GET      | Fetch all parcels    |
+| /api/v1/parcels       | POST      | A a new parcel    |
+| /api/v1/parcels/<userId>/cancel       | PUT      | Update a parcel    |
+| /api/v1/parcels/<userId>/status       | PUT      | Update a parcel status    |
+| /api/v1/parcels/<userId>/presentLocation       | PUT      | Update a parcel current location    |
+| /api/v1/parcels/<userId>/destination       | PUT      | Update a parcel destination    |
+
+
+Explain what these tests test and why
+
+```
+Give an example
+```
+
+### And coding style tests
+
+Explain what these tests test and why
+
+```
+Give an example
+```
+
+## Deployment
+
+For deployment, the .env file or the running environment should have the following variable
+
+- URL=http://localhost:3000
+- FRONT_URL=https://oesukam.github.io
+- PORT=3000
+- NODE_ENV=peoduction
+- JWT_SECRET=
+- MAILGUN_USER=
+- MAILGUN_PASSWORD=
+- DATABASE_URL=
+- PG_HOST=localhost
+- PG_USER=oem
+- PG_DATABASE=sendit
+- PG_PASSWORD=secretpassword
+- PG_PORT=
+
+## Built With
+
+* HTML
+* Javascript
+* CSS
+* NodeJS / Express
+* Postgress
+
+
+## Contributing
+
+Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+
+## Versioning
+
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+
+## Authors
+
+* **Olivier Esuka** - *Personal Website* - [My Website](https://oesukam.me/)
+
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+* Omolabake Lemboye
+* Bryan Manuele [Fermi Dirak](https://medium.com/@bryanmanuele/how-i-implemented-my-own-spa-routing-system-in-vanilla-js-49942e3c4573)
