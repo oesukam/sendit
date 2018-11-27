@@ -36,7 +36,7 @@ securityDefinitions:
     in: header
     name: Authorization
 paths:
-  /auth/login/:
+  /auth/login:
     post:
       summary: "Logs registered user"
       tags:
@@ -59,6 +59,24 @@ paths:
                 type: boolean
               data:
                 $ref: "#/definitions/User"
+        '404':
+          description: Unregistered user
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              message:
+                type: string
+        '401':
+          description: Email and password don't match
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              message:
+                type: string
   /auth/signup:
     post:
       summary: "Register new user"
@@ -98,14 +116,6 @@ paths:
       responses:
         '200':
           description: return list of users
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-              data:
-                type: array
-                items: "#/definitions/User"
   /users/{userId}:
     put:
       summary: "Update user's names, birth date, province, district and city"
@@ -197,7 +207,7 @@ paths:
         - in: body
           name: body
           schema:
-            $ref: "#/definitions/CreateParcel"
+            $ref: "#/definitions/ParcelCreate"
 
       responses:
         '201':
@@ -247,7 +257,7 @@ paths:
       summary: "Fetch single parcel by ID"
       security:
         - JWT_Token_User: []
-        - JWT_Token_admin: []
+        - JWT_Token_Admin: []
       tags:
       - "parcels"
       description: return a single parcel
@@ -261,13 +271,7 @@ paths:
       responses:
         '200':
           description: return a parcel object
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-              data:
-                ref: "#/definitions/Parcel"
+          
   /parcels/{id}/cancel:
     put:
       security:
@@ -327,11 +331,18 @@ paths:
       description: Change the status of a specific parcel delivery order
       operationId: updateStatus
       parameters:
+        - in: "body"
+          name: "body"
+          description: "Created user object"
+          required: true
+          schema:
+            $ref: "#/definitions/ParcelStatus"
         - name: id
           in: path
           description: uuid of a parcel
           required: true
           type: string
+              
       responses:
         '200':
           description: return a parcel object
@@ -363,9 +374,8 @@ definitions:
         type: string
       gender:
         type: string
-      birthDate:
+      birth_date:
         type: string
-        nullable: true
       created_at:
         type: string
       updated_at:
@@ -403,7 +413,6 @@ definitions:
         type: string
       city:
         type: string
-        nullable: true
     required: 
       - email
       - password
@@ -418,8 +427,11 @@ definitions:
       email:
         type: string
         format: email
+        example: "user@email.com"
       password:
         type: string
+        pattern: ".{6,60}"
+        example: "user@user"
     required: 
       - email
       - password
@@ -494,6 +506,17 @@ definitions:
       - to_district
       - receiver_names
       - receiver_phone
-      - receiver_addres
+      - receiver_address
       - weight
       - price
+  ParcelStatus:
+    type: object
+    properties:
+      status:
+        type: string
+        enum:
+         - "Waiting Pickup"
+         - "Pick Up"
+         - "In Transit"
+         - "Pending"
+         - "Delivered"
