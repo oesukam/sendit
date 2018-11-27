@@ -2,6 +2,8 @@ import express from 'express';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
+import swaggerUi from 'swagger-ui-express';
+import YAML from 'yamljs';
 import routes from './routes';
 import joiErrors from './middlewares/joiErrors';
 import { error404 } from './middlewares/responseErrors';
@@ -17,6 +19,7 @@ db.connect();
 const urlPrefixV1 = '/api/v1'; // Url prefix to map all urls
 const app = express();
 const { PORT = 3000, NODE_ENV } = process.env;
+const swaggerDocument = YAML.load('server/src/docs/api_swagger.yml');
 
 // Check for working environment to start logging http request
 if (NODE_ENV === 'development') {
@@ -42,6 +45,8 @@ app.use(`${urlPrefixV1}/parcels`, routes.parcels);
 app.get('/api/v1/', (req, res) => {
   res.send(welcomeMessage);
 });
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Apply Celebrate middleware to handle joi errors
 app.use(joiErrors());

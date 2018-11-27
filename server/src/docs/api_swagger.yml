@@ -1,0 +1,349 @@
+swagger: "2.0"
+info:
+  description: "This is the documentation of SendIT API hosted on Heroku"
+  version: "1.0.0"
+  title: "SendIT"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "oesukam@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "andela-sendit-api.herokuapp.com"
+basePath: "/api/v1"
+tags:
+- name: "auth"
+  description: "Access to authentification ressources"
+- name: "parcels"
+  description: "Access to parcels ressources"
+- name: "users"
+  description: "Access to users ressources"
+- name: "admin"
+  description: "Groups admin ressources"
+schemes:
+- "https"
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  JWT_Token_Admin:
+    type: apiKey
+    in: header
+    name: Authorization
+  JWT_Token_User:
+    type: apiKey
+    in: header
+    name: Authorization
+paths:
+  /auth/login/:
+    post:
+      tags:
+        - "auth"
+      operationId: authLogin
+      responses:
+        '200':
+          description: return the basic user information
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              data:
+                $ref: "#/definitions/User"
+  /auth/signup:
+    post:
+      tags:
+        - "auth"
+      operationId: authSignup
+      responses:
+        '201':
+          description: return the basic user information
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              data:
+                $ref: "#/definitions/User"
+  /users:
+    get:
+      security:
+        - JWT_Token_Admin: []
+      tags:
+        - "users"
+        - "admin"
+      operationId: getAllUsers
+      parameters: 
+        - name: Authorization
+          in: header
+          required: true
+          type: string
+      responses:
+        '200':
+          description: return list of users
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              data:
+                type: array
+                items: "#/definitions/User"
+  /users/{userId}:
+    put:
+      security:
+        - JWT_Token_User: []
+      tags:
+        - "users"
+      operationId: updateUser
+      parameters: 
+        - name: userId
+          in: path
+          required: true
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: return the basic user information
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              data:
+                $ref: "#/definitions/User"
+    get:
+      security:
+        - JWT_Token_User: []
+      tags:
+        - "users"
+      operationId: getUser
+      parameters: 
+        - name: userId
+          in: path
+          required: true
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: return the basic user information
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              data:
+                $ref: "#/definitions/User"
+  /parcels:
+    post:
+      security:
+        - JWT_Token_User: []
+      tags:
+        - "parcels"
+      description: add a new parcel
+      operationId: postParcel
+      parameters:
+        - name: Authorization
+          in: header
+          description: JWT Token
+          required: true
+          type: string
+      responses:
+        '201':
+          description: return the created parcel
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              data:
+                $ref: "#/definitions/User"
+    get:
+      security:
+        - JWT_Token_Admin: []
+      tags:
+        - "parcels"
+      description: return list of parcels
+      operationId: getParcels
+      parameters:
+        - name: search
+          in: query
+          description: keywords for 
+          required: false
+          type: string
+        - name: page
+          in: query
+          description: page number for pagination
+          required: false
+          type: number
+      responses:
+        '200':
+          description: success response
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              data:
+                type: array
+                items:
+                  $ref: "#/definitions/Parcel"
+  /parcels/{id}:
+    get:
+      security:
+        - JWT_Token_User: []
+        - JWT_Token_admin: []
+      tags:
+      - "parcels"
+      description: return a single parcel
+      operationId: getSingleParcel
+      parameters:
+        - name: id
+          in: path
+          description: uuid of a parcel
+          required: true
+          type: string
+      responses:
+        '200':
+          description: return a parcel object
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              data:
+                ref: "#/definitions/Parcel"
+  /parcels/{id}/cancel:
+    put:
+      security:
+        - JWT_Token_User: []
+      tags:
+        - "parcels"
+      description: Cancel the specific parcel delivery order
+      operationId: cancelParcel
+      parameters:
+        - name: id
+          in: path
+          description: uuid of a parcel
+          required: true
+          type: string
+      responses:
+        '200':
+          description: return a parcel object
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              message: 'Parcel cancelled successfully'
+  /parcels/{id}/presentLocation:
+    put:
+      security:
+        - JWT_Token_Admin: []
+      tags:
+        - "parcels"
+      description: Change the present location of a specific parcel delivery order
+      operationId: updatePresentLocation
+      parameters:
+        - name: id
+          in: path
+          description: uuid of a parcel
+          required: true
+          type: string
+      responses:
+        '200':
+          description: return a parcel object
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              message: 'Parcel location changed successfully'
+  /parcels/{id}/status:
+    put:
+      security:
+        - JWT_Token_Admin: []
+      tags:
+        - "parcels"
+      description: Change the status of a specific parcel delivery order
+      operationId: updateStatus
+      parameters:
+        - name: id
+          in: path
+          description: uuid of a parcel
+          required: true
+          type: string
+      responses:
+        '200':
+          description: return a parcel object
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              message: 'Parcel status changed successfully'
+
+definitions:
+  User:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+      email:
+        type: string
+        format: email
+      first_name:
+        type: string
+      last_name:
+        type: string
+      province:
+        type: string
+      district:
+        type: string
+    required: 
+     - id
+     - email
+     - first_name
+     - last_name
+     - province
+     - district
+  Parcel:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+      user_id:
+        type: string
+        format: uuid
+      from_province:
+        type: string
+      from_district:
+        type: string
+      to_province:
+        type: string
+      to_district:
+        type: string
+      receiver_names:
+        type: string
+      receiver_phone:
+        type: string
+      receiver_address:
+        type: string
+      weight:
+        type: number
+      price:
+        type: number
+    required: 
+     - user_id
+     - from_province
+     - from_district
+     - to_province
+     - to_district
+     - receiver_names
+     - receiver_phone
+     - receiver_addres
+     - weight
+     - price
