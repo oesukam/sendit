@@ -38,9 +38,17 @@ securityDefinitions:
 paths:
   /auth/login/:
     post:
+      summary: "Logs registered user"
       tags:
         - "auth"
       operationId: authLogin
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Created user object"
+          required: true
+          schema:
+            $ref: "#/definitions/UserLogin"
       responses:
         '200':
           description: return the basic user information
@@ -53,9 +61,16 @@ paths:
                 $ref: "#/definitions/User"
   /auth/signup:
     post:
+      summary: "Register new user"
       tags:
         - "auth"
       operationId: authSignup
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/UserSignup"
       responses:
         '201':
           description: return the basic user information
@@ -68,6 +83,7 @@ paths:
                 $ref: "#/definitions/User"
   /users:
     get:
+      summary: "Fetch a list of users by Admins"
       security:
         - JWT_Token_Admin: []
       tags:
@@ -92,6 +108,7 @@ paths:
                 items: "#/definitions/User"
   /users/{userId}:
     put:
+      summary: "Update user's names, birth date, province, district and city"
       security:
         - JWT_Token_User: []
       tags:
@@ -114,6 +131,7 @@ paths:
               data:
                 $ref: "#/definitions/User"
     get:
+      summary: "Fetch basic user's information"
       security:
         - JWT_Token_User: []
       tags:
@@ -135,8 +153,35 @@ paths:
                 type: boolean
               data:
                 $ref: "#/definitions/User"
+  /users/{userId}/parcels:
+    get:
+      summary: "Fetch a particular user's parcels"
+      security:
+        - JWT_Token_User: []
+      tags:
+        - "users"
+      operationId: getUserParcels
+      parameters: 
+        - name: userId
+          in: path
+          required: true
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: return a list of user's parcels
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              data:
+                type: array
+                items:
+                  $ref: "#/definitions/Parcel"
   /parcels:
     post:
+      summary: "Create a new parcel"
       security:
         - JWT_Token_User: []
       tags:
@@ -149,17 +194,25 @@ paths:
           description: JWT Token
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            $ref: "#/definitions/CreateParcel"
+
       responses:
         '201':
           description: return the created parcel
           schema:
             type: object
             properties:
+              success:
+                type: boolean
               message:
                 type: string
               data:
                 $ref: "#/definitions/User"
     get:
+      summary: "Fetch all parcels by Admins"
       security:
         - JWT_Token_Admin: []
       tags:
@@ -191,6 +244,7 @@ paths:
                   $ref: "#/definitions/Parcel"
   /parcels/{id}:
     get:
+      summary: "Fetch single parcel by ID"
       security:
         - JWT_Token_User: []
         - JWT_Token_admin: []
@@ -236,7 +290,9 @@ paths:
             properties:
               success:
                 type: boolean
-              message: 'Parcel cancelled successfully'
+              message:
+                type: string
+
   /parcels/{id}/presentLocation:
     put:
       security:
@@ -259,7 +315,9 @@ paths:
             properties:
               success:
                 type: boolean
-              message: 'Parcel location changed successfully'
+              message:
+                type: string
+
   /parcels/{id}/status:
     put:
       security:
@@ -282,7 +340,8 @@ paths:
             properties:
               success:
                 type: boolean
-              message: 'Parcel status changed successfully'
+              message:
+                type: string
 
 definitions:
   User:
@@ -302,13 +361,68 @@ definitions:
         type: string
       district:
         type: string
+      gender:
+        type: string
+      birthDate:
+        type: string
+        nullable: true
+      created_at:
+        type: string
+      updated_at:
+        type: string
     required: 
-     - id
-     - email
-     - first_name
-     - last_name
-     - province
-     - district
+      - id
+      - email
+      - first_name
+      - last_name
+      - province
+      - district
+      - gender
+      - created_at
+      - updated_at
+  UserSignup:
+    type: object
+    properties:
+      email:
+        type: string
+        format: email
+      password:
+        type: string
+        pattern: '.{8,64}'
+      first_name:
+        type: string
+      last_name:
+        type: string
+      province:
+        type: string
+      district:
+        type: string
+      gender:
+        type: string
+      birthDate:
+        type: string
+      city:
+        type: string
+        nullable: true
+    required: 
+      - email
+      - password
+      - first_name
+      - last_name
+      - province
+      - district
+      - gender
+  UserLogin:
+    type: object
+    properties:
+      email:
+        type: string
+        format: email
+      password:
+        type: string
+    required: 
+      - email
+      - password
   Parcel:
     type: object
     properties:
@@ -337,13 +451,49 @@ definitions:
       price:
         type: number
     required: 
-     - user_id
-     - from_province
-     - from_district
-     - to_province
-     - to_district
-     - receiver_names
-     - receiver_phone
-     - receiver_addres
-     - weight
-     - price
+      - id
+      - user_id
+      - from_province
+      - from_district
+      - to_province
+      - to_district
+      - receiver_names
+      - receiver_phone
+      - receiver_addres
+      - weight
+      - price
+  ParcelCreate:
+    type: object
+    properties:
+      user_id:
+        type: string
+        format: uuid
+      from_province:
+        type: string
+      from_district:
+        type: string
+      to_province:
+        type: string
+      to_district:
+        type: string
+      receiver_names:
+        type: string
+      receiver_phone:
+        type: string
+      receiver_address:
+        type: string
+      weight:
+        type: number
+      price:
+        type: number
+    required: 
+      - user_id
+      - from_province
+      - from_district
+      - to_province
+      - to_district
+      - receiver_names
+      - receiver_phone
+      - receiver_addres
+      - weight
+      - price

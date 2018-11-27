@@ -5,7 +5,7 @@ import { usersQuery } from '../db/queries';
 
 const initUsers = () => new Promise(async (resolve, reject) => {
   const now = moment().format();
-  await db.query(usersQuery.insert, [
+  await db.query(usersQuery.insertUser, [
     '648da554-e42f-40dc-92d3-649e3865fd72', // id
     'admin@email.com', // user email
     bcrypt.hashSync('admin@admin', 10), // password
@@ -15,6 +15,8 @@ const initUsers = () => new Promise(async (resolve, reject) => {
     'Male', // gender
     'Kigali', // province
     'Nyarungege', // district
+    'Kigali', // city
+    'Telecom House', // address
     'admin', // user_type
     'confirmed', // confirmed
     null, // confirmation_code
@@ -32,6 +34,8 @@ const initUsers = () => new Promise(async (resolve, reject) => {
     'Female', // gender
     'Kigali', // province
     'Nyarungege', // district
+    'Kigali', // city
+    'Telecom House', // address
     'user', // user_type
     'confirmed', // confirmed
     null, // confirmation_code,

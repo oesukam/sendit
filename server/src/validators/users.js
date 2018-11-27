@@ -10,6 +10,7 @@ const signup = {
   province: Joi.string().required().trim(),
   district: Joi.string().required().trim(),
   city: Joi.string().trim(),
+  address: Joi.string().required().trim(),
 };
 
 const login = {
@@ -17,7 +18,18 @@ const login = {
   password: Joi.string().min(6).required().trim(),
 };
 
+const updateUser = {
+  first_name: Joi.string().trim(),
+  last_name: Joi.string().trim(),
+  birth_date: Joi.date(),
+  province: Joi.string().trim(),
+  district: Joi.string().trim(),
+  city: Joi.string().trim(),
+  address: Joi.string().trim(),
+};
+
 export default {
   login,
   signup,
+  updateUser,
 };

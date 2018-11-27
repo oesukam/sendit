@@ -11,16 +11,17 @@ const user = {
   gender: 'Male',
   province: 'Kigali',
   district: 'Nyarungege',
-  password: '123456',
+  address: 'Telecom House',
+  password: 'user@user',
 };
 const userLogin = {
-  email: 'user@email.com',
+  email: 'oesukam@gmail.com',
   password: 'user@user',
 };
 
 const userLoginAdmin = {
-  email: 'admin@email.com',
-  password: 'admin@admin',
+  email: 'admin@gmail.com',
+  password: '123456@',
 };
 
 const userMail = {
@@ -31,6 +32,14 @@ const userMail = {
   gender: 'Male',
   province: 'Kigali',
   district: 'Burera',
+};
+
+const mailInfo = {
+  from: '"Andela - SendIT" <admin@sendit.service>',
+  to: 'oesukam@gmail.com',
+  subject: 'Testing email',
+  text: 'Testing email',
+  html: '<h2>Testing email</h2>',
 };
 
 const parcelData = {
@@ -67,4 +76,5 @@ export {
   userToken,
   adminToken,
   userMail,
+  mailInfo,
 };

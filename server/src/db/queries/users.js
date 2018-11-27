@@ -8,6 +8,8 @@ CREATE TABLE IF NOT EXISTS
     last_name VARCHAR(128) NOT NULL,
     province VARCHAR(128) NOT NULL,
     district VARCHAR(128) NOT NULL,
+    city VARCHAR(128),
+    address VARCHAR(255) NOT NULL,
     birth_date DATE,
     gender VARCHAR(10),
     status VARCHAR(50) DEFAULT 'active',
@@ -27,12 +29,14 @@ const insertUser = `INSERT INTO users(
   gender,
   province,
   district,
+  city,
+  address,
   user_type,
   confirmed,
   confirmation_code,
   created_at,
   updated_at
- ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
+ ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
  ON CONFLICT DO NOTHING returning *`;
 const dropTableUsers = 'DROP TABLE IF EXISTS users';
 const queryUserById = 'SELECT * FROM users WHERE id = $1';

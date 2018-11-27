@@ -11,7 +11,6 @@ import {
   user,
 } from '../data';
 
-// Creating a new parce;
 describe('parcel', () => {
   let server;
   let parcelId;

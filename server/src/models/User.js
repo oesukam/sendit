@@ -17,7 +17,7 @@ class User extends BaseModel {
   findByEmail(email = '') {
     return new Promise((resolve, reject) => {
       try {
-        db.query(usersQuery.queryByEmail, [email])
+        db.query(usersQuery.queryUserByEmail, [email])
           .then((res) => {
             const row = res.rows[0];
             this.updateFields(row);
@@ -42,18 +42,18 @@ class User extends BaseModel {
         this.id || this.getUID(),
         this.email, this.password, this.first_name, this.last_name,
         this.birth_date, this.gender, this.province, this.district,
-        this.user_type, this.confirmed || 'pending',
+        this.city, this.address || 'Address', this.user_type, this.confirmed || 'pending',
         this.confirmation_code, this.createdAt || now, now,
       ];
       try {
-        db.query(usersQuery.insert, record)
+        db.query(usersQuery.insertUser, record)
           .then((res) => {
             const row = res.rows[0];
             this.updateFields(row);
             resolve(row);
           })
           .catch((err) => {
-            console.log(err)
+            console.log(err);
             logger.error(err);
             reject(new Error('Failed, could not save'));
           });

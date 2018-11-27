@@ -20,7 +20,7 @@ try {
       } else {
         await db.createTables();
         await data.initUsers();
-        await data.parcels();
+        await data.initParcels();
         logger.info('Migrated');
         exitNode();
       }
