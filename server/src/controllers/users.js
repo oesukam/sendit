@@ -44,7 +44,7 @@ const getAll = async (req, res) => {
   const user = new User();
   const { page = 1, search = '' } = req.params;
   const items = await user.getAll({ page, search });
-  res.json({ data: items });
+  res.json({ success: true, data: items });
 };
 
 // Fetch a single user
@@ -71,9 +71,37 @@ const getUserParcels = (req, res) => {
   return res.status(200).json({ success: true, data: items });
 };
 
+// Update a user
+const updateUser = async (req, res) => {
+  const { userId } = req.params;
+  const { body } = req;
+  const user = new User();
+  await user.findById(userId);
+  if (!user.id) {
+    return res.status(404).json({ success: false, message: 'Not found' });
+  }
+
+  if (body.jwtUser) {
+    delete body.jwtUser;
+  }
+  if (Object.keys(body).length === 0) {
+    return res.status(204).json({ success: false, message: 'User not updated' });
+  }
+  user.first_name = body.first_name || user.first_name;
+  user.last_name = body.last_name || user.last_name;
+  user.province = body.province || user.province;
+  user.district = body.district || user.district;
+  user.city = body.city || user.city;
+  user.address = body.address || user.address;
+
+  await user.save();
+  return res.status(200).json({ success: true, data: user.toObject() });
+};
+
 export default {
   confirmEmail,
   getAll,
   getSingle,
   getUserParcels,
+  updateUser,
 };

@@ -18,4 +18,7 @@ router.get('/:userId', jwtVerifyToken(['user', 'admin']), controllers.getSingle)
 // Fetch user parcels
 router.get('/:userId/parcels', jwtVerifyToken(['user']), controllers.getUserParcels);
 
+// Fetch user info
+router.put('/:userId', jwtVerifyToken(['user']), controllers.updateUser);
+
 export default router;

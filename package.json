@@ -17,7 +17,7 @@
   },
   "scripts": {
     "ui": "live-server ui/src --verbose",
-    "start": "babel-node server/src/index.js",
+    "start": "babel-node server/src/index.js migrate",
     "dev": "nodemon --exec babel-node server/src/index.js",
     "build": "babel server/src --out-dir server/dist",
     "serve": "node server/dist/index.js",
@@ -75,7 +75,9 @@
     "nodemailer": "^4.6.8",
     "pg": "^7.6.1",
     "request": "^2.88.0",
+    "swagger-ui-express": "^4.0.1",
     "uuid": "^3.3.2",
-    "winston": "^3.1.0"
+    "winston": "^3.1.0",
+    "yamljs": "^0.3.0"
   }
 }

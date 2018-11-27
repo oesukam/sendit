@@ -45,15 +45,15 @@ Using Postman to access these endpoints
 | /api/v1/auth/login         | POST      | Login registered user  |
 | /api/v1/auth/signup        | POST      | Register a new User    |
 | /api/v1/users    | GET | Fetch all parcels  |
-| /api/v1/users/<userId>     | GET, PUT | Get and update user info  |
-| /api/v1/users/<userId/ confirmEmail/confirmationCode        | GET      | Confirm user email    |
-| /api/v1/users/<userID>parcels         | GET      | Get particular user parcels  |
+| /api/v1/users/`<userId>`     | GET, PUT | Get and update user info  |
+| /api/v1/users/`<userId>`/ confirmEmail/confirmationCode        | GET      | Confirm user email    |
+| /api/v1/users/`<userID>`/parcels         | GET      | Get particular user parcels  |
 | /api/v1/parcels       | GET      | Fetch all parcels    |
 | /api/v1/parcels       | POST      | A a new parcel    |
-| /api/v1/parcels/<userId>/cancel       | PUT      | Update a parcel    |
-| /api/v1/parcels/<userId>/status       | PUT      | Update a parcel status    |
-| /api/v1/parcels/<userId>/presentLocation       | PUT      | Update a parcel current location    |
-| /api/v1/parcels/<userId>/destination       | PUT      | Update a parcel destination    |
+| /api/v1/parcels/`<userId>`/cancel       | PUT      | Update a parcel    |
+| /api/v1/parcels/`<userId>`/status       | PUT      | Update a parcel status    |
+| /api/v1/parcels/`<userId>`/presentLocation       | PUT      | Update a parcel current location    |
+| /api/v1/parcels/`<userId>`/destination       | PUT      | Update a parcel destination    |
 
 
 Explain what these tests test and why

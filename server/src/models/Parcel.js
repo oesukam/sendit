@@ -38,14 +38,14 @@ class Parcel extends BaseModel {
         now,
       ];
       try {
-        db.query(parcelsQuery.insert, record)
+        db.query(parcelsQuery.insertParcel, record)
           .then((res) => {
             const row = res.rows[0];
             this.updateFields(row);
             resolve(row);
           })
           .catch((err) => {
-            console.log(err)
+            console.log(err);
             logger.error(err);
             reject(new Error('Failed, could not save'));
           });
@@ -61,7 +61,7 @@ class Parcel extends BaseModel {
     const startAt = (page - 1) * limit;
     return new Promise((resolve, reject) => {
       if (!this.storage) reject(new Error('Failed, storage not set'));
-      db.query(parcelsQuery.queryAllByUser, [startAt, userId])
+      db.query(parcelsQuery.queryAllParcelsByUser, [startAt, userId])
         .then(res => resolve(res.rows))
         .catch(err => reject(err));
     });
