@@ -15,7 +15,13 @@ const sideBar = {
       <div class="box sidebar">
         <div class="sidebar__header">
           <div class="profile-avatar"></div>
-          <div class="profile-name">Olivier Esuka</div>
+          <div class="profile-name">
+          ${ 
+            store.user
+            ? store.user.first_name + ' ' + store.user.last_name
+            : 'My Names'
+          }
+          </div>
         </div>
         <div class="sidebar__content">
           <ul class="sidebar__nav">

@@ -79,8 +79,8 @@ const router = async () => {
   request.forEach((el, index) => {
     if (el) {
       if (el) {
-        if (index%2 === 0) {
-          parsedURL.push(`:param${1}`);
+        if (index%2 === 0 && index != 0) {
+          parsedURL.push(`:id`);
           paramIndex += 1;
         } else {
           parsedURL.push(el);
@@ -93,35 +93,26 @@ const router = async () => {
   // Get the page from our hash of supported routes.
   // If the parsed URL is not in our list of supported routes, select the 404 page instead
   const urls = Object.keys(routes);
-  // let url = urls.find(route => {
-  //   const routeParams = route.split('/');
-  //   const requestParams = parsedURL.split('/');
-  //   const paramRegx = /:param/;
-  //   if (routeParams.length === requestParams.length) {
-  //     for (let i = 0; i < routeParams.length; i+=1) {
-  //       if (
-  //         routeParams[i] !== requestParams[i]
-  //         && !paramRegx.test(routeParams[i])
-  //       ) {
-  //         return false;
-  //       }
-  //     }
-  //     return true;
-  //   }
-  //   return false;
-  // })
-  const paramRegx = /:param\d+/; 
-  let url = ''
-  parsedURL.map((val, index) => {
-    if (paramRegx.test(val)) {
-      // parsedURL = parsedURL.replace(/:param[1-9]/, val);
-      url += `/${request[index]}`;
-    } else {
-      url += `/${val}`;
+  let url = urls.find(route => {
+    const routeParams = route.split('/');
+    console.log(routeParams.shift())
+    const requestParams = parsedURL;
+    const paramRegx = /:id/;
+    if (routeParams.length === requestParams.length) {
+      for (let i = 0; i < routeParams.length; i+=1) {
+        if (
+          routeParams[i] !== requestParams[i]
+          && !paramRegx.test(routeParams[i])
+        ) {
+          return false;
+        }
+      }
+      return true;
     }
-    return val;
+    return false;
   })
-  console.log('podpopfo',request, parsedURL, url)
+
+  if (parsedURL.length === 0) url = '/';
 
   let page = routes[url] ? routes[url].page : Error404Page
   mainContent.innerHTML = await page.render();

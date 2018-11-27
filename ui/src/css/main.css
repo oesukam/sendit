@@ -228,3 +228,9 @@ select option {
 .fa {
   color: inherit;
 }
+
+.brand-title {
+  width: 150px;
+  max-width: 80%;
+  margin-bottom: 20px;
+}

@@ -1,5 +1,5 @@
 import map from '../../components/googleMap.js';
-import provinces from '../../utils/store';
+import provinces from '../../utils/store.js';
 
 const Page = {
  render : async () => `

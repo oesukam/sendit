@@ -54,6 +54,7 @@ const login = async (req, res) => {
   const { email, password } = req.body;
   let userData;
   let success = false;
+
   const user = new User();
   try {
     userData = await user.findByEmail(email);

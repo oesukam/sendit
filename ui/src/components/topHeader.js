@@ -4,11 +4,11 @@ const topNav = {
   render: async () => {
     
     const links = [
-      { link: '/', text: 'Home' },
-      { link: '/#/quote', text: 'Get Quote' },
-      { link: '#', text: `Admin`, auth: true, user: 'admin' },
-      { link: '/#/signup', text: 'Signup' },
-      { link: '/#/login', text: 'Login' },
+      { link: '/', text: 'Home', users: [] },
+      { link: '/#/quote', text: 'Get Quote', users: [] },
+      { link: '#', text: `Admin`, auth: true, users: ['admin'] },
+      { link: '/#/signup', text: 'Signup', hide: true },
+      { link: '/#/login', text: 'Login', hide: true },
       { link: '/#/profile/:id', text: '<i class="fa fa-user mr-5"></i> My Account', auth: true },
     ]
     const view = `
@@ -39,7 +39,12 @@ const topNav = {
         <nav id="menu-nav" class="nav pull-right">
           <ul>
             ${links.map(el => {
-              if (el.auth ? store.auth : true) {
+              if (
+                el.auth
+                ? store.auth
+                : el.hide || el.users.indexOf(store.user.user_type) === -1
+                ? false
+                : true ) {
                 return `
                   <li class="nav-item">
                     <a href="${el.link}">${el.text}</a>

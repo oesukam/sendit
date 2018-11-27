@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import morgan from 'morgan';
 import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
+import cors from 'cors';
 import routes from './routes';
 import joiErrors from './middlewares/joiErrors';
 import { error404 } from './middlewares/responseErrors';
@@ -36,6 +37,7 @@ if (NODE_ENV === 'development') {
 }
 
 app.use(helmet()); // Sets various http headers
+app.use(cors());
 
 /* Apply the body-parser middleware to grab data
   from the request body and create application/json parser
@@ -43,15 +45,19 @@ app.use(helmet()); // Sets various http headers
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+
 app.get('/', (req, res) => {
   res.send(welcomeMessage);
 });
+
+app.use(express.static('../ui/src'));
+
 
 app.use(`${urlPrefixV1}/auth`, routes.auth);
 app.use(`${urlPrefixV1}/users`, routes.users);
 app.use(`${urlPrefixV1}/parcels`, routes.parcels);
 
-app.get('/api/v1/', (req, res) => {
+app.get(`${urlPrefixV1}`, (req, res) => {
   res.send(welcomeMessage);
 });
 

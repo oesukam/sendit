@@ -66,7 +66,7 @@ const connect = () => new Promise((resolve) => {
         resolve(true);
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
         const error = 'Postgress could not connect';
         logger.error(error);
         resolve(false);
