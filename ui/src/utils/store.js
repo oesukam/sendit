@@ -1,18 +1,17 @@
-const token = localStorage.getItem('token') || null;
+const token = localStorage.getItem('token') || '';
 let user = localStorage.getItem('user') || ''
 const data = {
-  auth: token !== null,
+  auth: token !== '',
   token,
   user: user ? JSON.parse(user) : '',
   parcels: [],
-  logout: () => {
-    localStorage.setItem('token', null);
+  logout: function () {
+    localStorage.setItem('token', '');
     localStorage.setItem('user', '');
     this.auth = false;
-    this.token = null
+    this.token = null;
     this.user = '';
     this.parcels = [];
-    console.log(this)
     return true;
   }
 }

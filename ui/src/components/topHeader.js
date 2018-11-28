@@ -1,5 +1,4 @@
-import store from '../utils/store.js';
-
+import store from '../utils/store.js'
 const topNav = {
   render: async () => {
     const { user } = store;
@@ -7,18 +6,18 @@ const topNav = {
       { link: '/', text: 'Home', users: [] },
       { link: '/#/quote', text: 'Get Quote', users: [] },
       { link: '#', text: `Admin`, auth: true, users: ['admin'] },
-      { link: '/#/signup', attr: '@click=logout', text: 'Signup', hide: true },
+      { link: '/#/signup', text: 'Signup', hide: true },
       { link: '/#/login', text: 'Login', hide: true },
       {
         link: `/#/profile/${user.id ? user.id : ':id'}`,
         text: '<i class="fa fa-user mr-5"></i> My Account',
         auth: true,
-
       },
       {
         link: '#',
         text: '<i class="fa fa-sign-out mr-5"></i> Logout',
         auth: true,
+        attr: 'onclick="logout()"',
         classes: 'logout'
       },
     ]
@@ -51,17 +50,18 @@ const topNav = {
           <ul>
             ${links.map(el => {
               if (
-                  el.auth
+                  store.auth
                   ? 
                     store.auth 
                     && (el.users ? el.users.indexOf(store.user.user_type) === -1 : true)
                     && !el.hide
-                  : !el.hide
+                  : 
+                    !el.auth || el.hide
                 ) {
                 return `
                   <li class="nav-item">
                     <a
-                      ${el.attr? el.attr:''} 
+                      ${el.attr? el.attr:'kk'} 
                       href="${el.link}" ${el.classes?`class="${el.classes}"`:''}
                     >
                       ${el.text}
@@ -95,9 +95,8 @@ const topNav = {
     });
 
 
-    function logout (e) {
-      e.preventDefault();
-
+    // Add the logout function to the global object window
+    window.logout = function (e) {
       store.logout();
       location.href = '/'
     };

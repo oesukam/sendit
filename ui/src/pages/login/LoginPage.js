@@ -78,9 +78,15 @@ const Page = {
         if (success && token) {
           localStorage.setItem('token', token);
           localStorage.setItem('user', JSON.stringify(data));
-          store.token = token,
-          store.user = data
-          location.href = `/#/profile/${data.id}`;
+          
+          store.auth = true;
+          store.token = token;
+          store.user = { ...data };
+
+          // Wait for a second
+          setTimeout(() => {
+            location.href = `/#/profile/${data.id}`;
+          }, 1000);
         }
 
       })
