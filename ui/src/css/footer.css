@@ -10,7 +10,7 @@
 }
 
 .footer-title {
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: #fff;
 }
 
@@ -26,6 +26,7 @@
 }
 .footer-list li a {
   color: #fff;
+  font-size: 0.9rem;
 }
 .footer-list li a:hover,
 .footer-list li a.active {

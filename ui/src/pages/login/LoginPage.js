@@ -10,6 +10,7 @@ const Page = {
           <p class="align-center">
             <img class="brand-title" src="./images/logo-blue.png" alt="logo">
           </p>
+          <div class="form-error error-message"></div>
           <form action="#">
             <input type="text" name="email" id="email" placeholder="Email">
             <div class="form-error email"></div>
@@ -31,6 +32,7 @@ const Page = {
   };
   const testEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
+  const errorMessage = document.querySelector('.form-error.error-message');
   const email = document.querySelector('#email');
   const emailError = document.querySelector('.form-error.email');
   const password = document.querySelector('#password');
@@ -43,6 +45,7 @@ const Page = {
   submitLogin.addEventListener('click', (e) => {
     e.preventDefault();
     loading.classList.add('active');
+    errorMessage.textContent = ''
     // Reset form errors to empty string
     emailError.textContent = '';
     passwordError.textContent = '';
@@ -66,6 +69,12 @@ const Page = {
       passwordError.textContent = 'Password Required.';
       hasError = true;
     }
+
+    if (form.password && form.password.length < 6) {
+      passwordError.style.color = 'red';
+      passwordError.textContent = 'Password must have at least 6 characters.';
+      hasError = true;
+    }
     if (hasError) {
       setTimeout(() => loading.classList.remove('active'), 2000);
       return;
@@ -73,8 +82,9 @@ const Page = {
     fetchAPI('/auth/login', { method: 'post', body: form })
       .then((res) => {
         const { success, data, token } = res;
-        loading.classList.remove('active');
-
+        if (res.message) {
+          errorMessage.textContent = res.message;
+        }
         if (success && token) {
           localStorage.setItem('token', token);
           localStorage.setItem('user', JSON.stringify(data));
@@ -89,10 +99,17 @@ const Page = {
           }, 1000);
         }
 
+        // Wait for 2 seconds to smooth the spinner
+        setTimeout(() => {
+          loading.classList.remove('active');
+        }, 2000);
       })
       .catch((err) => {
         loading.classList.remove('active');
         console.log(err);
+        if (err.message) {
+          errorMessage.textContent = err.message;
+        }
       })
   })
 

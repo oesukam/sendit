@@ -26,9 +26,14 @@ a {
 }
 .form-error {
   min-height: 20px;
-  font-size: 1rem;
+  font-size: 0.8rem;
   color: transparent;
   margin: 5px;
+}
+.form-error.error-message {
+  margin-bottom: 10px;
+  color: red;
+  font-size: 1rem;
 }
 .form-error .has-error {
   color: red;
@@ -43,6 +48,10 @@ input, select, textarea {
   line-height: 1.5rem;
   font-size: 1.1rem;
   outline: none;
+  color: rgba(0,0,0,.3);
+}
+input::placeholder, select::placeholder, textarea::placeholder {
+  color: rgba(0,0,0,.3);
 }
 input, textarea {
   background-color: #fff;
@@ -232,5 +241,5 @@ select option {
 .brand-title {
   width: 150px;
   max-width: 80%;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }

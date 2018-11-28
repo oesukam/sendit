@@ -54,7 +54,7 @@ const Page = {
                       <td>Await pick up</td>
                       <td class="align-right">
                         <a href="order.html" class="btn-edit">
-                          <i class="fa fa-edit"></i> Edit
+                          <i class="fa fa-edit"></i>
                         </a>
                       </td>
                     </tr>
@@ -68,7 +68,7 @@ const Page = {
                       <td>Delivered</td>
                       <td class="align-right">
                         <a href="order.html" class="btn-edit">
-                          <i class="fa fa-edit"></i> Edit
+                          <i class="fa fa-edit"></i>
                         </a>
                       </td>
                     </tr>
@@ -82,7 +82,7 @@ const Page = {
                       <td>In Process</td>
                       <td class="align-right">
                         <a href="order.html" class="btn-edit">
-                          <i class="fa fa-edit"></i> Edit
+                          <i class="fa fa-edit"></i>
                         </a>
                       </td>
                     </tr>
