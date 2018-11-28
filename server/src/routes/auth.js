@@ -14,6 +14,8 @@ router.post('/signup', celebrate({
 controllers.signup);
 
 // Login route
-router.post('/login', controllers.login);
+router.post('/login', celebrate({
+  body: users.login,
+}), controllers.login);
 
 export default router;

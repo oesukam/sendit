@@ -59,12 +59,12 @@ const getSingle = async (req, res) => {
   return res.status(200).json({ success: true, data: user.toObject() });
 };
 
-const getUserParcels = (req, res) => {
+const getUserParcels = async (req, res) => {
   const { keywords = '', page = 1 } = req.query;
   const { userId } = req.params;
   const parcel = new Parcel();
-  const items = parcel.getAllByUser({ keywords, userId, page });
-  if (!parcel) {
+  const items = await parcel.getAllByUser({ keywords, userId, page });
+  if (!items) {
     return res.status(404).json({ success: false, message: 'Not found' });
   }
 

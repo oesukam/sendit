@@ -43,8 +43,30 @@ const insertParcel = `INSERT INTO parcels (
 ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) 
 ON CONFLICT DO NOTHING returning * `;
 
+const updateParcel = `UPDATE parcels SET
+  user_id = $2,
+  tracking_number = $3,
+  from_province = $4,
+  from_district = $5,
+  to_province = $6,
+  to_district = $7,
+  present_location = $8,
+  receiver_names = $9,
+  receiver_phone = $10,
+  receiver_address = $11,
+  weight = $12,
+  price = $13,
+  description = $14,
+  status = $15,
+  updated_at = $16,
+  created_at = $17
+  WHERE id = $1 `;
+
 const queryAllParcels = 'SELECT * FROM parcels LIMIT 25 OFFSET $1';
-const queryAllParcelsByUser = 'SELECT * FROM parcels WHERE user_id = $2 LIMIT 25 OFFSET $1';
+const queryAllParcelsByUser = `
+  SELECT parcels.*, users.first_name, users.last_name 
+  FROM parcels INNER JOIN users ON parcels.user_id = users.id 
+  WHERE parcels.user_id = $2 LIMIT 25 OFFSET $1`;
 
 const queryParcelById = 'SELECT * FROM parcels WHERE id = $1';
 
@@ -67,4 +89,5 @@ export default {
   queryAllParcelsByUser,
   queryParcelById,
   queryFirstParcel,
+  updateParcel,
 };

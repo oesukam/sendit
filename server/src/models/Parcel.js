@@ -18,6 +18,12 @@ class Parcel extends BaseModel {
       const data = this.toObject();
       if (!data) reject(new Error('Field empty'));
       const now = moment().format();
+      let query;
+      if (this.id) {
+        query = parcelsQuery.updateParcel;
+      } else {
+        query = parcelsQuery.insertParcel;
+      }
       const record = [
         this.id || this.getUID(),
         this.user_id,
@@ -38,7 +44,7 @@ class Parcel extends BaseModel {
         now,
       ];
       try {
-        db.query(parcelsQuery.insertParcel, record)
+        db.query(query, record)
           .then((res) => {
             const row = res.rows[0];
             this.updateFields(row);
@@ -62,7 +68,10 @@ class Parcel extends BaseModel {
     return new Promise((resolve, reject) => {
       if (!this.storage) reject(new Error('Failed, storage not set'));
       db.query(parcelsQuery.queryAllParcelsByUser, [startAt, userId])
-        .then(res => resolve(res.rows))
+        .then((res) => {
+          const { rows = [] } = res;
+          resolve(rows);
+        })
         .catch(err => reject(err));
     });
   }
