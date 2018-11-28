@@ -24,6 +24,10 @@ const header = document.getElementById('top-menu');
 const mainContent = document.getElementById('main-content');
 const footer = document.getElementById('footer');
 
+const loadingPage = document.querySelector('.loading');
+
+import store from './utils/store.js';
+
 // Pages routes
 const routes = {
   '/': {
@@ -37,10 +41,12 @@ const routes = {
   '/login': {
     name: 'Login',
     page: LoginPage,
+    hide: true,
   },
   '/signup': {
     name: 'Signup',
     page: SignupPage,
+    hide: true,
   },
   '/create_parcel': {
     name: 'Create a parcel',
@@ -49,30 +55,28 @@ const routes = {
   '/profile/:id': {
     name: 'Profile',
     page: ProfilePage,
+    auth: true,
   },
   '/profile/:id/parcels': {
     name: 'My Parcels',
     page: ProfilePage,
+    auth: true,
   },
   '/admin/parcels': {
     name: 'Admin Parcels',
     page: AdminParcelsPage,
+    auth: true,
   },
   '/admin/parcels/:id': {
     name: 'Admin Parcels',
     page: AdminParcelPage,
+    auth: true,
   }
 };
 
 
 // The router code. Takes a URL, checks against the list of supported routes and then renders the corresponding content page.
 const router = async () => {
-  // Render the Header and footer of the page
-  header.innerHTML = await topHeader.render();
-  await topHeader.after_render();
-  footer.innerHTML = await bottomFooter.render();
-  await bottomFooter.after_render();
-
   let request = navigation.extractRequestURL()
   let parsedURL = [];
   let paramIndex = 1;
@@ -89,13 +93,12 @@ const router = async () => {
     }
   });
 
-  
   // Get the page from our hash of supported routes.
   // If the parsed URL is not in our list of supported routes, select the 404 page instead
   const urls = Object.keys(routes);
   let url = urls.find(route => {
-    const routeParams = route.split('/');
-    console.log(routeParams.shift())
+    let routeParams = route.split('/');
+    routeParams.shift()
     const requestParams = parsedURL;
     const paramRegx = /:id/;
     if (routeParams.length === requestParams.length) {
@@ -114,10 +117,32 @@ const router = async () => {
 
   if (parsedURL.length === 0) url = '/';
 
+  // Check if the route is protected
+  if (routes[url].auth || store.auth) {
+    if (routes[url].hide || !store.auth) {
+      url = '/';
+    }
+  }
   let page = routes[url] ? routes[url].page : Error404Page
+
+  loadingPage.classList.add('active');
+  // Render the Header and footer of the page
+  header.innerHTML = await topHeader.render();
+  await topHeader.after_render();
+
+  // Render content
   mainContent.innerHTML = await page.render();
   const menuLink = document.querySelecter
   await page.after_render();
+
+  // Render footer
+  footer.innerHTML = await bottomFooter.render();
+  await bottomFooter.after_render();
+  
+  // Wait for a second to remove the loading spinner
+  setTimeout(() => {
+    loadingPage.classList.remove('active'); 
+  }, 1000)
 }
 
 // Listen on hash change:

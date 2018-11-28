@@ -25,7 +25,7 @@ const sendConfirmEmail = (user = '') => {
             Or copy the link below
           <p><br>${HOST_URL}/#/profile/${user.id}/confirmEmail/${user.confirmation_code} 
         </div>
-        <p style="color: #5a5a5a !important;>Thank you, <br> Andela - SendIT Team</p>
+        <p style="color: #5a5a5a !important;">Thank you, <br> Andela - SendIT Team</p>
       </div>
     `;
     return mailer({ subject: 'Email confirmation', to: user.email, html: mailBody });
@@ -44,7 +44,7 @@ const sendEmailConfirmed = (user = '') => {
           Your email <${user.email}> has been confirmed, your are now
           able to make a parcel delivery order
         <p/>
-        <p style="color: #5a5a5a !important;"
+        <p style="color: #5a5a5a !important;">
           Thank you, <br> Andela - SendIT Team
         </p>
       </div>
@@ -62,11 +62,11 @@ const sendParcelStatusChanged = (user = '', parcel = '') => {
         <h2 style="color: #3359DF; text-align: center;">SendIT - Parcel Status Changed</h2>
       </div>
       <p style="font-size: 1.2rem; line-height: 2rem; color: #5a5a5a;">
-        Dear ${user.first_name}, <br>
-        Your parcel status with the following tracking number: ${parcel.trackingNumber || parcel.id} 
-        was changed to ${parcel.status}
+        Dear <strong>${user.first_name} ${user.last_name}</strong>, <br>
+        Your parcel status with the following tracking number: ${parcel.tracking_number || parcel.id} 
+        was changed to <strong>${parcel.status}</strong>
       <p/>
-      <p style="color: #5a5a5a !important;"
+      <p style="color: #5a5a5a !important;">
         Thank you, <br> Andela - SendIT Team
       </p>
     </div>
@@ -82,11 +82,11 @@ const sendParcelLocationChanged = (user = '', parcel = '') => {
         <h2 style="color: #3359DF; text-align: center;">SendIT - Parcel Status Changed</h2>
       </div>
       <p style="font-size: 1.2rem; line-height: 2rem; color: #5a5a5a;">
-        Dear ${user.first_name}, <br>
+        Dear <strong>${user.first_name} ${user.last_name}</strong>, <br>
         The current location of your parcel (${parcel.tracking_number || parcel.id}) 
         is at ${parcel.present_location}
       <p/>
-      <p style="color: #5a5a5a !important;"
+      <p style="color: #5a5a5a !important;">
         Thank you, <br> Andela - SendIT Team
       </p>
     </div>
@@ -102,11 +102,11 @@ const sendParcelDestinationChanged = (user = '', parcel = '') => {
         <h2 style="color: #3359DF; text-align: center;">SendIT - Parcel Status Changed</h2>
       </div>
       <p style="font-size: 1.2rem; line-height: 2rem; color: #5a5a5a;">
-        Dear ${user.first_name}, <br>
+        Dear <strong>${user.first_name} ${user.last_name}</strong>, <br>
         The parcel destination of the tracking number (${parcel.tracking_number || parcel.id}) 
         was changed to:<p/><br><p style="text-transform: capitalize; font-weight: 600;">
-        ${parcel.to_province}, ${parcel.to_district}<br>${parcel.receiver_address}</p>
-      <p style="color: #5a5a5a !important;"
+        <strong>${parcel.to_province}, ${parcel.to_district}<br>${parcel.receiver_address}</strong></p>
+      <p style="color: #5a5a5a !important;">
         Thank you, <br> Andela - SendIT Team
       </p>
     </div>

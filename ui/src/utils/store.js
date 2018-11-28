@@ -1,10 +1,20 @@
 const token = localStorage.getItem('token') || null;
-const user = JSON.parse(localStorage.getItem('user') || '')
+let user = localStorage.getItem('user') || ''
 const data = {
-  auth: true || token !== null,
+  auth: token !== null,
   token,
-  user,
+  user: user ? JSON.parse(user) : '',
   parcels: [],
+  logout: () => {
+    localStorage.setItem('token', null);
+    localStorage.setItem('user', '');
+    this.auth = false;
+    this.token = null
+    this.user = '';
+    this.parcels = [];
+    console.log(this)
+    return true;
+  }
 }
 
 export default data;

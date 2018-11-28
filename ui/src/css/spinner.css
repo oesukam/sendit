@@ -14,6 +14,9 @@
 .loading.active {
   display: flex;
 }
+.loading.page {
+  background-color: #000;
+}
 .loader,
 .loader:after {
   border-radius: 50%;

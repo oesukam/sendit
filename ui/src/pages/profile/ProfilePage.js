@@ -4,7 +4,6 @@ import store from '../../utils/store.js'
 
 const Page = {
   render : async () => {
-    console.log(store)
     const view = `
       <div class="container">
         <div class="row">

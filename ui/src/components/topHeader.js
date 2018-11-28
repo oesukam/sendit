@@ -2,14 +2,25 @@ import store from '../utils/store.js';
 
 const topNav = {
   render: async () => {
-    
+    const { user } = store;
     const links = [
       { link: '/', text: 'Home', users: [] },
       { link: '/#/quote', text: 'Get Quote', users: [] },
       { link: '#', text: `Admin`, auth: true, users: ['admin'] },
-      { link: '/#/signup', text: 'Signup', hide: true },
+      { link: '/#/signup', attr: '@click=logout', text: 'Signup', hide: true },
       { link: '/#/login', text: 'Login', hide: true },
-      { link: '/#/profile/:id', text: '<i class="fa fa-user mr-5"></i> My Account', auth: true },
+      {
+        link: `/#/profile/${user.id ? user.id : ':id'}`,
+        text: '<i class="fa fa-user mr-5"></i> My Account',
+        auth: true,
+
+      },
+      {
+        link: '#',
+        text: '<i class="fa fa-sign-out mr-5"></i> Logout',
+        auth: true,
+        classes: 'logout'
+      },
     ]
     const view = `
       <div class="meu-header">
@@ -40,14 +51,21 @@ const topNav = {
           <ul>
             ${links.map(el => {
               if (
-                el.auth
-                ? store.auth
-                : el.hide || el.users.indexOf(store.user.user_type) === -1
-                ? false
-                : true ) {
+                  el.auth
+                  ? 
+                    store.auth 
+                    && (el.users ? el.users.indexOf(store.user.user_type) === -1 : true)
+                    && !el.hide
+                  : !el.hide
+                ) {
                 return `
                   <li class="nav-item">
-                    <a href="${el.link}">${el.text}</a>
+                    <a
+                      ${el.attr? el.attr:''} 
+                      href="${el.link}" ${el.classes?`class="${el.classes}"`:''}
+                    >
+                      ${el.text}
+                    </a>
                   </li>
                 `;
               }
@@ -74,7 +92,16 @@ const topNav = {
         navLinks.forEach(nav => nav.classList.remove('active'))
         e.target.classList.add('active');
       })
-    })
+    });
+
+
+    function logout (e) {
+      e.preventDefault();
+
+      store.logout();
+      location.href = '/'
+    };
+
   }
 }
 
