@@ -178,6 +178,9 @@
 .table td, th {
   border: 1px solid rgba(0,0,0,0.1);
 }
+.table td:first-child {
+  text-align: center;
+}​
 @media only screen and (max-width: 768px) {
   .col-1, .col-2, .col-3,
   .col-4, .col-5, .col-6,

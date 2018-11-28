@@ -2,10 +2,7 @@ import express from 'express';
 import { celebrate } from 'celebrate';
 import dotenv from 'dotenv';
 import { parcels } from '../validators/index';
-import Parcel from '../models/Parcel';
-import User from '../models/User';
 import { jwtVerifyToken } from '../middlewares';
-import mail from '../controllers/mailers';
 import controllers from '../controllers/parcels';
 
 dotenv.config();
@@ -18,7 +15,10 @@ router.post('/',
   controllers.createParcel);
 
 // Fetch parcels
-router.get('/', jwtVerifyToken(['admin']), controllers.getAll);
+router.get('/',
+  celebrate({ query: parcels.parcelQueryParams }),
+  jwtVerifyToken(['admin']),
+  controllers.getAll);
 
 // Fetch a single parcel
 router.get('/:id', jwtVerifyToken(['user', 'admin']), controllers.getSingle);

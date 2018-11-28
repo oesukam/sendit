@@ -106,7 +106,6 @@ const Page = {
       })
       .catch((err) => {
         loading.classList.remove('active');
-        console.log(err);
         if (err.message) {
           errorMessage.textContent = err.message;
         }

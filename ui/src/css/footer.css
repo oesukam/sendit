@@ -1,12 +1,17 @@
 #footer {
-  background-image: linear-gradient(to bottom, rgb(51, 89, 223, 0.9), #7885b1), url('../images/blur-background.jpg');
-  background-color: #3359DF;
   width: 100%;
   min-height: 100px;
+  
+}
+.footer-container {
+  background-color: #3359DF;
   padding: 20px 0px;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  background-image: linear-gradient(to bottom, rgb(51, 89, 223, 0.9), #7885b1), url('../images/blur-background.jpg');
+  height: 100%;
+  width: 100%;
 }
 
 .footer-title {

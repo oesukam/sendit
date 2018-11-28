@@ -115,18 +115,26 @@ class BaseModel {
     return new Promise((resolve, reject) => {
       if (!this.storage) reject(new Error('Failed, storage not set'));
       let query;
+      let countQuery;
       switch (this.storage) {
         case 'users':
           query = usersQuery.queryAllUsers;
+          countQuery = usersQuery.countAllUsers;
           break;
         case 'parcels':
           query = parcelsQuery.queryAllParcels;
+          countQuery = parcelsQuery.countAllParcels;
           break;
         default:
           break;
       }
       db.query(query, [startAt])
-        .then(res => resolve(res.rows))
+        .then(async (res) => {
+          const { rows = [] } = res;
+          const results = await db.query(countQuery);
+          const { count = 0 } = results.rows[0];
+          resolve({ total: parseInt(count, 10), page, data: rows });
+        })
         .catch(err => reject(err));
     });
   }

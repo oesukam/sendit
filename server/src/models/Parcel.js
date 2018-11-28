@@ -68,9 +68,11 @@ class Parcel extends BaseModel {
     return new Promise((resolve, reject) => {
       if (!this.storage) reject(new Error('Failed, storage not set'));
       db.query(parcelsQuery.queryAllParcelsByUser, [startAt, userId])
-        .then((res) => {
+        .then(async (res) => {
           const { rows = [] } = res;
-          resolve(rows);
+          const results = await db.query(parcelsQuery.countAllUserParcels, [userId]);
+          const { count = 0 } = results.rows[0];
+          resolve({ total: parseInt(count, 10), page, data: rows });
         })
         .catch(err => reject(err));
     });

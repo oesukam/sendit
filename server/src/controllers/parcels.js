@@ -8,19 +8,27 @@ dotenv.config();
 const createParcel = async (req, res) => {
   const { body } = req;
   const { jwtUser } = body;
-  const user = new User();
-  await user.findById(body.user_id);
-  if (!user.id || user.id !== jwtUser.id) {
+  if (!jwtUser.id) {
     return res.status(401).json({
       success: false,
       message: 'Unauthorized Access',
     });
   }
+
   delete body.jwtUser;
-  const parcel = new Parcel({ ...body, present_location: body.city || body.district });
+  body.user_id = jwtUser.id;
+  const parcel = new Parcel({
+    ...body,
+    present_location: body.city || body.district,
+  });
 
   await parcel.save();
-
+  if (!parcel.id) {
+    return res.status(401).json({
+      success: false,
+      message: 'Parcel could not be saved',
+    });
+  }
   return res.status(201).json({ success: true, data: parcel.toObject() });
 };
 
@@ -28,11 +36,9 @@ const createParcel = async (req, res) => {
 const getAll = async (req, res) => {
   const { search = '', page = 1 } = req.query;
   const parcel = new Parcel();
-  const items = await parcel.getAll({ search, page });
-  if (!parcel) {
-    return res.status(404).json({ success: false, message: 'Not found' });
-  }
-  return res.status(200).json({ success: true, data: items });
+  const results = await parcel.getAll({ search, page: parseInt(page, 10) });
+
+  return res.status(200).json({ success: true, ...results });
 };
 
 // Fetch a single parcel

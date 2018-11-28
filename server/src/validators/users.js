@@ -10,7 +10,7 @@ const signup = {
   province: Joi.string().required().trim(),
   district: Joi.string().required().trim(),
   city: Joi.string().trim(),
-  address: Joi.string().required().trim(),
+  address: Joi.string().trim(),
 };
 
 const login = {
@@ -28,8 +28,14 @@ const updateUser = {
   address: Joi.string().trim(),
 };
 
+const userQueryParams = {
+  page: Joi.number().min(1),
+  search: Joi.string().trim(),
+};
+
 export default {
   login,
   signup,
   updateUser,
+  userQueryParams,
 };
