@@ -471,15 +471,12 @@ definitions:
       - to_district
       - receiver_names
       - receiver_phone
-      - receiver_addres
+      - receiver_address
       - weight
       - price
   ParcelCreate:
     type: object
     properties:
-      user_id:
-        type: string
-        format: uuid
       from_province:
         type: string
       from_district:
@@ -499,7 +496,6 @@ definitions:
       price:
         type: number
     required: 
-      - user_id
       - from_province
       - from_district
       - to_province

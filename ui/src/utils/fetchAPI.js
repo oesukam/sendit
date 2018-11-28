@@ -23,7 +23,6 @@ const fetchAPI = (endpoint, config) => new Promise((resolve, reject) => {
   fetch(`${URL}${endpoint}`, options)
     .then((res) => res.json())
     .then((res) => {
-      console.log(res)
       resolve(res)
     })
     .catch((err) => reject(err));

@@ -43,8 +43,8 @@ const confirmEmail = async (req, res) => {
 const getAll = async (req, res) => {
   const user = new User();
   const { page = 1, search = '' } = req.params;
-  const items = await user.getAll({ page, search });
-  res.json({ success: true, data: items });
+  const results = await user.getAll({ page: parseInt(page, 10), search });
+  res.json({ success: true, ...results });
 };
 
 // Fetch a single user
@@ -63,12 +63,12 @@ const getUserParcels = async (req, res) => {
   const { keywords = '', page = 1 } = req.query;
   const { userId } = req.params;
   const parcel = new Parcel();
-  const items = await parcel.getAllByUser({ keywords, userId, page });
-  if (!items) {
+  const results = await parcel.getAllByUser({ keywords, userId, page: parseInt(page, 10) });
+  if (!results.page) {
     return res.status(404).json({ success: false, message: 'Not found' });
   }
 
-  return res.status(200).json({ success: true, data: items });
+  return res.status(200).json({ success: true, ...results });
 };
 
 // Update a user

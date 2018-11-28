@@ -77,6 +77,8 @@ const updateParcelStatus = 'UPDATE parcels SET status = $2 WHERE id = $1';
 const updateParcelDestination = `UPDATE parcels 
   SET to_province = $2, to_district = $3 WHERE id = $1
 `;
+const countAllParcels = 'SELECT COUNT(*) FROM parcels';
+const countAllUserParcels = 'SELECT COUNT(*) FROM parcels WHERE user_id = $1';
 
 export default {
   createTableParcels,
@@ -90,4 +92,6 @@ export default {
   queryParcelById,
   queryFirstParcel,
   updateParcel,
+  countAllParcels,
+  countAllUserParcels,
 };

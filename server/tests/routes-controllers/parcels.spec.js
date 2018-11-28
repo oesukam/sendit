@@ -38,7 +38,6 @@ describe('parcel', () => {
         }
         const parcel = {
           ...parcelData,
-          user_id: parcelUserId,
           to_district: 'Test',
         };
         delete parcel.cancelled;

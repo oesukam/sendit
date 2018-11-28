@@ -44,6 +44,7 @@ const queryFirstUser = 'SELECT * FROM users WHERE id = $1 LIMIT 1';
 const queryAllUsers = 'SELECT * FROM users LIMIT 25 OFFSET $1';
 
 const queryUserByEmail = 'SELECT * FROM users WHERE email = $1';
+const countAllUsers = 'SELECT COUNT(*) FROM users';
 
 export default {
   createTableUsers,
@@ -53,4 +54,5 @@ export default {
   queryUserByEmail,
   queryUserById,
   queryFirstUser,
+  countAllUsers,
 };

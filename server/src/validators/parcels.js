@@ -1,7 +1,6 @@
 import { Joi } from 'celebrate';
 
 const create = {
-  user_id: Joi.string().required().trim(),
   from_province: Joi.string().required().trim(),
   from_district: Joi.string().required().trim(),
   to_province: Joi.string().required().trim(),
@@ -40,10 +39,15 @@ const changeDestination = {
   receiver_address: Joi.string().required().trim(),
 };
 
+const parcelQueryParams = {
+  page: Joi.number().min(1),
+  search: Joi.string().trim(),
+};
 
 export default {
   create,
   changeLocation,
   changeStatus,
   changeDestination,
+  parcelQueryParams,
 };
