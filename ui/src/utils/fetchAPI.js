@@ -1,12 +1,14 @@
+import store from './store.js';
 // const URL = 'https://oesukam.github.io';
 const URL = 'http://localhost:3000/api/v1';
 
+const { token = '' } = store;
 const defaultOptions = {
-  method: "GET",
-  // mode: "no-cors",
+  method: 'GET',
   headers: {
-    "Content-Type": "application/json; charset=utf-8",
-    "Accept": "application/json"
+    'Content-Type': 'application/json; charset=utf-8',
+    'Accept': 'application/json',
+    'Authorization': `Bearer ${token}`,
   },
 };
 

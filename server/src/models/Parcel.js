@@ -77,6 +77,21 @@ class Parcel extends BaseModel {
         .catch(err => reject(err));
     });
   }
+
+  getUserParcelsCounters(userId) {
+    return new Promise((resolve, reject) => {
+      if (!this.storage) reject(new Error('Failed, storage not set'));
+      db.query(parcelsQuery.userParcelCounters, [userId])
+        .then(async (res) => {
+          const counters = res.rows[0];
+          resolve({
+            delivered: parseInt(counters.delivered, 10),
+            in_progress: parseInt(counters.in_progress, 10),
+          });
+        })
+        .catch(err => reject(err));
+    });
+  }
 }
 
 export default Parcel;
