@@ -14,7 +14,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+Here are the environment prerequisites for the web app
 
 ```
 - NodeJS
@@ -27,11 +27,12 @@ A step by step series of examples that tell you how to get a development env run
 
 Say what the step will be
 
-```
+
 - Clone the repository
 - Copy .env.example to .env then correct change the corresponding variables
-- Run npm install
-```
+- Run `npm install` to install node packages
+- Run `npm run dev` to start the web app 
+
 
 End with an example of getting some data out of the system or using it for a little demo
 
@@ -39,6 +40,7 @@ End with an example of getting some data out of the system or using it for a lit
 
 ### Endpoints
 Using Postman to access these endpoints
+Please find the API documentation on `https://andela-sendit-api.herokuapp.com/api-docs`
 
 | Endpoint                   | Methods   | Functionalities        |
 | ---------------------------|-----------|------------------------|
@@ -48,6 +50,7 @@ Using Postman to access these endpoints
 | /api/v1/users/`<userId>`     | GET, PUT | Get and update user info  |
 | /api/v1/users/`<userId>`/ confirmEmail/confirmationCode        | GET      | Confirm user email    |
 | /api/v1/users/`<userID>`/parcels         | GET      | Get particular user parcels  |
+| /api/v1/users/`<userID>`/counters         | GET      | Get particular user parcels' counters  |
 | /api/v1/parcels       | GET      | Fetch all parcels    |
 | /api/v1/parcels       | POST      | A a new parcel    |
 | /api/v1/parcels/`<userId>`/cancel       | PUT      | Update a parcel    |
@@ -55,14 +58,6 @@ Using Postman to access these endpoints
 | /api/v1/parcels/`<userId>`/presentLocation       | PUT      | Update a parcel current location    |
 | /api/v1/parcels/`<userId>`/destination       | PUT      | Update a parcel destination    |
 
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
 
 Explain what these tests test and why
 

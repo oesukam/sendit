@@ -68,6 +68,7 @@ const Page = {
       email: '',
       password: '',
     }
+    const formKeys = Object.keys(form);
     // List of povinces and districts of Rwanda
     const testEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
@@ -98,6 +99,7 @@ const Page = {
     const loading = document.querySelector('.loading');
  
    
+
     email.addEventListener('input', inputHandler);
     password.addEventListener('input', inputHandler);
     firstName.addEventListener('input', inputHandler);
@@ -233,6 +235,20 @@ const Page = {
     // Callback function to handle email and password imput
     function inputHandler (e) {
       form[e.target.id] = e.target.value;
+    }
+    // Validation handlers
+    function validateInputs () {
+      const keys = Object.keys(form);
+      let hasError = false;
+      keys.forEach(key => {
+        if (!form[key] && form[key] !== 0) {
+          document.querySelector(`#${key}`).textContent = 'Required';
+          console.log(document.querySelector(`.form-error.${key}`), key)
+          hasError = true;
+        }
+      });
+      loading.classList.remove('active');
+      return hasError;
     }
   }
  }

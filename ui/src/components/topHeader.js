@@ -5,7 +5,8 @@ const topNav = {
     const links = [
       { link: '/', text: 'Home', users: [] },
       { link: '/#/quote', text: 'Get Quote', users: [] },
-      { link: '#', text: `Admin`, auth: true, users: ['admin'] },
+      // { link: '#', text: `Admin`, auth: true, users: ['admin'] },
+      { link: '/#/create_parcel', text: `Add parcel`, auth: true, users: [] },
       { link: '/#/signup', text: 'Signup', hide: true },
       { link: '/#/login', text: 'Login', hide: true },
       {

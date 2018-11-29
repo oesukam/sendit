@@ -2,14 +2,15 @@ import store from '../utils/store.js';
 
 const sideBar = {
   render: async () => {
+    const { user } = store;
     const links = [
       { link: '/', text: 'Home' },
       { link: '/#/quote', text: 'Get Quote' },
       { link: '#', text: `Admin`, auth: true, user: 'admin' },
-      { link: '/#/profile/:id/parcels', text: 'My Parcels' },
+      { link: `/#/profile/${user.id}`, text: 'My Parcels' },
       { link: '/#/create_parcel', text: 'Create a parcel' },
-      { link: '/#/admin/parcels', text: 'Admin Parcels' },
-      { link: '/#/admin/parcels/:id', text: 'View a parcel' },
+      // { link: '/#/admin/parcels', text: 'Admin Parcels' },
+      // { link: '/#/admin/parcels/:id', text: 'View a parcel' },
     ]
     const view = `
       <div class="box sidebar">

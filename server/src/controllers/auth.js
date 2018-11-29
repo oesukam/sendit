@@ -76,8 +76,7 @@ const login = async (req, res) => {
   success = true;
   const token = await jwt.sign({
     id: user.id,
-    user_type:
-    user.user_type,
+    user_type: user.user_type,
   }, JWT_SECRET);
   return res.status(200).json({ success, token, data: user.toObject() });
 };
