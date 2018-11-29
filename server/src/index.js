@@ -46,11 +46,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 
-app.get('/', (req, res) => {
-  res.send(welcomeMessage);
-});
-
-app.use(express.static('../ui/src'));
+app.use('/', express.static('ui/dist'));
 
 
 app.use(`${urlPrefixV1}/auth`, routes.auth);

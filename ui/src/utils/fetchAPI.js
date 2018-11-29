@@ -1,6 +1,5 @@
 import store from './store.js';
-// const URL = 'https://oesukam.github.io';
-const URL = 'http://localhost:3000/api/v1';
+const URL = '/api/v1';
 
 const { token = '' } = store;
 const defaultOptions = {
