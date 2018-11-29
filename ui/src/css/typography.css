@@ -40,5 +40,8 @@ h1, h2, h3, h4, h5 {
 .title.secondary {
   color: #ffa400;
 }
+.capitalize {
+  text-transform: capitalize;
+}
 
 

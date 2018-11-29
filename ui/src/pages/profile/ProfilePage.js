@@ -9,9 +9,10 @@ const Page = {
     let parcels = { data: [], page: 1, total: 0}
     let counters = { delivered: 0, in_progress: 0 }
     if (user.id) {
-      parcels = await fetchAPI(`/users/${user.id}/parcels`);
+      const parcelsData = await fetchAPI(`/users/${user.id}/parcels`) || parcels;
+      parcels = parcels.data ? parcelsData : parcels;
       const result = await fetchAPI(`/users/${user.id}/counters`);
-      counters = result.counters;
+      counters = result.counters || counters;
     }
     const view = `
       <div class="container">
@@ -23,17 +24,17 @@ const Page = {
             <div class="row mt-5">
               <div class="col-4">
                 <div class="box profile-counter">
-                  <p>Total Order: <strong>${counters.delivered + counters.in_progress}</strong></p>
+                  <p>Total Order: <strong>${(counters.delivered + counters.in_progress) || 0}</strong></p>
                 </div>
               </div>
               <div class="col-4">
                 <div class="box profile-counter">
-                  <p><i class="fa fa-tick"></i> Delivered: <strong>${counters.delivered}</strong></p>
+                  <p><i class="fa fa-tick"></i> Delivered: <strong>${counters.delivered || 0}</strong></p>
                 </div>
               </div>
               <div class="col-4">
                 <div class="box profile-counter">
-                  <p><i class="fa fa-truck"></i> In Process: <strong>${counters.in_progress}</strong></p>
+                  <p><i class="fa fa-truck"></i> In Process: <strong>${counters.in_progress || 0}</strong></p>
                 </div>
               </div>
             </div>

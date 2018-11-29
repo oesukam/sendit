@@ -189,6 +189,32 @@ paths:
                 type: array
                 items:
                   $ref: "#/definitions/Parcel"
+  /users/{userId}/counters:
+    get:
+      summary: "Fetch a particular user's parcels counters"
+      security:
+        - JWT_Token_User: []
+      tags:
+        - "users"
+      operationId: getUserParcelsCounters
+      parameters: 
+        - name: userId
+          in: path
+          required: true
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: return the number of delivered, in progress and total of parcels
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              message:
+                type: string
+              data:
+                $ref: "#/definitions/Counters"
   /parcels:
     post:
       summary: "Create a new parcel"
@@ -516,3 +542,12 @@ definitions:
          - "In Transit"
          - "Pending"
          - "Delivered"
+  Counters:
+    type: object
+    properties:
+      delivered:
+        type: number
+      in_progress:
+        type: number
+      total:
+        type: number

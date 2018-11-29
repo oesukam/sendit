@@ -11,7 +11,7 @@ const create = {
   receiver_address: Joi.string().required().trim(),
   weight: Joi.number().positive().required(),
   price: Joi.number().positive().required(),
-  description: Joi.string().trim(),
+  description: Joi.string(),
 };
 
 const changeLocation = {
