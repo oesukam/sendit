@@ -9,6 +9,9 @@
   <title>SendIT - My Profile</title>
 </head>
 <body>
+  <div class="loading active">
+    <div class="loader"></div>
+  </div>
   <header id="top-menu">
     <div class="meu-header">
       <div class="container">
@@ -38,10 +41,26 @@
         <ul>
           <li class="nav-item"><a href="index.html">Home</a></li>
           <li class="nav-item"><a href="quote.html">Get A Quote</a></li>
-          <li class="nav-item active">
-            <a href="profile.html">
-              <i class="fa fa-user mr-5"></i> My Profile
-            </a>
+          <li class="nav-item dropdown">
+            <a href="#">Admin</a>
+            <ul class="dropdown-block">
+              <li class="nav-item"><a href="admin-orders.html">Admin Orders</a></li>
+              <li class="nav-item"><a href="admin-order.html">Admin Update an Order</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a href="signup.html">Register</a></li>
+          <li class="nav-item"><a href="login.html">Login</a></li>
+          <li class="nav-item active dropdown">
+            <a href="#">My Account</a> 
+            <ul class="dropdown-block">
+              <li class="nav-item">
+                <a href="profile.html">
+                  <i class="fa fa-user mr-5"></i> My Profile
+                </a>
+              </li>
+              <li class="nav-item active"><a href="make-order.html">Make an Order</a></li>
+              <li class="nav-item"><a href="orders.html">My Orders</a></li>
+            </ul>
           </li>
         </ul>
       </nav>
@@ -59,7 +78,7 @@
             <div class="profile-sidebar__content">
               <ul class="profile-sidebar__nav">
                 <li><a class="active" href="profile.html">My Profile</a></li>
-                <li><a href="profile.html">My Orders</a></li>
+                <li><a href="orders.html">My Orders</a></li>
                 <li><a href="make-order.html">Make an Order</a></li>
               </ul>
             </div>
@@ -89,13 +108,12 @@
                 <thead>
                   <tr>
                     <th width="20" >No.</th>
-                    <th>From</th>
-                    <th>To</th>
-                    <th>Receiver</th>
-                    <th>Address</th>
-                    <th width="100">Date</th>
-                    <th width="100">Status</th>
-                    <th width="100">Action</th>
+                      <th>From</th>
+                      <th>To</th>
+                      <th width="140">Receiver</th>
+                      <th width="110">Date</th>
+                      <th width="100">Status</th>
+                      <th width="100">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -104,7 +122,6 @@
                     <td>Kigali</td>
                     <td>Gisenyi</td>
                     <td>Franck</td>
-                    <td>.....</td>
                     <td>2018-09-2</td>
                     <td>Await pick up</td>
                     <td class="align-right">
@@ -118,7 +135,6 @@
                     <td>Kigali</td>
                     <td>Gisenyi</td>
                     <td>Anais</td>
-                    <td>.....</td>
                     <td>2018-09-3</td>
                     <td>Delivered</td>
                     <td class="align-right">
@@ -132,7 +148,6 @@
                     <td>Kigali</td>
                     <td>Gisenyi</td>
                     <td>Angel</td>
-                    <td>.....</td>
                     <td>2018-09-3</td>
                     <td>In Process</td>
                     <td class="align-right">

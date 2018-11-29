@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/font-awesome.min.css">
-  <title>SendIT - Login</title>
+  <title>SendIT - My Profile</title>
 </head>
 <body>
   <div class="loading active">
@@ -49,7 +49,7 @@
             </ul>
           </li>
           <li class="nav-item"><a href="signup.html">Register</a></li>
-          <li class="nav-item active"><a href="login.html">Login</a></li>
+          <li class="nav-item"><a href="login.html">Login</a></li>
           <li class="nav-item dropdown">
             <a href="#">My Account</a> 
             <ul class="dropdown-block">
@@ -58,8 +58,7 @@
                   <i class="fa fa-user mr-5"></i> My Profile
                 </a>
               </li>
-              <li class="nav-item"><a href="make-order.html">Single Order View</a></li>
-              <li class="nav-item"><a href="make-order.html">Make an Order</a></li>
+              <li class="nav-item active"><a href="make-order.html">Make an Order</a></li>
               <li class="nav-item"><a href="orders.html">My Orders</a></li>
             </ul>
           </li>
@@ -69,22 +68,84 @@
   </header>
   <div id="main-content">
     <div class="container">
-      <div class="row content-center">
-        <div class="col-4"><br><br>
-          <div class="box login-container">
-            <p class="align-center">
-              <img class="brand-title" src="./images/logo-blue.png" alt="logo">
-            </p>
-            <div class="form-error error-message"></div>
-            <form action="#">
-              <input type="text" name="email" id="email" placeholder="Email">
-              <div class="form-error email"></div>
-  
-              <input type="password" name="password" id="password" placeholder="Password">
-              <div class="form-error password"></div>
-  
-              <button id="submit-login" class="btn primary v-wide mt-10">Login</button>
-            </form>
+      <div class="row profile-container">
+        <div class="col-3">
+          <div class="box profile-sidebar">
+            <div class="profile-sidebar__header">
+              <div class="profile-avatar"></div>
+              <div class="profile-name">Olivier Esuka</div>
+            </div>
+            <div class="profile-sidebar__content">
+              <ul class="profile-sidebar__nav">
+                <li><a href="profile.html">My Profile</a></li>
+                <li><a class="active" href="orders.html">My Orders</a></li>
+                <li><a href="make-order.html">Make an Order</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-9">
+          <div class="row">
+            <div class="col-12">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th width="20" >No.</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th width="140">Receiver</th>
+                    <th width="110">Date</th>
+                    <th width="100">Status</th>
+                    <th width="100">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Kigali</td>
+                    <td>Gisenyi</td>
+                    <td>Franck</td>
+                    <td>2018-09-2</td>
+                    <td>Await pick up</td>
+                    <td class="align-right">
+                      <a href="order.html" class="btn-edit">
+                        <i class="fa fa-edit"></i> Edit
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Kigali</td>
+                    <td>Gisenyi</td>
+                    <td>Anais</td>
+                    <td>2018-09-3</td>
+                    <td>Delivered</td>
+                    <td class="align-right">
+                      <a href="order.html" class="btn-edit">
+                        <i class="fa fa-edit"></i> Edit
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Kigali</td>
+                    <td>Gisenyi</td>
+                    <td>Angel</td>
+                    <td>2018-09-3</td>
+                    <td>In Process</td>
+                    <td class="align-right">
+                      <a href="order.html" class="btn-edit">
+                        <i class="fa fa-edit"></i> Edit
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <nav class="pagination">
+                <a href="#"><i class="fa fa-angle-left"></i> Previous</a>
+                <a href="#">Next <i class="fa fa-angle-right"></i></a>
+              </nav>
+            </div>
           </div>
         </div>
       </div>
@@ -125,6 +186,5 @@
     </div>
   </footer>
   <script src="./js/main.js"></script>
-  <script src="./js/login.js"></script>
 </body>
 </html>

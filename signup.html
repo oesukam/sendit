@@ -9,6 +9,9 @@
   <title>SendIT - Signup</title>
 </head>
 <body>
+  <div class="loading active">
+    <div class="loader"></div>
+  </div>
   <header id="top-menu">
     <div class="meu-header">
       <div class="container">
@@ -36,10 +39,30 @@
       </div>
       <nav id="menu-nav" class="nav pull-right">
         <ul>
-          <li class="nav-item"><a href="index.html">Home</a></li>
-          <li class="nav-item"><a href="quote.html">Get A Quote</a></li>
-          <li class="nav-item active"><a href="signup.html">Register</a></li>
-          <li class="nav-item"><a href="login.html">Login</a></li>
+            <li class="nav-item"><a href="index.html">Home</a></li>
+            <li class="nav-item"><a href="quote.html">Get A Quote</a></li>
+            <li class="nav-item dropdown">
+              <a href="#">Admin</a>
+              <ul class="dropdown-block">
+                <li class="nav-item"><a href="admin-orders.html">Admin Orders</a></li>
+                <li class="nav-item"><a href="admin-order.html">Admin Update an Order</a></li>
+              </ul>
+            </li>
+            <li class="nav-item active"><a href="signup.html">Register</a></li>
+            <li class="nav-item"><a href="login.html">Login</a></li>
+            <li class="nav-item dropdown">
+              <a href="#">My Account</a> 
+              <ul class="dropdown-block">
+                <li class="nav-item">
+                  <a href="profile.html">
+                    <i class="fa fa-user mr-5"></i> My Profile
+                  </a>
+                </li>
+                <li class="nav-item"><a href="order.html">Single Order View</a></li>
+                <li class="nav-item"><a href="make-order.html">Make an Order</a></li>
+                <li class="nav-item"><a href="orders.html">My Orders</a></li>
+              </ul>
+            </li>
         </ul>
       </nav>
     </div>
@@ -47,22 +70,37 @@
   <div id="main-content">
     <div class="container">
       <div class="row content-center">
-        <div class="col-6">
+        <div class="col-4">
           <div class="box signup-container">
-            <h3 class="title primary align-center">Register</h3>
+            <p class="align-center">
+              <img class="brand-title" src="./images/logo-blue.png" alt="logo">
+            </p>
+            <div class="form-error error-message"></div>
             <form action="#">
-              <label for="firstName">First Name</label>
-              <input type="text" name="firstName" id="firstName">
-              <div class="form-error firstName"></div>
+              <input type="text" name="first_name" id="first_name" placeholder="First Name">
+              <div class="form-error first_name"></div>
 
-              <label for="lastName">Last Name</label>
-              <input type="text" name="lastName" id="lastName">
-              <div class="form-error lastName"></div>
-             
-              <label for="province">Province</label>
+              <input type="text" name="last_name" id="last_name" placeholder="Last Name">
+              <div class="form-error last_name"></div>
+            
+              <input type="text" name="email" id="email" placeholder="Email">
+              <div class="form-error email"></div>
+
+              <input type="password" name="password" id="password" placeholder="Password">
+              <div class="form-error password"></div>
+
+              <span class="custom-dropdown">
+                <select id="gender" name="gender">
+                  <option value="">Select Gender</option> 
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </span>
+              <div class="form-error gender"></div>
+
               <span class="custom-dropdown">
                 <select id="province" name="province">
-                  <option value="">Select</option> 
+                  <option value="">Select Province</option> 
                   <option value="eastern">Eastern Province</option>
                   <option value="kigali">Kigali</option>  
                   <option value="northern">Northen Province</option>
@@ -71,27 +109,14 @@
               </span>
               <div class="form-error province"></div>
               
-              <label for="district">District</label>
               <span class="custom-dropdown">
                 <select id="district" name="district">    
-                  <option value="eastern">Select</option>
+                  <option value="">Select District</option>
                 </select>
               </span>
               <div class="form-error district"></div>
 
-              <label for="email">Email</label>
-              <input type="text" name="email" id="email">
-              <div class="form-error email"></div>
-
-              <label for="password">Password</label>
-              <input type="password" name="password" id="password">
-              <div class="form-error password"></div>
-
-              <label for="confirmPassword">Confirm Password</label>
-              <input type="password" name="confirmPassword" id="confirmPassword">
-              <div class="form-error confirmPassword"></div>
-
-              <button class="btn primary">Register</button>
+              <button id="submit-signup" class="btn primary v-wide">Signup</button>
             </form>
           </div>
         </div>
