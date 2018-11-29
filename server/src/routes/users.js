@@ -29,4 +29,9 @@ router.get('/:userId/parcels',
 // Fetch user info
 router.put('/:userId', jwtVerifyToken(['user']), controllers.updateUser);
 
+// Fetch user's parcels counters
+router.get('/:userId/counters',
+  jwtVerifyToken(['user']),
+  controllers.getUserParcelsCounters);
+
 export default router;

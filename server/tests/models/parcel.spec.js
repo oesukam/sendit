@@ -31,4 +31,24 @@ describe('parcel model', () => {
       })
       .catch(() => done());
   });
+
+  it('getUserParcelsCounters() should throw Failed, storage not set', (done) => {
+    const parcel = new Parcel({ ...parcelData });
+    parcel.storage = null;
+    parcel.getUserParcelsCounters()
+      .catch((err) => {
+        expect(err).toBeDefined();
+        done();
+      });
+  });
+
+  it('getAllUser() should throw Failed, storage not set', (done) => {
+    const parcel = new Parcel({ ...parcelData });
+    parcel.storage = null;
+    parcel.getAllByUser()
+      .catch((err) => {
+        expect(err).toBeDefined();
+        done();
+      });
+  });
 });

@@ -57,7 +57,7 @@ const routes = {
     page: ProfilePage,
     auth: true,
   },
-  '/profile/:id/parcels': {
+  '/parcels/:id': {
     name: 'My Parcels',
     page: ProfilePage,
     auth: true,

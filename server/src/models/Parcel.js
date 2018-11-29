@@ -43,21 +43,17 @@ class Parcel extends BaseModel {
         this.created_at || now,
         now,
       ];
-      try {
-        db.query(query, record)
-          .then((res) => {
-            const row = res.rows[0];
-            this.updateFields(row);
-            resolve(row);
-          })
-          .catch((err) => {
-            console.log(err);
-            logger.error(err);
-            reject(new Error('Failed, could not save'));
-          });
-      } catch (err) {
-        reject(new Error('Failed, could not save'));
-      }
+      db.query(query, record)
+        .then((res) => {
+          const row = res.rows[0];
+          this.updateFields(row);
+          resolve(row);
+        })
+        .catch((err) => {
+          console.log(err);
+          logger.error(err);
+          reject(new Error('Failed, could not save'));
+        });
     });
   }
 
@@ -73,6 +69,21 @@ class Parcel extends BaseModel {
           const results = await db.query(parcelsQuery.countAllUserParcels, [userId]);
           const { count = 0 } = results.rows[0];
           resolve({ total: parseInt(count, 10), page, data: rows });
+        })
+        .catch(err => reject(err));
+    });
+  }
+
+  getUserParcelsCounters(userId) {
+    return new Promise((resolve, reject) => {
+      if (!this.storage) reject(new Error('Failed, storage not set'));
+      db.query(parcelsQuery.userParcelCounters, [userId])
+        .then(async (res) => {
+          const counters = res.rows[0];
+          resolve({
+            delivered: parseInt(counters.delivered, 10),
+            in_progress: parseInt(counters.in_progress, 10),
+          });
         })
         .catch(err => reject(err));
     });

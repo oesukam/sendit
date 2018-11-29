@@ -79,7 +79,10 @@ const updateParcelDestination = `UPDATE parcels
 `;
 const countAllParcels = 'SELECT COUNT(*) FROM parcels';
 const countAllUserParcels = 'SELECT COUNT(*) FROM parcels WHERE user_id = $1';
-
+const userParcelCounters = `SELECT 
+  SUM(1) FILTER (WHERE status = 'Delivered' AND user_id = $1) AS delivered,
+  SUM(1) FILTER (WHERE status != 'Delivered' AND user_id = $1) AS in_progress
+  from parcels`;
 export default {
   createTableParcels,
   dropTableParcels,
@@ -94,4 +97,5 @@ export default {
   updateParcel,
   countAllParcels,
   countAllUserParcels,
+  userParcelCounters,
 };
