@@ -16,27 +16,21 @@ class User extends BaseModel {
   // Find user by email
   findByEmail(email = '') {
     return new Promise((resolve, reject) => {
-      try {
-        db.query(usersQuery.queryUserByEmail, [email])
-          .then((res) => {
-            const row = res.rows[0];
-            this.updateFields(row);
-            resolve({ data: row });
-          })
-          .catch((err) => {
-            logger.error(err);
-            reject(new Error('Failed, could query the user'));
-          });
-      } catch (err) {
-        reject(new Error('Failed'));
-      }
+      db.query(usersQuery.queryUserByEmail, [email])
+        .then((res) => {
+          const row = res.rows[0];
+          this.updateFields(row);
+          resolve({ data: row });
+        })
+        .catch((err) => {
+          logger.error(err);
+          reject(new Error('Failed, could query the user'));
+        });
     });
   }
 
   save() {
     return new Promise((resolve, reject) => {
-      const data = this.toObject();
-      if (!data) reject(new Error('Field empty'));
       const now = moment().format();
       const record = [
         this.id || this.getUID(),
@@ -45,21 +39,17 @@ class User extends BaseModel {
         this.city, this.address || 'Address', this.user_type, this.confirmed || 'pending',
         this.confirmation_code, this.createdAt || now, now,
       ];
-      try {
-        db.query(usersQuery.insertUser, record)
-          .then((res) => {
-            const row = res.rows[0];
-            this.updateFields(row);
-            resolve(row);
-          })
-          .catch((err) => {
-            console.log(err);
-            logger.error(err);
-            reject(new Error('Failed, could not save'));
-          });
-      } catch (err) {
-        reject(new Error('Failed, could not save'));
-      }
+      db.query(usersQuery.insertUser, record)
+        .then((res) => {
+          const row = res.rows[0];
+          this.updateFields(row);
+          resolve(row);
+        })
+        .catch((err) => {
+          console.log(err);
+          logger.error(err);
+          reject(new Error('Failed, could not save'));
+        });
     });
   }
 }

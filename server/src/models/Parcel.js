@@ -43,21 +43,17 @@ class Parcel extends BaseModel {
         this.created_at || now,
         now,
       ];
-      try {
-        db.query(query, record)
-          .then((res) => {
-            const row = res.rows[0];
-            this.updateFields(row);
-            resolve(row);
-          })
-          .catch((err) => {
-            console.log(err);
-            logger.error(err);
-            reject(new Error('Failed, could not save'));
-          });
-      } catch (err) {
-        reject(new Error('Failed, could not save'));
-      }
+      db.query(query, record)
+        .then((res) => {
+          const row = res.rows[0];
+          this.updateFields(row);
+          resolve(row);
+        })
+        .catch((err) => {
+          console.log(err);
+          logger.error(err);
+          reject(new Error('Failed, could not save'));
+        });
     });
   }
 

@@ -51,7 +51,7 @@ const getAll = async (req, res) => {
 const getSingle = async (req, res) => {
   const { userId } = req.params;
   const { jwtUser } = req.body;
-  if (jwtUser.id !== userId || jwtUser.user_type !== 'admin') {
+  if (jwtUser.id !== userId) {
     return res.status(401).json({
       success: false,
       message: 'Unauthorized Access',
