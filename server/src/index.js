@@ -46,9 +46,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 
-app.get('/', (req, res) => {
-  res.send(welcomeMessage);
-});
+app.use('/', express.static('ui/src'));
 
 app.use(express.static('../ui/src'));
 
