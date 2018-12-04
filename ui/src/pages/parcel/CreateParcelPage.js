@@ -141,7 +141,7 @@ const Page = {
       receiver_names: '',
       receiver_phone: '',
       receiver_address: '',
-      weight: 0,
+      weight: '',
     }
 
     const formKeys = Object.keys(form);
