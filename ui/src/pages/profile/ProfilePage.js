@@ -55,7 +55,7 @@ const Page = {
                   <tbody>
                     ${ parcels.data.map((val, index) => {
                       return `
-                        <tr>
+                        <tr class="capitalize">
                           <td>${index+1}</td>
                           <td>${val.from_province}, ${val.from_district}</td>
                           <td>${val.to_province}, ${val.to_district}</td>

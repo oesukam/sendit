@@ -3,7 +3,7 @@
  * https://medium.com/@bryanmanuele/how-i-implemented-my-own-spa-routing-system-in-vanilla-js-49942e3c4573
  */
 
-'use strict';
+// 'use strict';
 // Web Pages
 import Error404Page from './pages/error/Error404Page.js';
 import HomePage from './pages/home/HomePage.js';
@@ -118,11 +118,11 @@ const router = async () => {
   if (parsedURL.length === 0) url = '/';
 
   // Check if the route is protected
-  if (routes[url].auth || store.auth) {
-    if (routes[url].hide || !store.auth) {
-      url = '/';
-    }
-  }
+  // if (routes[url].auth || store.auth) {
+  //   if (routes[url].hide || !store.auth) {
+  //     url = '/';
+  //   }
+  // }
   let page = routes[url] ? routes[url].page : Error404Page
 
   loadingPage.classList.add('active');
