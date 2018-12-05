@@ -45,8 +45,11 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-
-app.use('/', express.static('ui/src'));
+if (process.env.NODE_ENV === 'production') {
+  app.use('/', express.static('ui/dist'));
+} else {
+  app.use('/', express.static('ui/src'));
+}
 
 app.use(`${urlPrefixV1}/auth`, routes.auth);
 app.use(`${urlPrefixV1}/users`, routes.users);

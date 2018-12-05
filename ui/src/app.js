@@ -12,6 +12,7 @@ import LoginPage from './pages/login/LoginPage.js';
 import SignupPage from './pages/signup/SignupPage.js';
 import ProfilePage from './pages/profile/ProfilePage.js';
 import CreateParcelPage from './pages/parcel/CreateParcelPage.js'
+import UpdateParcelPage from './pages/parcel/UpdateParcelPage.js'
 import AdminParcelsPage from './pages/admin/AdminParcelsPage.js';
 import AdminParcelPage from './pages/admin/AdminParcelPage.js';
 
@@ -51,14 +52,15 @@ const routes = {
   '/create_parcel': {
     name: 'Create a parcel',
     page: CreateParcelPage,
-  },
-  '/profile/:id': {
-    name: 'Profile',
-    page: ProfilePage,
     auth: true,
   },
   '/parcels/:id': {
-    name: 'My Parcels',
+    name: 'Update parcel',
+    page: UpdateParcelPage,
+    auth: true,
+  },
+  '/profile/:id': {
+    name: 'Profile',
     page: ProfilePage,
     auth: true,
   },

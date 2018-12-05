@@ -36,6 +36,8 @@ const changeDestination = {
     'southern',
   ).required(),
   to_district: Joi.string().required().trim(),
+  receiver_names: Joi.string().required().trim(),
+  receiver_phone: Joi.string().required().trim(),
   receiver_address: Joi.string().required().trim(),
 };
 

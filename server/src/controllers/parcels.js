@@ -166,13 +166,17 @@ const changeDestination = async (req, res) => {
   */
   if (
     parcel.to_province === body.to_province
-    || parcel.to_district === body.to_district
-    || parcel.to_province === body.to_province
+    && parcel.to_district === body.to_district
   ) {
-    return res.status(304).json({ success: false, message: 'Parcel destination was not changed' });
+    return res.status(409).json({
+      success: false,
+      message: 'Parcel destination was not changed',
+    });
   }
   parcel.to_province = body.to_province;
   parcel.to_district = body.to_district;
+  parcel.receiver_names = body.receiver_names;
+  parcel.receiver_phone = body.receiver_phone;
   parcel.receiver_address = body.receiver_address;
   await parcel.save();
 

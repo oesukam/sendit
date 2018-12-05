@@ -236,9 +236,10 @@ const Page = {
             model({
               title,
               body,
+              reload: true,
             });
 
-            resentInputs();
+            resetInputs();
             
             parcel = { ...data };
             // Wait for a second
@@ -261,7 +262,11 @@ const Page = {
     });
     // Callback function to handle email and password imput
     function inputHandler (e) {
-      form[e.target.id] = e.target.value;
+      let { value, id } = e.target;
+      if (id === 'receiver_phone') {
+        value = value.replace(/\D+/g, '');
+      }
+      form[id] = value;
       renderDetails() 
     }
     function renderDetails () {
@@ -271,7 +276,7 @@ const Page = {
       <p>
         From <strong>${form.from_district || '-'}</strong> 
         to <strong class="capitalize">${form.to_district || '-'}</strong>, a parcel of 
-        <strong class="capitalize">${form.weight || '-'} Kg</strong> costs <strong>${price || '-'} RWF</strong>
+        <strong class="capitalize">${form.weight || '-'} Kg</strong> costs <strong>${price.toLocaleString() || '-'} RWF</strong>
       </p>`;
     }
     function validateInputs () {
@@ -291,7 +296,7 @@ const Page = {
       return hasError;
     }
 
-    function resentInputs () {
+    function resetInputs () {
       const keys = Object.keys(form);
       let hasError = false;
       keys.forEach(key => {

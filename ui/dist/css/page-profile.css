@@ -1,0 +1,62 @@
+
+.sidebar {
+  margin-top: 15px;
+  background-color: #3359DF;
+  color: #fff;
+  min-height: 400px;
+}
+.sidebar__header {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-bottom: 1px solid #fff;
+  padding-bottom: 5px;
+}
+
+.profile-avatar {
+  height: 100px;
+  width: 100px;
+  background-image: url('../images/profile-female.png');
+  background-position: center;
+  background-size: cover;
+  background-color: #fff;
+  display: inline-block;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.2);
+}
+.profile-name {
+  color: #fff;
+  margin: 10px;
+}
+.sidebar__nav {
+  list-style-type: none;
+  padding: 0;
+}
+.sidebar__nav li a {
+  color: #fff;
+  display: inline-block;
+  padding: 5px;
+}
+.sidebar__nav li a:hover,
+.sidebar__nav .active {
+  color: #ffa400;
+}
+.profile-counter {
+  font-size: 1.5rem;
+  padding: 0.2rem 15px;
+}
+.btn-edit {
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  padding: 5px 10px;
+  margin: 5px;
+  display: inline-block;
+}
