@@ -7,6 +7,10 @@
 
 SendIT is a courier service that helps users deliver parcels to different destinations. SendIT provides courier quotes based on weight categories. `Case study`: Rwanda.
 
+- UI template: `https://oesukam.github.io/andela-sendit/`
+- Frontend: `https://andela-sendit-api.herokuapp.com`
+- API Documentation: `https://andela-sendit-api.herokuapp.com/api-docs`
+
 
 ## Getting Started
 
@@ -23,11 +27,9 @@ Here are the environment prerequisites for the web app
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
 
-Say what the step will be
-
-
+- Start your postgress server
+- Create a postgress database with any name but make sure to use the same name in the .env file for the PG_DATABASE variable
 - Clone the repository
 - Copy .env.example to .env then correct change the corresponding variables
 - Run `npm install` to install node packages
@@ -72,7 +74,7 @@ For deployment, the .env file or the running environment should have the followi
 - URL=http://localhost:3000
 - FRONT_URL=https://oesukam.github.io
 - PORT=3000
-- NODE_ENV=peoduction
+- NODE_ENV=production
 - JWT_SECRET=
 - MAILGUN_USER=
 - MAILGUN_PASSWORD=
@@ -112,4 +114,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Acknowledgments
 
 * Omolabake Lemboye
+* Deo Kamara
 * Bryan Manuele [Fermi Dirak](https://medium.com/@bryanmanuele/how-i-implemented-my-own-spa-routing-system-in-vanilla-js-49942e3c4573)
