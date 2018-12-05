@@ -13,7 +13,7 @@ host: "andela-sendit-api.herokuapp.com"
 basePath: "/api/v1"
 tags:
 - name: "auth"
-  description: "Access to authentification ressources"
+  description: "Access to protected ressources"
 - name: "parcels"
   description: "Access to parcels ressources"
 - name: "users"
