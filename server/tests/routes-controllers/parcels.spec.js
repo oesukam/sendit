@@ -264,6 +264,8 @@ describe('parcel', () => {
             to_province: 'eastern',
             to_district: 'bugesera',
             receiver_address: 'Address',
+            receiver_names: 'Olivier',
+            receiver_phone: '07832000000',
           },
           headers: {
             Authorization: `Bearer ${userToken}`,
