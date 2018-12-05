@@ -5,7 +5,7 @@ const originIcon = 'https://chart.googleapis.com/chart?' +
 
 const kigaliLatLng = { lat: -1.935114, lng: 30.082111 };
 
-const initMap = ({ from = { lat: -1.935114, lng: 30.082111 }, to = 'gisenyi' } = {}) => {
+const initMap = ({ from = { lat: -1.935114, lng: 30.082111 }, to = '' } = {}) => {
   const mapElement = document.getElementById('quote-map');
   const bounds = new google.maps.LatLngBounds;
   let markersArray = [];

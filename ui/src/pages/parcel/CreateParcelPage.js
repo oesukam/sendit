@@ -132,6 +132,7 @@ const Page = {
     </div>
   `,
   after_render: async () => {
+    await map.after_render();
     const pricePerKg = 1000;
     const form = {
       from_province: '',
@@ -274,19 +275,24 @@ const Page = {
       form.price = price;
       quoteResult.innerHTML = `
       <p>
-        From <strong>${form.from_district || '-'}</strong> 
+        From <strong class="capitalize">${form.from_district || '-'}</strong> 
         to <strong class="capitalize">${form.to_district || '-'}</strong>, a parcel of 
-        <strong class="capitalize">${form.weight || '-'} Kg</strong> costs <strong>${price.toLocaleString() || '-'} RWF</strong>
+        <strong class="capitalize">${form.weight || '-'} Kg</strong> costs <strong>
+        ${price ? price.toLocaleString() : '-'} RWF</strong>
       </p>`;
+      map.after_render(form.from_district, form.to_district);
     }
     function validateInputs () {
       const keys = Object.keys(form);
       let hasError = false;
       keys.forEach(key => {
         if (!form[key] && form[key] !== 0) {
-          document.querySelector(`.form-error.${key}`).textContent = 'Required'
-          document.querySelector(`.form-error.${key}`).style.color = 'red'
-          hasError = true;
+          const tagElement = document.querySelector(`.form-error.${key}`);
+          if (tagElement) {
+            tagElement.textContent = 'Required';
+            tagElement.style.color = 'red'
+            hasError = true;
+          }
         }
         // Set all null field to an empty string
         if (form[key] === null) {

@@ -4,8 +4,8 @@ const map = {
     <div id="quote-map" class="map-location"> Map location</div>
     <div id="output" class="map-output"><strong>Distance: </strong></div>
    `,
-  after_render: async () => {
-    initMap();
+  after_render: async (from, to) => {
+    initMap({from, to});
   },
 };
 
