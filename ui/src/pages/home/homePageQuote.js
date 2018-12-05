@@ -1,7 +1,9 @@
+import googleMap from '../../components/googleMap.js';
+
 const quote = {
   render: async () => `
     <div class="container">
-        <div id="quote-map" class="map-location">Map Location</div>
+        ${await googleMap.render()}
         <div class="box quote-container">
           <h2 class="quote-title">Get A Quote</h2>
           <p class="quote-error">
@@ -62,7 +64,9 @@ const quote = {
         </div>
       </div>
     `,
-    after_render: async () => {},
+    after_render: async () => {
+      await googleMap.after_render();
+    },
 }
 
 export default quote;

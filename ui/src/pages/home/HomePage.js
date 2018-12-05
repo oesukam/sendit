@@ -8,7 +8,9 @@ const Page = {
     ${await homeQuote.render()}
     ${await homeTestimonies.render()}
  `,
- after_render: async () => {}
+ after_render: async () => {
+    await homeQuote.after_render();
+ }
 }
 
 export default Page;

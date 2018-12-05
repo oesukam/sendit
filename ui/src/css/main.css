@@ -215,6 +215,10 @@ select option {
   align-items: center;
   margin-top: 2px;
 }
+.map-output {
+  padding: 15px;
+  background-color: rgb(51, 89, 223, 0.1);
+}
 .pagination {
   display: flex;
   justify-content: space-between;
