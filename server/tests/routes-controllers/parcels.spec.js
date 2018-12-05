@@ -14,7 +14,6 @@ import {
 describe('parcel', () => {
   let server;
   let parcelId;
-  let parcelUserId;
   let userToken;
 
   beforeAll(async (done) => {
@@ -34,7 +33,6 @@ describe('parcel', () => {
       }, (err, res, body) => {
         if (!err) {
           userToken = body.token;
-          parcelUserId = body.data.id;
         }
         const parcel = {
           ...parcelData,
@@ -43,6 +41,7 @@ describe('parcel', () => {
         delete parcel.cancelled;
         delete parcel.present_location;
         delete parcel.id;
+        delete parcel.user_id;
 
         Request.post(`${urlPrefixV1}/parcels`,
           {
@@ -57,7 +56,6 @@ describe('parcel', () => {
             }
             done();
           });
-        // done();
       });
   });
 
@@ -81,11 +79,11 @@ describe('parcel', () => {
     beforeAll(async (done) => {
       const parcel = {
         ...parcelData,
-        user_id: parcelUserId,
       };
       delete parcel.cancelled;
       delete parcel.present_location;
       delete parcel.id;
+      delete parcel.user_id;
 
       Request.post(`${urlPrefixV1}/parcels`,
         {
@@ -100,7 +98,6 @@ describe('parcel', () => {
             data.success = body.success;
             data.data = body.data;
             parcelId = body.data.id;
-            parcelUserId = body.data.user_id;
           }
           done();
         });
@@ -267,6 +264,8 @@ describe('parcel', () => {
             to_province: 'eastern',
             to_district: 'bugesera',
             receiver_address: 'Address',
+            receiver_names: 'Olivier',
+            receiver_phone: '07832000000',
           },
           headers: {
             Authorization: `Bearer ${userToken}`,

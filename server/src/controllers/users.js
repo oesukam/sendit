@@ -50,6 +50,13 @@ const getAll = async (req, res) => {
 // Fetch a single user
 const getSingle = async (req, res) => {
   const { userId } = req.params;
+  const { jwtUser } = req.body;
+  if (jwtUser.id !== userId) {
+    return res.status(401).json({
+      success: false,
+      message: 'Unauthorized Access',
+    });
+  }
   const user = new User();
   await user.findById(userId);
   if (!user.id) {
@@ -59,9 +66,17 @@ const getSingle = async (req, res) => {
   return res.status(200).json({ success: true, data: user.toObject() });
 };
 
+// Get User's parcels
 const getUserParcels = async (req, res) => {
   const { keywords = '', page = 1 } = req.query;
   const { userId } = req.params;
+  const { jwtUser } = req.body;
+  if (jwtUser.id !== userId) {
+    return res.status(401).json({
+      success: false,
+      message: 'Unauthorized Access',
+    });
+  }
   const parcel = new Parcel();
   const results = await parcel.getAllByUser({ keywords, userId, page: parseInt(page, 10) });
   if (!results.page) {
@@ -69,6 +84,24 @@ const getUserParcels = async (req, res) => {
   }
 
   return res.status(200).json({ success: true, ...results });
+};
+
+const getUserParcelsCounters = async (req, res) => {
+  const { userId } = req.params;
+  const { jwtUser } = req.body;
+  if (jwtUser.id !== userId) {
+    return res.status(401).json({
+      success: false,
+      message: 'Unauthorized Access',
+    });
+  }
+  const parcel = new Parcel();
+  const counters = await parcel.getUserParcelsCounters(userId);
+  if (!counters) {
+    return res.status(404).json({ success: false, message: 'Not found' });
+  }
+
+  return res.status(200).json({ success: true, counters });
 };
 
 // Update a user
@@ -104,4 +137,5 @@ export default {
   getSingle,
   getUserParcels,
   updateUser,
+  getUserParcelsCounters,
 };

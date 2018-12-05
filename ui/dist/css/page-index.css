@@ -1,0 +1,84 @@
+.country-map {
+  background-image: url('../images/rwanda-map.png');
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  min-height: 300px;
+}
+.intro-area {
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  padding: 30px 15px;
+  border-bottom: 1px solid #3359DF;
+  box-shadow: 0 1px 3px #3350df;
+}
+.intro-area__title {
+  font-size: 3rem;
+  color: #3359DF;
+}
+.intro-area__text {
+  font-size: 1.5rem;
+  color: #3359DF;
+  line-height: 2.3rem;
+  letter-spacing: 0.2rem;
+}
+label .title {
+  margin-bottom: 20px;
+}
+.testimonies-area {
+  margin: 50px 0;
+  background-color: #3359DF;
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.4);
+}
+
+.testimonies {
+  min-height: 20vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.testimony-block {
+  display: flex;
+  align-items: center;
+}
+.testimony-block .fa {
+  font-size: 3rem;
+}
+.testimony-content {
+  flex: 1;
+  padding: 10px 30px;
+  overflow: hidden;
+  color: #fff;
+}
+
+.testimony-content__title {
+  font-size: 2rem;
+  color: #fff;
+}
+.testimony-content__text {
+  font-size: 1rem;
+  color: rgb(224, 224, 224);
+}
+.testimony-stars {
+  text-align: center;
+}
+.testimony-stars .fa {
+  color: #fff;
+  font-size: 1.5rem;
+  
+}
+.testimony-stars .active {
+  color: #ffa400;
+}
+
+.quote-error {
+  text-align: center;
+  color: #da2525;
+  font-size: 1.2rem;
+  padding: 0px 10%;
+  display: none;
+}
+.quote-error.active {
+  display: block;
+}

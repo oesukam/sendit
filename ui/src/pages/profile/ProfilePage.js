@@ -1,9 +1,19 @@
 
 import sideBar from '../../components/leftSideBar.js';
-import store from '../../utils/store.js'
+import store from '../../utils/store.js';
+import fetchAPI from '../../utils/fetchAPI.js';
 
 const Page = {
   render : async () => {
+    const { user = '' } = store;
+    let parcels = { data: [], page: 1, total: 0}
+    let counters = { delivered: 0, in_progress: 0 }
+    if (user.id) {
+      const parcelsData = await fetchAPI(`/users/${user.id}/parcels`) || parcels;
+      parcels = parcels.data ? parcelsData : parcels;
+      const result = await fetchAPI(`/users/${user.id}/counters`);
+      counters = result.counters || counters;
+    }
     const view = `
       <div class="container">
         <div class="row">
@@ -14,17 +24,17 @@ const Page = {
             <div class="row mt-5">
               <div class="col-4">
                 <div class="box profile-counter">
-                  <p>Total Order: <strong>20</strong></p>
+                  <p>Total Order: <strong>${(counters.delivered + counters.in_progress) || 0}</strong></p>
                 </div>
               </div>
               <div class="col-4">
                 <div class="box profile-counter">
-                  <p><i class="fa fa-tick"></i> Deliverd: <strong>13</strong></p>
+                  <p><i class="fa fa-tick"></i> Delivered: <strong>${counters.delivered || 0}</strong></p>
                 </div>
               </div>
               <div class="col-4">
                 <div class="box profile-counter">
-                  <p><i class="fa fa-truck"></i> In Process: <strong>7</strong></p>
+                  <p><i class="fa fa-truck"></i> In Process: <strong>${counters.in_progress || 0}</strong></p>
                 </div>
               </div>
             </div>
@@ -36,56 +46,31 @@ const Page = {
                       <th width="20" >No.</th>
                       <th>From</th>
                       <th>To</th>
-                      <th>Receiver</th>
-                      <th>Address</th>
-                      <th width="100">Date</th>
+                      <th width="140">Receiver</th>
+                      <th width="110">Date</th>
                       <th width="100">Status</th>
                       <th width="100">Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Kigali</td>
-                      <td>Gisenyi</td>
-                      <td>Franck</td>
-                      <td>.....</td>
-                      <td>2018-09-2</td>
-                      <td>Await pick up</td>
-                      <td class="align-right">
-                        <a href="order.html" class="btn-edit">
-                          <i class="fa fa-edit"></i>
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Kigali</td>
-                      <td>Gisenyi</td>
-                      <td>Anais</td>
-                      <td>.....</td>
-                      <td>2018-09-3</td>
-                      <td>Delivered</td>
-                      <td class="align-right">
-                        <a href="order.html" class="btn-edit">
-                          <i class="fa fa-edit"></i>
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Kigali</td>
-                      <td>Gisenyi</td>
-                      <td>Angel</td>
-                      <td>.....</td>
-                      <td>2018-09-3</td>
-                      <td>In Process</td>
-                      <td class="align-right">
-                        <a href="order.html" class="btn-edit">
-                          <i class="fa fa-edit"></i>
-                        </a>
-                      </td>
-                    </tr>
+                    ${ parcels.data.map((val, index) => {
+                      return `
+                        <tr class="capitalize">
+                          <td>${index+1}</td>
+                          <td>${val.from_province}, ${val.from_district}</td>
+                          <td>${val.to_province}, ${val.to_district}</td>
+                          <td>${val.receiver_names}</td>
+                          <td>${val.created_at.substring(0, 10)}</td>
+                          <td>${val.status}</td>
+                          <td class="align-right">
+                            <a href="/#/parcels/${val.id}" class="btn-edit">
+                              <i class="fa fa-edit"></i>
+                            </a>
+                          </td>
+                        </tr>
+                        `;
+                      }).join('\n ')
+                    }
                   </tbody>
                 </table>
                 <nav class="pagination">
@@ -100,7 +85,9 @@ const Page = {
     `;
     return view;
   },
-  after_render: async () => { }
+  after_render: async () => {
+    
+  }
  }
  
  export default Page;

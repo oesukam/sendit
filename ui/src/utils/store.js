@@ -4,7 +4,11 @@ const data = {
   auth: token !== '',
   token,
   user: user ? JSON.parse(user) : '',
-  parcels: [],
+  parcels: {
+    data: [],
+    page: 1,
+    total: 0,
+  },
   logout: function () {
     localStorage.setItem('token', '');
     localStorage.setItem('user', '');

@@ -12,10 +12,21 @@ const Page = {
           </p>
           <div class="form-error error-message"></div>
           <form action="#">
-            <input type="text" name="email" id="email" placeholder="Email">
+            <input
+              type="text"
+              name="email"
+              id="email"
+              placeholder="Email"
+              required
+            >
             <div class="form-error email"></div>
 
-            <input type="password" name="password" id="password" placeholder="Password">
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Password"
+            >
             <div class="form-error password"></div>
 
             <button id="submit-login" class="btn primary v-wide mt-10">Login</button>
@@ -95,7 +106,7 @@ const Page = {
 
           // Wait for a second
           setTimeout(() => {
-            location.href = `/#/profile/${data.id}`;
+            location.href = '/';
           }, 1000);
         }
 

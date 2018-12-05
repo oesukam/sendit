@@ -1,0 +1,10 @@
+/*
+  CSS Style for signup.html 
+*/
+
+.signup-container {
+  margin-top: 20px;
+}
+.signup-container::after {
+  clear: both;
+}

@@ -9,8 +9,8 @@ const footer = {
           <div class="col-3">
             <h3 class="footer-title">Site Map</h3>
             <ul class="footer-list">
-              <li><a href="index.html">Home</a></li>
-              <li><a href="quote.html">Get A Quote</a></li>
+              <li><a href="/">Home</a></li>
+              <li><a href="/#/quote">Get A Quote</a></li>
             </ul>
           </div>
           <div class="col-3">

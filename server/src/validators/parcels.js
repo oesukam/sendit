@@ -11,7 +11,7 @@ const create = {
   receiver_address: Joi.string().required().trim(),
   weight: Joi.number().positive().required(),
   price: Joi.number().positive().required(),
-  description: Joi.string().trim(),
+  description: Joi.string(),
 };
 
 const changeLocation = {
@@ -36,6 +36,8 @@ const changeDestination = {
     'southern',
   ).required(),
   to_district: Joi.string().required().trim(),
+  receiver_names: Joi.string().required().trim(),
+  receiver_phone: Joi.string().required().trim(),
   receiver_address: Joi.string().required().trim(),
 };
 

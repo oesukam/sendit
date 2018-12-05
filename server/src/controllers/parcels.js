@@ -8,6 +8,7 @@ dotenv.config();
 const createParcel = async (req, res) => {
   const { body } = req;
   const { jwtUser } = body;
+  const pricePerKg = 1000;
   if (!jwtUser.id) {
     return res.status(401).json({
       success: false,
@@ -17,9 +18,11 @@ const createParcel = async (req, res) => {
 
   delete body.jwtUser;
   body.user_id = jwtUser.id;
+  const price = parseFloat(body.weight) * pricePerKg;
   const parcel = new Parcel({
     ...body,
     present_location: body.city || body.district,
+    price,
   });
 
   await parcel.save();
@@ -163,13 +166,17 @@ const changeDestination = async (req, res) => {
   */
   if (
     parcel.to_province === body.to_province
-    || parcel.to_district === body.to_district
-    || parcel.to_province === body.to_province
+    && parcel.to_district === body.to_district
   ) {
-    return res.status(304).json({ success: false, message: 'Parcel destination was not changed' });
+    return res.status(409).json({
+      success: false,
+      message: 'Parcel destination was not changed',
+    });
   }
   parcel.to_province = body.to_province;
   parcel.to_district = body.to_district;
+  parcel.receiver_names = body.receiver_names;
+  parcel.receiver_phone = body.receiver_phone;
   parcel.receiver_address = body.receiver_address;
   await parcel.save();
 

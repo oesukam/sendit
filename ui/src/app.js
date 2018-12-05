@@ -3,7 +3,7 @@
  * https://medium.com/@bryanmanuele/how-i-implemented-my-own-spa-routing-system-in-vanilla-js-49942e3c4573
  */
 
-'use strict';
+// 'use strict';
 // Web Pages
 import Error404Page from './pages/error/Error404Page.js';
 import HomePage from './pages/home/HomePage.js';
@@ -12,6 +12,7 @@ import LoginPage from './pages/login/LoginPage.js';
 import SignupPage from './pages/signup/SignupPage.js';
 import ProfilePage from './pages/profile/ProfilePage.js';
 import CreateParcelPage from './pages/parcel/CreateParcelPage.js'
+import UpdateParcelPage from './pages/parcel/UpdateParcelPage.js'
 import AdminParcelsPage from './pages/admin/AdminParcelsPage.js';
 import AdminParcelPage from './pages/admin/AdminParcelPage.js';
 
@@ -51,14 +52,15 @@ const routes = {
   '/create_parcel': {
     name: 'Create a parcel',
     page: CreateParcelPage,
+    auth: true,
+  },
+  '/parcels/:id': {
+    name: 'Update parcel',
+    page: UpdateParcelPage,
+    auth: true,
   },
   '/profile/:id': {
     name: 'Profile',
-    page: ProfilePage,
-    auth: true,
-  },
-  '/profile/:id/parcels': {
-    name: 'My Parcels',
     page: ProfilePage,
     auth: true,
   },
@@ -118,11 +120,11 @@ const router = async () => {
   if (parsedURL.length === 0) url = '/';
 
   // Check if the route is protected
-  if (routes[url].auth || store.auth) {
-    if (routes[url].hide || !store.auth) {
-      url = '/';
-    }
-  }
+  // if (routes[url].auth || store.auth) {
+  //   if (routes[url].hide || !store.auth) {
+  //     url = '/';
+  //   }
+  // }
   let page = routes[url] ? routes[url].page : Error404Page
 
   loadingPage.classList.add('active');
