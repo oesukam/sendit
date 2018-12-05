@@ -120,11 +120,11 @@ const router = async () => {
   if (parsedURL.length === 0) url = '/';
 
   // Check if the route is protected
-  // if (routes[url].auth || store.auth) {
-  //   if (routes[url].hide || !store.auth) {
-  //     url = '/';
-  //   }
-  // }
+  if (routes[url].auth || store.auth) {
+    if (routes[url].hide || !store.auth) {
+      url = '/';
+    }
+  }
   let page = routes[url] ? routes[url].page : Error404Page
 
   loadingPage.classList.add('active');

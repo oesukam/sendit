@@ -24,7 +24,9 @@ export const jwtVerifyToken = (userType = ['user']) => (req, res, next) => {
     if (userType.indexOf(user.user_type) === -1) {
       return res.status(403).json({ succes: false, message: 'Not allowed' });
     }
-
+    if (!user.id) {
+      return res.status(401).json({ succes: false, message: 'Unauthorized access' });
+    }
     req.body.jwtUser = user.toObject();
     next();
   });

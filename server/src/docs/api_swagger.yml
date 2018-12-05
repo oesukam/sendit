@@ -13,7 +13,7 @@ host: "andela-sendit-api.herokuapp.com"
 basePath: "/api/v1"
 tags:
 - name: "auth"
-  description: "Access to authentification ressources"
+  description: "Access to protected ressources"
 - name: "parcels"
   description: "Access to parcels ressources"
 - name: "users"
@@ -355,7 +355,7 @@ paths:
       tags:
         - "parcels"
       description: Change the status of a specific parcel delivery order
-      operationId: updateStatus
+      operationId: updateParcelStatus
       parameters:
         - in: "body"
           name: "body"
@@ -372,6 +372,37 @@ paths:
       responses:
         '200':
           description: return a parcel object
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              message:
+                type: string
+  /parcels/{id}/destination:
+    put:
+      security:
+        - JWT_Token_User: []
+      tags:
+        - "parcels"
+      description: Change the destination of a specific parcel delivery order
+      operationId: updateParcelDestination
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Update parcel's destination"
+          required: true
+          schema:
+            $ref: "#/definitions/ParcelDestination"
+        - name: id
+          in: path
+          description: uuid of a parcel
+          required: true
+          type: string
+              
+      responses:
+        '200':
+          description: Parcel destination updated successfully
           schema:
             type: object
             properties:
@@ -542,6 +573,24 @@ definitions:
          - "In Transit"
          - "Pending"
          - "Delivered"
+  ParcelDestination:
+    type: object
+    properties:
+      to_province:
+        type: string
+        enum:
+          - eastern
+          - kigali
+          - northern
+          - southern
+      to_district:
+        type: string
+      receiver_names:
+        type: string
+      receiver_phone:
+        type: string
+      receiver_address:
+        type: string
   Counters:
     type: object
     properties:
