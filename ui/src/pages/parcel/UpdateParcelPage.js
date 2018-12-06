@@ -376,7 +376,7 @@ const Page = {
     }
 
     function renderToProvince (value = '') {
-      if (value) {
+      if (provinces[value]) {
         form.to_province = value;
         const districts = provinces[value].districts || []
 
