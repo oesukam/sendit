@@ -4,7 +4,7 @@ const originIcon = 'https://chart.googleapis.com/chart?' +
   'chst=d_map_pin_letter&chld=O|FFFF00|000000';
 
 const kigaliLatLng = { lat: -1.935114, lng: 30.082111 };
-
+let map;
 const initMap = ({ from = { lat: -1.935114, lng: 30.082111 }, to = '' } = {}) => {
   const mapElement = document.getElementById('quote-map');
   const bounds = new google.maps.LatLngBounds;
@@ -81,5 +81,7 @@ function deleteMarkers(markersArray) {
   }
   markersArray = [];
 }
+
+window.initMap = initMap
 
 export default initMap;
