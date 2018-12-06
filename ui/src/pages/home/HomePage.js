@@ -1,15 +1,15 @@
 import homeIntro from './homePageIntro.js';
-import homeQuote from './homePageQuote.js';
 import homeTestimonies from './homePageTestimonies.js';
+import getQuote from '../../components/getQuote.js';
 
 const Page = {
  render : async () => `
     ${await homeIntro.render()}
-    ${await homeQuote.render()}
+    ${await getQuote.render()}
     ${await homeTestimonies.render()}
  `,
  after_render: async () => {
-    await homeQuote.after_render();
+    await getQuote.after_render();
  }
 }
 

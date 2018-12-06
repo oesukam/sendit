@@ -18,4 +18,6 @@ module.exports = {
       },
     ],
   },
+  devtool: '#eval-source-map',
+  target: 'web',
 };
