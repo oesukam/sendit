@@ -282,7 +282,8 @@ const Page = {
       <p>
         From <strong>${form.from_district || '-'}</strong> 
         to <strong class="capitalize">${form.to_district || '-'}</strong>, a parcel of 
-        <strong class="capitalize">${form.weight || '-'} Kg</strong> costs <strong>${price || '-'} RWF</strong>
+        <strong class="capitalize">${form.weight || '-'} Kg</strong> costs <strong>
+        ${price ? price.toLocaleString() : '-'} RWF</strong>
       </p>`;
     }
     function validateInputs () {
