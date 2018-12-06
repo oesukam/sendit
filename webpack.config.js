@@ -1,4 +1,5 @@
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -18,6 +19,14 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new CopyWebpackPlugin([
+      { from: 'ui/src/images', to: 'ui/dist/images' },
+      { from: 'ui/src/css', to: 'ui/dist/css' },
+      { from: 'ui/src/images', to: 'ui/dist/images' },
+      { from: 'ui/src/fonts', to: 'ui/dist/fonts' },
+    ]),
+  ],
   devtool: '#eval-source-map',
   target: 'web',
 };
