@@ -8,7 +8,7 @@ const sideBar = {
       { link: '/#/quote', text: 'Get Quote' },
       { link: '#', text: `Admin`, auth: true, user: 'admin' },
       { link: `/#/profile/${user.id}`, text: 'My Parcels' },
-      { link: '/#/create_parcel', text: 'Create a parcel' },
+      { link: '/#/create_parcel', text: 'Add parcel' },
       // { link: '/#/admin/parcels', text: 'Admin Parcels' },
       // { link: '/#/admin/parcels/:id', text: 'View a parcel' },
     ]

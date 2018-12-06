@@ -32,7 +32,9 @@ const initMap = ({ from = { lat: -1.935114, lng: 30.082111 }, to = '' } = {}) =>
         const originList = response.originAddresses;
         const destinationList = response.destinationAddresses;
         const outputDiv = document.getElementById('output');
-        outputDiv.innerHTML = '<strong>Distance: </strong>';
+        if (outputDiv) {
+          outputDiv.innerHTML = '<strong>Distance: </strong>';
+        }
         deleteMarkers(markersArray);
 
         const showGeocodedAddressOnMap = function(asDestination) {

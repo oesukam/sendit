@@ -173,6 +173,18 @@ const changeDestination = async (req, res) => {
       message: 'Parcel destination was not changed',
     });
   }
+  /*
+    Checks if the parcel was already cancelled or pick up
+  */
+  if (
+    parcel.status === 'Waiting Pickup'
+    || parcel.status === 'Cancelled'
+  ) {
+    return res.status(409).json({
+      success: false,
+      message: `Can not change parcel in status ${parcel.status}`,
+    });
+  }
   parcel.to_province = body.to_province;
   parcel.to_district = body.to_district;
   parcel.receiver_names = body.receiver_names;

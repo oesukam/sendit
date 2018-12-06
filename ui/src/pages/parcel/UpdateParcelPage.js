@@ -45,6 +45,17 @@ const Page = {
               <div class="form-error error-message"></div>
               <form action="#">
                 <div class="row">
+                  <div class="col-12 align-center">
+                    <button
+                      id="submit-cancel"
+                      class="btn primary"
+                      ${ form.status === 'Cancelled' ? 'disabled' : ''}
+                    >
+                      ${ form.status === 'Cancelled' ? 'Parcel cancelled' : 'Cancel'}
+                    </button>
+                  </div>
+                </div>
+                <div class="row">
                   <div class="col-6">
                     <span class="custom-dropdown">
                       <select
@@ -156,7 +167,11 @@ const Page = {
                       ></textarea>
                     <div class="form-error receiver_address"></div>
 
-                    <button id="submit-form" class="btn primary">
+                    <button
+                      id="submit-form"
+                      class="btn primary"
+                      ${ form.status !== 'Waiting Pickup' ? 'disabled' : ''}
+                    >
                       Update
                     </button>
                   </div>
@@ -188,6 +203,7 @@ const Page = {
     const quoteResult = document.querySelector('.quote-result');
 
     const submitForm = document.querySelector('#submit-form');
+    const submitCancel = document.querySelector('#submit-cancel');
     const errorMessage = document.querySelector('.form-error.error-message');
     const loading = document.querySelector('.loading');
  
@@ -245,11 +261,48 @@ const Page = {
               title,
               body,
             });
+          }
 
-            // Wait for a second
-            setTimeout(() => {
-              // location.href = `/#/profile/${data.id}`;
-            }, 1000);
+          // Wait for 2 seconds to smooth the spinner
+          setTimeout(() => {
+            loading.classList.remove('active');
+          }, 2000);
+        })
+        .catch((err) => {
+          loading.classList.remove('active');
+          console.log(err)
+          if (err.message) {
+            errorMessage.textContent = err.message;
+            errorMessage.style.color = 'red';
+          }
+        })
+    });
+
+    submitCancel.addEventListener('click', (e) => {
+      e.preventDefault();
+      loading.classList.add('active');
+      
+      fetchAPI(`/parcels/${form.id}/cancel`, { method: 'put' })
+        .then((res) => {
+          const { data } = res;
+          if (res.message) {
+            errorMessage.textContent = res.message;
+            form.stats = 'Cancelled'
+            errorMessage.style.color = 'green';
+            const title = res.message || 'Parcel delivery cancelled';
+            const body = `
+              <p class="capitalize" style="font-size: 1rem; line-height: 2rem;">
+                <b>Status</b>: Cancelled<br>
+                <b>From</b>: ${form.from_province}, ${form.from_district}<br>
+                <b>To</b>: ${form.to_province}, ${form.to_district}<br>
+                <b>Receiver</b>: ${form.receiver_names}<br>
+                <b>Address</b>: ${form.receiver_address}<br>
+              </p>
+            `
+            model({
+              title,
+              body,
+            });
           }
 
           // Wait for 2 seconds to smooth the spinner
@@ -297,8 +350,6 @@ const Page = {
             tagElement.style.color = 'red'
             hasError = true;
           }
-          // document.querySelector(`.form-error.${key}`).textContent = 'Required'
-          // document.querySelector(`.form-error.${key}`).style.color = 'red'
         }
         // Set all null field to an empty string
         if (form[key] === null) {
@@ -325,16 +376,18 @@ const Page = {
     }
 
     function renderToProvince (value = '') {
-      form.to_province = value;
-      const districts = provinces[value].districts || []
+      if (value) {
+        form.to_province = value;
+        const districts = provinces[value].districts || []
 
-      toDistrict.options.length = 0; //Reset district option to 0
-      toDistrict.options[0] = new Option('Select District'); // Add the first option to district
-      // Add all district from the selected province
-      for(let index in districts) {
-        const selected = index === form.to_district;
-        toDistrict.add(new Option(districts[index].name, index, '', selected));
-      };
+        toDistrict.options.length = 0; //Reset district option to 0
+        toDistrict.options[0] = new Option('Select District'); // Add the first option to district
+        // Add all district from the selected province
+        for(let index in districts) {
+          const selected = index === form.to_district;
+          toDistrict.add(new Option(districts[index].name, index, '', selected));
+        };
+      }
     }
   }
  }
