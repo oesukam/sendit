@@ -376,9 +376,10 @@ const Page = {
     }
 
     function renderToProvince (value = '') {
-      if (provinces[value]) {
-        form.to_province = value;
-        const districts = provinces[value].districts || []
+      const province = value.toLocaleLowerCase() || '';
+      if (provinces[province]) {
+        form.to_province = province;
+        const districts = provinces[province].districts || []
 
         toDistrict.options.length = 0; //Reset district option to 0
         toDistrict.options[0] = new Option('Select District'); // Add the first option to district
