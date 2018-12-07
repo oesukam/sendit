@@ -7,9 +7,9 @@
 
 SendIT is a courier service that helps users deliver parcels to different destinations. SendIT provides courier quotes based on weight categories. `Case study`: Rwanda.
 
-- UI template: `https://oesukam.github.io/andela-sendit/`
-- Frontend: `https://andela-sendit-api.herokuapp.com`
-- API Documentation: `https://andela-sendit-api.herokuapp.com/api-docs`
+- UI template: [https://oesukam.github.io/andela-sendit](https://oesukam.github.io/andela-sendit)
+- Frontend: [https://andela-sendit-api.herokuapp.com](https://andela-sendit-api.herokuapp.com)
+- API Documentation: [https://andela-sendit-api.herokuapp.com/api-docs](https://andela-sendit-api.herokuapp.com/api-docs)
 
 
 ## Getting Started
@@ -42,7 +42,7 @@ End with an example of getting some data out of the system or using it for a lit
 
 ### Endpoints
 Using Postman to access these endpoints
-Please find the API documentation on `https://andela-sendit-api.herokuapp.com/api-docs`
+Please find the API documentation on [https://andela-sendit-api.herokuapp.com/api-docs](https://andela-sendit-api.herokuapp.com/api-docs)
 
 | Endpoint                   | Methods   | Functionalities        |
 | ---------------------------|-----------|------------------------|
@@ -96,11 +96,11 @@ For deployment, the .env file or the running environment should have the followi
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/oesukam/andela-sendit/tags). 
 
 ## Authors
 

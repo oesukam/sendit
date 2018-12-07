@@ -18,7 +18,7 @@ describe('parcel model', () => {
   it('should create an instance of Parcel', () => {
     const parcel = new Parcel();
     expect(parcel.storage).toBe('parcels');
-    expect(parcel.status).toBe('In Transit');
+    expect(parcel.status).toBe('Waiting Pickup');
     expect(parcel.cancelled).toBeFalsy();
   });
 
