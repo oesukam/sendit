@@ -9,7 +9,7 @@ class Parcel extends BaseModel {
   constructor(args) {
     super(args);
     this.storage = 'parcels';
-    this.status = 'In Transit';
+    this.status = 'Waiting Pickup';
     this.cancelled = false;
   }
 
@@ -39,7 +39,7 @@ class Parcel extends BaseModel {
         this.weight,
         this.price,
         this.description,
-        this.status || 'In Transit',
+        this.status || 'Waiting Pickup',
         this.created_at || now,
         now,
       ];

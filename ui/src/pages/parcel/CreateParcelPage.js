@@ -5,7 +5,6 @@ import { provinces } from '../../mocks/index.js';
 import fetchAPI from '../../utils/fetchAPI.js';
 import model from '../../utils/model.js';
 import getPrice from '../../utils/getPrice.js'
-let parcel = {};
 
 const Page = {
   render : async () => `
@@ -120,7 +119,7 @@ const Page = {
                   <div class="form-error receiver_address"></div>
 
                   <button id="submit-form" class="btn primary">
-                    ${parcel.id ? 'Update' : 'Submit' }
+                    Submit
                   </button>
                 </div>
               </div>
@@ -242,8 +241,6 @@ const Page = {
 
             resetInputs();
             
-            parcel = { ...data };
-            // Wait for a second
             setTimeout(() => {
               // location.href = `/#/profile/${data.id}`;
             }, 1000);
