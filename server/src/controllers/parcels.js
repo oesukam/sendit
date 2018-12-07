@@ -93,7 +93,7 @@ const changeLocation = async (req, res) => {
   }
 
   if (parcel.present_location === body.present_location) {
-    return res.status(304).json({
+    return res.status(409).json({
       success: false,
       message: 'Parcel location not changed',
     });
@@ -105,7 +105,7 @@ const changeLocation = async (req, res) => {
   await user.findById(parcel.user_id);
 
   // Notifying the user via email
-  if (user.id) mail.sendParcelLocationChanged(user, parcel.toObject());
+  if (user.id) mail.sendParcelLocationChanged(user.toObject(), parcel.toObject());
 
   return res.status(200).json({
     success: true,

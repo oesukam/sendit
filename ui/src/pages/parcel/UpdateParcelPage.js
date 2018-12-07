@@ -58,6 +58,7 @@ const Page = {
                 </div>
                 <div class="row">
                   <div class="col-6">
+                    <label for="from_province">From</label>
                     <span class="custom-dropdown">
                       <select
                         class="capitalize"
@@ -90,6 +91,7 @@ const Page = {
                     <div class="form-error from_district"></div>
                   </div>
                   <div class="col-6">
+                    <label for="to_province">To</label>
                     <span class="custom-dropdown">
                       <select id="to_province" name="to_province" required value="southern">
                         <option value="">Province - Destination</option> 
@@ -187,7 +189,7 @@ const Page = {
   },
   after_render: async () => {
     const pricePerKg = 1000;
-    map.after_render(form.from_district, form.to_district);
+    map.after_render(form.from_district, form.present_location || form.to_district);
 
     const formKeys = Object.keys(form);
     // From province and distrinct

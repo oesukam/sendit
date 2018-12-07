@@ -57,6 +57,9 @@
 .flex {
   display: flex;
 }
+.flex-1 {
+  flex: 1;
+}
 .content-center {
   display: flex;
   justify-content: center;
