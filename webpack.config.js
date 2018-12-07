@@ -25,6 +25,7 @@ module.exports = {
       { from: 'ui/src/css', to: 'ui/dist/css' },
       { from: 'ui/src/images', to: 'ui/dist/images' },
       { from: 'ui/src/fonts', to: 'ui/dist/fonts' },
+      { from: 'ui/src/favicon.ico', to: 'ui/dist/favicon.ico' },
     ]),
   ],
   devtool: '#eval-source-map',

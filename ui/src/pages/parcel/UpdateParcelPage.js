@@ -33,6 +33,7 @@ const Page = {
           </div>
           <div class="col-9">
             <br>
+            ${await map.render()}
             <div class="box order-container">
               <h2 class="title-1 align-center">Update parcel's destination</h3>
               <div class="quote-result">
@@ -177,7 +178,6 @@ const Page = {
                   </div>
                 </div>
               </form>
-              ${await map.render()}
             </div>
           </div>
         </div>
@@ -187,6 +187,7 @@ const Page = {
   },
   after_render: async () => {
     const pricePerKg = 1000;
+    map.after_render(form.from_district, form.to_district);
 
     const formKeys = Object.keys(form);
     // From province and distrinct
