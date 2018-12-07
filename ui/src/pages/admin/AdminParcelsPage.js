@@ -76,7 +76,7 @@ const Page = {
                         <td>${val.created_at.substring(0, 10)}</td>
                         <td>${val.status}</td>
                         <td class="align-right">
-                          <a href="/#/parcels/${val.id}" class="btn-edit">
+                          <a href="/#/admin_parcels/${val.id}" class="btn-edit">
                             <i class="fa fa-edit"></i>
                           </a>
                         </td>

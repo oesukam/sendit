@@ -8,14 +8,14 @@ CREATE TABLE IF NOT EXISTS
     from_district VARCHAR(255) NOT NULL,
     to_province VARCHAR(255) NOT NULL,
     to_district VARCHAR(255) NOT NULL,
-    present_location VARCHAR(255) NOT NULL DEFAULT 'In Transit',
+    present_location VARCHAR(255) NOT NULL DEFAULT 'Waiting Pickup',
     receiver_phone VARCHAR(20) NOT NULL,
     receiver_names VARCHAR(255) NOT NULL,
     receiver_address VARCHAR(255) NOT NULL,
     weight INT,
     price INT,
     description TEXT,
-    status VARCHAR(20) NOT NULL DEFAULT 'In Transit',
+    status VARCHAR(20) NOT NULL DEFAULT 'Waiting Pickup',
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
   )`;
