@@ -5,7 +5,7 @@ module.exports = {
   mode: 'production',
   entry: './ui/src/app.js',
   output: {
-    filename: 'bundle.js',
+    filename: 'app.js',
     path: path.resolve(__dirname, 'ui/dist'),
   },
   module: {
@@ -21,6 +21,7 @@ module.exports = {
   },
   plugins: [
     new CopyWebpackPlugin([
+      { from: 'ui/src/index.html', to: 'ui/dist/index.html' },
       { from: 'ui/src/images', to: 'ui/dist/images' },
       { from: 'ui/src/css', to: 'ui/dist/css' },
       { from: 'ui/src/images', to: 'ui/dist/images' },

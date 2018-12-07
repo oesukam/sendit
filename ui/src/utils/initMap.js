@@ -64,10 +64,12 @@ const initMap = ({ from = { lat: -1.935114, lng: 30.082111 }, to = '' } = {}) =>
               {'address': destinationList[j]},
               showGeocodedAddressOnMap(true)
             );
-            outputDiv.innerHTML += `
-              ${originList[i]} to ${destinationList[j]}: ${results[j].distance.text} 
-              in ${results[j].duration.text} <br>
-            `;
+            if (outputDiv) {
+              outputDiv.innerHTML += `
+                ${originList[i]} to ${destinationList[j]}: ${results[j].distance.text} 
+                in ${results[j].duration.text} <br>
+              `;
+            }
           }
         }
 

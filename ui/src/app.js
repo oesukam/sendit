@@ -64,12 +64,12 @@ const routes = {
     page: ProfilePage,
     auth: true,
   },
-  '/admin/parcels': {
+  '/admin_parcels': {
     name: 'Admin Parcels',
     page: AdminParcelsPage,
     auth: true,
   },
-  '/admin/parcels/:id': {
+  '/admin_parcels/:id': {
     name: 'Admin Parcels',
     page: AdminParcelPage,
     auth: true,
@@ -83,13 +83,17 @@ const router = async () => {
   let parsedURL = [];
   let paramIndex = 1;
   request.forEach((el, index) => {
-    if (el) {
-      if (el) {
+    let param = el;
+    if (param) {
+      if (param.match(/\?.*/)) {
+        param = param.replace(/\?.*/g, '');
+      }
+      if (param) {
         if (index%2 === 0 && index != 0) {
           parsedURL.push(`:id`);
           paramIndex += 1;
         } else {
-          parsedURL.push(el);
+          parsedURL.push(param);
         }
       }
     }

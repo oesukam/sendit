@@ -20,6 +20,11 @@ router.get('/',
   jwtVerifyToken(['admin']),
   controllers.getAll);
 
+// Fetch parcels' counters
+router.get('/counters',
+  jwtVerifyToken(['admin']),
+  controllers.getParcelsCounters);
+
 // Fetch a single parcel
 router.get('/:id', jwtVerifyToken(['user', 'admin']), controllers.getSingle);
 
