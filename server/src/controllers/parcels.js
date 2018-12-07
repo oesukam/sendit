@@ -200,6 +200,16 @@ const changeDestination = async (req, res) => {
   });
 };
 
+const getParcelsCounters = async (req, res) => {
+  const parcel = new Parcel();
+  const counters = await parcel.getParcelsCounters();
+  if (!counters) {
+    return res.status(404).json({ success: false, message: 'Not found' });
+  }
+
+  return res.status(200).json({ success: true, counters });
+};
+
 export default {
   getAll,
   getSingle,
@@ -208,4 +218,5 @@ export default {
   changeStatus,
   createParcel,
   changeDestination,
+  getParcelsCounters,
 };

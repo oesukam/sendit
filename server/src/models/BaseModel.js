@@ -133,7 +133,14 @@ class BaseModel {
           const { rows = [] } = res;
           const results = await db.query(countQuery);
           const { count = 0 } = results.rows[0];
-          resolve({ total: parseInt(count, 10), page, data: rows });
+          const total = parseInt(count, 10);
+          const totalPage = Math.ceil(total / limit);
+          resolve({
+            total,
+            totalPage,
+            page,
+            data: rows,
+          });
         })
         .catch(err => reject(err));
     });

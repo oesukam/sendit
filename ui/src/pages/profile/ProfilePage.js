@@ -8,8 +8,10 @@ const Page = {
     const { user = '' } = store;
     let parcels = { data: [], page: 1, total: 0}
     let counters = { delivered: 0, in_progress: 0 }
+    const { page = 1, search = ''} = nav.extractQuery();
     if (user.id) {
-      const parcelsData = await fetchAPI(`/users/${user.id}/parcels`) || parcels;
+      const parcelsUrl = `/users/${user.id}/parcels?page=${page}&search=${search}`
+      const parcelsData = await fetchAPI(parcelsUrl) || parcels;
       parcels = parcels.data ? parcelsData : parcels;
       const result = await fetchAPI(`/users/${user.id}/counters`);
       counters = result.counters || counters;
@@ -63,7 +65,7 @@ const Page = {
                           <td>${val.created_at.substring(0, 10)}</td>
                           <td>${val.status}</td>
                           <td class="align-right">
-                            <a href="/#/parcels/${val.id}" class="btn-edit">
+                            <a href="/#/admin_parcels/${val.id}" class="btn-edit">
                               <i class="fa fa-edit"></i>
                             </a>
                           </td>
@@ -74,8 +76,26 @@ const Page = {
                   </tbody>
                 </table>
                 <nav class="pagination">
-                  <a href="#"><i class="fa fa-angle-left"></i> Previous</a>
-                  <a href="#">Next <i class="fa fa-angle-right"></i></a>
+                  <a
+                    ${ 
+                      parcels.page > 1
+                      ? `href="/#/admin_parcels?page=${parcels.page - 1}"`
+                      : ''
+                    }
+                    ${parcels.page === 1 ? 'disabled' : ''}
+                  >
+                    <i class="fa fa-angle-left"></i> Previous
+                  </a>
+                  <a
+                    ${ 
+                      parcels.page <= parcels.totalPage
+                      ? `href="/#/admin_parcels?page=${parcels.page + 1}"`
+                      : ''
+                    }
+                    ${parcels.page >= parcels.totalPage ? 'disabled' : ''}
+                  >
+                    Next <i class="fa fa-angle-right"></i>
+                  </a>
                 </nav>
               </div>
             </div>

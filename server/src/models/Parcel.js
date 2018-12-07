@@ -68,7 +68,14 @@ class Parcel extends BaseModel {
           const { rows = [] } = res;
           const results = await db.query(parcelsQuery.countAllUserParcels, [userId]);
           const { count = 0 } = results.rows[0];
-          resolve({ total: parseInt(count, 10), page, data: rows });
+          const total = parseInt(count, 10);
+          const totalPage = Math.ceil(total / limit);
+          resolve({
+            total,
+            totalPage,
+            page,
+            data: rows,
+          });
         })
         .catch(err => reject(err));
     });
@@ -78,6 +85,21 @@ class Parcel extends BaseModel {
     return new Promise((resolve, reject) => {
       if (!this.storage) reject(new Error('Failed, storage not set'));
       db.query(parcelsQuery.userParcelCounters, [userId])
+        .then(async (res) => {
+          const counters = res.rows[0];
+          resolve({
+            delivered: parseInt(counters.delivered, 10),
+            in_progress: parseInt(counters.in_progress, 10),
+          });
+        })
+        .catch(err => reject(err));
+    });
+  }
+
+  getParcelsCounters() {
+    return new Promise((resolve, reject) => {
+      if (!this.storage) reject(new Error('Failed, storage not set'));
+      db.query(parcelsQuery.parcelCounters)
         .then(async (res) => {
           const counters = res.rows[0];
           resolve({

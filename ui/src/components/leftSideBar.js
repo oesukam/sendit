@@ -9,7 +9,7 @@ const sideBar = {
       { link: '#', text: `Admin`, auth: true, user: 'admin' },
       { link: `/#/profile/${user.id}`, text: 'My Parcels' },
       { link: '/#/create_parcel', text: 'Add parcel' },
-      // { link: '/#/admin/parcels', text: 'Admin Parcels' },
+      { link: '/#/admin_parcels', text: 'Admin Parcels' },
       // { link: '/#/admin/parcels/:id', text: 'View a parcel' },
     ]
     const view = `
@@ -27,7 +27,15 @@ const sideBar = {
         <div class="sidebar__content">
           <ul class="sidebar__nav">
             ${links.map(el => {
-              if (el.auth ? store.auth : true) {
+              if (
+                el.auth
+                ? 
+                  store.auth 
+                  && (el.users ? el.users.indexOf(user.user_type) !== -1 : true)
+                  && !el.hide
+                : 
+                  !store.auth || !el.hide
+              ) {
                 return `
                   <li class="nav-item">
                     <a href="${el.link}">${el.text}</a>

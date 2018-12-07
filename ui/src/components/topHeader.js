@@ -5,7 +5,7 @@ const topNav = {
     const links = [
       { link: '/', text: 'Home', users: [] },
       { link: '/#/quote', text: 'Get Quote', users: [] },
-      // { link: '#', text: `Admin`, auth: true, users: ['admin'] },
+      { link: '/#/admin_parcels', text: `Parcels`, auth: true, users: ['admin'] },
       { link: '/#/create_parcel', text: `Add parcel`, auth: true, users: [] },
       { link: '/#/signup', text: 'Signup', hide: true },
       { link: '/#/login', text: 'Login', hide: true },
@@ -51,13 +51,13 @@ const topNav = {
           <ul>
             ${links.map(el => {
               if (
-                  store.auth
+                  el.auth
                   ? 
                     store.auth 
-                    && (el.users ? el.users.indexOf(store.user.user_type) === -1 : true)
+                    && (el.users ? el.users.indexOf(user.user_type) !== -1 : true)
                     && !el.hide
                   : 
-                    !el.auth || el.hide
+                    !store.auth || !el.hide
                 ) {
                 return `
                   <li class="nav-item">

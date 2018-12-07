@@ -198,7 +198,7 @@ select option {
   font-size: 1.2rem;
   font-weight: 300;
 }
-button[disabled] {
+button[disabled], a[disabled] {
   color: rgba(0,0,0,.4) !important;
   background-color: rgba(0, 0, 0, 0.3) !important;
 }
