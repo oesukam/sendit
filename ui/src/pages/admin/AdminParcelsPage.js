@@ -6,18 +6,26 @@ import nav from '../../utils/navigation.js';
 
 let parcels = { data: [], page: 1, total: 0 };
 let counters = { delivered: 0, in_progress: 0 };
+let keywords = '';
 
 const Page = {
   render : async () => {
     const { user = '' } = store;
     const { page = 1, search = ''} = nav.extractQuery();
     if (user.id) {
-      const parcelsUrl = `/parcels?page=${page}&search=${search}`
+      const parcelsUrl = `/parcels?page=${page}`
       const parcelsData = await fetchAPI(parcelsUrl) || parcels;
       parcels = parcels.data ? parcelsData : parcels;
       const result = await fetchAPI(`/parcels/counters`);
       counters = result.counters || counters;
     }
+    const searchForm = `
+      <form>
+        <div class="input-block is-row search">
+          <input id="search-input" type="text" name="search" placeholder="Search for user" >
+          <i class="fa fa-search icon-btn"></i>
+        </div>
+      </form>`;
     const view = `
       <div class="container">
         <div class="row">
@@ -45,12 +53,6 @@ const Page = {
             <div class="row">
             <div class="col-12">
               <h3 class="title-1 align-center">Parcels</h3>
-              <form action="#">
-                <div class="input-block is-row search">
-                  <input type="text" placeholder="Search" >
-                  <i class="fa fa-search icon-btn"></i>
-                </div>
-              </form>
               <table class="table">
                 <thead>
                   <tr>
@@ -112,7 +114,19 @@ const Page = {
       </div>`;
       return view;
   },
-  after_render: async () => { }
+  after_render: async () => {
+    /*const searchInput = document.querySelector('#search-input');
+    searchInput.addEventListener('keypress', (e) => {
+      if (e.keyCode === 13) {
+        e.preventDefault();
+        const { page = 1 } = nav.extractQuery();
+        location.href = `/#/admin_parcels?page=${page}&search=${keywords}`
+      }
+    })
+    searchInput.addEventListener('keyup', (e) => {
+      keywords = e.target.value;
+    })*/
+  }
  }
  
  export default Page;

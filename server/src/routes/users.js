@@ -23,15 +23,15 @@ router.get('/:userId', jwtVerifyToken(['user', 'admin']), controllers.getSingle)
 // Fetch user parcels
 router.get('/:userId/parcels',
   celebrate({ query: users.userQueryParams }),
-  jwtVerifyToken(['user']),
+  jwtVerifyToken(['user', 'admin']),
   controllers.getUserParcels);
 
 // Fetch user info
-router.put('/:userId', jwtVerifyToken(['user']), controllers.updateUser);
+router.put('/:userId', jwtVerifyToken(['user', 'admin']), controllers.updateUser);
 
 // Fetch user's parcels counters
 router.get('/:userId/counters',
-  jwtVerifyToken(['user']),
+  jwtVerifyToken(['user', 'admin']),
   controllers.getUserParcelsCounters);
 
 export default router;

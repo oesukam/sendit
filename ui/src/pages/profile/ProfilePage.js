@@ -2,12 +2,14 @@
 import sideBar from '../../components/leftSideBar.js';
 import store from '../../utils/store.js';
 import fetchAPI from '../../utils/fetchAPI.js';
+import nav from '../../utils/navigation.js';
+
+let parcels = { data: [], page: 1, total: 0 };
+let counters = { delivered: 0, in_progress: 0 };
 
 const Page = {
   render : async () => {
     const { user = '' } = store;
-    let parcels = { data: [], page: 1, total: 0}
-    let counters = { delivered: 0, in_progress: 0 }
     const { page = 1, search = ''} = nav.extractQuery();
     if (user.id) {
       const parcelsUrl = `/users/${user.id}/parcels?page=${page}&search=${search}`

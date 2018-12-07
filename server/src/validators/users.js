@@ -30,7 +30,7 @@ const updateUser = {
 
 const userQueryParams = {
   page: Joi.number().min(1),
-  search: Joi.string().trim(),
+  search: Joi.string().trim().allow(''),
 };
 
 export default {
