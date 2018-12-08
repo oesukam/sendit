@@ -21,12 +21,12 @@ module.exports = {
   },
   plugins: [
     new CopyWebpackPlugin([
-      { from: 'ui/src/index.html', to: 'ui/dist/index.html' },
-      { from: 'ui/src/images', to: 'ui/dist/images' },
-      { from: 'ui/src/css', to: 'ui/dist/css' },
-      { from: 'ui/src/images', to: 'ui/dist/images' },
-      { from: 'ui/src/fonts', to: 'ui/dist/fonts' },
-      { from: 'ui/src/favicon.ico', to: 'ui/dist/favicon.ico' },
+      { from: 'ui/src/index.html', to: 'index.html' },
+      { from: 'ui/src/images', to: 'images' },
+      { from: 'ui/src/css', to: 'css' },
+      { from: 'ui/src/images', to: 'images' },
+      { from: 'ui/src/fonts', to: 'fonts' },
+      { from: 'ui/src/favicon.ico', to: 'favicon.ico' },
     ]),
   ],
   devtool: '#eval-source-map',

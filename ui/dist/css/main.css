@@ -146,6 +146,7 @@ select option {
   border: 1px solid rgba(0,0,0,.1);
   -webkit-appearance: button;
   width: 100%;
+  height: 100%;
 }
 
 .custom-dropdown::before,
@@ -198,7 +199,7 @@ select option {
   font-size: 1.2rem;
   font-weight: 300;
 }
-button[disabled] {
+button[disabled], a[disabled] {
   color: rgba(0,0,0,.4) !important;
   background-color: rgba(0, 0, 0, 0.3) !important;
 }

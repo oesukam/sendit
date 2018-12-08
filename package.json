@@ -16,12 +16,12 @@
     ]
   },
   "scripts": {
-    "ui": "live-server ui/src --verbose",
-    "start-ui": "live-server ui/dist --verbose",
-    "start": "babel-node server/src/index.js migrate",
-    "dev": "nodemon --exec babel-node server/src/index.js",
     "build": "babel server/src --out-dir server/dist",
     "build-ui": "npx webpack --config webpack.config.js",
+    "ui": "live-server ui/src --verbose",
+    "start-ui": "live-server ui/dist --verbose",
+    "start": "npm run build-ui && babel-node server/src/index.js migrate",
+    "dev": "nodemon --exec babel-node server/src/index.js",
     "serve": "node server/dist/index.js",
     "test-only": "babel-node tests/run.js",
     "test": "NODE_ENV=test JASMINE_CONFIG_PATH=server/tests/support/jasmine.json nyc --include-sources server/src --reporter=text --reporter=lcov babel-node server/tests/run.js --exit",
