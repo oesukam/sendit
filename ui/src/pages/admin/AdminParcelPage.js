@@ -16,6 +16,8 @@ let form = {
   receiver_address: '',
   weight: '',
 };
+let parcelStatus;
+let parcelPresentLocation;
 
 const Page = {
   render : async () => {
@@ -23,6 +25,8 @@ const Page = {
     await fetchAPI(`/parcels/${id}`)
       .then(res => {
         form = res.data;
+        parcelStatus = res.data.status;
+        parcelPresentLocation = res.data.present_location;
       })
     const view = `
       <div class="container">
@@ -47,7 +51,7 @@ const Page = {
                   <div class="col-6 align-center">
                     <div class="checkbox-block content-center">
                       <label for="cancelled">Cancelled</label>
-                      <input class="checkbox" type="checkbox" name="cancelled" /> 
+                      <input class="checkbox" type="checkbox" name="cancelled" disabled /> 
                     </div>
                   </div>
                 </div>
@@ -62,7 +66,7 @@ const Page = {
                             value="Waiting Pickup"
                           >Waiting Pickup</option>
                           <option
-                            ${form.status === 'Pickup Up' ? 'selected' : ''}
+                            ${form.status === 'Pick Up' ? 'selected' : ''}
                             value="Pick Up"
                           >Pick Up</option>  
                           <option
@@ -78,6 +82,7 @@ const Page = {
                       <button
                         id="submit-status"
                         class="btn primary"
+                        disabled
                       >
                         Update
                       </button>
@@ -91,12 +96,12 @@ const Page = {
                         name="present_location"
                         id="present_location"
                         placeholder="Present Location"
-                        required
                         value="${form.present_location}"
                       >
                       <button
                         id="submit-location"
                         class="btn primary"
+                        disabled
                       >
                         Update
                       </button>
@@ -241,7 +246,7 @@ const Page = {
   },
   after_render: async () => {
     const pricePerKg = 1000;
-    map.after_render(form.from_district, form.to_district);
+    map.after_render(form.from_district, form.present_location || form.to_district);
 
     const formKeys = Object.keys(form);
     // From province and distrinct
@@ -251,6 +256,7 @@ const Page = {
     const toProvince = document.querySelector('#to_province');
     const toDistrict = document.querySelector('#to_district');
 
+    const status = document.querySelector('#status');
     const presentLocation = document.querySelector('#present_location');
     const receiverNames = document.querySelector('#receiver_names');
     const receiverPhone = document.querySelector('#receiver_phone');
@@ -259,10 +265,12 @@ const Page = {
     const quoteResult = document.querySelector('.quote-result');
 
     const submitLocation = document.querySelector('#submit-location');
+    const submitStatus = document.querySelector('#submit-status');
     const errorMessage = document.querySelector('.form-error.error-message');
     const loading = document.querySelector('.loading');
  
-   
+  
+    status.addEventListener('input', inputHandler);
     presentLocation.addEventListener('input', inputHandler);
     receiverAddress.addEventListener('input', inputHandler);
     receiverNames.addEventListener('input', inputHandler);
@@ -283,6 +291,59 @@ const Page = {
       renderDetails()
     });
 
+    submitStatus.addEventListener('click', (e) => {
+      e.preventDefault();
+      loading.classList.add('active');
+      
+      if (validateInputs()) {
+        setTimeout(() => loading.classList.remove('active'), 2000);
+        return;
+      }
+      const body = {
+        status: form.status,
+      }
+      fetchAPI(`/parcels/${form.id}/status`, { method: 'put', body })
+        .then((res) => {
+          const { data } = res;
+          if (res.message) {
+            parcelPresentLocation = form.present_location;
+            parcelStatus = form.status;
+            status.setAttribute('disabled', true);
+            presentLocation.setAttribute('disabled', true);
+            errorMessage.textContent = res.message;
+            errorMessage.style.color = 'green';
+            const title = res.message || 'Parcel status updated';
+            const body = `
+              <p class="capitalize" style="font-size: 1rem; line-height: 2rem;">
+                <b>Status</b>: ${form.status}<br>
+                <b>Current Location</b>: ${form.present_location}<br>
+                <b>From</b>: ${form.from_province}, ${form.from_district}<br>
+                <b>To</b>: ${form.to_province}, ${form.to_district}<br>
+                <b>Receiver</b>: ${form.receiver_names}<br>
+                <b>Address</b>: ${form.receiver_address}<br>
+              </p>
+            `
+            model({
+              title,
+              body,
+            });
+          }
+
+          // Wait for 2 seconds to smooth the spinner
+          setTimeout(() => {
+            loading.classList.remove('active');
+          }, 2000);
+        })
+        .catch((err) => {
+          loading.classList.remove('active');
+          console.log(err)
+          if (err.message) {
+            errorMessage.textContent = err.message;
+            errorMessage.style.color = 'red';
+          }
+        })
+    });
+
     submitLocation.addEventListener('click', (e) => {
       e.preventDefault();
       loading.classList.add('active');
@@ -298,11 +359,16 @@ const Page = {
         .then((res) => {
           const { data } = res;
           if (res.message) {
+            parcelPresentLocation = form.present_location;
+            parcelStatus = form.status;
+            status.setAttribute('disabled', true);
+            presentLocation.setAttribute('disabled', true);
             errorMessage.textContent = res.message;
             errorMessage.style.color = 'green';
             const title = res.message || 'Parcel location updated';
             const body = `
               <p class="capitalize" style="font-size: 1rem; line-height: 2rem;">
+                <b>Status</b>: ${form.status}<br>
                 <b>Current Location</b>: ${form.present_location}<br>
                 <b>From</b>: ${form.from_province}, ${form.from_district}<br>
                 <b>To</b>: ${form.to_province}, ${form.to_district}<br>
@@ -337,7 +403,20 @@ const Page = {
     }
     // Callback function to handle email and password imput
     function inputHandler (e) {
-      form[e.target.id] = e.target.value;
+      const { id, value } = e.target;
+      form[id] = value;
+      // toggle status disabled attribute
+      if (id === 'status') {
+        parcelStatus === value
+        ? submitStatus.setAttribute('disabled', true)
+        : submitStatus.removeAttribute('disabled'); 
+      }
+      // toggle pressent_location disabled attribute
+      if (id === 'present_location') {
+        parcelPresentLocation === value
+        ? submitLocation.setAttribute('disabled', true)
+        : submitLocation.removeAttribute('disabled'); 
+      }
       renderDetails() 
     }
     function renderDetails () {
@@ -350,6 +429,7 @@ const Page = {
         <strong class="capitalize">${form.weight || '-'} Kg</strong> costs <strong>
         ${price ? price.toLocaleString() : '-'} RWF</strong>
       </p>`;
+      map.after_render(form.from_district, form.present_location || form.to_district);
     }
     function validateInputs () {
       const keys = Object.keys(form);
