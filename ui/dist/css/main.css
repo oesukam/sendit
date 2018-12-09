@@ -199,9 +199,9 @@ select option {
   font-size: 1.2rem;
   font-weight: 300;
 }
-button[disabled], a[disabled] {
-  color: rgba(0,0,0,.4) !important;
-  background-color: rgba(0, 0, 0, 0.3) !important;
+button[disabled], a[disabled], input[disabled] {
+  color: rgba(0,0,0,.5) !important;
+  background-color: rgba(0, 0, 0, 0.1) !important;
 }
 .btn.primary {
   background-color: #3359DF;

@@ -8,6 +8,7 @@ module.exports =  {
   },
   "rules": {
     "consistent-return": 0,
-		"import/prefer-default-export": "off"
+    "import/prefer-default-export": "off",
+    "no-throw-literal": "off"
 	}
 };

@@ -341,6 +341,9 @@ const Page = {
         <strong class="capitalize">${form.weight || '-'} Kg</strong> costs <strong>
         ${price ? price.toLocaleString() : '-'} RWF</strong>
       </p>`;
+      if (form.to_district) {
+        map.after_render(form.from_district, form.to_district);
+      }
     }
     function validateInputs () {
       const keys = Object.keys(form);

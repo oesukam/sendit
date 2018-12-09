@@ -26,8 +26,11 @@ router.get('/:userId/parcels',
   jwtVerifyToken(['user', 'admin']),
   controllers.getUserParcels);
 
-// Fetch user info
-router.put('/:userId', jwtVerifyToken(['user', 'admin']), controllers.updateUser);
+// Update user info
+router.put('/:userId',
+  celebrate({ body: users.updateUser }),
+  jwtVerifyToken(['user', 'admin']),
+  controllers.updateUser);
 
 // Fetch user's parcels counters
 router.get('/:userId/counters',

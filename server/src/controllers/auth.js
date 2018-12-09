@@ -52,16 +52,15 @@ const signup = async (req, res) => {
 
 const login = async (req, res) => {
   const { email, password } = req.body;
-  let userData;
   let success = false;
 
   const user = new User();
   try {
-    userData = await user.findByEmail(email);
-    if (!userData.data) {
+    await user.findByEmail(email);
+    if (!user.id) {
       return res.status(404).json({ success, message: 'User does not exist' });
     }
-    const validPassword = await bcrypt.compare(password, userData.data.password);
+    const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) {
       return res.status(401).json({
         success,

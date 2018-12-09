@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import bcrypt from 'bcrypt';
 
 import Parcel from '../models/Parcel';
 import User from '../models/User';
@@ -108,20 +109,29 @@ const getUserParcelsCounters = async (req, res) => {
 const updateUser = async (req, res) => {
   const { userId } = req.params;
   const { body } = req;
+  const { jwtUser } = body;
+  if (jwtUser.id !== userId) {
+    return res.status(401).json({
+      success: false,
+      message: 'Unauthorized Access',
+    });
+  }
   const user = new User();
   await user.findById(userId);
   if (!user.id) {
     return res.status(404).json({ success: false, message: 'Not found' });
   }
 
-  if (body.jwtUser) {
-    delete body.jwtUser;
-  }
-  if (Object.keys(body).length === 0) {
-    return res.status(204).json({ success: false, message: 'User not updated' });
+  const validPassword = await bcrypt.compare(body.password, user.password);
+  if (!validPassword) {
+    return res.status(401).json({
+      success: false,
+      message: 'Wrong password',
+    });
   }
   user.first_name = body.first_name || user.first_name;
   user.last_name = body.last_name || user.last_name;
+  user.birth_date = body.birth_date || user.birth_date;
   user.province = body.province || user.province;
   user.district = body.district || user.district;
   user.city = body.city || user.city;

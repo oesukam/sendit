@@ -7,7 +7,8 @@ const sideBar = {
       { link: '/', text: 'Home' },
       { link: '/#/quote', text: 'Get Quote' },
       { link: '#', text: `Admin`, auth: true, user: 'admin' },
-      { link: `/#/profile/${user.id}`, text: 'My Parcels' },
+      { link: `/#/profile/${user.id}`, text: 'My Account' },
+      { link: '/#/my_parcels', text: 'My Parcels' },
       { link: '/#/create_parcel', text: 'Add parcel' },
       { link: '/#/admin_parcels', text: 'Admin Parcels' },
       // { link: '/#/admin/parcels/:id', text: 'View a parcel' },
@@ -15,7 +16,11 @@ const sideBar = {
     const view = `
       <div class="box sidebar">
         <div class="sidebar__header">
-          <div class="profile-avatar"></div>
+          <div class="profile-avatar">
+            <div class="profile-avatar__edit">
+              <i class="fa fa-pencil"></i>
+            </div>
+          </div>
           <div class="profile-name">
           ${ 
             store.user

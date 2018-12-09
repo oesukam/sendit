@@ -19,7 +19,9 @@ const sendMail = ({
   from = '', to = '', subject = '', bcc = '', text = '', html = '',
 }) => new Promise((resolve, reject) => {
   // setup email data with unicode symbols
-  if (!to) return reject(new Error('Please provide to email address'));
+  if (!to) {
+    throw 'Please provide to email address';
+  }
   const mailOptions = {
     from: from || '"Andela - SendIT" <admin@sendit.service>', // sender address
     to: to || 'oesukam@gmail.com', // list of receivers
@@ -35,10 +37,8 @@ const sendMail = ({
       logger.error(error);
       reject(error);
     }
-    if (info) {
-      const message = `Message sent: ${info.messageId}`;
-      logger.info(message);
-    }
+    const message = `Message sent: ${info.messageId}`;
+    logger.info(message);
     resolve(true);
   });
 });

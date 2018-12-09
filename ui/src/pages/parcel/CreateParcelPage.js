@@ -226,11 +226,14 @@ const Page = {
             errorMessage.textContent = res.message;
           }
           if (data) {
-            const title = 'Parcel created';
+            const title = res.message || 'Parcel created';
             const body = `
               <p>
-                <b>From</b>: ${data.from_province}, ${data.from_district}<br>
-                <b>To</b>: ${data.to_province}, ${data.to_district}<br> 
+                <b class="capitalize">From</b>: ${data.from_province}, ${data.from_district}<br>
+                <b class="capitalize">To</b>: ${data.to_province}, ${data.to_district}<br>
+                <b class="capitalize">Receiver</b>: ${data.receiver_names}
+                <b class="capitalize">Weight</b>: ${data.weight}
+                <b class="capitalize">Price</b>: ${data.price}
               </p>
             `
             model({
