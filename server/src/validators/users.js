@@ -7,7 +7,7 @@ const signup = {
   email: Joi.string().email().required().trim(),
   gender: Joi.string().required().valid('Male', 'Female'),
   birth_date: Joi.date(),
-  to_province: Joi.string().valid(
+  province: Joi.string().valid(
     'eastern',
     'kigali',
     'northern',

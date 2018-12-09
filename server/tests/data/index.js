@@ -9,7 +9,7 @@ const user = {
   last_name: 'Esuka',
   email: 'oesukam@gmail.com',
   gender: 'Male',
-  province: 'Kigali',
+  province: 'kigali',
   district: 'Nyarungege',
   address: 'Telecom House',
   password: 'user@user',
@@ -44,7 +44,7 @@ const mailInfo = {
 
 const parcelData = {
   user_id: '97cf377c-5735-4f5d-8645-c8fb4b5c5af3',
-  from_province: 'Kigali',
+  from_province: 'kigali',
   from_district: 'Nyarungege',
   to_province: 'Northen Province',
   to_district: 'Test',
