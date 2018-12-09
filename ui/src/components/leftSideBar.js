@@ -17,9 +17,7 @@ const sideBar = {
       <div class="box sidebar">
         <div class="sidebar__header">
           <div class="profile-avatar">
-            <div class="profile-avatar__edit">
-              <i class="fa fa-pencil"></i>
-            </div>
+            
           </div>
           <div class="profile-name">
           ${ 
