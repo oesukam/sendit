@@ -21,6 +21,7 @@ describe('parcel', () => {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
     const userModel = new User({ ...user });
     userModel.userType = 'admin';
+    userModel.confirmed = 'confirmed';
     userModel.password = await bcrypt.hash(user.password, 10);
     await userModel.save();
     Request.post(`${urlPrefixV1}/auth/login`,

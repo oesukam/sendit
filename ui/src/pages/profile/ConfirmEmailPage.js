@@ -21,7 +21,6 @@ const Page = {
   const params = nav.extractRequestURL();
   const userId = params[1];
   const confirmationCode = params[3];
-  console.log(userId, confirmationCode);
   const errorMessage = document.querySelector('.form-error.error-message');
   const loading = document.querySelector('.loading');
 
