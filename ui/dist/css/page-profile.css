@@ -14,9 +14,10 @@
 }
 
 .profile-avatar {
+  position: relative;
   height: 100px;
   width: 100px;
-  background-image: url('../images/profile-female.png');
+  background-image: url('../images/profile-female.png'), linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6));
   background-position: center;
   background-size: cover;
   background-color: #fff;
@@ -27,6 +28,29 @@
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
   border: 1px solid rgba(0,0,0,0.2);
+}
+.profile-avatar__edit {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: -10px;
+  bottom: 0;
+  height: 35px;
+  width: 35px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 20px;
+  color: rgba(0,0,0,0.9);
+  background-color: rgb(255, 164, 0, 0.7);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+.profile-avatar__edit:hover {
+  color: rgba(0,0,0,0.7);
+  background-color: rgb(255, 164, 0, 0.9);
 }
 .profile-name {
   color: #fff;

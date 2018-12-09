@@ -22,6 +22,7 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin([
       { from: 'ui/src/index.html', to: 'index.html' },
+      { from: 'ui/src/libraries', to: 'libraries' },
       { from: 'ui/src/images', to: 'images' },
       { from: 'ui/src/css', to: 'css' },
       { from: 'ui/src/images', to: 'images' },

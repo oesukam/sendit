@@ -5,8 +5,9 @@ const topNav = {
     const links = [
       { link: '/', text: 'Home', users: [] },
       { link: '/#/quote', text: 'Get Quote', users: [] },
-      { link: '/#/admin_parcels', text: `Parcels`, auth: true, users: ['admin'] },
-      { link: '/#/create_parcel', text: `Add parcel`, auth: true, users: [] },
+      // { link: '/#/admin_parcels', text: 'Parcels', auth: true, users: ['admin'] },
+      { link: '/#/create_parcel', text: 'Add parcel', auth: true, users: ['user', 'admin'] },
+      { link: '/#/my_parcels', text: 'My Parcels', auth: true, users: ['user', 'admin'] },
       { link: '/#/signup', text: 'Signup', hide: true },
       { link: '/#/login', text: 'Login', hide: true },
       {
@@ -44,7 +45,7 @@ const topNav = {
         <a class="brand" href="index.html">
           <img class="brand__img" src="./images/logo.png" alt="logo">
         </a>
-        <div class="toggle-menu is-tablet">
+        <div class="toggle-menu">
           <div class="hamburger"></div>
         </div>
         <nav id="menu-nav" class="nav pull-right">
@@ -78,6 +79,7 @@ const topNav = {
   return view;
   },
   after_render: async () => {
+    const toggleMenu = document.querySelector('.toggle-menu');
     const navLinks = document.querySelectorAll('.nav-item>a');
     /*
       Add eventListerner to all menu links in order to toggle
@@ -93,6 +95,14 @@ const topNav = {
         navLinks.forEach(nav => nav.classList.remove('active'))
         e.target.classList.add('active');
       })
+    });
+
+    toggleMenu.addEventListener('click', (e) => {
+      e.preventDefault()
+      const hamburger = document.querySelector('.hamburger');
+      const menuNav = document.querySelector('#menu-nav');
+      hamburger.classList.toggle('active');
+      menuNav.classList.toggle('active');
     });
 
 

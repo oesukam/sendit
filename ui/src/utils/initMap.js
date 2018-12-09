@@ -24,7 +24,11 @@ const initMap = ({ from = { lat: -1.935114, lng: 30.082111 }, to = '' } = {}) =>
       travelMode: 'DRIVING',
       unitSystem: google.maps.UnitSystem.METRIC,
       avoidHighways: false,
-      avoidTolls: false
+      avoidTolls: false,
+      drivingOptions: {
+        departureTime: new Date(Date.now() + 4*3600*1000),  // Add 4 hours processing time.
+        trafficModel: 'optimistic'
+      }
     }, function(response, status) {
       if (status !== 'OK') {
         alert('Error was: ' + status);
@@ -33,7 +37,7 @@ const initMap = ({ from = { lat: -1.935114, lng: 30.082111 }, to = '' } = {}) =>
         const destinationList = response.destinationAddresses;
         const outputDiv = document.getElementById('output');
         if (outputDiv) {
-          outputDiv.innerHTML = '<strong>Distance: </strong>';
+          outputDiv.innerHTML = '<strong>Journey: </strong>';
         }
         deleteMarkers(markersArray);
 
@@ -65,9 +69,18 @@ const initMap = ({ from = { lat: -1.935114, lng: 30.082111 }, to = '' } = {}) =>
               showGeocodedAddressOnMap(true)
             );
             if (outputDiv) {
+              // Processing time set to 4 hours
+              const processTime = 4*60*60;
+
+              // Set duration from google map to 0 in case location not found
+              const distanceDuration = results[j] && results[j].status === 'OK' ? results[j].duration.value : 0;
+              
+              // Get duration from moment.js
+              const duration = moment.duration(distanceDuration + processTime, 'seconds');
               outputDiv.innerHTML += `
-                ${originList[i]} to ${destinationList[j]}: ${results[j].distance.text} 
-                in ${results[j].duration.text} <br>
+                ${originList[i]} to ${destinationList[j]}: 
+                ${results[j] ? results[j].distance.text : ''} 
+                in ${duration.humanize()} <br>
               `;
             }
           }

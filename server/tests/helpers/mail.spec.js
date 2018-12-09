@@ -14,7 +14,6 @@ describe('mailer', () => {
     server.close();
   });
 
-  // Sending an email test
   describe('send email with correct from address', () => {
     let success = false;
     let error;
@@ -26,7 +25,6 @@ describe('mailer', () => {
           done();
         })
         .catch((err) => {
-          console.log(err);
           error = err;
           done();
         });
@@ -58,5 +56,16 @@ describe('mailer', () => {
       expect(success).toBeFalsy();
       expect(error.responseCode).toBe(501);
     });
+  });
+
+  it('send email without to address', (done) => {
+    mailer({ ...mailInfo, to: '' })
+      .then(() => {
+        done();
+      })
+      .catch((err) => {
+        expect(err).toBe('Please provide to email address');
+        done();
+      });
   });
 });
