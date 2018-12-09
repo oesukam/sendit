@@ -26,8 +26,9 @@ const Page = {
 
   fetchAPI(`/users/${userId}/confirmEmail/${confirmationCode}`)
     .then((res) => {
-      if (res.message) {
+      if (!res.success) {
         errorMessage.textContent = res.message;
+      } else {
         model({
           title: 'Confirm Email',
           body: res.message, 
