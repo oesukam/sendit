@@ -11,6 +11,7 @@ import QuotePage from './pages/quote/QuotePage.js';
 import LoginPage from './pages/login/LoginPage.js';
 import SignupPage from './pages/signup/SignupPage.js';
 import ProfilePage from './pages/profile/ProfilePage.js';
+import ConfirmEmailPage from './pages/profile/ConfirmEmailPage.js';
 import MyParcelsPage from './pages/parcel/MyParcelsPage.js'
 import CreateParcelPage from './pages/parcel/CreateParcelPage.js'
 import UpdateParcelPage from './pages/parcel/UpdateParcelPage.js'
@@ -70,6 +71,10 @@ const routes = {
     page: ProfilePage,
     auth: true,
   },
+  '/profile/:id/confirm_email/:id': {
+    name: 'Confirm Email',
+    page: ConfirmEmailPage,
+  },
   '/admin_parcels': {
     name: 'Admin Parcels',
     page: AdminParcelsPage,
@@ -85,7 +90,7 @@ const routes = {
 
 // The router code. Takes a URL, checks against the list of supported routes and then renders the corresponding content page.
 const router = async () => {
-  let request = navigation.extractRequestURL()
+  let request = navigation.extractRequestURL();
   let parsedURL = [];
   let paramIndex = 1;
   request.forEach((el, index) => {
@@ -95,7 +100,7 @@ const router = async () => {
         param = param.replace(/\?.*/g, '');
       }
       if (param) {
-        if (index%2 === 0 && index != 0) {
+        if (index%2 !== 0 && index != 0) {
           parsedURL.push(`:id`);
           paramIndex += 1;
         } else {
@@ -130,9 +135,11 @@ const router = async () => {
   if (parsedURL.length === 0) url = '/';
 
   // Check if the route is protected
-  if (routes[url].auth || store.auth) {
-    if (routes[url].hide || !store.auth) {
-      url = '/';
+  if (routes[url]) {
+    if (routes[url].auth || store.auth) {
+      if (routes[url].hide || !store.auth) {
+        url = '/';
+      }
     }
   }
   let page = routes[url] ? routes[url].page : Error404Page

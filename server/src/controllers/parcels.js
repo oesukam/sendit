@@ -16,6 +16,12 @@ const createParcel = async (req, res) => {
     });
   }
 
+  if (jwtUser.confirmed !== 'confirmed') {
+    return res.status(401).json({
+      success: false,
+      message: 'Please confirm your email address',
+    });
+  }
   delete body.jwtUser;
   body.user_id = jwtUser.id;
   const price = parseFloat(body.weight) * pricePerKg;

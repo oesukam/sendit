@@ -30,6 +30,15 @@ const Page = {
               <div class="form-error error-message"></div>
               <form action="#">
                 <div class="row">
+                  <div class="col-12 align-center">
+                    <div class="profile-avatar">
+                      <div class="profile-avatar__edit">
+                        <i class="fa fa-pencil"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
                   <div class="col-6">
                     <label for="province">Province</label>
                     <span class="custom-dropdown" >

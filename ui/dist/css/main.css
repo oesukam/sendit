@@ -292,6 +292,9 @@ button[disabled], a[disabled], input[disabled] {
 .model-wrapper.show {
   display: flex;
 }
+.model-wrapper button {
+  margin-top: 10px;
+}
 
 .model-title {
   margin-bottom: 20px;
