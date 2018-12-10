@@ -13,13 +13,14 @@ const {
   PG_DATABASE,
   PG_PORT,
   PG_URL,
+  DATABASE_URL,
 } = process.env;
 
 let pool;
 
-if (PG_URL) {
+if (PG_URL || DATABASE_URL) {
   pool = new Pool({
-    connectionString: PG_URL,
+    connectionString: PG_URL || DATABASE_URL,
   });
 } else {
   pool = new Pool({

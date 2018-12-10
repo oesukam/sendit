@@ -32,7 +32,7 @@ const Page = {
                 <div class="row">
                   <div class="col-12 align-center">
                     <div
-                      class="profile-avatar user"
+                      class="profile-avatar"
                       style="background-image: url('${form.avatar_url || '/images/profile-female.png'}'), linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6))"
                     >
                       <div class="profile-avatar__edit">
@@ -170,7 +170,7 @@ const Page = {
     const formKeys = Object.keys(form);
     // Initialise select inputs
     const avatar = document.getElementById('avatar');
-    const profileAvatar = document.querySelector('.profile-avatar.user')
+    const profileAvatar = document.querySelectorAll('.profile-avatar')
     const avatarButton = document.querySelector('.profile-avatar__edit')
     const firstName = document.querySelector('#first_name');
     const firstNameError = document.querySelector('.form-error.first_name');
@@ -204,7 +204,6 @@ const Page = {
     district.addEventListener('input', inputHandler);
 
     avatarButton.addEventListener('click', () => {
-      console.log('dofpfo');
       avatar.click();
     });
     avatar.addEventListener("change", (e) => {
@@ -221,9 +220,11 @@ const Page = {
         .then(( res ) => {
           if (res.success) {
             form.avatar_url = res.avatar_url;
-            profileAvatar.style.backgroundImage =`
-              url("${form.avatar_url}"), linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6))
-            `;
+            profileAvatar.forEach(el => {
+              el.style.backgroundImage =`
+                url("${form.avatar_url}"), linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6))
+              `;
+            })
             store.user = {
               ...store.user,
               avatar_url: form.avatar_url, 
