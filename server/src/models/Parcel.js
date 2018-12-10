@@ -63,10 +63,10 @@ class Parcel extends BaseModel {
     const startAt = (page - 1) * limit;
     return new Promise((resolve, reject) => {
       if (!this.storage) reject(new Error('Failed, storage not set'));
-      db.query(parcelsQuery.queryAllParcelsByUser, [startAt, userId])
+      db.query(parcelsQuery.queryAllParcelsByUser(search), [startAt, userId])
         .then(async (res) => {
           const { rows = [] } = res;
-          const results = await db.query(parcelsQuery.countAllUserParcels, [userId]);
+          const results = await db.query(parcelsQuery.countAllUserParcels(search), [userId]);
           const { count = 0 } = results.rows[0];
           const total = parseInt(count, 10);
           const totalPage = Math.ceil(total / limit);

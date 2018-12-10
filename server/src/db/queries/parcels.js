@@ -62,11 +62,58 @@ const updateParcel = `UPDATE parcels SET
   created_at = $17
   WHERE id = $1 `;
 
-const queryAllParcels = 'SELECT * FROM parcels LIMIT 25 OFFSET $1';
-const queryAllParcelsByUser = `
-  SELECT parcels.*, users.first_name, users.last_name 
-  FROM parcels INNER JOIN users ON parcels.user_id = users.id 
-  WHERE parcels.user_id = $2 LIMIT 25 OFFSET $1`;
+const queryAllParcels = (search = '') => {
+  let query = `
+    SELECT 
+      parcels.*, 
+      users.first_name, 
+      users.last_name, 
+      users.gender 
+    FROM parcels INNER JOIN users ON parcels.user_id = users.id
+   `;
+  if (search) {
+    const keywords = search.split(/\s+/g);
+    query += ' WHERE';
+    keywords.forEach((val, index) => {
+      if (index !== 0) {
+        query += ' AND';
+      }
+      query += `
+        (
+          users.first_name ILIKE '%${val}%' OR 
+          users.last_name ILIKE '%${val}%' OR 
+          users.gender ILIKE '%${val}%' OR 
+          parcels.status ILIKE '%${val}%' OR 
+          parcels.receiver_names ILIKE '%${val}%' OR 
+          parcels.from_province ILIKE '%${val}%' OR 
+          parcels.from_district ILIKE '%${val}%' OR 
+          parcels.to_province ILIKE '%${val}%' OR 
+          parcels.to_district ILIKE '%${val}%' 
+        )
+      `;
+    });
+  }
+  return `${query} LIMIT 25 OFFSET $1`;
+};
+const queryAllParcelsByUser = (search = '') => {
+  let query = 'SELECT * FROM parcels WHERE (user_id = $2)';
+  if (search) {
+    const keywords = search.split(/\s+/g);
+    keywords.forEach((val) => {
+      query += ` AND
+        (
+          status ILIKE '%${val}%' OR 
+          receiver_names ILIKE '%${val}%' OR 
+          from_province ILIKE '%${val}%' OR 
+          from_district ILIKE '%${val}%' OR 
+          to_province ILIKE '%${val}%' OR 
+          to_district ILIKE '%${val}%' 
+        )
+      `;
+    });
+  }
+  return `${query} LIMIT 25 OFFSET $1`;
+};
 
 const queryParcelById = 'SELECT * FROM parcels WHERE id = $1';
 
@@ -77,8 +124,55 @@ const updateParcelStatus = 'UPDATE parcels SET status = $2 WHERE id = $1';
 const updateParcelDestination = `UPDATE parcels 
   SET to_province = $2, to_district = $3 WHERE id = $1
 `;
-const countAllParcels = 'SELECT COUNT(*) FROM parcels';
-const countAllUserParcels = 'SELECT COUNT(*) FROM parcels WHERE user_id = $1';
+const countAllParcels = (search = '') => {
+  let query = `
+    SELECT 
+      COUNT(*) 
+    FROM parcels INNER JOIN users ON parcels.user_id = users.id
+   `;
+  if (search) {
+    const keywords = search.split(/\s+/g);
+    query += ' WHERE';
+    keywords.forEach((val, index) => {
+      if (index !== 0) {
+        query += ' AND';
+      }
+      query += `
+        (
+          users.first_name ILIKE '%${val}%' OR 
+          users.last_name ILIKE '%${val}%' OR 
+          users.gender ILIKE '%${val}%' OR 
+          parcels.status ILIKE '%${val}%' OR 
+          parcels.receiver_names ILIKE '%${val}%' OR 
+          parcels.from_province ILIKE '%${val}%' OR 
+          parcels.from_district ILIKE '%${val}%' OR 
+          parcels.to_province ILIKE '%${val}%' OR 
+          parcels.to_district ILIKE '%${val}%'
+        )
+      `;
+    });
+  }
+  return query;
+};
+const countAllUserParcels = (search) => {
+let query = 'SELECT COUNT(*) FROM parcels WHERE (user_id = $1)';
+  if (search) {
+    const keywords = search.split(/\s+/g);
+    keywords.forEach((val) => {
+      query += ` AND
+        (
+          status ILIKE '%${val}%' OR 
+          receiver_names ILIKE '%${val}%' OR 
+          from_province ILIKE '%${val}%' OR 
+          from_district ILIKE '%${val}%' OR 
+          to_province ILIKE '%${val}%' OR 
+          to_district ILIKE '%${val}%' 
+        )
+      `;
+    });
+  }
+  return query;
+};
 const userParcelCounters = `
   SELECT 
     SUM(1) FILTER (WHERE status = 'Delivered' AND user_id = $1) AS delivered,

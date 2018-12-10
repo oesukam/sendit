@@ -248,7 +248,7 @@ const Page = {
       fetchAPI(`/parcels/${form.id}/destination`, { method: 'put', body })
         .then((res) => {
           const { data } = res;
-          if (res.message) {
+          if (res.success) {
             errorMessage.textContent = res.message;
             errorMessage.style.color = 'green';
             const title = res.message || 'Parcel destination updated';
@@ -263,6 +263,10 @@ const Page = {
             model({
               title,
               body,
+            });
+          } else {
+            model({
+              title: res.message,
             });
           }
 
@@ -290,7 +294,7 @@ const Page = {
           const { data } = res;
           if (res.message) {
             errorMessage.textContent = res.message;
-            form.stats = 'Cancelled'
+            form.status = 'Cancelled'
             errorMessage.style.color = 'green';
             const title = res.message || 'Parcel delivery cancelled';
             const body = `
