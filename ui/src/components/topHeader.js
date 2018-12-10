@@ -4,9 +4,9 @@ const topNav = {
     const { user } = store;
     const links = [
       { link: '/', text: 'Home', users: [] },
-      { link: '/#/quote', text: 'Get Quote', users: [] },
-      // { link: '/#/admin_parcels', text: 'Parcels', auth: true, users: ['admin'] },
+      { link: '/#/quote', text: 'Get Quote', users: [], hide: true },
       { link: '/#/create_parcel', text: 'Add parcel', auth: true, users: ['user', 'admin'] },
+      { link: '/#/admin_parcels', text: 'Parcels', auth: true, users: ['admin'] },
       { link: '/#/my_parcels', text: 'My Parcels', auth: true, users: ['user', 'admin'] },
       { link: '/#/signup', text: 'Signup', hide: true },
       { link: '/#/login', text: 'Login', hide: true },

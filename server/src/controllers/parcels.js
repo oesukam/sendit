@@ -45,6 +45,7 @@ const createParcel = async (req, res) => {
 const getAll = async (req, res) => {
   const { search = '', page = 1 } = req.query;
   const parcel = new Parcel();
+
   const results = await parcel.getAll({ search, page: parseInt(page, 10) });
 
   return res.status(200).json({ success: true, ...results });
@@ -183,7 +184,7 @@ const changeDestination = async (req, res) => {
     Checks if the parcel was already cancelled or pick up
   */
   if (
-    parcel.status === 'Waiting Pickup'
+    parcel.status !== 'Waiting Pickup'
     || parcel.status === 'Cancelled'
   ) {
     return res.status(409).json({

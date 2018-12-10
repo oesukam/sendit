@@ -118,12 +118,12 @@ class BaseModel {
       let countQuery;
       switch (this.storage) {
         case 'users':
-          query = usersQuery.queryAllUsers;
-          countQuery = usersQuery.countAllUsers;
+          query = usersQuery.queryAllUsers(search);
+          countQuery = usersQuery.countAllUsers(search);
           break;
         case 'parcels':
-          query = parcelsQuery.queryAllParcels;
-          countQuery = parcelsQuery.countAllParcels;
+          query = parcelsQuery.queryAllParcels(search);
+          countQuery = parcelsQuery.countAllParcels(search);
           break;
         default:
           break;

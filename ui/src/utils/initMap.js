@@ -7,7 +7,13 @@ const kigaliLatLng = { lat: -1.935114, lng: 30.082111 };
 let map;
 const initMap = ({ from = { lat: -1.935114, lng: 30.082111 }, to = '' } = {}) => {
   const mapElement = document.getElementById('quote-map');
-  const bounds = new google.maps.LatLngBounds;
+  let bounds;
+  try {
+    bounds = new google.maps.LatLngBounds;
+  } catch(err) {
+    console.log(err);
+    document.querySelector('.loading').classList.remove('active');
+  }
   let markersArray = [];
   if (mapElement) {
     map = new google.maps.Map(mapElement, {
@@ -77,9 +83,10 @@ const initMap = ({ from = { lat: -1.935114, lng: 30.082111 }, to = '' } = {}) =>
               
               // Get duration from moment.js
               const duration = moment.duration(distanceDuration + processTime, 'seconds');
+              const distance = results[j] ? results[j].distance || '' : ''
               outputDiv.innerHTML += `
                 ${originList[i]} to ${destinationList[j]}: 
-                ${results[j] ? results[j].distance.text : ''} 
+                ${distance.text || ''} 
                 in ${duration.humanize()} <br>
               `;
             }

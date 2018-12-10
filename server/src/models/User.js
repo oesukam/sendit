@@ -33,7 +33,7 @@ class User extends BaseModel {
     return new Promise((resolve, reject) => {
       const now = moment().format();
       const record = [
-        this.id || this.getUID(),
+        this.id || this.getUID(), this.avatar || null,
         this.email, this.password, this.first_name, this.last_name,
         this.birth_date, this.gender, this.province, this.district,
         this.city, this.address || 'Address', this.user_type, this.confirmed || 'pending',

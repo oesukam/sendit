@@ -43,8 +43,8 @@ const confirmEmail = async (req, res) => {
 // Fetch list of users
 const getAll = async (req, res) => {
   const user = new User();
-  const { page = 1, search = '' } = req.params;
-  const results = await user.getAll({ page: parseInt(page, 10), search });
+  const { page = 1, search = '' } = req.query;
+  const results = await user.getAll({ search, page: parseInt(page, 10) });
   res.json({ success: true, ...results });
 };
 
@@ -69,7 +69,7 @@ const getSingle = async (req, res) => {
 
 // Get User's parcels
 const getUserParcels = async (req, res) => {
-  const { keywords = '', page = 1 } = req.query;
+  const { search = '', page = 1 } = req.query;
   const { userId } = req.params;
   const { jwtUser } = req.body;
   if (jwtUser.id !== userId) {
@@ -79,7 +79,7 @@ const getUserParcels = async (req, res) => {
     });
   }
   const parcel = new Parcel();
-  const results = await parcel.getAllByUser({ keywords, userId, page: parseInt(page, 10) });
+  const results = await parcel.getAllByUser({ search, page: parseInt(page, 10), userId });
   if (!results.page) {
     return res.status(404).json({ success: false, message: 'Not found' });
   }

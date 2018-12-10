@@ -2,6 +2,7 @@ const createTableUsers = `
 CREATE TABLE IF NOT EXISTS
   users(
     id UUID PRIMARY KEY,
+    avatar VARCHAR(255),
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     first_name VARCHAR(128) NOT NULL,
@@ -21,6 +22,7 @@ CREATE TABLE IF NOT EXISTS
   )`;
 const insertUser = `INSERT INTO users(
   id,
+  avatar,
   email,
   password,
   first_name,
@@ -36,15 +38,63 @@ const insertUser = `INSERT INTO users(
   confirmation_code,
   created_at,
   updated_at
- ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
+ ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)
  ON CONFLICT DO NOTHING returning *`;
 const dropTableUsers = 'DROP TABLE IF EXISTS users';
 const queryUserById = 'SELECT * FROM users WHERE id = $1';
 const queryFirstUser = 'SELECT * FROM users WHERE id = $1 LIMIT 1';
-const queryAllUsers = 'SELECT * FROM users LIMIT 25 OFFSET $1';
+const queryAllUsers = (search) => {
+  let query = 'SELECT * FROM users';
+  if (search) {
+    const keywords = search.split(/\s+/g);
+    query += ' WHERE';
+    keywords.forEach((val, index) => {
+      if (index !== 0) {
+        query += ' AND';
+      }
+      query += `
+        (
+          first_name ILIKE '%${val}%' OR 
+          last_name ILIKE '%${val}%' OR 
+          confirmed ILIKE '%${val}%' OR
+          gender ILIKE '%${val}%' OR 
+          province ILIKE '%${val}%' OR 
+          district ILIKE '%${val}%' OR
+          city ILIKE '%${val}%' OR 
+          user_type ILIKE '%${val}%'
+        )
+      `;
+    });
+  }
+  return `${query} LIMIT 25 OFFSET $1`;
+};
 
 const queryUserByEmail = 'SELECT * FROM users WHERE email = $1';
-const countAllUsers = 'SELECT COUNT(*) FROM users';
+const countAllUsers = (search) => {
+  let query = 'SELECT COUNT(*) FROM users';
+  if (search) {
+    const keywords = search.split(/\s+/g);
+    query += ' WHERE';
+    keywords.forEach((val, index) => {
+      if (index !== 0) {
+        query += ' AND';
+      }
+      query += `
+        (
+          first_name ILIKE '%${val}%' OR 
+          last_name ILIKE '%${val}%' OR
+          confirmed ILIKE '%${val}%' OR 
+          gender ILIKE '%${val}%' OR 
+          province ILIKE '%${val}%' OR 
+          district ILIKE '%${val}%' OR
+          city ILIKE '%${val}%' OR 
+          user_type ILIKE '%${val}%'
+        )
+      `;
+    });
+  }
+  return query;
+};
 
 export default {
   createTableUsers,

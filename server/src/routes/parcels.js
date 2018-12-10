@@ -48,7 +48,7 @@ router.put('/:id/status',
 // Change parcel destination
 router.put('/:id/destination',
   celebrate({ body: parcels.changeDestination }),
-  jwtVerifyToken(['user']),
+  jwtVerifyToken(['user', 'admin']),
   controllers.changeDestination);
 
 export default router;
