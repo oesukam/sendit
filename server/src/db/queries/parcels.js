@@ -155,7 +155,7 @@ const countAllParcels = (search = '') => {
   return query;
 };
 const countAllUserParcels = (search) => {
-let query = 'SELECT COUNT(*) FROM parcels WHERE (user_id = $1)';
+  let query = 'SELECT COUNT(*) FROM parcels WHERE (user_id = $1)';
   if (search) {
     const keywords = search.split(/\s+/g);
     keywords.forEach((val) => {

@@ -16,7 +16,10 @@ const sideBar = {
     const view = `
       <div class="box sidebar">
         <div class="sidebar__header">
-          <div class="profile-avatar">
+          <div
+            class="profile-avatar"
+            style="background-image: url('${store.user? store.user.avatar_url || '/images/profile-female.png': '/images/profile-female.png' }'), linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6))"
+            >
             
           </div>
           <div class="profile-name">

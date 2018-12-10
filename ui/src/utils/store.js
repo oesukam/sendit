@@ -9,7 +9,11 @@ const data = {
     page: 1,
     total: 0,
   },
-  logout: function () {
+  updateUser(user) {
+    this.user = user;
+    localStorage.setItem('user', JSON.stringify(user));
+  },
+  logout() {
     localStorage.setItem('token', '');
     localStorage.setItem('user', '');
     this.auth = false;

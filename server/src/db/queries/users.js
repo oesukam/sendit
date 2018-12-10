@@ -2,7 +2,8 @@ const createTableUsers = `
 CREATE TABLE IF NOT EXISTS
   users(
     id UUID PRIMARY KEY,
-    avatar VARCHAR(255),
+    avatar_url VARCHAR(255),
+    avatar_public_id VARCHAR(255),
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     first_name VARCHAR(128) NOT NULL,
@@ -22,7 +23,8 @@ CREATE TABLE IF NOT EXISTS
   )`;
 const insertUser = `INSERT INTO users(
   id,
-  avatar,
+  avatar_url,
+  avatar_public_id,
   email,
   password,
   first_name,
@@ -38,8 +40,31 @@ const insertUser = `INSERT INTO users(
   confirmation_code,
   created_at,
   updated_at
- ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)
+ ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18)
  ON CONFLICT DO NOTHING returning *`;
+
+const updateUser = `
+  UPDATE users SET
+    avatar_url = $2,
+    avatar_public_id = $3,
+    email = $4,
+    password = $5,
+    first_name = $6,
+    last_name = $7,
+    birth_date = $8,
+    gender = $9,
+    province = $10,
+    district = $11,
+    city = $12,
+    address = $13,
+    user_type = $14,
+    confirmed = $15,
+    confirmation_code = $16,
+    created_at = $17,
+    updated_at = $18
+  WHERE id = $1
+`;
+
 const dropTableUsers = 'DROP TABLE IF EXISTS users';
 const queryUserById = 'SELECT * FROM users WHERE id = $1';
 const queryFirstUser = 'SELECT * FROM users WHERE id = $1 LIMIT 1';
@@ -105,4 +130,5 @@ export default {
   queryUserById,
   queryFirstUser,
   countAllUsers,
+  updateUser,
 };

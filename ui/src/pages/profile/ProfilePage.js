@@ -9,13 +9,13 @@ import navigation from '../../utils/navigation.js';
 import store from '../../utils/store.js'
 
 let form = { ...store.user };
-
 const Page = {
   render : async () => {
     const id = navigation.extractRequestURL()[1];
     await fetchAPI(`/users/${id}`)
       .then(res => {
         form = res.data;
+        store.updateUser(res.data);
       })
     const view = `
       <div class="container">
@@ -31,10 +31,14 @@ const Page = {
               <form action="#">
                 <div class="row">
                   <div class="col-12 align-center">
-                    <div class="profile-avatar">
+                    <div
+                      class="profile-avatar user"
+                      style="background-image: url('${form.avatar_url || '/images/profile-female.png'}'), linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6))"
+                    >
                       <div class="profile-avatar__edit">
                         <i class="fa fa-pencil"></i>
                       </div>
+                      <input type="file" hidden name="avatar" id="avatar" />
                     </div>
                   </div>
                 </div>
@@ -165,6 +169,9 @@ const Page = {
 
     const formKeys = Object.keys(form);
     // Initialise select inputs
+    const avatar = document.getElementById('avatar');
+    const profileAvatar = document.querySelector('.profile-avatar.user')
+    const avatarButton = document.querySelector('.profile-avatar__edit')
     const firstName = document.querySelector('#first_name');
     const firstNameError = document.querySelector('.form-error.first_name');
 
@@ -196,6 +203,47 @@ const Page = {
     province.addEventListener('input', inputHandler);
     district.addEventListener('input', inputHandler);
 
+    avatarButton.addEventListener('click', () => {
+      console.log('dofpfo');
+      avatar.click();
+    });
+    avatar.addEventListener("change", (e) => {
+      if (avatar.files.length > 0) {
+        loading.classList.add('active');
+
+        let formData = new FormData();
+        formData.append('avatar', avatar.files[0])
+        fetchAPI(
+          `/users/${form.id}/avatar`,
+          { method: 'PUT', body: formData },
+          true,
+        )
+        .then(( res ) => {
+          if (res.success) {
+            form.avatar_url = res.avatar_url;
+            profileAvatar.style.backgroundImage =`
+              url("${form.avatar_url}"), linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6))
+            `;
+            store.user = {
+              ...store.user,
+              avatar_url: form.avatar_url, 
+            }
+            store.updateUser(store.user);
+          }
+          setTimeout(() => {
+            loading.classList.remove('active');
+          }, 1000);
+        })
+        .catch((err) => {
+          console.log(err);
+          setTimeout(() => {
+            loading.classList.remove('active');
+          }, 2000);
+        })
+
+        
+      }
+    });
     province.addEventListener('change', (e) => {
       const value = e.target.value;
       if (value) {
@@ -291,9 +339,8 @@ const Page = {
             });
           }
           if (success) {
-            localStorage.setItem('user', JSON.stringify(data));
             store.user = { ...data };
-
+            store.updateUser(data);
             const title = res.message || 'Information updated';
             const body = `
               <p class="capitalize" style="font-size: 1rem; line-height: 2rem;">
