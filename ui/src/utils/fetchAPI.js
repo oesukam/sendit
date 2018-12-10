@@ -11,13 +11,16 @@ const defaultOptions = {
   },
 };
 
-const fetchAPI = (endpoint, config) => new Promise((resolve, reject) => {
+const fetchAPI = (endpoint, config, noContentType = false) => new Promise((resolve, reject) => {
   let options = {
     ...defaultOptions,
     ...config,
   }
+  if (noContentType) {
+    delete options.headers['Content-Type']
+  }
   // Converts a given json body to string
-  if (options.body) {
+  if (options.body && !noContentType) {
     options.body = JSON.stringify(options.body);
   }
   

@@ -1,12 +1,16 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import { celebrate } from 'celebrate';
+import multer from 'multer';
+
 import { jwtVerifyToken } from '../middlewares';
 import controllers from '../controllers/users';
 import { users } from '../validators/index';
+import storage from '../helpers/cloudinary';
 
 const router = express.Router();
 dotenv.config();
+const fileParser = multer({ storage });
 
 // Confirm email route
 router.get('/:userId/confirmEmail/:confirmationCode', controllers.confirmEmail);
@@ -36,5 +40,11 @@ router.put('/:userId',
 router.get('/:userId/counters',
   jwtVerifyToken(['user', 'admin']),
   controllers.getUserParcelsCounters);
+
+// Upload user's avatar
+router.put('/:userId/avatar',
+  jwtVerifyToken(['user', 'admin']),
+  fileParser.single('avatar'),
+  controllers.uploadUserAvatar);
 
 export default router;

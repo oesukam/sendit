@@ -141,6 +141,28 @@ const updateUser = async (req, res) => {
   return res.status(200).json({ success: true, data: user.toObject() });
 };
 
+const uploadUserAvatar = async (req, res) => {
+  const { userId } = req.params;
+  const { file } = req;
+  if (!file) {
+    return res.status(400).json({ success: false, message: 'Avatar required' });
+  }
+  const user = new User();
+  await user.findById(userId);
+  if (!user.id) {
+    return res.status(404).json({ success: false, message: 'Not found' });
+  }
+  user.avatar_url = file.url;
+  user.avatar_public_id = file.public_id;
+  await user.save();
+
+  return res.status(200).json({
+    success: true,
+    message: 'Avatar uploaded successfully',
+    avatar_url: user.avatar_url,
+  });
+};
+
 export default {
   confirmEmail,
   getAll,
@@ -148,4 +170,5 @@ export default {
   getUserParcels,
   updateUser,
   getUserParcelsCounters,
+  uploadUserAvatar,
 };
