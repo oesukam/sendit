@@ -7,6 +7,7 @@ const initUsers = () => new Promise(async (resolve, reject) => {
   const now = moment().format();
   await db.query(usersQuery.insertUser, [
     '648da554-e42f-40dc-92d3-649e3865fd72', // id
+    null, // Avatar
     'admin@email.com', // user email
     bcrypt.hashSync('admin@admin', 10), // password
     'Admin', // first_name
@@ -26,6 +27,7 @@ const initUsers = () => new Promise(async (resolve, reject) => {
 
   await db.query(usersQuery.insertUser, [
     '97cf377c-5735-4f5d-8645-c8fb4b5c5af3', // id
+    null, // Avatar
     'user@email.com', // user email
     bcrypt.hashSync('user@user', 10), // password
     'User', // first_name
