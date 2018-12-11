@@ -24,16 +24,12 @@ const Page = {
   const errorMessage = document.querySelector('.form-error.error-message');
   const loading = document.querySelector('.loading');
 
-  fetchAPI(`/users/${userId}/confirmEmail/${confirmationCode}`)
+  fetchAPI(`/users/${userId}/confirm_email/${confirmationCode}`)
     .then((res) => {
-      if (!res.success) {
-        errorMessage.textContent = res.message;
-      } else {
-        model({
-          title: 'Confirm Email',
-          body: res.message, 
-        });
+      if (res.success) {
+        errorMessage.style.color = 'green'
       }
+      errorMessage.textContent = res.message || '';
       // Wait for 2 seconds to smooth the spinner
       setTimeout(() => {
         loading.classList.remove('active');

@@ -265,7 +265,6 @@ button[disabled], a[disabled], input[disabled] {
 .brand-title {
   width: 150px;
   max-width: 80%;
-  margin-bottom: 15px;
 }
 
 .model-wrapper {

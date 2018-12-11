@@ -208,15 +208,13 @@ const Page = {
           }
           if (success && token) {
             localStorage.setItem('token', token);
-            localStorage.setItem('user', JSON.stringify(data));
-            
+            store.updateUser(data);
             store.auth = true;
             store.token = token;
             store.user = { ...data };
-
             // Wait for a second
             setTimeout(() => {
-              location.href = `/#/profile/${data.id}`;
+              location.href = '/';
             }, 1000);
           }
 

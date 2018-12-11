@@ -167,6 +167,7 @@ const Page = {
                       id="receiver_address"
                       maxlength="200"
                       required
+                      value="${form.receiver_address}"
                       ></textarea>
                     <div class="form-error receiver_address"></div>
 

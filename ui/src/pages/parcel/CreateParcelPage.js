@@ -218,8 +218,12 @@ const Page = {
         setTimeout(() => loading.classList.remove('active'), 2000);
         return;
       }
-
-      fetchAPI('/parcels', {method: 'post', body: { ...form } })
+      const formData = { ...form };
+      delete formData.price
+      fetchAPI(
+        '/parcels',
+        { method: 'POST', body: { ...formData } }
+      )
         .then((res) => {
           const { data } = res;
           if (res.message) {
