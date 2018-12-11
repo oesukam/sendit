@@ -13,7 +13,6 @@ const Page = {
         </p>
       </div>
       <p class="quote-error">
-        Please select the corresponding province and district.
       </p>
       <form action="#">
         <div class="row">

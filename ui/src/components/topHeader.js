@@ -3,7 +3,7 @@ const topNav = {
   render: async () => {
     const { user } = store;
     const links = [
-      { link: '/', text: 'Home', users: [] },
+      { link: '/#/', text: 'Home', users: [] },
       { link: '/#/quote', text: 'Get Quote', users: [], hide: true },
       { link: '/#/create_parcel', text: 'Add parcel', auth: true, users: ['user', 'admin'] },
       { link: '/#/admin_parcels', text: 'Parcels', auth: true, users: ['admin'] },
