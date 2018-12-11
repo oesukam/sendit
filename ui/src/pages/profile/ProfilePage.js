@@ -14,6 +14,9 @@ const Page = {
     const id = navigation.extractRequestURL()[1];
     await fetchAPI(`/users/${id}`)
       .then(res => {
+        if(!res.success) {
+          store.logout();
+        }
         form = res.data;
         store.updateUser(res.data);
       })

@@ -10,8 +10,10 @@ const data = {
     total: 0,
   },
   updateUser(user) {
-    this.user = user;
-    localStorage.setItem('user', JSON.stringify(user));
+    if (user) {
+      localStorage.setItem('user', JSON.stringify(user));
+      this.user = user;
+    }
   },
   logout() {
     localStorage.setItem('token', '');

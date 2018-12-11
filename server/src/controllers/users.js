@@ -13,8 +13,12 @@ const confirmEmail = async (req, res) => {
   const { userId, confirmationCode } = req.params;
   const user = new User();
   await user.findById(userId);
+  console.log('user', '', user.toObject());
   if (!user.id) {
-    return res.status(404).json({ success });
+    return res.status(404).json({
+      success,
+      message: 'User does not exist',
+    });
   }
   if (user.confirmed === 'confirmed') {
     return res.status(404).json({
@@ -37,7 +41,10 @@ const confirmEmail = async (req, res) => {
     })
     .catch(error => logger.error(error));
 
-  return res.status(201).json({ success, message: 'Email confirmed' });
+  return res.status(201).json({
+    success,
+    message: `Your email ${user.email} has been confirmed`,
+  });
 };
 
 // Fetch list of users
