@@ -1,5 +1,5 @@
 const token = localStorage.getItem('token') || '';
-let user = localStorage.getItem('user') || ''
+let user = localStorage.getItem('user');
 const data = {
   auth: token !== '',
   token,
