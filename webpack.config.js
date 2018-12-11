@@ -2,6 +2,7 @@ const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
+  performance: { hints: false },
   mode: 'production',
   entry: './ui/src/app.js',
   output: {

@@ -50,9 +50,10 @@ Please find the API documentation on [https://andela-sendit-api.herokuapp.com/ap
 | /api/v1/auth/signup        | POST      | Register a new User    |
 | /api/v1/users    | GET | Fetch all parcels  |
 | /api/v1/users/`<userId>`     | GET, PUT | Get and update user info  |
-| /api/v1/users/`<userId>`/ confirmEmail/confirmationCode        | GET      | Confirm user email    |
+| /api/v1/users/`<userId>`/confirm_email/`<confirmationCode>`        | GET      | Confirm user email    |
 | /api/v1/users/`<userID>`/parcels         | GET      | Get particular user parcels  |
 | /api/v1/users/`<userID>`/counters         | GET      | Get particular user parcels' counters  |
+| /api/v1/users/`<userID>`/avatar         | PUT      | Update user's avatar  |
 | /api/v1/parcels       | GET      | Fetch all parcels    |
 | /api/v1/parcels       | POST      | A a new parcel    |
 | /api/v1/parcels/`<userId>`/cancel       | PUT      | Update a parcel    |

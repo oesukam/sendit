@@ -13,7 +13,7 @@ dotenv.config();
 const fileParser = multer({ storage });
 
 // Confirm email route
-router.get('/:userId/confirmEmail/:confirmationCode', controllers.confirmEmail);
+router.get('/:userId/confirm_email/:confirmationCode', controllers.confirmEmail);
 
 // Fetch users route accessible to admins only
 router.get('/',

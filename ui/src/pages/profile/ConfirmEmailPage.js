@@ -24,7 +24,7 @@ const Page = {
   const errorMessage = document.querySelector('.form-error.error-message');
   const loading = document.querySelector('.loading');
 
-  fetchAPI(`/users/${userId}/confirmEmail/${confirmationCode}`)
+  fetchAPI(`/users/${userId}/confirm_email/${confirmationCode}`)
     .then((res) => {
       if (!res.success) {
         errorMessage.textContent = res.message;

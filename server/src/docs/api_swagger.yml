@@ -116,6 +116,34 @@ paths:
       responses:
         '200':
           description: return list of users
+  /users/{userId}/confirm_email/{confirmationCode}:
+    get:
+      summary: "Confirm user's email after registration"
+      security:
+        - JWT_Token_User: []
+      tags:
+        - "users"
+      operationId: confirmUserEmail
+      parameters: 
+        - name: userId
+          in: path
+          required: true
+          type: string
+          format: uuid
+        - name: confirmationCode
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: return the basic user information
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              message:
+                type: string
   /users/{userId}:
     put:
       summary: "Update user's names, birth date, province, district and city"
@@ -215,6 +243,34 @@ paths:
                 type: string
               data:
                 $ref: "#/definitions/Counters"
+  /users/{userId}/avatar:
+    put:
+      summary: Uploads a user's avatar file.
+      consumes:
+        - multipart/form-data
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          type: string
+          format: uuid
+        - in: formData
+          name: avatar
+          type: file
+          description: The image to upload.
+      responses:
+        '200':
+          description: return the created parcel
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+              message:
+                type: string
+              avatar_url:
+                type: string
+              
   /parcels:
     post:
       summary: "Create a new parcel"
@@ -304,7 +360,7 @@ paths:
         - JWT_Token_User: []
       tags:
         - "parcels"
-      description: Cancel the specific parcel delivery order
+      summary: Cancel the specific parcel delivery order
       operationId: cancelParcel
       parameters:
         - name: id
@@ -329,7 +385,7 @@ paths:
         - JWT_Token_Admin: []
       tags:
         - "parcels"
-      description: Change the present location of a specific parcel delivery order
+      summary: Change the present location of a specific parcel delivery order
       operationId: updatePresentLocation
       parameters:
         - name: id
@@ -354,7 +410,7 @@ paths:
         - JWT_Token_Admin: []
       tags:
         - "parcels"
-      description: Change the status of a specific parcel delivery order
+      summary: Change the status of a specific parcel delivery order
       operationId: updateParcelStatus
       parameters:
         - in: "body"
@@ -385,7 +441,7 @@ paths:
         - JWT_Token_User: []
       tags:
         - "parcels"
-      description: Change the destination of a specific parcel delivery order
+      summary: Change the destination of a specific parcel delivery order
       operationId: updateParcelDestination
       parameters:
         - in: "body"
@@ -456,20 +512,28 @@ definitions:
       password:
         type: string
         pattern: '.{8,64}'
+        example: '123456'
       first_name:
         type: string
+        example: Olivier
       last_name:
         type: string
+        example: Esuka
       province:
         type: string
+        example: kigali
       district:
         type: string
+        example: nyarugenge
       gender:
         type: string
+        example: Male
       birthDate:
         type: string
+        example: '2018-11-19'
       city:
         type: string
+        example: Kigali
     required: 
       - email
       - password
@@ -536,22 +600,28 @@ definitions:
     properties:
       from_province:
         type: string
+        example: kigali
       from_district:
         type: string
+        example: nyarugenge
       to_province:
         type: string
+        example: western
       to_district:
         type: string
+        example: rubavu
       receiver_names:
         type: string
+        example: 'Merveille Kazadi'
       receiver_phone:
         type: string
+        example: '078-0000-211'
       receiver_address:
         type: string
+        example: 'Rubavu Street 4'
       weight:
         type: number
-      price:
-        type: number
+        example: 3.5
     required: 
       - from_province
       - from_district
@@ -587,10 +657,13 @@ definitions:
         type: string
       receiver_names:
         type: string
+        example: 'Jimy MUKANDAMA'
       receiver_phone:
         type: string
+        example: '078-000-000'
       receiver_address:
         type: string
+        example: '3 street'
   Counters:
     type: object
     properties:

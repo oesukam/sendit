@@ -10,7 +10,6 @@ const create = {
   receiver_names: Joi.string().required().trim(),
   receiver_address: Joi.string().required().trim(),
   weight: Joi.number().positive().required(),
-  price: Joi.number().positive().required(),
   description: Joi.string(),
 };
 

@@ -14,7 +14,7 @@ Visit the [issue tracker](https://github.com/oesukam/andela-sendit/issues) to fi
 Fork, then clone the repo:
 
 ```
-git clone https://github.com/oesukam/xlszipsave.git
+git clone https://github.com/oesukam/andela-sendit.git
 ```
 
 ### Testing
