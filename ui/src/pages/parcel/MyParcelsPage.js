@@ -47,6 +47,7 @@ const Page = {
             </div>
             <div class="row">
               <div class="col-12">
+                <h3 class="title-1 align-center">Parcels</h3>
                 <form>
                   <div class="input-block is-row search">
                     <input

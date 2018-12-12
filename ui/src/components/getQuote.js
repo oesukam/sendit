@@ -1,6 +1,16 @@
 import map from './googleMap.js';
 import { provinces } from '../mocks/index.js';
 import getPrice from '../utils/getPrice.js'
+import store from '../utils/store.js';
+
+let form = {
+  from_province: '',
+  from_district: '',
+  to_province: '',
+  to_district: '',
+  weight: '',
+  price: ''
+};
 
 const Page = {
  render : async () => `
@@ -63,6 +73,12 @@ const Page = {
             <input type="number" name="weight" id="weight">
             <div class="form-error"></div>
             <button id="submit-quote" class="btn">Quote</button>
+            ${
+              store.auth
+              ? '<button id="submit-order" hidden class="btn bg-green">Make order</button>'
+              : ''
+            }
+            
           </div>
         </div>
       </form>
@@ -75,14 +91,7 @@ const Page = {
     from_province: 'from_district',
     to_province: 'to_district'
   }
-  let form = {
-    from_province: '',
-    from_district: '',
-    to_province: '',
-    to_district: '',
-    weight: '',
-    price: ''
-  };
+  
    // Initialise select inputs and errors
   const fromProvince = document.querySelector('#from_province');
   const toProvince = document.querySelector('#to_province');
@@ -90,6 +99,7 @@ const Page = {
   const toDistrict = document.querySelector('#to_district');
   const quoteError = document.querySelector('.quote-error');
   const submitQuote = document.querySelector('#submit-quote');
+  const submitOrder = document.querySelector('#submit-order');
   const quoteResult = document.querySelector('.quote-result');
   const weight = document.querySelector('#weight');
   const loading = document.querySelector('.loading');
@@ -152,6 +162,21 @@ const Page = {
     }, 2000);
 
   });
+
+  submitOrder.addEventListener('click', (e) => {
+    e.preventDefault();
+    loading.classList.add('active');
+    let query = `?from_province=${form.from_province}`;
+    query += `&from_district=${form.from_district}`;
+    query += `&to_province=${form.to_province}`;
+    query += `&to_district=${form.to_district}`;
+    query += `&weight=${form.weight}`;
+    location.href = `/#/create_parcel${query}`;
+    setTimeout(() => {
+      loading.classList.remove('active');
+    }, 2000);
+
+  });
   // Callback function to handle email and password imput
   function inputHandler (e) {
     let { value, id } = e.target;
@@ -159,7 +184,21 @@ const Page = {
       value = value.replace(/\D+/g, '');
     }
     form[id] = value;
-    renderDetails() 
+    renderDetails();
+  }
+
+  function makeOrderHandler () {
+    if (
+      form.from_province
+      && form.from_district
+      && form.to_province
+      && form.to_district
+      && form.weight
+    ) {
+      submitOrder.removeAttribute('hidden');
+    } else {
+      submitOrder.setAttribute('hidden', true);
+    }
   }
   function renderDetails () {
     const price = getPrice(form.weight) || '';
@@ -171,6 +210,7 @@ const Page = {
       <strong class="capitalize">${form.weight || '-'} Kg</strong> costs <strong>
       ${price ? price.toLocaleString() : '-'} RWF</strong>
     </p>`;
+    makeOrderHandler(); 
   }
 
   function validateInputs () {

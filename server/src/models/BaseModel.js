@@ -56,9 +56,7 @@ class BaseModel {
         default:
           break;
       }
-      if (queryById === undefined) {
-        return reject(new Error('Failed, model storage not set'));
-      }
+      if (queryById === undefined) return reject(new Error('Failed, model storage not set'));
       try {
         db.query(queryById, [id])
           .then((res) => {
@@ -66,10 +64,7 @@ class BaseModel {
             this.updateFields(row);
             resolve({ data: row });
           })
-          .catch((err) => {
-            logger.error(err);
-            reject(new Error('Failed, could query the user'));
-          });
+          .catch((err) => reject(new Error('Failed, could query the user'));
       } catch (err) {
         reject(new Error('Failed, could query the user'));
       }

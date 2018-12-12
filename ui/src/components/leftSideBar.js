@@ -6,7 +6,6 @@ const sideBar = {
     const links = [
       { link: '/', text: 'Home' },
       { link: '/#/quote', text: 'Get Quote' },
-      { link: '#', text: `Admin`, auth: true, user: 'admin' },
       { link: `/#/profile/${user.id}`, text: 'My Account' },
       { link: '/#/my_parcels', text: 'My Parcels' },
       { link: '/#/create_parcel', text: 'Add parcel' },

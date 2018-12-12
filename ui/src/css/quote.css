@@ -20,7 +20,8 @@
   margin-left: 15px;
 }
 #quote-map {
-  height: 300px;
+  height: 250px;
+  max-height: 70vh;
 }
 
 .quote-result {

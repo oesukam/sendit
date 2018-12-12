@@ -39,25 +39,19 @@ class User extends BaseModel {
         query = usersQuery.insertUser;
       }
       const record = [
-        this.id || this.getUID(),
-        this.avatar_url || null, this.avatar_public_id || null,
+        this.id || this.getUID(), this.avatar_url || null, this.avatar_public_id || null,
         this.email, this.password, this.first_name, this.last_name,
         this.birth_date, this.gender, this.province, this.district,
         this.city, this.address || 'Address', this.user_type, this.confirmed || 'pending',
         this.confirmation_code, this.createdAt || now, now,
       ];
-
       db.query(query, record)
         .then((res) => {
           const row = res.rows[0];
           this.updateFields(row);
           resolve(row);
         })
-        .catch((err) => {
-          console.log(err);
-          logger.error(err);
-          reject(new Error('Failed, could not save'));
-        });
+        .catch((err) => reject(new Error('Failed, could not save'));
     });
   }
 }

@@ -10,17 +10,11 @@ const createParcel = async (req, res) => {
   const { jwtUser } = body;
   const pricePerKg = 1000;
   if (!jwtUser.id) {
-    return res.status(401).json({
-      success: false,
-      message: 'Unauthorized Access',
-    });
+    return res.status(401).json({ success: false, message: 'Unauthorized Access' });
   }
 
   if (jwtUser.confirmed !== 'confirmed') {
-    return res.status(401).json({
-      success: false,
-      message: 'Please confirm your email address',
-    });
+    return res.status(401).json({ success: false, message: 'Please confirm your email address' });
   }
   delete body.jwtUser;
   body.user_id = jwtUser.id;
@@ -33,10 +27,7 @@ const createParcel = async (req, res) => {
 
   await parcel.save();
   if (!parcel.id) {
-    return res.status(401).json({
-      success: false,
-      message: 'Parcel could not be saved',
-    });
+    return res.status(401).json({ success: false, message: 'Parcel could not be saved' });
   }
   return res.status(201).json({ success: true, data: parcel.toObject() });
 };

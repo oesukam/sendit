@@ -13,12 +13,18 @@
 .is-white {
   color: white;
 }
+.is-green {
+  color: rgb(8, 204, 51) !important;
+}
 .bg-primary {
-  background-color: #3359DF;
+  background-color: #3359DF !important;
 }
 .bg-blue {
-  background-color: blue;
+  background-color: blue !important;
 }
 .bg-yellow {
-  background-color: #ffa400;
+  background-color: #ffa400 !important;
+}
+.bg-green {
+  background-color: rgb(8, 204, 51) !important;
 }
