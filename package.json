@@ -22,7 +22,7 @@
     "build-ui": "npx webpack --config webpack.config.js",
     "ui": "live-server ui/src --verbose",
     "start-ui": "live-server ui/dist --verbose",
-    "start": "npm run build-ui && babel-node server/src/index.js migrate",
+    "start": "babel-node server/src/index.js migrate",
     "dev": "nodemon --exec babel-node server/src/index.js",
     "serve": "node server/dist/index.js",
     "test-only": "babel-node tests/run.js",
