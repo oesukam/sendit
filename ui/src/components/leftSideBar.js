@@ -4,13 +4,12 @@ const sideBar = {
   render: async () => {
     const { user } = store;
     const links = [
-      { link: '/', text: 'Home' },
+      { link: '/#/', text: 'Home' },
       { link: '/#/quote', text: 'Get Quote' },
       { link: `/#/profile/${user.id}`, text: 'My Account' },
       { link: '/#/my_parcels', text: 'My Parcels' },
       { link: '/#/create_parcel', text: 'Add parcel' },
-      { link: '/#/admin_parcels', text: 'Admin Parcels' },
-      // { link: '/#/admin/parcels/:id', text: 'View a parcel' },
+      { link: '/#/admin_parcels', text: 'Parcels' },
     ]
     const view = `
       <div class="box sidebar">

@@ -129,12 +129,7 @@ class BaseModel {
           const { count = 0 } = results.rows[0];
           const total = parseInt(count, 10);
           const totalPage = Math.ceil(total / limit);
-          resolve({
-            total,
-            totalPage,
-            page,
-            data: rows,
-          });
+          resolve({ total, totalPage, page, data: rows });
         })
         .catch(err => reject(err));
     });

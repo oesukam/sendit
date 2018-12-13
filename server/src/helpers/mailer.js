@@ -38,8 +38,7 @@ const sendMail = ({
       reject(error);
     }
     if (info) {
-      const message = `Message sent: ${info.messageId}`;
-      logger.info(message);
+      logger.info(`Message sent: ${info.messageId}`);
     }
     resolve(true);
   });
