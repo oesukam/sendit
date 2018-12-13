@@ -18,7 +18,7 @@ describe('base model', () => {
 
   it('storage should return empty string', (done) => {
     const model = new BaseModel();
-    expect(model.storage).toEqual(undefined);
+    expect(model.storage).toEqual('');
     done();
   });
 

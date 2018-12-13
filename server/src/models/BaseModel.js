@@ -1,6 +1,5 @@
 import uuid from 'uuid';
 import moment from 'moment';
-import { logger } from '../helpers';
 import { usersQuery, parcelsQuery } from '../db/queries';
 import db from '../db';
 
@@ -8,6 +7,8 @@ class BaseModel {
   constructor(args = '') {
     if (args) this.updateFields(args);
     this.uuid = uuid.v4();
+    this.hidden = [];
+    this.storage = '';
   }
 
   getUID() {
@@ -21,15 +22,11 @@ class BaseModel {
     if (this.hidden !== undefined) {
       hidden = [...fields.hidden];
     }
-    if (this.storage !== undefined) {
-      delete fields.storage;
-    }
-    if (this.hidden !== undefined) {
-      delete fields.hidden;
-    }
     if (this.jwtUser !== undefined) {
       delete fields.jwtUser;
     }
+    delete fields.storage;
+    delete fields.hidden;
     if (!withHidden && hidden) {
       // Delete all hidden properties before returning the object
       hidden.forEach((value) => {
@@ -56,9 +53,7 @@ class BaseModel {
         default:
           break;
       }
-      if (queryById === undefined) {
-        return reject(new Error('Failed, model storage not set'));
-      }
+      if (queryById === undefined) return reject(new Error('Failed, model storage not set'));
       try {
         db.query(queryById, [id])
           .then((res) => {
@@ -66,8 +61,7 @@ class BaseModel {
             this.updateFields(row);
             resolve({ data: row });
           })
-          .catch((err) => {
-            logger.error(err);
+          .catch(() => {
             reject(new Error('Failed, could query the user'));
           });
       } catch (err) {

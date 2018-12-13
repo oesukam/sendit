@@ -5,144 +5,172 @@ import { provinces } from '../../mocks/index.js';
 import fetchAPI from '../../utils/fetchAPI.js';
 import model from '../../utils/model.js';
 import getPrice from '../../utils/getPrice.js'
+import nav from '../../utils/navigation.js';
+
+const form = {
+  from_province: '',
+  from_district: '',
+  to_district: '',
+  to_province: '',
+  receiver_names: '',
+  receiver_phone: '',
+  receiver_address: '',
+  weight: '',
+}
 
 const Page = {
-  render : async () => `
-    <div class="container">
-      <div class="row">
-        <div class="col-3">
-          ${await sideBar.render()}
-        </div>
-        <div class="col-9">
-          <br>
-          <div class="box order-container">
-            <h2 class="title-1 align-center">Create a parcel</h3>
-            <div class="quote-result">
-              <p>From <strong>-</strong> to <strong>-</strong>, a parcel of 
-                <strong>-</strong> costs <strong>-</strong>
-              </p>
-            </div>
-            <div class="form-error error-message"></div>
-            <form action="#">
-              <div class="row">
-                <div class="col-6">
-                  <span class="custom-dropdown">
-                    <select
-                      id="from_province"
-                      name="from_province
+  render : async () => {
+    const params = nav.extractQuery();
+    form.from_province = params.from_province || '';
+    form.from_district = params.from_district || 'District - Origin';
+    form.to_province = params.to_province || '';
+    form.to_district = params.to_district || 'District - Destination';
+    const view = `
+      <div class="container">
+        <div class="row">
+          <div class="col-3">
+            ${await sideBar.render()}
+          </div>
+          <div class="col-9">
+            <br>
+            ${await map.render(form.from_district, form.to_district)}
+            <div class="box order-container">
+              <h2 class="title-1 align-center">Create a parcel</h3>
+              <div class="quote-result">
+                <p>From <strong>-</strong> to <strong>-</strong>, a parcel of 
+                  <strong>-</strong> costs <strong>-</strong>
+                </p>
+              </div>
+              <div class="form-error error-message"></div>
+              <form action="#">
+                <div class="row">
+                  <div class="col-6">
+                    <span class="custom-dropdown">
+                      <select
+                        id="from_province"
+                        name="from_province
+                        required
+                        placeholder="From Province"
+                      >
+                        <option value="">Province - Origin</option> 
+                        <option ${form.from_province === 'eastern' ? 'selected' : ''} value="eastern">
+                            Eastern Province
+                          </option>
+                          <option ${form.from_province === 'kigali' ? 'selected' : ''} value="kigali">
+                            Kigali
+                          </option>  
+                          <option ${form.from_province === 'northern' ? 'selected' : ''} value="northern">
+                            Northen Province
+                          </option>
+                          <option ${form.from_province === 'southern' ? 'selected' : ''} value="southern">
+                            Southern Province
+                          </option>
+                        </select>
+                      </select>
+                    </span>
+                    <div class="form-error from_province"></div>
+                    
+                    <span class="custom-dropdown">
+                      <select id="from_district" name="from_district" required>    
+                      <option value="">${form.from_district}</option>
+                      </select>
+                    </span>
+                    <div class="form-error from_district"></div>
+                  </div>
+                  <div class="col-6">
+                    <span class="custom-dropdown">
+                      <select id="to_province" name="to_province" required>
+                        <option value="">Province - Destination</option> 
+                        <option ${form.to_province === 'eastern' ? 'selected' : ''} value="eastern">
+                          Eastern Province
+                        </option>
+                        <option ${form.to_province === 'kigali' ? 'selected' : ''} value="kigali">
+                          Kigali
+                        </option>  
+                        <option ${form.to_province === 'northern' ? 'selected' : ''} value="northern">
+                          Northen Province
+                        </option>
+                        <option ${form.to_province === 'southern' ? 'selected' : ''} value="southern">
+                          Southern Province
+                        </option>
+                      </select>
+                    </span>
+                    <div class="form-error to_province"></div>
+                    
+                    <span class="custom-dropdown">
+                      <select id="to_district" name="to_district" required>    
+                      <option value="">${form.to_district}</option>
+                      </select>
+                    </span>
+                    <div class="form-error to_district"></div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-6">
+                    <input
+                      type="number"
+                      name="weight"
+                      id="weight"
+                      placeholder="Weight"
+                      value="${form.to_district}"
                       required
-                      placeholder="From Province"
                     >
-                      <option value="">Province - Origin</option> 
-                      <option value="eastern">Eastern Province</option>
-                      <option value="kigali">Kigali</option>  
-                      <option value="northern">Northen Province</option>
-                      <option value="southern">Southern Province</option>
-                    </select>
-                  </span>
-                  <div class="form-error from_province"></div>
-                  
-                  <span class="custom-dropdown">
-                    <select id="from_district" name="from_district" required>    
-                      <option value="">District - Origin</option>
-                    </select>
-                  </span>
-                  <div class="form-error from_district"></div>
+                    <div class="form-error weight"></div>
+                  </div>
+                  <div class="col-6">
+                    <input
+                      type="number"
+                      name="phone"
+                      id="receiver_phone"
+                      placeholder="Phone Number"
+                      required
+                    >
+                    <div class="form-error receiver_phone"></div>
+                  </div>
                 </div>
-                <div class="col-6">
-                  <span class="custom-dropdown">
-                    <select id="to_province" name="to_province" required>
-                      <option value="">Province - Destination</option> 
-                      <option value="eastern">Eastern Province</option>
-                      <option value="kigali">Kigali</option>  
-                      <option value="northern">Northen Province</option>
-                      <option value="southern">Southern Province</option>
-                    </select>
-                  </span>
-                  <div class="form-error to_province"></div>
-                  
-                  <span class="custom-dropdown">
-                    <select id="to_district" name="to_district" required>    
-                      <option value="">District - Destination</option>
-                    </select>
-                  </span>
-                  <div class="form-error to_district"></div>
-                </div>
-              </div>
 
-              <div class="row">
-                <div class="col-6">
-                  <input
-                    type="number"
-                    name="weight"
-                    id="weight"
-                    placeholder="Weight"
-                    required
-                  >
-                  <div class="form-error weight"></div>
+                <div class="row">
+                  <div class="col-6">
+                    <input
+                      type="text"
+                      name="receiver_names"
+                      id="receiver_names"
+                      placeholder="Receiver's Names"
+                      required
+                    >
+                    <div class="form-error receiver_names"></div>
+                  </div>
                 </div>
-                <div class="col-6">
-                  <input
-                    type="number"
-                    name="phone"
-                    id="receiver_phone"
-                    placeholder="Phone Number"
-                    required
-                  >
-                  <div class="form-error receiver_phone"></div>
-                </div>
-              </div>
 
-              <div class="row">
-                <div class="col-6">
-                  <input
-                    type="text"
-                    name="receiver_names"
-                    id="receiver_names"
-                    placeholder="Receiver's Names"
-                    required
-                  >
-                  <div class="form-error receiver_names"></div>
-                </div>
-              </div>
+                <div class="row">
+                  <div class="col-12">
+                    <textarea
+                      placeholder="Enter full address"
+                      rows="5"
+                      name="receiver_address"
+                      id="receiver_address"
+                      maxlength="200"
+                      required
+                      ></textarea>
+                    <div class="form-error receiver_address"></div>
 
-              <div class="row">
-                <div class="col-12">
-                  <textarea
-                    placeholder="Enter full address"
-                    rows="5"
-                    name="receiver_address"
-                    id="receiver_address"
-                    maxlength="200"
-                    required
-                    ></textarea>
-                  <div class="form-error receiver_address"></div>
-
-                  <button id="submit-form" class="btn primary">
-                    Submit
-                  </button>
+                    <button id="submit-form" class="btn primary">
+                      Submit
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </form>
-            ${await map.render()}
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  `,
+    `;
+    return view;
+  },
   after_render: async () => {
     await map.after_render();
     const pricePerKg = 1000;
-    const form = {
-      from_province: '',
-      from_district: '',
-      to_district: '',
-      to_province: '',
-      receiver_names: '',
-      receiver_phone: '',
-      receiver_address: '',
-      weight: '',
-    }
 
     const formKeys = Object.keys(form);
     // From province and distrinct

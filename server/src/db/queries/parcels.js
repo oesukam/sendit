@@ -66,9 +66,7 @@ const queryAllParcels = (search = '') => {
   let query = `
     SELECT 
       parcels.*, 
-      users.first_name, 
-      users.last_name, 
-      users.gender 
+      users.first_name, users.last_name, users.gender 
     FROM parcels INNER JOIN users ON parcels.user_id = users.id
    `;
   if (search) {
@@ -80,15 +78,11 @@ const queryAllParcels = (search = '') => {
       }
       query += `
         (
-          users.first_name ILIKE '%${val}%' OR 
-          users.last_name ILIKE '%${val}%' OR 
-          users.gender ILIKE '%${val}%' OR 
-          parcels.status ILIKE '%${val}%' OR 
+          users.first_name ILIKE '%${val}%' OR users.last_name ILIKE '%${val}%' OR 
+          users.gender ILIKE '%${val}%' OR parcels.status ILIKE '%${val}%' OR 
           parcels.receiver_names ILIKE '%${val}%' OR 
-          parcels.from_province ILIKE '%${val}%' OR 
-          parcels.from_district ILIKE '%${val}%' OR 
-          parcels.to_province ILIKE '%${val}%' OR 
-          parcels.to_district ILIKE '%${val}%' 
+          parcels.from_province ILIKE '%${val}%' OR parcels.from_district ILIKE '%${val}%' OR 
+          parcels.to_province ILIKE '%${val}%' OR parcels.to_district ILIKE '%${val}%' 
         )
       `;
     });
@@ -104,10 +98,8 @@ const queryAllParcelsByUser = (search = '') => {
         (
           status ILIKE '%${val}%' OR 
           receiver_names ILIKE '%${val}%' OR 
-          from_province ILIKE '%${val}%' OR 
-          from_district ILIKE '%${val}%' OR 
-          to_province ILIKE '%${val}%' OR 
-          to_district ILIKE '%${val}%' 
+          from_province ILIKE '%${val}%' OR from_district ILIKE '%${val}%' OR 
+          to_province ILIKE '%${val}%' OR to_district ILIKE '%${val}%' 
         )
       `;
     });
@@ -126,8 +118,7 @@ const updateParcelDestination = `UPDATE parcels
 `;
 const countAllParcels = (search = '') => {
   let query = `
-    SELECT 
-      COUNT(*) 
+    SELECT COUNT(*) 
     FROM parcels INNER JOIN users ON parcels.user_id = users.id
    `;
   if (search) {
@@ -139,15 +130,11 @@ const countAllParcels = (search = '') => {
       }
       query += `
         (
-          users.first_name ILIKE '%${val}%' OR 
-          users.last_name ILIKE '%${val}%' OR 
-          users.gender ILIKE '%${val}%' OR 
-          parcels.status ILIKE '%${val}%' OR 
+          users.first_name ILIKE '%${val}%' OR users.last_name ILIKE '%${val}%' OR 
+          users.gender ILIKE '%${val}%' OR parcels.status ILIKE '%${val}%' OR 
           parcels.receiver_names ILIKE '%${val}%' OR 
-          parcels.from_province ILIKE '%${val}%' OR 
-          parcels.from_district ILIKE '%${val}%' OR 
-          parcels.to_province ILIKE '%${val}%' OR 
-          parcels.to_district ILIKE '%${val}%'
+          parcels.from_province ILIKE '%${val}%' OR parcels.from_district ILIKE '%${val}%' OR 
+          parcels.to_province ILIKE '%${val}%' OR parcels.to_district ILIKE '%${val}%'
         )
       `;
     });
@@ -161,12 +148,9 @@ const countAllUserParcels = (search) => {
     keywords.forEach((val) => {
       query += ` AND
         (
-          status ILIKE '%${val}%' OR 
-          receiver_names ILIKE '%${val}%' OR 
-          from_province ILIKE '%${val}%' OR 
-          from_district ILIKE '%${val}%' OR 
-          to_province ILIKE '%${val}%' OR 
-          to_district ILIKE '%${val}%' 
+          status ILIKE '%${val}%' OR receiver_names ILIKE '%${val}%' OR 
+          from_province ILIKE '%${val}%' OR from_district ILIKE '%${val}%' OR 
+          to_province ILIKE '%${val}%' OR to_district ILIKE '%${val}%' 
         )
       `;
     });

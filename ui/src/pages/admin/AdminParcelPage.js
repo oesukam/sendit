@@ -192,6 +192,7 @@ const Page = {
                       id="weight"
                       placeholder="Weight"
                       required
+                      disabled
                       value="${form.weight}"
                     >
                     <div class="form-error weight"></div>
@@ -204,6 +205,7 @@ const Page = {
                       placeholder="Phone Number"
                       required
                       value="${form.receiver_phone}"
+                      disabled
                     >
                     <div class="form-error receiver_phone"></div>
                   </div>

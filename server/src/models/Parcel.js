@@ -25,23 +25,11 @@ class Parcel extends BaseModel {
         query = parcelsQuery.insertParcel;
       }
       const record = [
-        this.id || this.getUID(),
-        this.user_id,
-        'RW-KI',
-        this.from_province,
-        this.from_district,
-        this.to_province,
-        this.to_district,
-        this.present_location || this.to_district,
-        this.receiver_names,
-        this.receiver_phone,
-        this.receiver_address,
-        this.weight,
-        this.price,
-        this.description,
-        this.status || 'Waiting Pickup',
-        this.created_at || now,
-        now,
+        this.id || this.getUID(), this.user_id, 'RW-KI', this.from_province,
+        this.from_district, this.to_province, this.to_district,
+        this.present_location || this.to_district, this.receiver_names,
+        this.receiver_phone, this.receiver_address, this.weight, this.price,
+        this.description, this.status || 'Waiting Pickup', this.created_at || now, now,
       ];
       db.query(query, record)
         .then((res) => {
@@ -50,7 +38,6 @@ class Parcel extends BaseModel {
           resolve(row);
         })
         .catch((err) => {
-          console.log(err);
           logger.error(err);
           reject(new Error('Failed, could not save'));
         });

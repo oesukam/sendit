@@ -10,10 +10,10 @@ const navigation = {
   extractQuery: function () {
     const queries = this.extractRequestURL()[this.extractRequestURL().length - 1].match(/\?.*/g, '') || []
     const query = (queries.length > 0 ? queries[0] : '').substring(1);
-    let params = query.match(/(([a-zA-Z]+=[a-zA-Z0-9]+&)|([a-zA-Z]+=[a-zA-Z%0-9]+))/g) || [];
+    let params = query.match(/(([a-zA-Z_]+=[a-zA-Z0-9]+&)|([a-zA-Z_]+=[a-zA-Z%0-9]+))/g) || [];
     let obj = {}
     params.forEach(val => {
-      const key = val.match(/[a-zA-Z]+=/g)[0];
+      const key = val.match(/[a-zA-Z_]+=/g)[0];
       const value = decodeURIComponent(val.match(/=[a-zA-Z%0-9]+/g)[0].replace(/&/g, ''));
       if (key) {
         obj[key.substring(0, key.length-1)] = value.substring(1);

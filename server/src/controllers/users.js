@@ -13,24 +13,14 @@ const confirmEmail = async (req, res) => {
   const { userId, confirmationCode } = req.params;
   const user = new User();
   await user.findById(userId);
-  console.log('user', '', user.toObject());
   if (!user.id) {
-    return res.status(404).json({
-      success,
-      message: 'User does not exist',
-    });
+    return res.status(404).json({ success, message: 'User does not exist' });
   }
   if (user.confirmed === 'confirmed') {
-    return res.status(404).json({
-      success,
-      message: `${user.email} has already been confimed`,
-    });
+    return res.status(404).json({ success, message: `${user.email} has already been confimed` });
   }
   if (confirmationCode !== user.confirmation_code) {
-    return res.status(404).json({
-      success,
-      message: 'Confirmation code is incorrect',
-    });
+    return res.status(404).json({ success, message: 'Confirmation code is incorrect' });
   }
   user.confirmed = 'confirmed';
   user.confirmation_code = null;
@@ -41,10 +31,7 @@ const confirmEmail = async (req, res) => {
     })
     .catch(error => logger.error(error));
 
-  return res.status(201).json({
-    success,
-    message: `Your email ${user.email} has been confirmed`,
-  });
+  return res.status(201).json({ success, message: `Your email ${user.email} has been confirmed` });
 };
 
 // Fetch list of users
