@@ -138,7 +138,7 @@ const router = async () => {
   if (routes[url]) {
     if (routes[url].auth || store.auth) {
       if (routes[url].hide || !store.auth) {
-        url = '/';
+        location.href = '/#/';
       }
     }
   }

@@ -94,8 +94,8 @@ const sendParcelLocationChanged = (user = '', parcel = '') => {
   return mailer({ subject: 'Parcel Status Changed', to: user.email, html: mailBody });
 };
 
-const sendParcelDestinationChanged = (user = '', parcel = '') => {
-  if (!user || !parcel) return false;
+const sendParcelDestinationChanged = (user = '', parcelChanged = '') => {
+  if (!user || !parcelChanged) return false;
   const mailBody = `
     <div style="color: #5a5a5a;">
       <div style="border-bottom: 1px solid #3359DF; padding: 15px;">
@@ -103,9 +103,9 @@ const sendParcelDestinationChanged = (user = '', parcel = '') => {
       </div>
       <p style="font-size: 1.2rem; line-height: 2rem; color: #5a5a5a;">
         Dear <strong>${user.first_name} ${user.last_name}</strong>, <br>
-        The parcel destination of the tracking number (${parcel.tracking_number || parcel.id}) 
+        The parcel destination of the tracking number (${parcelChanged.tracking_number || parcelChanged.id}) 
         was changed to:<p/><br><p style="text-transform: capitalize; font-weight: 600;">
-        <strong>${parcel.to_province}, ${parcel.to_district}<br>${parcel.receiver_address}</strong></p>
+        <strong>${parcelChanged.to_province}, ${parcelChanged.to_district}<br>${parcelChanged.receiver_address}</strong></p>
       <p style="color: #5a5a5a !important;">
         Thank you, <br> Andela - SendIT Team
       </p>
