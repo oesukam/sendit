@@ -75,8 +75,8 @@ const Page = {
             <button id="submit-quote" class="btn">Quote</button>
             ${
               store.auth
-              ? '<button id="submit-order" hidden class="btn bg-green">Make order</button>'
-              : ''
+              ? '<button id="submit-order" disabled class="btn bg-green">Make order</button>'
+              : '<button id="submit-order" class="btn bg-green">Login</button>'
             }
             
           </div>
@@ -165,6 +165,10 @@ const Page = {
 
   submitOrder.addEventListener('click', (e) => {
     e.preventDefault();
+    if (!store.auth) {
+      location.href = '/#/login';
+      return;
+    }
     loading.classList.add('active');
     let query = `?from_province=${form.from_province}`;
     query += `&from_district=${form.from_district}`;
@@ -194,10 +198,11 @@ const Page = {
       && form.to_province
       && form.to_district
       && form.weight
+      && store.auth
     ) {
-      submitOrder.removeAttribute('hidden');
+      submitOrder.removeAttribute('disabled');
     } else {
-      submitOrder.setAttribute('hidden', true);
+      submitOrder.setAttribute('disabled', true);
     }
   }
   function renderDetails () {
