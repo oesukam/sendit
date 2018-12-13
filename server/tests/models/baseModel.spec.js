@@ -3,7 +3,7 @@ import { parcelData } from '../data';
 import db from '../../src/db';
 import { deleteTestParcels } from '../queries';
 
-fdescribe('base model', () => {
+describe('base model', () => {
   beforeAll((done) => {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
     db.query(deleteTestParcels, [])
