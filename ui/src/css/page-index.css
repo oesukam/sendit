@@ -26,39 +26,106 @@
 label .title {
   margin-bottom: 20px;
 }
+/* Slide inspired by OfficialEasy from youtube */
+@keyframes testimoniesSlide {
+  0% {
+    left: 100%;
+  }
+  10% {
+    left: 100%;
+  }
+  10% {
+    left: 0%;
+  }
+  20% {
+    left: 0;
+  }
+  25% {
+    left: -100%;
+  }
+  40% {
+    left: -100%;
+  }
+  45% {
+    left: -200%;
+  }
+  60% {
+   left: -200%;
+  }
+  65% {
+    left: -300%;
+  }
+  80% {
+    left: -300%;
+  }
+  85% {
+    left: -400%;
+  }
+  100% {
+    left: -400%;
+  }
+}
 .testimonies-area {
   margin: 50px 0;
   background-color: #3359DF;
   box-shadow: 2px 0 4px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
 }
 
 .testimonies {
   min-height: 20vh;
-  width: 100%;
   display: flex;
-  justify-content: center;
+  /*justify-content: center;
+  */width: 500%;
+  animation: 20s testimoniesSlide infinite;
+  -webkit-animation: 20s testimoniesSlide infinite;
+  position: relative;
+  text-align: left;
 }
 .testimony-block {
   display: flex;
   align-items: center;
+  width: 20%;
+  padding: 20px;
 }
 .testimony-block .fa {
-  font-size: 3rem;
+  font-size: 2rem;
 }
 .testimony-content {
   flex: 1;
+  display: flex;
   padding: 10px 30px;
   overflow: hidden;
   color: #fff;
+  flex-direction: column;
+  align-items: center;
 }
 
 .testimony-content__title {
   font-size: 2rem;
   color: #fff;
+  text-align: center;
+}
+.testimony-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  margin: 0 auto;
+  background-color: rgb(255, 164, 0, 0.9);
+  margin-bottom: 5px;
 }
 .testimony-content__text {
+  display: flex;
+}
+.testimony-content__text div {
+  flex: 1;
   font-size: 1rem;
   color: rgb(224, 224, 224);
+  padding: 10px;
 }
 .testimony-stars {
   text-align: center;

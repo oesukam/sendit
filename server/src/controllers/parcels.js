@@ -75,10 +75,7 @@ const cancelParcel = async (req, res) => {
   await user.findById(parcel.user_id);
   if (user.id) mail.sendParcelStatusChanged(user.toObject(), parcel.toObject());
 
-  return res.status(200).json({
-    success: true,
-    message: 'Parcel cancelled successfully',
-  });
+  return res.status(200).json({ success: true, message: 'Parcel cancelled successfully' });
 };
 
 const changeLocation = async (req, res) => {
@@ -152,10 +149,7 @@ const changeDestination = async (req, res) => {
   const user = new User();
   await user.findById(parcel.user_id);
   if (!user.id || user.id !== jwtUser.id) {
-    return res.status(401).json({
-      success: false,
-      message: 'Unauthorized Access',
-    });
+    return res.status(401).json({ success: false, message: 'Unauthorized Access' });
   }
 
   /*

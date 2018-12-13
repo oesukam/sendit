@@ -18,16 +18,10 @@ const signup = async (req, res) => {
   try {
     const foundUser = await new User().findByEmail(body.email);
     if (foundUser.data) {
-      return res.status(200).json({
-        success: false,
-        message: `${body.email} user already exist`,
-      });
+      return res.status(200).json({ success: false, message: `${body.email} user already exist` });
     }
   } catch (err) {
-    return res.status(200).json({
-      success: false,
-      message: 'Failed, please try again',
-    });
+    return res.status(400).json({ success: false, message: 'Failed, please try again' });
   }
   if (body.jwtToken) {
     delete body.jwtToken;
@@ -43,10 +37,8 @@ const signup = async (req, res) => {
   if (user.id) {
     success = true;
     token = jwt.sign({ id: user.id, user_type: user.user_type }, JWT_SECRET);
-
     mail.sendConfirmEmail(user.toObject({ withHidden: true }));
   }
-
   return res.status(201).json({ success, token, data: user.toObject() });
 };
 
@@ -71,12 +63,8 @@ const login = async (req, res) => {
     logger.error(err);
     return res.status(404).json({ success, message: 'User does not exist' });
   }
-
   success = true;
-  const token = await jwt.sign({
-    id: user.id,
-    user_type: user.user_type,
-  }, JWT_SECRET);
+  const token = await jwt.sign({ id: user.id, user_type: user.user_type }, JWT_SECRET);
   return res.status(200).json({ success, token, data: user.toObject() });
 };
 
