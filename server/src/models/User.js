@@ -51,7 +51,10 @@ class User extends BaseModel {
           this.updateFields(row);
           resolve(row);
         })
-        .catch((err) => reject(new Error('Failed, could not save'));
+        .catch((err) => {
+          logger.error(err);
+          reject(new Error('Failed, could not save'));
+        });
     });
   }
 }
