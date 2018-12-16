@@ -76,7 +76,7 @@ const Page = {
             ${
               store.auth
               ? '<button id="submit-order" disabled class="btn bg-green">Make order</button>'
-              : '<button id="submit-order" class="btn bg-green">Login</button>'
+              : '<button id="submit-order" disabled class="btn bg-green">Login</button>'
             }
             
           </div>

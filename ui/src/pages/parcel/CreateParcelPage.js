@@ -45,6 +45,7 @@ const Page = {
               <form action="#">
                 <div class="row">
                   <div class="col-6">
+                    <label>Province - Origin</label>
                     <span class="custom-dropdown">
                       <select
                         id="from_province"
@@ -52,7 +53,7 @@ const Page = {
                         required
                         placeholder="From Province"
                       >
-                        <option value="">Province - Origin</option> 
+                        <option value="">Select Province</option> 
                         <option ${form.from_province === 'eastern' ? 'selected' : ''} value="eastern">
                             Eastern Province
                           </option>
@@ -70,6 +71,7 @@ const Page = {
                     </span>
                     <div class="form-error from_province"></div>
                     
+                    <label>District - Origin</label>
                     <span class="custom-dropdown">
                       <select id="from_district" name="from_district" required>    
                       <option value="">${form.from_district}</option>
@@ -78,9 +80,10 @@ const Page = {
                     <div class="form-error from_district"></div>
                   </div>
                   <div class="col-6">
+                    <label>Province - Destination</label>
                     <span class="custom-dropdown">
                       <select id="to_province" name="to_province" required>
-                        <option value="">Province - Destination</option> 
+                        <option value="">Select Province</option> 
                         <option ${form.to_province === 'eastern' ? 'selected' : ''} value="eastern">
                           Eastern Province
                         </option>
@@ -96,10 +99,11 @@ const Page = {
                       </select>
                     </span>
                     <div class="form-error to_province"></div>
-                    
+                   
+                    <label>District - Destination</label>
                     <span class="custom-dropdown">
                       <select id="to_district" name="to_district" required>    
-                      <option value="">${form.to_district}</option>
+                        <option value="">${form.to_district}</option>
                       </select>
                     </span>
                     <div class="form-error to_district"></div>
@@ -107,7 +111,8 @@ const Page = {
                 </div>
 
                 <div class="row">
-                  <div class="col-6">
+                  <div class="col-6 pv-less">
+                    <label>Parcel's weight</label>
                     <input
                       type="number"
                       name="weight"
@@ -118,7 +123,8 @@ const Page = {
                     >
                     <div class="form-error weight"></div>
                   </div>
-                  <div class="col-6">
+                  <div class="col-6 pv-less">
+                    <label>Receiver's Phone Number</label>
                     <input
                       type="number"
                       name="phone"
@@ -131,7 +137,8 @@ const Page = {
                 </div>
 
                 <div class="row">
-                  <div class="col-6">
+                  <div class="col-6 pv-less">
+                    <label>Receiver's Names</label>
                     <input
                       type="text"
                       name="receiver_names"
@@ -144,7 +151,8 @@ const Page = {
                 </div>
 
                 <div class="row">
-                  <div class="col-12">
+                  <div class="col-12 pv-less">
+                    <label>Receiver's Address</label>
                     <textarea
                       placeholder="Enter full address"
                       rows="5"

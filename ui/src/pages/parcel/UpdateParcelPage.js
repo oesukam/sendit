@@ -50,7 +50,12 @@ const Page = {
                     <button
                       id="submit-cancel"
                       class="btn primary"
-                      ${ form.status === 'Cancelled' ? 'disabled' : ''}
+                      ${
+                        form.status === 'Cancelled'
+                        || form.status === 'In Transit'
+                        || form.status === 'Delivered'
+                        ? 'disabled' : ''
+                      }
                     >
                       ${ form.status === 'Cancelled' ? 'Parcel cancelled' : 'Cancel'}
                     </button>
@@ -58,7 +63,7 @@ const Page = {
                 </div>
                 <div class="row">
                   <div class="col-6">
-                    <label for="from_province">From</label>
+                    <label>Province - Origin</label>
                     <span class="custom-dropdown">
                       <select
                         class="capitalize"
@@ -68,7 +73,7 @@ const Page = {
                         placeholder="From Province"
                         disabled
                       >
-                        <option value="">From: ${form.from_province} Province</option> 
+                        <option value="">${form.from_province}</option> 
                         <option value="eastern">Eastern Province</option>
                         <option value="kigali">Kigali</option>  
                         <option value="northern">Northen Province</option>
@@ -76,7 +81,8 @@ const Page = {
                       </select>
                     </span>
                     <div class="form-error from_province"></div>
-                    
+                   
+                    <label>District - Origin</label>
                     <span class="custom-dropdown">
                       <select
                         class="capitalize"
@@ -85,13 +91,13 @@ const Page = {
                         required
                         disabled
                       >    
-                        <option value="">From: ${form.from_district} District</option>
+                        <option value="">${form.from_district}</option>
                       </select>
                     </span>
                     <div class="form-error from_district"></div>
                   </div>
                   <div class="col-6">
-                    <label for="to_province">To</label>
+                    <label>Province - Destination</label>
                     <span class="custom-dropdown">
                       <select id="to_province" name="to_province" required value="southern">
                         <option value="">Province - Destination</option> 
@@ -110,7 +116,8 @@ const Page = {
                       </select>
                     </span>
                     <div class="form-error to_province"></div>
-                    
+
+                    <label>District - Destination</label>
                     <span class="custom-dropdown">
                       <select class="capitalize" id="to_district" name="to_district" required>    
                         <option value="">${form.to_district}</option>
@@ -120,7 +127,8 @@ const Page = {
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-6">
+                  <div class="col-6 pv-less">
+                    <label>Receiver's Phone Number</label>
                     <input
                       type="number"
                       name="weight"
@@ -131,7 +139,8 @@ const Page = {
                     >
                     <div class="form-error weight"></div>
                   </div>
-                  <div class="col-6">
+                  <div class="col-6 pv-less">
+                    <label>Receiver's Phone Number</label>
                     <input
                       type="number"
                       name="phone"
@@ -145,7 +154,8 @@ const Page = {
                 </div>
 
                 <div class="row">
-                  <div class="col-6">
+                  <div class="col-6 pv-less">
+                    <label>Receiver's Names</label>
                     <input
                       type="text"
                       name="receiver_names"
@@ -159,7 +169,8 @@ const Page = {
                 </div>
 
                 <div class="row">
-                  <div class="col-12">
+                  <div class="col-12 pv-less">
+                    <label>Receiver's Address</label>
                     <textarea
                       placeholder="Enter full address"
                       rows="5"

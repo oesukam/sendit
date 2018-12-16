@@ -12,16 +12,18 @@ const { JWT_SECRET } = process.env;
 
 const signup = async (req, res) => {
   let success = false;
+  let status = 201;
   let token;
   const { body } = req;
 
   try {
     const foundUser = await new User().findByEmail(body.email);
     if (foundUser.data) {
-      return res.status(200).json({ success: false, message: `${body.email} user already exist` });
+      return res.status(status).json({ status, success: false, message: `${body.email} user already exist` });
     }
   } catch (err) {
-    return res.status(400).json({ success: false, message: 'Failed, please try again' });
+    status = 400;
+    return res.status(status).json({ status, success: false, message: 'Failed, please try again' });
   }
   if (body.jwtToken) {
     delete body.jwtToken;
@@ -39,13 +41,13 @@ const signup = async (req, res) => {
     token = jwt.sign({ id: user.id, user_type: user.user_type }, JWT_SECRET);
     mail.sendConfirmEmail(user.toObject({ withHidden: true }));
   }
-  return res.status(201).json({ success, token, data: user.toObject() });
+  return res.status(status).json({ status, success, token, data: user.toObject() });
 };
 
 const login = async (req, res) => {
   const { email, password } = req.body;
   let success = false;
-
+  let status = 200;
   const user = new User();
   try {
     await user.findByEmail(email);
@@ -54,18 +56,21 @@ const login = async (req, res) => {
     }
     const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) {
-      return res.status(401).json({
+      status = 401;
+      return res.status(status).json({
+        status,
         success,
         message: 'Email and password don\'t match',
       });
     }
   } catch (err) {
     logger.error(err);
-    return res.status(404).json({ success, message: 'User does not exist' });
+    status = 404;
+    return res.status(status).json({ status, success, message: 'User does not exist' });
   }
   success = true;
   const token = await jwt.sign({ id: user.id, user_type: user.user_type }, JWT_SECRET);
-  return res.status(200).json({ success, token, data: user.toObject() });
+  return res.status(status).json({ status, success, token, data: user.toObject() });
 };
 
 export default {

@@ -22,7 +22,6 @@ const changeStatus = {
     'Waiting Pickup',
     'Pick Up',
     'In Transit',
-    'Pending',
     'Delivered',
   ).required(),
 };

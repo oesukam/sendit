@@ -27,7 +27,6 @@ Here are the environment prerequisites for the web app
 
 ### Installing
 
-
 - Start your postgress server
 - Create a postgress database with any name but make sure to use the same name in the .env file for the PG_DATABASE variable
 - Clone the repository
@@ -60,13 +59,6 @@ Please find the API documentation on [https://andela-sendit-api.herokuapp.com/ap
 | /api/v1/parcels/`<userId>`/status       | PUT      | Update a parcel status    |
 | /api/v1/parcels/`<userId>`/presentLocation       | PUT      | Update a parcel current location    |
 | /api/v1/parcels/`<userId>`/destination       | PUT      | Update a parcel destination    |
-
-
-Explain what these tests test and why
-
-```
-Give an example
-```
 
 ## Deployment
 
