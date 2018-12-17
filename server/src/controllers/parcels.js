@@ -9,12 +9,15 @@ const createParcel = async (req, res) => {
   const { body } = req;
   const { jwtUser } = body;
   const pricePerKg = 1000;
+  let status = 201;
   if (!jwtUser.id) {
+    status = 401;
     return res.status(401).json({ success: false, message: 'Unauthorized Access' });
   }
 
   if (jwtUser.confirmed !== 'confirmed') {
-    return res.status(401).json({ success: false, message: 'Please confirm your email address' });
+    status = 401;
+    return res.status(status).json({ status, success: false, message: 'Please confirm your email address' });
   }
   delete body.jwtUser;
   body.user_id = jwtUser.id;
@@ -27,19 +30,21 @@ const createParcel = async (req, res) => {
 
   await parcel.save();
   if (!parcel.id) {
-    return res.status(401).json({ success: false, message: 'Parcel could not be saved' });
+    status = 401;
+    return res.status(status).json({ success: false, message: 'Parcel could not be saved' });
   }
-  return res.status(201).json({ success: true, data: parcel.toObject() });
+  return res.status(status).json({ status, success: true, data: parcel.toObject() });
 };
 
 // Fetch all parcels
 const getAll = async (req, res) => {
   const { search = '', page = 1 } = req.query;
   const parcel = new Parcel();
+  const status = 200;
 
   const results = await parcel.getAll({ search, page: parseInt(page, 10) });
 
-  return res.status(200).json({ success: true, ...results });
+  return res.status(status).json({ status, success: true, ...results });
 };
 
 // Fetch a single parcel
@@ -58,15 +63,22 @@ const cancelParcel = async (req, res) => {
   const { id } = req.params;
   const parcel = new Parcel();
   await parcel.findById(id);
+  let status = 200;
   if (!parcel.id) {
-    return res.status(404).json({ success: false, message: 'Not found' });
+    status = 404;
+    return res.status(status).json({ status, success: false, message: 'Not found' });
   }
 
   if (parcel.status === 'Cancelled') {
-    return res.status(204).json({
-      success: false,
-      message: 'Parcel had already been cancelled',
-    });
+    status = 204;
+    return res.status(status).json({ status, success: false, message: 'Parcel had already been cancelled' });
+  }
+  /*
+    Checks if the parcel was already about to be delivered
+  */
+  if (parcel.status === 'In Transit' || parcel.status === 'Delivered') {
+    status = 409;
+    return res.status(status).json({ status, success: false, message: `Can not cancel parcel in status ${parcel.status}` });
   }
   parcel.status = 'Cancelled';
   await parcel.save();
@@ -75,20 +87,24 @@ const cancelParcel = async (req, res) => {
   await user.findById(parcel.user_id);
   if (user.id) mail.sendParcelStatusChanged(user.toObject(), parcel.toObject());
 
-  return res.status(200).json({ success: true, message: 'Parcel cancelled successfully' });
+  return res.status(status).json({ status, success: true, message: 'Parcel cancelled successfully' });
 };
 
 const changeLocation = async (req, res) => {
   const { id } = req.params;
   const { body } = req;
   const parcel = new Parcel();
+  let status = 200;
   await parcel.findById(id);
   if (!parcel.id) {
-    return res.status(404).json({ success: false, message: 'Not found' });
+    status = 404;
+    return res.status(status).json({ status, success: false, message: 'Not found' });
   }
 
   if (parcel.present_location === body.present_location) {
-    return res.status(409).json({
+    status = 409;
+    return res.status(status).json({
+      status,
       success: false,
       message: 'Parcel location not changed',
     });
@@ -102,7 +118,8 @@ const changeLocation = async (req, res) => {
   // Notifying the user via email
   if (user.id) mail.sendParcelLocationChanged(user.toObject(), parcel.toObject());
 
-  return res.status(200).json({
+  return res.status(status).json({
+    status,
     success: true,
     message: 'Parcel location changed successfully',
   });
@@ -110,24 +127,28 @@ const changeLocation = async (req, res) => {
 
 const changeStatus = async (req, res) => {
   const { id } = req.params;
-  const { status } = req.body;
+  const { status: parcelStatus } = req.body;
   const parcel = new Parcel();
+  let status = 200;
   await parcel.findById(id);
   if (!parcel.id) {
-    return res.status(404).json({ success: false, message: 'Not found' });
+    status = 404;
+    return res.status(status).json({ status, success: false, message: 'Not found' });
   }
 
-  if (parcel.status === status) {
-    return res.status(304).json({ success: false, message: 'Parcel not changed' });
+  if (parcel.status === parcelStatus) {
+    status = 304;
+    return res.status(status).json({ success: false, message: 'Parcel not changed' });
   }
-  parcel.status = status;
+  parcel.status = parcelStatus;
   await parcel.save();
   const user = new User();
   await user.findById(parcel.user_id);
 
   if (user.id) mail.sendParcelStatusChanged(user.toObject(), parcel.toObject());
 
-  return res.status(200).json({
+  return res.status(status).json({
+    status,
     success: true,
     message: 'Parcel status changed successfully',
   });
@@ -137,9 +158,11 @@ const changeDestination = async (req, res) => {
   const { id } = req.params;
   const { body } = req;
   const parcel = new Parcel();
+  let status = 200;
   await parcel.findById(id);
   if (!parcel.id) {
-    return res.status(404).json({ success: false, message: 'Not found' });
+    status = 404;
+    return res.status(status).json({ status, success: false, message: 'Not found' });
   }
 
   /*
@@ -149,7 +172,8 @@ const changeDestination = async (req, res) => {
   const user = new User();
   await user.findById(parcel.user_id);
   if (!user.id || user.id !== jwtUser.id) {
-    return res.status(401).json({ success: false, message: 'Unauthorized Access' });
+    status = 401;
+    return res.status(status).json({ status, success: false, message: 'Unauthorized Access' });
   }
 
   /*
@@ -160,19 +184,23 @@ const changeDestination = async (req, res) => {
     parcel.to_province === body.to_province
     && parcel.to_district === body.to_district
   ) {
-    return res.status(409).json({
+    status = 409;
+    return res.status(status).json({
+      status,
       success: false,
       message: 'Parcel destination was not changed',
     });
   }
   /*
-    Checks if the parcel was already cancelled or pick up
+    Checks if the parcel was already cancelled or about to be delivered
   */
   if (
-    parcel.status !== 'Waiting Pickup'
+    parcel.status === 'Delivered'
     || parcel.status === 'Cancelled'
   ) {
-    return res.status(409).json({
+    status = 409;
+    return res.status(status).json({
+      status,
       success: false,
       message: `Can not change parcel in status ${parcel.status}`,
     });
@@ -186,7 +214,8 @@ const changeDestination = async (req, res) => {
 
   mail.sendParcelDestinationChanged(user.toObject(), parcel.toObject());
 
-  return res.status(200).json({
+  return res.status(status).json({
+    status,
     success: true,
     message: 'Parcel destination changed successfully',
   });
@@ -194,12 +223,14 @@ const changeDestination = async (req, res) => {
 
 const getParcelsCounters = async (req, res) => {
   const parcel = new Parcel();
+  let status = 200;
   const counters = await parcel.getParcelsCounters();
   if (!counters) {
-    return res.status(404).json({ success: false, message: 'Not found' });
+    status = 404;
+    return res.status(status).json({ status, success: false, message: 'Not found' });
   }
 
-  return res.status(200).json({ success: true, counters });
+  return res.status(status).json({ status, success: true, counters });
 };
 
 export default {
