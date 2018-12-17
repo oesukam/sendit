@@ -176,7 +176,7 @@ describe('parcel', () => {
         {
           json: true,
           headers: {
-            Authorization: `Bearer ${adminToken}`,
+            Authorization: `Bearer ${userToken}`,
           },
         }, (err, res, body) => {
           data.status = res.statusCode;
@@ -232,7 +232,7 @@ describe('parcel', () => {
       Request.put(`${urlPrefixV1}/parcels/${parcelId}/status`,
         {
           json: true,
-          form: { status: 'Waiting Pickup' },
+          form: { status: 'In Transit' },
           headers: {
             Authorization: `Bearer ${adminToken}`,
           },
@@ -272,7 +272,6 @@ describe('parcel', () => {
             Authorization: `Bearer ${userToken}`,
           },
         }, (err, res, body) => {
-          console.log(body)
           data.status = res.statusCode;
           if (!err) {
             data.success = body.success;

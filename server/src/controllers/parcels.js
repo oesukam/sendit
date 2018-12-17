@@ -76,7 +76,7 @@ const cancelParcel = async (req, res) => {
   /*
     Checks if the parcel was already about to be delivered
   */
-  if (parcel.status !== 'In Transit' || parcel.status !== 'Delivered') {
+  if (parcel.status === 'In Transit' || parcel.status === 'Delivered') {
     status = 409;
     return res.status(status).json({ status, success: false, message: `Can not cancel parcel in status ${parcel.status}` });
   }
@@ -195,8 +195,7 @@ const changeDestination = async (req, res) => {
     Checks if the parcel was already cancelled or about to be delivered
   */
   if (
-    parcel.status !== 'In Transit'
-    || parcel.status !== 'Delivered'
+    parcel.status === 'Delivered'
     || parcel.status === 'Cancelled'
   ) {
     status = 409;
