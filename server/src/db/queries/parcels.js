@@ -66,7 +66,7 @@ const queryAllParcels = (search = '') => {
   let query = `
     SELECT 
       parcels.*, 
-      users.first_name, users.last_name, users.gender 
+      users.first_name, users.last_name, users.email, users.gender 
     FROM parcels INNER JOIN users ON parcels.user_id = users.id
    `;
   if (search) {
@@ -80,7 +80,7 @@ const queryAllParcels = (search = '') => {
         (
           users.first_name ILIKE '%${val}%' OR users.last_name ILIKE '%${val}%' OR 
           users.gender ILIKE '%${val}%' OR parcels.status ILIKE '%${val}%' OR 
-          parcels.receiver_names ILIKE '%${val}%' OR 
+          users.email ILIKE '%${val}%' OR parcels.receiver_names ILIKE '%${val}%' OR 
           parcels.from_province ILIKE '%${val}%' OR parcels.from_district ILIKE '%${val}%' OR 
           parcels.to_province ILIKE '%${val}%' OR parcels.to_district ILIKE '%${val}%' 
         )
@@ -132,7 +132,7 @@ const countAllParcels = (search = '') => {
         (
           users.first_name ILIKE '%${val}%' OR users.last_name ILIKE '%${val}%' OR 
           users.gender ILIKE '%${val}%' OR parcels.status ILIKE '%${val}%' OR 
-          parcels.receiver_names ILIKE '%${val}%' OR 
+          users.email ILIKE '%${val}%' OR parcels.receiver_names ILIKE '%${val}%' OR 
           parcels.from_province ILIKE '%${val}%' OR parcels.from_district ILIKE '%${val}%' OR 
           parcels.to_province ILIKE '%${val}%' OR parcels.to_district ILIKE '%${val}%'
         )

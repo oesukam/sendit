@@ -118,6 +118,7 @@ const Page = {
                       name="weight"
                       id="weight"
                       placeholder="Weight"
+                      min="0"
                       value="${form.to_district}"
                       required
                     >
