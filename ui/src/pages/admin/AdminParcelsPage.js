@@ -76,6 +76,7 @@ const Page = {
                 <thead>
                   <tr>
                     <th width="20" >No.</th>
+                    <th>User</th>
                     <th>From</th>
                     <th>To</th>
                     <th width="140">Receiver</th>
@@ -89,6 +90,7 @@ const Page = {
                     return `
                       <tr class="capitalize">
                         <td>${index+1}</td>
+                        <td>${val.first_name} ${val.last_name}, <span class="lowercase">${val.email}</span></td>
                         <td>${val.from_province}, ${val.from_district}</td>
                         <td>${val.to_province}, ${val.to_district}</td>
                         <td>${val.receiver_names}</td>

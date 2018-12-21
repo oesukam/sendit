@@ -25,11 +25,15 @@ const Page = {
               type="password"
               name="password"
               id="password"
+              minlength=6
+              pattern=".{6,20}"
+              title="Password should have at least 6 characters""
               placeholder="Password"
+              required
             >
             <div class="form-error password"></div>
 
-            <button id="submit-login" class="btn primary v-wide mt-10">Login</button>
+            <button id="submit-login" type="submit" class="btn primary v-wide mt-10">Login</button>
           </form>
         </div>
       </div>
