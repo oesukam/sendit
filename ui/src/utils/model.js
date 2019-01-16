@@ -7,7 +7,7 @@ const modelWrapper = ({ title = 'Title', body = '' , reload = false} = {}) => {
     <div class="box">
       <h3 class="title model-title">${title}</h3>
       ${body}
-      <button class="btn primary v-wide" onclick="closeModel(${reload})">Ok</button>
+      <button class="btn primary v-wide mt-10" onclick="closeModel(${reload})">Ok</button>
     </div>
   `
 }

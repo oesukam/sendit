@@ -290,6 +290,13 @@ const Page = {
             }, 1000);
           }
 
+          if (res.status === 401) {
+            model({
+              title: 'Error',
+              body: res.message,
+            });
+          }
+
           // Wait for 2 seconds to smooth the spinner
           setTimeout(() => {
             loading.classList.remove('active');
@@ -327,7 +334,7 @@ const Page = {
       const keys = Object.keys(form);
       let hasError = false;
       keys.forEach(key => {
-        if (!form[key] && form[key] !== 0) {
+        if (!form[key]) {
           const tagElement = document.querySelector(`.form-error.${key}`);
           if (tagElement) {
             tagElement.textContent = 'Required';

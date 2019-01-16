@@ -6,3 +6,4 @@ coverage/
 error.log
 combined.log
 .vscode
+shrinkwrap.yaml
