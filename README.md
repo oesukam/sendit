@@ -1,16 +1,6 @@
 # SendIT
 
-
-[![Build Status](https://travis-ci.org/oesukam/andela-sendit.svg?branch=master)](https://travis-ci.org/oesukam/andela-sendit-api)
-[![codecov](https://codecov.io/gh/oesukam/andela-sendit/branch/develop/graph/badge.svg)](https://codecov.io/gh/oesukam/andela-sendit)
-[![Maintainability](https://api.codeclimate.com/v1/badges/30bd033f62cd2b12a455/maintainability)](https://codeclimate.com/github/oesukam/andela-sendit/maintainability)
-
-SendIT is a courier service that helps users deliver parcels to different destinations. SendIT provides courier quotes based on weight categories. `Case study`: Rwanda.
-
-- UI template: [https://oesukam.github.io/andela-sendit](https://oesukam.github.io/andela-sendit)
-- Frontend: [https://andela-sendit-api.herokuapp.com](https://andela-sendit-api.herokuapp.com)
-- API Documentation: [https://andela-sendit-api.herokuapp.com/api-docs](https://andela-sendit-api.herokuapp.com/api-docs)
-
+SendIT is a courier service that helps users deliver parcels to different destinations. SendIT provides courier quotes based on weight categories. 
 
 ## Getting Started
 
